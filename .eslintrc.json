@@ -1,0 +1,75 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "jsdoc", "sonarjs"],
+    "env": {
+        "browser": true,
+        "webextensions": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:jsdoc/recommended",
+        "plugin:sonarjs/recommended"
+    ],
+    "rules": {
+        "quotes": ["error", "single"],
+        "no-undef": "error",
+        "semi": "error",
+        "no-eval": "error",
+    
+        "prefer-spread": "warn",
+        "no-prototype-builtins": "warn",
+        "max-classes-per-file": ["warn", 1],
+        "indent": ["warn", 4],
+        "no-cond-assign": "warn",
+        "no-unreachable": "warn",
+        "no-useless-escape": "warn",
+        "no-inner-declarations": "warn",
+        "no-redeclare": "off",
+        "@typescript-eslint/no-redeclare": ["error"],
+        "no-trailing-spaces": "warn",
+        "no-multi-spaces": "warn",
+        "no-var": "warn",
+        "curly": ["warn", "all"],
+        "operator-linebreak": ["warn", "before"],
+        "no-console": "off",
+        "no-alert": "warn",
+        "comma-dangle": ["warn", "always-multiline"],
+        "prefer-arrow-callback": "warn",
+        "no-return-await": "warn",
+        "max-len": ["warn", { "code": 120, "ignoreComments": false, "ignoreTrailingComments": false, "ignoreUrls": true}],
+        "eol-last": ["warn", "always"],
+        "@typescript-eslint/explicit-module-boundary-types": "warn",
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+        "@typescript-eslint/no-this-alias": "warn",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-floating-promises": "warn",
+        "@typescript-eslint/member-ordering": "warn",
+        "@typescript-eslint/consistent-type-imports": "warn",
+        "jsdoc/require-returns-type": "off",
+        "jsdoc/require-param-type": "off",
+        "jsdoc/require-file-overview": ["warn", { "tags": {
+            "file": {
+                "initialCommentsOnly": true,
+                "mustExist": true,
+                "preventDuplicates": true
+            }
+        }}],
+        "jsdoc/check-tag-names": ["warn", {
+            "definedTags": ["packageDocumentation"]
+        }],
+        "jsdoc/require-jsdoc": ["warn", {"contexts": ["TSInterfaceDeclaration", "TSTypeAliasDeclaration", "TSEnumDeclaration"]}],
+        "jsdoc/newline-after-description": "off",
+        "sonarjs/cognitive-complexity": "warn",
+        "sonarjs/no-duplicate-string": "off",
+        "sonarjs/no-unused-collection": "warn"
+    },
+    "globals": {
+        "JSX": "readonly"
+    }
+}
