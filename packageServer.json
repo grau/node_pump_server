@@ -1,0 +1,68 @@
+{
+  "name": "ardduino_pump_fetch",
+  "version": "0.1",
+  "description": "Node program to fetch and store data from adruino pump control",
+  "main": "index.js",
+  "author": "grau",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "npm run site && npm run server",
+
+    "presite": "cp packageSite.json package.json",
+    "site": "esbuild --bundle ./src/website --outfile=site/bundle.js --loader:.woff2=file --loader:.woff=file --sourcemap --platform=browser",
+    "postsite": "cp ./src/website/index.html site",
+
+    "preserver": "cp packageServer.json package.json",
+    "server": "ttsc --project tsconfig.json",
+    "start": "node ./dist/js/index.js",
+
+    "checkTs": "ttsc --project tsconfig.json --noEmit",
+    "lintError": "eslint \"./src/**/*.{ts,tsx}\" --quiet --ext .js,.ts,.tsx",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\" --ext .js,.ts,.tsx --global JSX",
+    "lintFix": "eslint \"./src/**/*.{ts,tsx}\" --fix --ext .js,.ts,.tsx"
+  },
+  "dependencies": {
+    "@types/wojtekmaj__react-datetimerange-picker": "^3.0.2",
+    "better-sqlite3": "^7.6.2",
+    "delay": "^5.0.0",
+    "downsample-lttb": "^0.0.1",
+    "downsample-lttb-ts": "^0.0.6",
+    "express": "^4.18.2",
+    "fs-extra": "^10.1.0",
+    "react-icons": "^4.6.0",
+    "serialport": "^10.4.0",
+    "typescript-json": "^3.3.10",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.9",
+    "@types/better-sqlite3": "^7.6.2",
+    "@types/express": "^4.17.14",
+    "@types/fs-extra": "^9.0.13",
+    "@types/react-date-range": "^1.4.4",
+    "@types/react-dom": "^18.0.6",
+    "@types/serialport": "^8.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "@wojtekmaj/react-datetimerange-picker": "^4.0.1",
+    "apexcharts": "^3.36.0",
+    "chart.js": "3.8.1",
+    "esbuild": "^0.15.11",
+    "eslint": "^8.25.0",
+    "eslint-plugin-jsdoc": "^39.3.6",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-sonarjs": "^0.16.0",
+    "react": "^18.2.0",
+    "react-apexcharts": "^1.4.0",
+    "react-dom": "^18.2.0",
+    "ts-node": "^10.9.1",
+    "ttypescript": "^1.5.13",
+    "typescript": "^4.8.4"
+  }
+}

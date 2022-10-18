@@ -131,12 +131,38 @@ export class Storage {
      * @returns Storage data
      */
     public getData(from: number | null, to: number | null): IStorageData[] {
+        return this.getRawData(from, to).map(this.getStorageDataFromDbData);
+    }
+
+    /**
+     * Fetches data from database and returns it
+     * Yes - you can dump the whole database with this function! So use caution
+     *
+     * @param from Starting timestamp
+     * @param to Ending timetstamp
+     * @returns Storage data
+     */
+    public getRawData(from: number | null, to: number | null): IDbData[] {
         const stmt = this.db.prepare('SELECT timestamp, input0, input1, input2, input3, output0, output1, boot, state '
             + 'FROM data '
             + 'WHERE timestamp >= ? AND timestamp <= ? '
             + 'ORDER BY timestamp;');
-        const data = stmt.all([from ?? 0, to ?? Date.now() * 32]) as IDbData[];
-        return data.map(this.getStorageDataFromDbData);
+        return stmt.all([from ?? 0, to ?? Date.now() * 32]) as IDbData[];
+    }
+
+    /**
+     * Returns the requested data as an iterator object
+     *
+     * @param from Starting timestamp
+     * @param to Ending timetstamp
+     * @returns Iterator of the storage data
+     */
+    public getDataIterator(from: number, to: number): IterableIterator<IDbData> {
+        const stmt = this.db.prepare('SELECT timestamp, input0, input1, input2, input3, output0, output1, boot, state '
+            + 'FROM data '
+            + 'WHERE timestamp >= ? AND timestamp <= ? '
+            + 'ORDER BY timestamp;');
+        return stmt.iterate([from, to]);
     }
 
     /**
@@ -146,6 +172,17 @@ export class Storage {
      */
     public getMinDate(): number {
         return this.db.prepare('SELECT min(timestamp) AS m FROM data;').get().m;
+    }
+
+    /**
+     * Writes backup file to disk. Returns backup filenames.
+     *
+     * @returns filename of backup file.
+     */
+    public async getBackupFile(): Promise<string> {
+        const filename = path.resolve(path.join(dataStorage, Date.now() + '-database.db'));
+        await this.db.backup(filename);
+        return filename;
     }
 
     /**

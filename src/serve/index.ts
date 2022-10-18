@@ -4,11 +4,20 @@
 
 import express from 'express';
 import type { Request, Response } from 'express';
+import * as XLSX from 'xlsx';
+import fs from 'fs-extra';
 
 import { Storage } from '../fetchAndStore/Storage.js';
 import type { IStorageData } from '../interfaces/IData.js';
 import type { ISeriesData } from '../interfaces/IStorage.js';
 import { downsample } from 'downsample-lttb-ts';
+
+/** Supported download formats */
+export const downloadFormats = ['csv', 'xlsx', 'json'] as const;
+/**
+ *
+ */
+export type TDownloadFormats = typeof downloadFormats[number];
 
 /**
  * Starts http server. Servers all files
@@ -53,6 +62,10 @@ export async function startWebServer(): Promise<void> {
 
     app.get('/getDataSeries', (req, res) => getDataSeries(req, res, storage));
 
+    app.get('/download', (req, res) => download(req, res, storage));
+
+    app.get('/backup', async (_, res) => backup(res, storage));
+
     app.use('/', express.static('./site'));
 
 
@@ -90,6 +103,75 @@ function getDataSeries(req: Request, res: Response, storage: Storage): void {
     res.json(toSeries(storage.getData(from, to), samples));
 }
 
+/**
+ * Handler for download endpoint
+ *
+ * @param req Request
+ * @param res Response
+ * @param storage Storage object
+ */
+function download(req: Request, res: Response, storage: Storage): void {
+    const from = getAsNumber(req.query.from) ?? Date.now() - 24 * 60 * 60 * 1000;
+    const to = getAsNumber(req.query.to) ?? Date.now();
+    const formatString = (typeof(req.query.format) === 'string' ? req.query.format : 'json') as TDownloadFormats;
+    const format = downloadFormats.includes(formatString) ? formatString : 'json';
+    // Force download, prevent show in browser
+    switch (format) {
+    case 'csv':
+        res.setHeader('Content-Type', 'text/csv');
+        res.write('timestamp;input0;input1;input2;input3;output0;output1;boot;state\n');
+        for (const row of storage.getDataIterator(from, to)) {
+            res.write([row.timestamp, row.input0, row.input1, row.input2, row.input3,
+                row.output0, row.output1, row.boot, row.state]
+                .join(';') + '\n');
+        }
+        res.end();
+        break;
+    case 'json': {
+        // We don't want the browser to open the result - therefore we tag it as octet stream to force download.
+        res.setHeader('Content-Type', 'application/octet-stream');
+        res.write('[');
+        let first = true;
+        for (const row of storage.getDataIterator(from, to)) {
+            if (first) {
+                res.write(JSON.stringify(row));
+                first = false;
+            } else {
+                res.write(',' + JSON.stringify(row));
+            }
+        }
+        res.write(']');
+        res.end();
+        break;
+    }
+    case 'xlsx': {
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        const data = storage.getRawData(from, to);
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Dates');
+        const wb = XLSX.write(workbook, {
+            bookType: 'xlsx',
+            type: 'buffer',
+        }) as ArrayBuffer;
+        res.send(wb);
+    }
+    }
+}
+
+
+/**
+ * Handler for backup endpoint
+ *
+ * @param res Response
+ * @param storage Storage object
+ */
+async function backup(res: Response, storage: Storage): Promise<void> {
+    const filename = await storage.getBackupFile();
+    res.setHeader('Content-Type', 'application/octet-stream');
+    res.sendFile(filename);
+    await fs.remove(filename);
+}
 
 /**
  * Returns either a numeric representation of the given query parameter or null if not available / possible

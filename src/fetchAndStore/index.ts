@@ -12,7 +12,7 @@ import type { IStorageData } from '../interfaces/IData.js';
  * Main queue
  */
 export async function mainQueue(): Promise<never> {
-    const storage = await Storage.getInstance();
+    const storage = Storage.getInstance();
     // eslint-disable-next-line no-constant-condition
     while (true) {
         console.info('Connecting to port');

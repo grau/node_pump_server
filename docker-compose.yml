@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  pump_server:
+    build: .
+    devices:
+    - "/dev/ttyUSB0:/dev/ttyUSB0"
+    restart: always
+    ports:
+      - "80:3000"
+    volumes:
+      - pump_server_db:/code/data
+
+volumes:
+  pump_server_db:

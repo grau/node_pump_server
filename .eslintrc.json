@@ -70,6 +70,10 @@
         "sonarjs/no-unused-collection": "warn"
     },
     "globals": {
-        "JSX": "readonly"
+        "JSX": "readonly",
+        "Generator": true,
+        "Iterator": true,
+        "Iterable": true,
+        "IterableIterator": true
     }
 }
