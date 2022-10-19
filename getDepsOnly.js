@@ -1,3 +1,4 @@
+#!/usr/bin/node
 import fs from 'fs-extra';
 
 const deps = fs.readJSONSync('package.json');
