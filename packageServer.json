@@ -13,6 +13,8 @@
     "presite": "cp packageSite.json package.json",
     "site": "esbuild --bundle ./src/website --outfile=site/bundle.js --loader:.woff2=file --loader:.woff=file --sourcemap --platform=browser",
     "postsite": "cp ./src/website/index.html site",
+    "prewatch": "cp packageSite.json package.json",
+    "watch": "esbuild --bundle ./src/website --outfile=site/bundle.js --loader:.woff2=file --loader:.woff=file --sourcemap --platform=browser --watch",
 
     "preserver": "cp packageServer.json package.json",
     "server": "ttsc --project tsconfig.json",
@@ -26,6 +28,7 @@
   "dependencies": {
     "@types/wojtekmaj__react-datetimerange-picker": "^3.0.2",
     "better-sqlite3": "^7.6.2",
+    "check-disk-space": "^3.3.1",
     "delay": "^5.0.0",
     "downsample-lttb": "^0.0.1",
     "downsample-lttb-ts": "^0.0.6",
