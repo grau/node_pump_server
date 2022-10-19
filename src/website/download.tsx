@@ -19,7 +19,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import type { Mark } from '@mui/base';
 import type { SxProps } from '@mui/material';
 
-import { getMinDate } from './getData';
+import { getMinDate } from './getData.js';
 
 /** All possible timeframe results */
 enum ETimeframe {

@@ -2,8 +2,9 @@
  * @file Api connector to get data
  */
 
-import type { ISeriesData } from '../interfaces/IStorage';
-import type { IStorageData } from '../interfaces/IData';
+import type { ISeriesData } from '../interfaces/IStorage.js';
+import type { IStorageData } from '../interfaces/IData.js';
+import type { ISystemData } from '../fetchAndStore/system.js';
 
 /**
  * Returns cached data
@@ -86,4 +87,13 @@ export async function getDataSeries(from?: number, to?: number, samples: number 
  */
 export async function getMinDate(): Promise<number> {
     return parseInt(await (await fetch('/getMinDate')).text());
+}
+
+/**
+ * Get the lowest timestamp in database
+ *
+ * @returns Lowest timestamp in database
+ */
+export async function getSystem(): Promise<ISystemData[]> {
+    return (await fetch('/system')).json();
 }

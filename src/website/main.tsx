@@ -4,10 +4,11 @@
 
 import * as React from 'react';
 
-import { Live } from './live';
-import type { TViews } from './drawer';
-import { Graph } from './graph';
-import { Download } from './download';
+import { Live } from './live.js';
+import type { TViews } from './drawer.js';
+import { Graph } from './graph.js';
+import { Download } from './download.js';
+import { System } from './system.js';
 
 /** React properties */
 interface IProps {
@@ -29,6 +30,8 @@ export function Main(props: IProps): JSX.Element {
         return <Graph />;
     case 'download':
         return <Download />;
+    case 'system':
+        return <System />;
     default:
     case 'live':
         return <Live />;

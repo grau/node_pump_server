@@ -7,8 +7,8 @@ import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 import Paper from '@mui/material/Paper';
 import FormLabel from '@mui/material/FormLabel';
 import CircularProgress from '@mui/material/CircularProgress';
-import { getDataSeries, getMinDate } from './getData';
-import { LineGraph } from './lineGraph';
+import { getDataSeries, getMinDate } from './getData.js';
+import { LineGraph } from './lineGraph.js';
 /**
  * Select date graph
  *

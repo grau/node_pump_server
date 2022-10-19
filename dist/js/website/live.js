@@ -19,8 +19,8 @@ import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import { getCachedDataSeries } from './getData';
-import { LineGraph } from './lineGraph';
+import { getCachedDataSeries } from './getData.js';
+import { LineGraph } from './lineGraph.js';
 /** Available marks on time slider */
 const marks = [
     {

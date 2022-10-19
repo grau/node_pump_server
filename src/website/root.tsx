@@ -7,10 +7,10 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 
-import { AppBar } from './appBar';
-import { Drawer } from './drawer';
-import { Main } from './main';
-import type { TViews } from './drawer';
+import { AppBar } from './appBar.js';
+import { Drawer } from './drawer.js';
+import { Main } from './main.js';
+import type { TViews } from './drawer.js';
 
 /**
  * Root element
@@ -27,7 +27,7 @@ export function Root(): JSX.Element {
     return (
         <Box sx={{ display: 'flex' }}>
             <AppBar open={open} toggleDrawer={toggleDrawer} />
-            <Drawer open={open} toggleDrawer={toggleDrawer} onChangeView={setView} />
+            <Drawer view={view} open={open} toggleDrawer={toggleDrawer} onChangeView={setView} />
             <Box
                 component="main"
                 sx={{

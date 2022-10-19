@@ -8,20 +8,20 @@ import MuiDrawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 
 import DownloadIcon from '@mui/icons-material/Download';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
+import MemoryIcon from '@mui/icons-material/Memory';
+
+import { DrawerItem } from './drawerItem';
 
 export const drawerWidth: number = 240;
 
 /** All available views */
-export type TViews = 'live' | 'graph' | 'download';
+export type TViews = 'live' | 'graph' | 'download' | 'system';
 
 const DrawerElem = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -58,6 +58,8 @@ interface Props {
     toggleDrawer: () => void;
     /** View change request */
     onChangeView: (view: TViews) => void;
+    /** Active view */
+    view: TViews;
 }
 
 /**
@@ -67,9 +69,9 @@ interface Props {
  * @returns React component
  */
 export function Drawer(props: Props): JSX.Element {
-    const {open, toggleDrawer, onChangeView} = props;
+    const {open, toggleDrawer, onChangeView, view} = props;
 
-    return <DrawerElem variant="permanent" open={open}>
+    return <DrawerElem variant='permanent' open={open}>
         <Toolbar
             sx={{
                 display: 'flex',
@@ -83,25 +85,16 @@ export function Drawer(props: Props): JSX.Element {
             </IconButton>
         </Toolbar>
         <Divider />
-        <List component="nav">
-            <ListItemButton onClick={() => onChangeView('live')}>
-                <ListItemIcon>
-                    <LiveTvIcon />
-                </ListItemIcon>
-                <ListItemText primary="Live" />
-            </ListItemButton>
-            <ListItemButton onClick={() => onChangeView('graph')}>
-                <ListItemIcon>
-                    <BarChartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Historie" />
-            </ListItemButton>
-            <ListItemButton onClick={() => onChangeView('download')}>
-                <ListItemIcon>
-                    <DownloadIcon />
-                </ListItemIcon>
-                <ListItemText primary="Download" />
-            </ListItemButton>
+        <List component='nav'>
+            <DrawerItem title='Live' view='live' onChangeView={onChangeView} activeView={view}
+                icon={<LiveTvIcon />} />
+            <DrawerItem title='Historie' view='graph' onChangeView={onChangeView} activeView={view}
+                icon={<BarChartIcon />} />
+            <DrawerItem title='Download' view='download' onChangeView={onChangeView} activeView={view}
+                icon={<DownloadIcon />} />
+            <Divider sx={{my: 1}} />
+            <DrawerItem title='System' view='system' onChangeView={onChangeView} activeView={view}
+                icon={<MemoryIcon />} />
         </List>
     </DrawerElem>;
 }

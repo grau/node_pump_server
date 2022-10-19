@@ -12,15 +12,27 @@ import CssBaseline from '@mui/material/CssBaseline';
 // import '@fontsource/roboto/500.css';
 // import '@fontsource/roboto/700.css';
 
-import { Root } from './root';
+import { Root } from './root.js';
 
 const container = document.getElementById('reactRoot');
 if (! container) {
     throw new Error('No root container node found');
 }
+
+const theme = createTheme({
+    palette: {
+        action: {
+            selectedOpacity: 0.3,
+            hoverOpacity: 1,
+            focus: '#ff0000',
+            focusOpacity: 1,
+        },
+    },
+});
+
 const root = createRoot(container);
 root.render(<React.StrictMode>
-    <ThemeProvider theme={createTheme()}>
+    <ThemeProvider theme={theme}>
         <CssBaseline />
         <Root />
     </ThemeProvider>

@@ -98,3 +98,13 @@ export function getMinDate() {
         return parseInt(yield (yield fetch('/getMinDate')).text());
     });
 }
+/**
+ * Get the lowest timestamp in database
+ *
+ * @returns Lowest timestamp in database
+ */
+export function getSystem() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return (yield fetch('/system')).json();
+    });
+}

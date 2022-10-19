@@ -4,13 +4,14 @@
 
 import express from 'express';
 import type { Request, Response } from 'express';
+import { downsample } from 'downsample-lttb-ts';
 import * as XLSX from 'xlsx';
 import fs from 'fs-extra';
 
-import { Storage } from '../fetchAndStore/Storage.js';
+import { Storage } from '../fetchAndStore/storage.js';
+import { System } from '../fetchAndStore/system.js';
 import type { IStorageData } from '../interfaces/IData.js';
 import type { ISeriesData } from '../interfaces/IStorage.js';
-import { downsample } from 'downsample-lttb-ts';
 
 /** Supported download formats */
 export const downloadFormats = ['csv', 'xlsx', 'json'] as const;
@@ -24,6 +25,7 @@ export type TDownloadFormats = typeof downloadFormats[number];
  */
 export async function startWebServer(): Promise<void> {
     const storage = Storage.getInstance();
+    const system = System.getInstance();
     const app = express();
     const port = 3000;
 
@@ -67,6 +69,8 @@ export async function startWebServer(): Promise<void> {
     app.get('/backup', async (_, res) => backup(res, storage));
 
     app.use('/', express.static('./site'));
+
+    app.use('/system', (_, res) => res.json(system.data));
 
 
     app.get('/getMinDate', (_, res) => res.send(String(storage.getMinDate())));

@@ -14,7 +14,7 @@ import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 
-import { drawerWidth } from './drawer';
+import { drawerWidth } from './drawer.js';
 
 /**
  * React properties

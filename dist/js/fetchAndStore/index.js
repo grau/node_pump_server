@@ -12,7 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import delay from 'delay';
 import { SerialPort, ReadlineParser } from 'serialport';
-import { Storage } from './Storage.js';
+import { Storage } from './storage.js';
 /**
  * Main queue
  */

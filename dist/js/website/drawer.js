@@ -15,6 +15,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
+import MemoryIcon from '@mui/icons-material/Memory';
 export const drawerWidth = 240;
 const DrawerElem = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
     '& .MuiDrawer-paper': Object.assign({ position: 'relative', whiteSpace: 'nowrap', width: drawerWidth, transition: theme.transitions.create('width', {
@@ -62,5 +63,10 @@ export function Drawer(props) {
             React.createElement(ListItemButton, { onClick: () => onChangeView('download') },
                 React.createElement(ListItemIcon, null,
                     React.createElement(DownloadIcon, null)),
-                React.createElement(ListItemText, { primary: "Download" }))));
+                React.createElement(ListItemText, { primary: "Download" })),
+            React.createElement(Divider, null),
+            React.createElement(ListItemButton, { onClick: () => onChangeView('system') },
+                React.createElement(ListItemIcon, null,
+                    React.createElement(MemoryIcon, null)),
+                React.createElement(ListItemText, { primary: "System" }))));
 }

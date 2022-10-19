@@ -1,13 +1,12 @@
 /**
  * @file React component
  */
-
-import type { ApexOptions } from 'apexcharts';
 import * as React from 'react';
 
 import Chart from 'react-apexcharts';
+import type { ApexOptions } from 'apexcharts';
 
-import type { ISeriesData } from '../interfaces/IStorage';
+import type { ISeriesData } from '../interfaces/IStorage.js';
 
 /** React properties */
 interface IProps {

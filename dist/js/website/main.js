@@ -2,9 +2,10 @@
  * @file React component
  */
 import * as React from 'react';
-import { Live } from './live';
-import { Graph } from './graph';
-import { Download } from './download';
+import { Live } from './live.js';
+import { Graph } from './graph.js';
+import { Download } from './download.js';
+import { System } from './system.js';
 /**
  * Content pane
  *
@@ -19,6 +20,8 @@ export function Main(props) {
             return React.createElement(Graph, null);
         case 'download':
             return React.createElement(Download, null);
+        case 'system':
+            return React.createElement(System, null);
         default:
         case 'live':
             return React.createElement(Live, null);

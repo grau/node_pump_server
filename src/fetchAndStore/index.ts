@@ -5,7 +5,7 @@
 import delay from 'delay';
 import { SerialPort, ReadlineParser } from 'serialport';
 
-import { Storage } from './Storage.js';
+import { Storage } from './storage.js';
 import type { IStorageData } from '../interfaces/IData.js';
 
 /**

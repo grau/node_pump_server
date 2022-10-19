@@ -14,9 +14,9 @@ import type { Mark } from '@mui/base';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
-import { getCachedDataSeries } from './getData';
-import { LineGraph } from './lineGraph';
-import type { ISeriesData } from '../interfaces/IStorage';
+import { getCachedDataSeries } from './getData.js';
+import { LineGraph } from './lineGraph.js';
+import type { ISeriesData } from '../interfaces/IStorage.js';
 
 /** Available marks on time slider */
 const marks: Mark[] = [

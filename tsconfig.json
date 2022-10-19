@@ -24,7 +24,7 @@
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
 		"noUnusedParameters": true,
-		"resolveJsonModule": false,
+		"resolveJsonModule": true,
 		"strictNullChecks": true,
 		"jsx": "react",
 		"skipLibCheck": true

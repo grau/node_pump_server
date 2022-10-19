@@ -5,9 +5,9 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import { AppBar } from './appBar';
-import { Drawer } from './drawer';
-import { Main } from './main';
+import { AppBar } from './appBar.js';
+import { Drawer } from './drawer.js';
+import { Main } from './main.js';
 /**
  * Root element
  *

@@ -11,10 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import express from 'express';
+import { downsample } from 'downsample-lttb-ts';
 import * as XLSX from 'xlsx';
 import fs from 'fs-extra';
-import { Storage } from '../fetchAndStore/Storage.js';
-import { downsample } from 'downsample-lttb-ts';
+import { Storage } from '../fetchAndStore/storage.js';
+import { System } from '../fetchAndStore/system.js';
 /** Supported download formats */
 export const downloadFormats = ['csv', 'xlsx', 'json'];
 /**
@@ -23,6 +24,7 @@ export const downloadFormats = ['csv', 'xlsx', 'json'];
 export function startWebServer() {
     return __awaiter(this, void 0, void 0, function* () {
         const storage = Storage.getInstance();
+        const system = System.getInstance();
         const app = express();
         const port = 3000;
         app.get('/getDataCache', (req, res) => {
@@ -59,6 +61,7 @@ export function startWebServer() {
         app.get('/download', (req, res) => download(req, res, storage));
         app.get('/backup', (_, res) => __awaiter(this, void 0, void 0, function* () { return backup(res, storage); }));
         app.use('/', express.static('./site'));
+        app.use('/system', (_, res) => res.json(system.data));
         app.get('/getMinDate', (_, res) => res.send(String(storage.getMinDate())));
         app.listen(port, () => {
             console.info('Webserver active on Port ' + port);
