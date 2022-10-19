@@ -26,7 +26,6 @@
     "lintFix": "eslint \"./src/**/*.{ts,tsx}\" --fix --ext .js,.ts,.tsx"
   },
   "dependencies": {
-    "@types/wojtekmaj__react-datetimerange-picker": "^3.0.2",
     "better-sqlite3": "^7.6.2",
     "check-disk-space": "^3.3.1",
     "delay": "^5.0.0",
@@ -51,6 +50,7 @@
     "@types/react-date-range": "^1.4.4",
     "@types/react-dom": "^18.0.6",
     "@types/serialport": "^8.0.2",
+    "@types/wojtekmaj__react-datetimerange-picker": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "@wojtekmaj/react-datetimerange-picker": "^4.0.1",
