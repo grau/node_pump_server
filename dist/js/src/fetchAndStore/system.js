@@ -13,7 +13,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import checkDiskSpace from 'check-disk-space';
 import os from 'os';
 import fs from 'fs-extra';
-import { dbLocation } from './storage.js';
+import { dbLocation } from './storage-mysql.js';
 /** Amount of data held in local storage (6 hrs) */
 const pufferLength = 6 * 60;
 /**

@@ -8,7 +8,7 @@ import { downsample } from 'downsample-lttb-ts';
 import * as XLSX from 'xlsx';
 import fs from 'fs-extra';
 
-import { Storage } from '../fetchAndStore/storage.js';
+import { Storage } from '../fetchAndStore/storage-mysql.js';
 import { System } from '../fetchAndStore/system.js';
 import type { IStorageData } from '../interfaces/IData.js';
 import type { ISeriesData } from '../interfaces/IStorage.js';
@@ -24,12 +24,12 @@ export type TDownloadFormats = typeof downloadFormats[number];
  * Starts http server. Servers all files
  */
 export async function startWebServer(): Promise<void> {
-    const storage = Storage.getInstance();
+    const storage = await Storage.getInstance();
     const system = System.getInstance();
     const app = express();
     const port = 3000;
 
-    app.get('/getDataCache', (req, res) => {
+    app.get('/getDataCache', async (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         let data = storage.data;
         const from = getAsNumber(req.query.from);
@@ -100,11 +100,11 @@ function getData(req: Request, res: Response, storage: Storage): void {
  * @param res Response
  * @param storage Storage object
  */
-function getDataSeries(req: Request, res: Response, storage: Storage): void {
+async function getDataSeries(req: Request, res: Response, storage: Storage): Promise<void> {
     const from = getAsNumber(req.query.from);
     const to = getAsNumber(req.query.to);
     const samples = getAsNumber(req.query.samples) ?? 200;
-    res.json(toSeries(storage.getData(from, to), samples));
+    res.json(toSeries(await storage.getData(from, to), samples));
 }
 
 /**
@@ -114,7 +114,7 @@ function getDataSeries(req: Request, res: Response, storage: Storage): void {
  * @param res Response
  * @param storage Storage object
  */
-function download(req: Request, res: Response, storage: Storage): void {
+async function download(req: Request, res: Response, storage: Storage): Promise<void> {
     const from = getAsNumber(req.query.from) ?? Date.now() - 24 * 60 * 60 * 1000;
     const to = getAsNumber(req.query.to) ?? Date.now();
     const formatString = (typeof(req.query.format) === 'string' ? req.query.format : 'json') as TDownloadFormats;
@@ -124,7 +124,7 @@ function download(req: Request, res: Response, storage: Storage): void {
     case 'csv':
         res.setHeader('Content-Type', 'text/csv');
         res.write('timestamp;input0;input1;input2;input3;output0;output1;boot;state\n');
-        for (const row of storage.getDataIterator(from, to)) {
+        for (const row of await storage.getDataIterator(from, to)) {
             res.write([row.timestamp, row.input0, row.input1, row.input2, row.input3,
                 row.output0, row.output1, row.boot, row.state]
                 .join(';') + '\n');
@@ -136,7 +136,7 @@ function download(req: Request, res: Response, storage: Storage): void {
         res.setHeader('Content-Type', 'application/octet-stream');
         res.write('[');
         let first = true;
-        for (const row of storage.getDataIterator(from, to)) {
+        for (const row of await storage.getDataIterator(from, to)) {
             if (first) {
                 res.write(JSON.stringify(row));
                 first = false;
@@ -150,7 +150,7 @@ function download(req: Request, res: Response, storage: Storage): void {
     }
     case 'xlsx': {
         res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        const data = storage.getRawData(from, to);
+        const data = await storage.getRawData(from, to);
         const worksheet = XLSX.utils.json_to_sheet(data);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Dates');

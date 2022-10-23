@@ -5,19 +5,23 @@
 import delay from 'delay';
 import { SerialPort, ReadlineParser } from 'serialport';
 
-import { Storage } from './storage.js';
+import { Storage } from './storage-mysql.js';
 import type { IStorageData } from '../interfaces/IData.js';
 
 /**
  * Main queue
  */
 export async function mainQueue(): Promise<never> {
-    const storage = Storage.getInstance();
+    const storage = await Storage.getInstance();
     // eslint-disable-next-line no-constant-condition
     while (true) {
         console.info('Connecting to port');
         await new Promise<void>((resolve) => {
-            listenToArduino(storage, resolve);
+            listenToArduino(storage, resolve)
+                .catch((err) => {
+                    console.warn('listenToArduino crashed!', err);
+                    resolve();
+                });
         });
         await delay(5000);
     }
@@ -30,7 +34,7 @@ export async function mainQueue(): Promise<never> {
  * @param storage Storage function to pipe data to
  * @param error Called if port crashes/closes
  */
-function listenToArduino(storage: Storage, error: () => void): void {
+async function listenToArduino(storage: Storage, error: () => void): Promise<void> {
     const port = new SerialPort({
         baudRate: 115200,
         path: '/dev/ttyUSB0',
@@ -41,18 +45,22 @@ function listenToArduino(storage: Storage, error: () => void): void {
     parser.on('data', (data: string) => storage.storeDataLine(data, Date.now()));
 
     port.on('pause', () => {
-        storage.storeError('port', 'Pause', Date.now());
+        storage.storeError('port', 'Pause', Date.now())
+            .catch((err) => console.warn('Failed to store pause error', {err}));
     });
     port.on('close', () => {
-        storage.storeError('port', 'Close', Date.now());
+        storage.storeError('port', 'Close', Date.now())
+            .catch((err) => console.warn('Failed to store close error', {err}));
         error();
     });
     port.on('error', () => {
-        storage.storeError('port', 'Close', Date.now());
+        storage.storeError('port', 'Close', Date.now())
+            .catch((err) => console.warn('Failed to store error error', {err}));
         error();
     });
     parser.on('error', () => {
-        storage.storeError('port', 'Close', Date.now());
+        storage.storeError('port', 'Close', Date.now())
+            .catch((err) => console.warn('Failed to store parser error', {err}));
         error();
     });
 }
@@ -61,18 +69,18 @@ function listenToArduino(storage: Storage, error: () => void): void {
  * Just a simple test function
  */
 export async function writeTestData(): Promise<never> {
-    const storage = Storage.getInstance();
+    const storage = await Storage.getInstance();
 
     console.log('Pre-push some values');
     for (let timestamp = Date.now() - (2000 * 1800); timestamp < Date.now(); timestamp+=2000) {
-        storage.storeDataLine(getTestdata(timestamp), timestamp);
+        await storage.storeDataLine(getTestdata(timestamp), timestamp);
     }
 
     console.log('Starting base system');
     // eslint-disable-next-line no-constant-condition
     while (true) {
         const timestamp = Date.now();
-        storage.storeDataLine(getTestdata(timestamp), timestamp);
+        await storage.storeDataLine(getTestdata(timestamp), timestamp);
         await delay(2000);
     }
 }

@@ -3,11 +3,12 @@
  */
 
 import checkDiskSpace from 'check-disk-space';
-import os from 'os';
-import fs from 'fs-extra';
 import type { DiskSpace } from 'check-disk-space';
 
-import { dbLocation } from './storage.js';
+import os from 'os';
+import fs from 'fs-extra';
+
+import { dbLocation } from './storage-mysql.js';
 
 /** Amount of data held in local storage (6 hrs) */
 const pufferLength = 6 * 60;

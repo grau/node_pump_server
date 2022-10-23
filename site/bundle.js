@@ -76235,7 +76235,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   // package.json
   var package_default = {
     name: "ardduino_pump_fetch",
-    version: "0.2",
+    version: "0.1",
     description: "Node program to fetch and store data from adruino pump control",
     main: "index.js",
     author: "grau",
@@ -76257,7 +76257,6 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       lintFix: 'eslint "./src/**/*.{ts,tsx}" --fix --ext .js,.ts,.tsx'
     },
     dependencies: {
-      "@types/wojtekmaj__react-datetimerange-picker": "^3.0.2",
       "better-sqlite3": "^7.6.2",
       "check-disk-space": "^3.3.1",
       delay: "^5.0.0",
@@ -76265,7 +76264,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       "downsample-lttb-ts": "^0.0.6",
       express: "^4.18.2",
       "fs-extra": "^10.1.0",
-      "react-icons": "^4.6.0",
+      mysql2: "^2.3.3",
       serialport: "^10.4.0",
       "typescript-json": "^3.3.10",
       xlsx: "^0.18.5"
@@ -76282,6 +76281,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       "@types/react-date-range": "^1.4.4",
       "@types/react-dom": "^18.0.6",
       "@types/serialport": "^8.0.2",
+      "@types/wojtekmaj__react-datetimerange-picker": "^3.0.2",
       "@typescript-eslint/eslint-plugin": "^5.40.0",
       "@typescript-eslint/parser": "^5.40.0",
       "@wojtekmaj/react-datetimerange-picker": "^4.0.1",
@@ -76295,6 +76295,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       react: "^18.2.0",
       "react-apexcharts": "^1.4.0",
       "react-dom": "^18.2.0",
+      "react-icons": "^4.6.0",
       "ts-node": "^10.9.1",
       ttypescript: "^1.5.13",
       typescript: "^4.8.4"
