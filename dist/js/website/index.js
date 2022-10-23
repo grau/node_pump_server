@@ -14,8 +14,18 @@ const container = document.getElementById('reactRoot');
 if (!container) {
     throw new Error('No root container node found');
 }
+const theme = createTheme({
+    palette: {
+        action: {
+            selectedOpacity: 0.3,
+            hoverOpacity: 1,
+            focus: '#ff0000',
+            focusOpacity: 1,
+        },
+    },
+});
 const root = createRoot(container);
 root.render(React.createElement(React.StrictMode, null,
-    React.createElement(ThemeProvider, { theme: createTheme() },
+    React.createElement(ThemeProvider, { theme: theme },
         React.createElement(CssBaseline, null),
         React.createElement(Root, null))));

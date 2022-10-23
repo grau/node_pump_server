@@ -7,9 +7,6 @@ import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import FormLabel from '@mui/material/FormLabel';
 import Alert from '@mui/material/Alert';
-import pkg from '../../package.json';
-
-
 
 /**
  * Info about the active version
@@ -36,12 +33,12 @@ export function VersionInfo(): JSX.Element {
     return <>
         <FormLabel>Version</FormLabel>
         <Paper sx={{ p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column'}}>
-            {pkg.version === remoteVersion
+            {'0.1' === remoteVersion
                 ? <Alert severity='success'>
-                    Die installierte Version {pkg.version} ist aktuell
+                    Die installierte Version 0.1 ist aktuell
                 </Alert>
                 : <Alert severity='error'>
-                    Installiert ist Version {pkg.version}. Version {remoteVersion} ist verfügbar
+                    Installiert ist Version 0.1. Version {remoteVersion} ist verfügbar
                 </Alert>}
         </Paper>
     </>;

@@ -7,15 +7,13 @@ import MuiDrawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import DownloadIcon from '@mui/icons-material/Download';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import MemoryIcon from '@mui/icons-material/Memory';
+import { DrawerItem } from './drawerItem';
 export const drawerWidth = 240;
 const DrawerElem = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
     '& .MuiDrawer-paper': Object.assign({ position: 'relative', whiteSpace: 'nowrap', width: drawerWidth, transition: theme.transitions.create('width', {
@@ -40,8 +38,8 @@ const DrawerElem = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'op
  * @returns React component
  */
 export function Drawer(props) {
-    const { open, toggleDrawer, onChangeView } = props;
-    return React.createElement(DrawerElem, { variant: "permanent", open: open },
+    const { open, toggleDrawer, onChangeView, view } = props;
+    return React.createElement(DrawerElem, { variant: 'permanent', open: open },
         React.createElement(Toolbar, { sx: {
                 display: 'flex',
                 alignItems: 'center',
@@ -51,22 +49,10 @@ export function Drawer(props) {
             React.createElement(IconButton, { onClick: toggleDrawer },
                 React.createElement(ChevronLeftIcon, null))),
         React.createElement(Divider, null),
-        React.createElement(List, { component: "nav" },
-            React.createElement(ListItemButton, { onClick: () => onChangeView('live') },
-                React.createElement(ListItemIcon, null,
-                    React.createElement(LiveTvIcon, null)),
-                React.createElement(ListItemText, { primary: "Live" })),
-            React.createElement(ListItemButton, { onClick: () => onChangeView('graph') },
-                React.createElement(ListItemIcon, null,
-                    React.createElement(BarChartIcon, null)),
-                React.createElement(ListItemText, { primary: "Historie" })),
-            React.createElement(ListItemButton, { onClick: () => onChangeView('download') },
-                React.createElement(ListItemIcon, null,
-                    React.createElement(DownloadIcon, null)),
-                React.createElement(ListItemText, { primary: "Download" })),
-            React.createElement(Divider, null),
-            React.createElement(ListItemButton, { onClick: () => onChangeView('system') },
-                React.createElement(ListItemIcon, null,
-                    React.createElement(MemoryIcon, null)),
-                React.createElement(ListItemText, { primary: "System" }))));
+        React.createElement(List, { component: 'nav' },
+            React.createElement(DrawerItem, { title: 'Live', view: 'live', onChangeView: onChangeView, activeView: view, icon: React.createElement(LiveTvIcon, null) }),
+            React.createElement(DrawerItem, { title: 'Historie', view: 'graph', onChangeView: onChangeView, activeView: view, icon: React.createElement(BarChartIcon, null) }),
+            React.createElement(DrawerItem, { title: 'Download', view: 'download', onChangeView: onChangeView, activeView: view, icon: React.createElement(DownloadIcon, null) }),
+            React.createElement(Divider, { sx: { my: 1 } }),
+            React.createElement(DrawerItem, { title: 'System', view: 'system', onChangeView: onChangeView, activeView: view, icon: React.createElement(MemoryIcon, null) })));
 }

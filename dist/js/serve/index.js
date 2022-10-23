@@ -14,7 +14,7 @@ import express from 'express';
 import { downsample } from 'downsample-lttb-ts';
 import * as XLSX from 'xlsx';
 import fs from 'fs-extra';
-import { Storage } from '../fetchAndStore/storage.js';
+import { Storage } from '../fetchAndStore/storage-mysql.js';
 import { System } from '../fetchAndStore/system.js';
 /** Supported download formats */
 export const downloadFormats = ['csv', 'xlsx', 'json'];
@@ -23,11 +23,11 @@ export const downloadFormats = ['csv', 'xlsx', 'json'];
  */
 export function startWebServer() {
     return __awaiter(this, void 0, void 0, function* () {
-        const storage = Storage.getInstance();
+        const storage = yield Storage.getInstance();
         const system = System.getInstance();
         const app = express();
         const port = 3000;
-        app.get('/getDataCache', (req, res) => {
+        app.get('/getDataCache', (req, res) => __awaiter(this, void 0, void 0, function* () {
             res.setHeader('Content-Type', 'application/json');
             let data = storage.data;
             const from = getAsNumber(req.query.from);
@@ -35,7 +35,7 @@ export function startWebServer() {
                 data = data.filter((data) => data.timestamp > from);
             }
             res.json(data);
-        });
+        }));
         app.get('/getDataCacheSeries', (req, res) => {
             var _a;
             res.setHeader('Content-Type', 'application/json');
@@ -89,10 +89,12 @@ function getData(req, res, storage) {
  */
 function getDataSeries(req, res, storage) {
     var _a;
-    const from = getAsNumber(req.query.from);
-    const to = getAsNumber(req.query.to);
-    const samples = (_a = getAsNumber(req.query.samples)) !== null && _a !== void 0 ? _a : 200;
-    res.json(toSeries(storage.getData(from, to), samples));
+    return __awaiter(this, void 0, void 0, function* () {
+        const from = getAsNumber(req.query.from);
+        const to = getAsNumber(req.query.to);
+        const samples = (_a = getAsNumber(req.query.samples)) !== null && _a !== void 0 ? _a : 200;
+        res.json(toSeries(yield storage.getData(from, to), samples));
+    });
 }
 /**
  * Handler for download endpoint
@@ -103,53 +105,55 @@ function getDataSeries(req, res, storage) {
  */
 function download(req, res, storage) {
     var _a, _b;
-    const from = (_a = getAsNumber(req.query.from)) !== null && _a !== void 0 ? _a : Date.now() - 24 * 60 * 60 * 1000;
-    const to = (_b = getAsNumber(req.query.to)) !== null && _b !== void 0 ? _b : Date.now();
-    const formatString = (typeof (req.query.format) === 'string' ? req.query.format : 'json');
-    const format = downloadFormats.includes(formatString) ? formatString : 'json';
-    // Force download, prevent show in browser
-    switch (format) {
-        case 'csv':
-            res.setHeader('Content-Type', 'text/csv');
-            res.write('timestamp;input0;input1;input2;input3;output0;output1;boot;state\n');
-            for (const row of storage.getDataIterator(from, to)) {
-                res.write([row.timestamp, row.input0, row.input1, row.input2, row.input3,
-                    row.output0, row.output1, row.boot, row.state]
-                    .join(';') + '\n');
-            }
-            res.end();
-            break;
-        case 'json': {
-            // We don't want the browser to open the result - therefore we tag it as octet stream to force download.
-            res.setHeader('Content-Type', 'application/octet-stream');
-            res.write('[');
-            let first = true;
-            for (const row of storage.getDataIterator(from, to)) {
-                if (first) {
-                    res.write(JSON.stringify(row));
-                    first = false;
+    return __awaiter(this, void 0, void 0, function* () {
+        const from = (_a = getAsNumber(req.query.from)) !== null && _a !== void 0 ? _a : Date.now() - 24 * 60 * 60 * 1000;
+        const to = (_b = getAsNumber(req.query.to)) !== null && _b !== void 0 ? _b : Date.now();
+        const formatString = (typeof (req.query.format) === 'string' ? req.query.format : 'json');
+        const format = downloadFormats.includes(formatString) ? formatString : 'json';
+        // Force download, prevent show in browser
+        switch (format) {
+            case 'csv':
+                res.setHeader('Content-Type', 'text/csv');
+                res.write('timestamp;input0;input1;input2;input3;output0;output1;boot;state\n');
+                for (const row of yield storage.getDataIterator(from, to)) {
+                    res.write([row.timestamp, row.input0, row.input1, row.input2, row.input3,
+                        row.output0, row.output1, row.boot, row.state]
+                        .join(';') + '\n');
                 }
-                else {
-                    res.write(',' + JSON.stringify(row));
+                res.end();
+                break;
+            case 'json': {
+                // We don't want the browser to open the result - therefore we tag it as octet stream to force download.
+                res.setHeader('Content-Type', 'application/octet-stream');
+                res.write('[');
+                let first = true;
+                for (const row of yield storage.getDataIterator(from, to)) {
+                    if (first) {
+                        res.write(JSON.stringify(row));
+                        first = false;
+                    }
+                    else {
+                        res.write(',' + JSON.stringify(row));
+                    }
                 }
+                res.write(']');
+                res.end();
+                break;
             }
-            res.write(']');
-            res.end();
-            break;
+            case 'xlsx': {
+                res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                const data = yield storage.getRawData(from, to);
+                const worksheet = XLSX.utils.json_to_sheet(data);
+                const workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(workbook, worksheet, 'Dates');
+                const wb = XLSX.write(workbook, {
+                    bookType: 'xlsx',
+                    type: 'buffer',
+                });
+                res.send(wb);
+            }
         }
-        case 'xlsx': {
-            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            const data = storage.getRawData(from, to);
-            const worksheet = XLSX.utils.json_to_sheet(data);
-            const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'Dates');
-            const wb = XLSX.write(workbook, {
-                bookType: 'xlsx',
-                type: 'buffer',
-            });
-            res.send(wb);
-        }
-    }
+    });
 }
 /**
  * Handler for backup endpoint

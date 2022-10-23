@@ -21,7 +21,7 @@ export function Root() {
     };
     return (React.createElement(Box, { sx: { display: 'flex' } },
         React.createElement(AppBar, { open: open, toggleDrawer: toggleDrawer }),
-        React.createElement(Drawer, { open: open, toggleDrawer: toggleDrawer, onChangeView: setView }),
+        React.createElement(Drawer, { view: view, open: open, toggleDrawer: toggleDrawer, onChangeView: setView }),
         React.createElement(Box, { component: "main", sx: {
                 backgroundColor: (theme) => theme.palette.mode === 'light'
                     ? theme.palette.grey[100]

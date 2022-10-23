@@ -14,7 +14,6 @@ import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import FormLabel from '@mui/material/FormLabel';
 import Alert from '@mui/material/Alert';
-import pkg from '../../package.json';
 /**
  * Info about the active version
  *
@@ -35,15 +34,10 @@ export function VersionInfo() {
     });
     return React.createElement(React.Fragment, null,
         React.createElement(FormLabel, null, "Version"),
-        React.createElement(Paper, { sx: { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column' } }, pkg.version === remoteVersion
-            ? React.createElement(Alert, { severity: 'success' },
-                "Die installierte Version ",
-                pkg.version,
-                " ist aktuell")
+        React.createElement(Paper, { sx: { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column' } }, '0.1' === remoteVersion
+            ? React.createElement(Alert, { severity: 'success' }, "Die installierte Version 0.1 ist aktuell")
             : React.createElement(Alert, { severity: 'error' },
-                "Installiert ist Version ",
-                pkg.version,
-                ". Version ",
+                "Installiert ist Version 0.1. Version ",
                 remoteVersion,
                 " ist verf\u00FCgbar")));
 }

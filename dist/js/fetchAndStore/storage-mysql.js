@@ -34,7 +34,8 @@ export class Storage {
         fs.mkdirSync(dataStorage, { recursive: true });
         this.db = mysql.createPool({
             host: 'localhost',
-            user: 'root',
+            user: 'pump',
+            password: 'pump',
             database: 'pump',
             waitForConnections: true,
             connectionLimit: 10,
