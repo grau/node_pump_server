@@ -57,7 +57,8 @@ export class Storage {
 
         this.db = mysql.createPool({
             host: 'localhost',
-            user: 'root',
+            user: 'pump',
+            password: 'pump',
             database: 'pump',
             waitForConnections: true,
             connectionLimit: 10,
