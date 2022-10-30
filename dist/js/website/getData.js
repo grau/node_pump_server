@@ -10,101 +10,102 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import delay from 'delay';
+import { db } from './database.js';
 /**
- * Returns cached data
- *
- * @param from Timestamp to start from
- * @returns Cached data
+ * Update loop fetching new data from server - for all infinity.
  */
-export function getCachedData(from) {
+export function fetchLoop() {
     return __awaiter(this, void 0, void 0, function* () {
-        let url = '/getDataCache';
-        if (from !== undefined) {
-            url = url + '?from=' + from;
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+            yield updateFileIndex();
+            for (const filename of yield db.getNextFilenames()) {
+                console.log('Fetching data file ' + filename);
+                yield storeFile(filename);
+                yield db.setFileIndex(filename);
+                console.log('... fetched');
+            }
+            console.log('Waiting for new files');
+            yield delay(10000);
         }
-        return (yield fetch(url)).json();
     });
 }
 /**
- * Returns cached data
+ * Fetches the index from server
  *
- * @param from Timestamp to start from
- * @param samples Number of samples to return
- * @returns Cached data
+ * @returns All index files
  */
-export function getCachedDataSeries(from, samples = 200) {
+function updateFileIndex() {
     return __awaiter(this, void 0, void 0, function* () {
-        const params = new URLSearchParams();
-        if (from !== undefined) {
-            params.append('from', String(from));
-        }
-        if (samples !== undefined) {
-            params.append('samples', String(samples));
-        }
-        return (yield fetch('/getDataCacheSeries?' + params.toString())).json();
+        const url = '/data/index.txt';
+        const content = yield (yield fetch(url)).text();
+        const filenames = content
+            .split('\n')
+            .filter((line) => line.length > 0);
+        yield db.updateFileIndex(filenames);
     });
 }
 /**
- * Returns cached data
+ * Fetches the given file from server and puts it in database
  *
- * @param from Timestamp to start from
- * @param to Timestamp to end at
- * @returns Cached data
+ * @param filename Filename to fetch
  */
-export function getData(from, to) {
+function storeFile(filename) {
     return __awaiter(this, void 0, void 0, function* () {
-        const searchParams = new URLSearchParams();
-        if (from !== undefined) {
-            searchParams.append('from', String(from));
+        const url = '/' + filename;
+        const content = yield (yield fetch(url)).text();
+        const rows = content
+            .split('\n')
+            .filter((line) => line.length > 0);
+        if (filename.match(/-error\.csv/)) {
+            const errors = rows
+                .map(parseErrorLine);
+            yield db.addError(errors);
         }
-        if (to !== undefined) {
-            searchParams.append('t', String(to));
+        else {
+            const data = rows
+                .map(parseDataLine);
+            yield db.addData(data);
         }
-        const url = '/getData?' + searchParams.toString();
-        return (yield fetch(url)).json();
     });
 }
 /**
- * Returns cached data
+ * Parses a single error line
  *
- * @param from Timestamp to start from
- * @param to Timestamp to end at
- * @param samples Number of samples to return
- * @returns Cached data
+ * @param line Line to parse
+ * @returns error object
  */
-export function getDataSeries(from, to, samples = 200) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const searchParams = new URLSearchParams();
-        if (from !== undefined) {
-            searchParams.append('from', String(from));
-        }
-        if (to !== undefined) {
-            searchParams.append('t', String(to));
-        }
-        if (samples !== undefined) {
-            searchParams.append('samples', String(samples));
-        }
-        const url = '/getDataSeries?' + searchParams.toString();
-        return (yield fetch(url)).json();
-    });
+function parseErrorLine(line) {
+    const [timestamp, data, error, message] = line.split(';');
+    return {
+        timestamp: parseInt(timestamp),
+        data,
+        error: error,
+        message,
+    };
 }
 /**
- * Get the lowest timestamp in database
+ * Parses a single data line
  *
- * @returns Lowest timestamp in database
+ * @param line Line to parse
+ * @returns data object
  */
-export function getMinDate() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return parseInt(yield (yield fetch('/getMinDate')).text());
-    });
-}
-/**
- * Get the lowest timestamp in database
- *
- * @returns Lowest timestamp in database
- */
-export function getSystem() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return (yield fetch('/system')).json();
-    });
+function parseDataLine(line) {
+    const [timestamp, input0, input1, input2, input3, output0, output1, boot, state] = line.split(';');
+    return {
+        timestamp: parseInt(timestamp),
+        input: [
+            { id: 0, val: parseInt(input0) },
+            { id: 1, val: parseInt(input1) },
+            { id: 2, val: parseInt(input2) },
+            { id: 3, val: parseInt(input3) },
+        ],
+        output: [
+            { id: 0, val: parseInt(output0) },
+            { id: 1, val: parseInt(output1) },
+        ],
+        boot: boot === '1',
+        state: parseInt(state),
+    };
 }

@@ -1,10 +1,11 @@
 /**
  * @file Entry point
  */
-import { mainQueue } from './fetchAndStore/index.js';
+import { writeTestData } from './fetchAndStore/index.js';
 import { startWebServer } from './serve/index.js';
 Promise.all([
-    mainQueue(),
+    writeTestData(),
+    // mainQueue(),
     startWebServer(),
 ])
     .catch((err) => {

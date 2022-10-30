@@ -42,6 +42,12 @@ export interface IStorageData {
     }[];
 }
 
+/** All available error types */
+export type TError = 'parse' | // Error while parsing data.
+    'validate' | // Incoming data could be parsed - but does not match expected structure
+    'port' | // Something with the port went wront
+    'readlineParser';
+
 /** In case data was received incorrect - errors are stored */
 export interface IStorageError {
     /** Timestamp this data was received */
@@ -49,10 +55,7 @@ export interface IStorageError {
     /** Data that was received */
     data?: string;
     /** Type of error */
-    error: 'parse' | // Error while parsing data.
-        'validate' | // Incoming data could be parsed - but does not match expected structure
-        'port' | // Something with the port went wront
-        'readlineParser'; // Something with the first, readlineParser went wrong
+    error: TError
     /** Error message */
     message: string;
 }

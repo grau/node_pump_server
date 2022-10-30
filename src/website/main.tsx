@@ -24,7 +24,6 @@ interface IProps {
  */
 export function Main(props: IProps): JSX.Element {
     const { view } = props;
-    console.log(view);
     switch (view) {
     case 'graph':
         return <Graph />;

@@ -12,7 +12,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
 
-import { getSystem } from './getData.js';
 import { VersionInfo } from './versionInfo.js';
 import type { ISystemData } from '../fetchAndStore/system.js';
 
@@ -58,21 +57,21 @@ const memoryOptions: ApexOptions = {
 export function System(): JSX.Element {
     const [data, setData] = React.useState<ISystemData[] | null>(null);
 
-    const fetchData = () => {
-        getSystem()
-            .then(setData)
-            .catch((err) => console.warn('Failed to fetch data', {err}));
-    };
+    // const fetchData = () => {
+    //     getSystem()
+    //         .then(setData)
+    //         .catch((err: unknown) => console.warn('Failed to fetch data', {err}));
+    // };
 
-    React.useEffect(() => {
-        fetchData();
-        const interval = setInterval(() => {
-            fetchData();
-        }, 60000);
-        return () => {
-            clearInterval(interval);
-        };
-    });
+    // React.useEffect(() => {
+    //     fetchData();
+    //     const interval = setInterval(() => {
+    //         fetchData();
+    //     }, 60000);
+    //     return () => {
+    //         clearInterval(interval);
+    //     };
+    // });
 
     if (data === null) {
         return <CircularProgress />;

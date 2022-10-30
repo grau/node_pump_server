@@ -14,7 +14,6 @@ import { System } from './system.js';
  */
 export function Main(props) {
     const { view } = props;
-    console.log(view);
     switch (view) {
         case 'graph':
             return React.createElement(Graph, null);

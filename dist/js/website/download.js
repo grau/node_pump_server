@@ -12,7 +12,6 @@ import Slider from '@mui/material/Slider';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon';
-import { getMinDate } from './getData.js';
 /** All possible timeframe results */
 var ETimeframe;
 (function (ETimeframe) {
@@ -61,11 +60,11 @@ export function Download() {
     const [minDate, setMinDate] = React.useState(new Date());
     const paperSx = { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column' };
     const buttonSx = { width: 150 };
-    React.useEffect(() => {
-        getMinDate()
-            .then((date) => setMinDate(new Date(date)))
-            .catch((err) => console.warn('Could not fetch min date', { err }));
-    });
+    // React.useEffect(() => {
+    //     getMinDate()
+    //         .then((date) => setMinDate(new Date(date)))
+    //         .catch((err) => console.warn('Could not fetch min date', {err}));
+    // });
     const [from, to] = getFromTo(timeframe, timeRange);
     const baseUrl = '/download?from=' + from + '&to=' + to + '&format=';
     return React.createElement(Stack, null,

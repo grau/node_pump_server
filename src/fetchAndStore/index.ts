@@ -5,7 +5,7 @@
 import delay from 'delay';
 import { SerialPort, ReadlineParser } from 'serialport';
 
-import { Storage } from './storage-mysql.js';
+import { Storage } from './storage-csv.js';
 import type { IStorageData } from '../interfaces/IData.js';
 
 /**
@@ -72,7 +72,7 @@ export async function writeTestData(): Promise<never> {
     const storage = await Storage.getInstance();
 
     console.log('Pre-push some values');
-    for (let timestamp = Date.now() - (2000 * 1800); timestamp < Date.now(); timestamp+=2000) {
+    for (let timestamp = Date.now() - (1000 * 60 * 60 * 24 * 10); timestamp < Date.now(); timestamp+=2000) {
         await storage.storeDataLine(getTestdata(timestamp), timestamp);
     }
 
@@ -102,7 +102,7 @@ function getTestdata(timestamp: number): string {
     for (let id = 0; id < 4; id++) {
         data.input.push({
             id,
-            val: Math.sin(id + timestamp / 4000),
+            val: Math.sin(id + timestamp / 4000) * 30,
         });
     }
     for (let id = 0; id < 2; id++) {

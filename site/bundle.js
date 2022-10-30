@@ -20,6 +20,9 @@
       }
     return a;
   };
+  var __esm = (fn, res) => function __init() {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  };
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
@@ -40,6 +43,7 @@
     isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
     mod
   ));
+  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
   var __async = (__this, __arguments, generator) => {
     return new Promise((resolve, reject) => {
       var fulfilled = (value) => {
@@ -218,8 +222,8 @@
           {
             Object.freeze(emptyObject);
           }
-          function Component(props, context, updater) {
-            this.props = props;
+          function Component(props2, context, updater) {
+            this.props = props2;
             this.context = context;
             this.refs = emptyObject;
             this.updater = updater || ReactNoopUpdateQueue;
@@ -256,8 +260,8 @@
           function ComponentDummy() {
           }
           ComponentDummy.prototype = Component.prototype;
-          function PureComponent(props, context, updater) {
-            this.props = props;
+          function PureComponent(props2, context, updater) {
+            this.props = props2;
             this.context = context;
             this.refs = emptyObject;
             this.updater = updater || ReactNoopUpdateQueue;
@@ -276,14 +280,14 @@
             return refObject;
           }
           var isArrayImpl = Array.isArray;
-          function isArray(a) {
+          function isArray2(a) {
             return isArrayImpl(a);
           }
           function typeName(value) {
             {
               var hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
-              var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
-              return type;
+              var type2 = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+              return type2;
             }
           }
           function willCoercionThrow(value) {
@@ -315,25 +319,25 @@
             var functionName = innerType.displayName || innerType.name || "";
             return functionName !== "" ? wrapperName + "(" + functionName + ")" : wrapperName;
           }
-          function getContextName(type) {
-            return type.displayName || "Context";
+          function getContextName(type2) {
+            return type2.displayName || "Context";
           }
-          function getComponentNameFromType(type) {
-            if (type == null) {
+          function getComponentNameFromType(type2) {
+            if (type2 == null) {
               return null;
             }
             {
-              if (typeof type.tag === "number") {
+              if (typeof type2.tag === "number") {
                 error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue.");
               }
             }
-            if (typeof type === "function") {
-              return type.displayName || type.name || null;
+            if (typeof type2 === "function") {
+              return type2.displayName || type2.name || null;
             }
-            if (typeof type === "string") {
-              return type;
+            if (typeof type2 === "string") {
+              return type2;
             }
-            switch (type) {
+            switch (type2) {
               case REACT_FRAGMENT_TYPE:
                 return "Fragment";
               case REACT_PORTAL_TYPE:
@@ -347,24 +351,24 @@
               case REACT_SUSPENSE_LIST_TYPE:
                 return "SuspenseList";
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_CONTEXT_TYPE:
-                  var context = type;
+                  var context = type2;
                   return getContextName(context) + ".Consumer";
                 case REACT_PROVIDER_TYPE:
-                  var provider = type;
+                  var provider = type2;
                   return getContextName(provider._context) + ".Provider";
                 case REACT_FORWARD_REF_TYPE:
-                  return getWrappedName(type, type.render, "ForwardRef");
+                  return getWrappedName(type2, type2.render, "ForwardRef");
                 case REACT_MEMO_TYPE:
-                  var outerName = type.displayName || null;
+                  var outerName = type2.displayName || null;
                   if (outerName !== null) {
                     return outerName;
                   }
-                  return getComponentNameFromType(type.type) || "Memo";
+                  return getComponentNameFromType(type2.type) || "Memo";
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
                   var init = lazyComponent._init;
                   try {
@@ -410,7 +414,7 @@
             }
             return config.key !== void 0;
           }
-          function defineKeyPropWarningGetter(props, displayName) {
+          function defineKeyPropWarningGetter(props2, displayName) {
             var warnAboutAccessingKey = function() {
               {
                 if (!specialPropKeyWarningShown) {
@@ -420,12 +424,12 @@
               }
             };
             warnAboutAccessingKey.isReactWarning = true;
-            Object.defineProperty(props, "key", {
+            Object.defineProperty(props2, "key", {
               get: warnAboutAccessingKey,
               configurable: true
             });
           }
-          function defineRefPropWarningGetter(props, displayName) {
+          function defineRefPropWarningGetter(props2, displayName) {
             var warnAboutAccessingRef = function() {
               {
                 if (!specialPropRefWarningShown) {
@@ -435,7 +439,7 @@
               }
             };
             warnAboutAccessingRef.isReactWarning = true;
-            Object.defineProperty(props, "ref", {
+            Object.defineProperty(props2, "ref", {
               get: warnAboutAccessingRef,
               configurable: true
             });
@@ -451,13 +455,13 @@
               }
             }
           }
-          var ReactElement = function(type, key, ref, self2, source, owner, props) {
+          var ReactElement = function(type2, key, ref, self2, source, owner, props2) {
             var element = {
               $$typeof: REACT_ELEMENT_TYPE,
-              type,
+              type: type2,
               key,
               ref,
-              props,
+              props: props2,
               _owner: owner
             };
             {
@@ -487,9 +491,9 @@
             }
             return element;
           };
-          function createElement13(type, config, children) {
+          function createElement13(type2, config, children) {
             var propName;
-            var props = {};
+            var props2 = {};
             var key = null;
             var ref = null;
             var self2 = null;
@@ -511,13 +515,13 @@
               source = config.__source === void 0 ? null : config.__source;
               for (propName in config) {
                 if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
-                  props[propName] = config[propName];
+                  props2[propName] = config[propName];
                 }
               }
             }
             var childrenLength = arguments.length - 2;
             if (childrenLength === 1) {
-              props.children = children;
+              props2.children = children;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
               for (var i = 0; i < childrenLength; i++) {
@@ -528,28 +532,28 @@
                   Object.freeze(childArray);
                 }
               }
-              props.children = childArray;
+              props2.children = childArray;
             }
-            if (type && type.defaultProps) {
-              var defaultProps2 = type.defaultProps;
+            if (type2 && type2.defaultProps) {
+              var defaultProps2 = type2.defaultProps;
               for (propName in defaultProps2) {
-                if (props[propName] === void 0) {
-                  props[propName] = defaultProps2[propName];
+                if (props2[propName] === void 0) {
+                  props2[propName] = defaultProps2[propName];
                 }
               }
             }
             {
               if (key || ref) {
-                var displayName = typeof type === "function" ? type.displayName || type.name || "Unknown" : type;
+                var displayName = typeof type2 === "function" ? type2.displayName || type2.name || "Unknown" : type2;
                 if (key) {
-                  defineKeyPropWarningGetter(props, displayName);
+                  defineKeyPropWarningGetter(props2, displayName);
                 }
                 if (ref) {
-                  defineRefPropWarningGetter(props, displayName);
+                  defineRefPropWarningGetter(props2, displayName);
                 }
               }
             }
-            return ReactElement(type, key, ref, self2, source, ReactCurrentOwner.current, props);
+            return ReactElement(type2, key, ref, self2, source, ReactCurrentOwner.current, props2);
           }
           function cloneAndReplaceKey(oldElement, newKey) {
             var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
@@ -560,7 +564,7 @@
               throw new Error("React.cloneElement(...): The argument must be a React element, but you passed " + element + ".");
             }
             var propName;
-            var props = assign({}, element.props);
+            var props2 = assign({}, element.props);
             var key = element.key;
             var ref = element.ref;
             var self2 = element._self;
@@ -584,24 +588,24 @@
               for (propName in config) {
                 if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
                   if (config[propName] === void 0 && defaultProps2 !== void 0) {
-                    props[propName] = defaultProps2[propName];
+                    props2[propName] = defaultProps2[propName];
                   } else {
-                    props[propName] = config[propName];
+                    props2[propName] = config[propName];
                   }
                 }
               }
             }
             var childrenLength = arguments.length - 2;
             if (childrenLength === 1) {
-              props.children = children;
+              props2.children = children;
             } else if (childrenLength > 1) {
               var childArray = Array(childrenLength);
               for (var i = 0; i < childrenLength; i++) {
                 childArray[i] = arguments[i + 2];
               }
-              props.children = childArray;
+              props2.children = childArray;
             }
-            return ReactElement(element.type, key, ref, self2, source, owner, props);
+            return ReactElement(element.type, key, ref, self2, source, owner, props2);
           }
           function isValidElement3(object) {
             return typeof object === "object" && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
@@ -634,15 +638,15 @@
             return index.toString(36);
           }
           function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
-            var type = typeof children;
-            if (type === "undefined" || type === "boolean") {
+            var type2 = typeof children;
+            if (type2 === "undefined" || type2 === "boolean") {
               children = null;
             }
             var invokeCallback = false;
             if (children === null) {
               invokeCallback = true;
             } else {
-              switch (type) {
+              switch (type2) {
                 case "string":
                 case "number":
                   invokeCallback = true;
@@ -659,7 +663,7 @@
               var _child = children;
               var mappedChild = callback(_child);
               var childKey = nameSoFar === "" ? SEPARATOR + getElementKey(_child, 0) : nameSoFar;
-              if (isArray(mappedChild)) {
+              if (isArray2(mappedChild)) {
                 var escapedChildKey = "";
                 if (childKey != null) {
                   escapedChildKey = escapeUserProvidedKey(childKey) + "/";
@@ -687,7 +691,7 @@
             var nextName;
             var subtreeCount = 0;
             var nextNamePrefix = nameSoFar === "" ? SEPARATOR : nameSoFar + SUBSEPARATOR;
-            if (isArray(children)) {
+            if (isArray2(children)) {
               for (var i = 0; i < children.length; i++) {
                 child = children[i];
                 nextName = nextNamePrefix + getElementKey(child, i);
@@ -713,7 +717,7 @@
                   nextName = nextNamePrefix + getElementKey(child, ii++);
                   subtreeCount += mapIntoArray(child, array, escapedPrefix, nextName, callback);
                 }
-              } else if (type === "object") {
+              } else if (type2 === "object") {
                 var childrenString = String(children);
                 throw new Error("Objects are not valid as a React child (found: " + (childrenString === "[object Object]" ? "object with keys {" + Object.keys(children).join(", ") + "}" : childrenString) + "). If you meant to render a collection of children, use an array instead.");
               }
@@ -974,29 +978,29 @@
           {
             REACT_MODULE_REFERENCE = Symbol.for("react.module.reference");
           }
-          function isValidElementType(type) {
-            if (typeof type === "string" || typeof type === "function") {
+          function isValidElementType(type2) {
+            if (typeof type2 === "string" || typeof type2 === "function") {
               return true;
             }
-            if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || enableDebugTracing || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
+            if (type2 === REACT_FRAGMENT_TYPE || type2 === REACT_PROFILER_TYPE || enableDebugTracing || type2 === REACT_STRICT_MODE_TYPE || type2 === REACT_SUSPENSE_TYPE || type2 === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type2 === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
               return true;
             }
-            if (typeof type === "object" && type !== null) {
-              if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_MODULE_REFERENCE || type.getModuleId !== void 0) {
+            if (typeof type2 === "object" && type2 !== null) {
+              if (type2.$$typeof === REACT_LAZY_TYPE || type2.$$typeof === REACT_MEMO_TYPE || type2.$$typeof === REACT_PROVIDER_TYPE || type2.$$typeof === REACT_CONTEXT_TYPE || type2.$$typeof === REACT_FORWARD_REF_TYPE || type2.$$typeof === REACT_MODULE_REFERENCE || type2.getModuleId !== void 0) {
                 return true;
               }
             }
             return false;
           }
-          function memo2(type, compare) {
+          function memo2(type2, compare) {
             {
-              if (!isValidElementType(type)) {
-                error("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
+              if (!isValidElementType(type2)) {
+                error("memo: The first argument must be a component. Instead received: %s", type2 === null ? "null" : typeof type2);
               }
             }
             var elementType = {
               $$typeof: REACT_MEMO_TYPE,
-              type,
+              type: type2,
               compare: compare === void 0 ? null : compare
             };
             {
@@ -1009,8 +1013,8 @@
                 },
                 set: function(name) {
                   ownName = name;
-                  if (!type.name && !type.displayName) {
-                    type.displayName = name;
+                  if (!type2.name && !type2.displayName) {
+                    type2.displayName = name;
                   }
                 }
               });
@@ -1052,7 +1056,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useRef(initialValue);
           }
-          function useEffect11(create, deps) {
+          function useEffect8(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useEffect(create, deps);
           }
@@ -1068,7 +1072,7 @@
             var dispatcher = resolveDispatcher();
             return dispatcher.useCallback(callback, deps);
           }
-          function useMemo3(create, deps) {
+          function useMemo5(create, deps) {
             var dispatcher = resolveDispatcher();
             return dispatcher.useMemo(create, deps);
           }
@@ -1119,20 +1123,20 @@
                 prevGroup = console.group;
                 prevGroupCollapsed = console.groupCollapsed;
                 prevGroupEnd = console.groupEnd;
-                var props = {
+                var props2 = {
                   configurable: true,
                   enumerable: true,
                   value: disabledLog,
                   writable: true
                 };
                 Object.defineProperties(console, {
-                  info: props,
-                  log: props,
-                  warn: props,
-                  error: props,
-                  group: props,
-                  groupCollapsed: props,
-                  groupEnd: props
+                  info: props2,
+                  log: props2,
+                  warn: props2,
+                  error: props2,
+                  group: props2,
+                  groupCollapsed: props2,
+                  groupEnd: props2
                 });
               }
               disabledDepth++;
@@ -1142,31 +1146,31 @@
             {
               disabledDepth--;
               if (disabledDepth === 0) {
-                var props = {
+                var props2 = {
                   configurable: true,
                   enumerable: true,
                   writable: true
                 };
                 Object.defineProperties(console, {
-                  log: assign({}, props, {
+                  log: assign({}, props2, {
                     value: prevLog
                   }),
-                  info: assign({}, props, {
+                  info: assign({}, props2, {
                     value: prevInfo
                   }),
-                  warn: assign({}, props, {
+                  warn: assign({}, props2, {
                     value: prevWarn
                   }),
-                  error: assign({}, props, {
+                  error: assign({}, props2, {
                     value: prevError
                   }),
-                  group: assign({}, props, {
+                  group: assign({}, props2, {
                     value: prevGroup
                   }),
-                  groupCollapsed: assign({}, props, {
+                  groupCollapsed: assign({}, props2, {
                     value: prevGroupCollapsed
                   }),
-                  groupEnd: assign({}, props, {
+                  groupEnd: assign({}, props2, {
                     value: prevGroupEnd
                   })
                 });
@@ -1309,32 +1313,32 @@
             var prototype = Component2.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
-          function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
-            if (type == null) {
+          function describeUnknownElementTypeFrameInDEV(type2, source, ownerFn) {
+            if (type2 == null) {
               return "";
             }
-            if (typeof type === "function") {
+            if (typeof type2 === "function") {
               {
-                return describeNativeComponentFrame(type, shouldConstruct(type));
+                return describeNativeComponentFrame(type2, shouldConstruct(type2));
               }
             }
-            if (typeof type === "string") {
-              return describeBuiltInComponentFrame(type);
+            if (typeof type2 === "string") {
+              return describeBuiltInComponentFrame(type2);
             }
-            switch (type) {
+            switch (type2) {
               case REACT_SUSPENSE_TYPE:
                 return describeBuiltInComponentFrame("Suspense");
               case REACT_SUSPENSE_LIST_TYPE:
                 return describeBuiltInComponentFrame("SuspenseList");
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_FORWARD_REF_TYPE:
-                  return describeFunctionComponentFrame(type.render);
+                  return describeFunctionComponentFrame(type2.render);
                 case REACT_MEMO_TYPE:
-                  return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
+                  return describeUnknownElementTypeFrameInDEV(type2.type, source, ownerFn);
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
                   var init = lazyComponent._init;
                   try {
@@ -1359,7 +1363,7 @@
               }
             }
           }
-          function checkPropTypes(typeSpecs, values2, location, componentName, element) {
+          function checkPropTypes(typeSpecs, values2, location2, componentName, element) {
             {
               var has = Function.call.bind(hasOwnProperty);
               for (var typeSpecName in typeSpecs) {
@@ -1367,23 +1371,23 @@
                   var error$1 = void 0;
                   try {
                     if (typeof typeSpecs[typeSpecName] !== "function") {
-                      var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                      var err = Error((componentName || "React class") + ": " + location2 + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
                       err.name = "Invariant Violation";
                       throw err;
                     }
-                    error$1 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+                    error$1 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location2, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
                   } catch (ex) {
                     error$1 = ex;
                   }
                   if (error$1 && !(error$1 instanceof Error)) {
                     setCurrentlyValidatingElement(element);
-                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location, typeSpecName, typeof error$1);
+                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location2, typeSpecName, typeof error$1);
                     setCurrentlyValidatingElement(null);
                   }
                   if (error$1 instanceof Error && !(error$1.message in loggedTypeFailures)) {
                     loggedTypeFailures[error$1.message] = true;
                     setCurrentlyValidatingElement(element);
-                    error("Failed %s type: %s", location, error$1.message);
+                    error("Failed %s type: %s", location2, error$1.message);
                     setCurrentlyValidatingElement(null);
                   }
                 }
@@ -1463,7 +1467,7 @@
             if (typeof node !== "object") {
               return;
             }
-            if (isArray(node)) {
+            if (isArray2(node)) {
               for (var i = 0; i < node.length; i++) {
                 var child = node[i];
                 if (isValidElement3(child)) {
@@ -1491,36 +1495,36 @@
           }
           function validatePropTypes(element) {
             {
-              var type = element.type;
-              if (type === null || type === void 0 || typeof type === "string") {
+              var type2 = element.type;
+              if (type2 === null || type2 === void 0 || typeof type2 === "string") {
                 return;
               }
               var propTypes;
-              if (typeof type === "function") {
-                propTypes = type.propTypes;
-              } else if (typeof type === "object" && (type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_MEMO_TYPE)) {
-                propTypes = type.propTypes;
+              if (typeof type2 === "function") {
+                propTypes = type2.propTypes;
+              } else if (typeof type2 === "object" && (type2.$$typeof === REACT_FORWARD_REF_TYPE || type2.$$typeof === REACT_MEMO_TYPE)) {
+                propTypes = type2.propTypes;
               } else {
                 return;
               }
               if (propTypes) {
-                var name = getComponentNameFromType(type);
+                var name = getComponentNameFromType(type2);
                 checkPropTypes(propTypes, element.props, "prop", name, element);
-              } else if (type.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
+              } else if (type2.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
                 propTypesMisspellWarningShown = true;
-                var _name = getComponentNameFromType(type);
+                var _name = getComponentNameFromType(type2);
                 error("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", _name || "Unknown");
               }
-              if (typeof type.getDefaultProps === "function" && !type.getDefaultProps.isReactClassApproved) {
+              if (typeof type2.getDefaultProps === "function" && !type2.getDefaultProps.isReactClassApproved) {
                 error("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
               }
             }
           }
           function validateFragmentProps(fragment) {
             {
-              var keys = Object.keys(fragment.props);
-              for (var i = 0; i < keys.length; i++) {
-                var key = keys[i];
+              var keys2 = Object.keys(fragment.props);
+              for (var i = 0; i < keys2.length; i++) {
+                var key = keys2[i];
                 if (key !== "children" && key !== "key") {
                   setCurrentlyValidatingElement$1(fragment);
                   error("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", key);
@@ -1535,29 +1539,29 @@
               }
             }
           }
-          function createElementWithValidation(type, props, children) {
-            var validType = isValidElementType(type);
+          function createElementWithValidation(type2, props2, children) {
+            var validType = isValidElementType(type2);
             if (!validType) {
               var info = "";
-              if (type === void 0 || typeof type === "object" && type !== null && Object.keys(type).length === 0) {
+              if (type2 === void 0 || typeof type2 === "object" && type2 !== null && Object.keys(type2).length === 0) {
                 info += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
               }
-              var sourceInfo = getSourceInfoErrorAddendumForProps(props);
+              var sourceInfo = getSourceInfoErrorAddendumForProps(props2);
               if (sourceInfo) {
                 info += sourceInfo;
               } else {
                 info += getDeclarationErrorAddendum();
               }
               var typeString;
-              if (type === null) {
+              if (type2 === null) {
                 typeString = "null";
-              } else if (isArray(type)) {
+              } else if (isArray2(type2)) {
                 typeString = "array";
-              } else if (type !== void 0 && type.$$typeof === REACT_ELEMENT_TYPE) {
-                typeString = "<" + (getComponentNameFromType(type.type) || "Unknown") + " />";
+              } else if (type2 !== void 0 && type2.$$typeof === REACT_ELEMENT_TYPE) {
+                typeString = "<" + (getComponentNameFromType(type2.type) || "Unknown") + " />";
                 info = " Did you accidentally export a JSX literal instead of a component?";
               } else {
-                typeString = typeof type;
+                typeString = typeof type2;
               }
               {
                 error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
@@ -1569,10 +1573,10 @@
             }
             if (validType) {
               for (var i = 2; i < arguments.length; i++) {
-                validateChildKeys(arguments[i], type);
+                validateChildKeys(arguments[i], type2);
               }
             }
-            if (type === REACT_FRAGMENT_TYPE) {
+            if (type2 === REACT_FRAGMENT_TYPE) {
               validateFragmentProps(element);
             } else {
               validatePropTypes(element);
@@ -1580,9 +1584,9 @@
             return element;
           }
           var didWarnAboutDeprecatedCreateFactory = false;
-          function createFactoryWithValidation(type) {
-            var validatedFactory = createElementWithValidation.bind(null, type);
-            validatedFactory.type = type;
+          function createFactoryWithValidation(type2) {
+            var validatedFactory = createElementWithValidation.bind(null, type2);
+            validatedFactory.type = type2;
             {
               if (!didWarnAboutDeprecatedCreateFactory) {
                 didWarnAboutDeprecatedCreateFactory = true;
@@ -1593,15 +1597,15 @@
                 get: function() {
                   warn("Factory.type is deprecated. Access the class directly before passing it to createFactory.");
                   Object.defineProperty(this, "type", {
-                    value: type
+                    value: type2
                   });
-                  return type;
+                  return type2;
                 }
               });
             }
             return validatedFactory;
           }
-          function cloneElementWithValidation(element, props, children) {
+          function cloneElementWithValidation(element, props2, children) {
             var newElement = cloneElement5.apply(this, arguments);
             for (var i = 2; i < arguments.length; i++) {
               validateChildKeys(arguments[i], newElement.type);
@@ -1633,7 +1637,7 @@
           }
           var didWarnAboutMessageChannel = false;
           var enqueueTaskImpl = null;
-          function enqueueTask(task) {
+          function enqueueTask(task2) {
             if (enqueueTaskImpl === null) {
               try {
                 var requireString = ("require" + Math.random()).slice(0, 7);
@@ -1655,7 +1659,7 @@
                 };
               }
             }
-            return enqueueTaskImpl(task);
+            return enqueueTaskImpl(task2);
           }
           var actScopeDepth = 0;
           var didWarnNoAwaitAct = false;
@@ -1832,12 +1836,12 @@
           exports.useContext = useContext7;
           exports.useDebugValue = useDebugValue2;
           exports.useDeferredValue = useDeferredValue;
-          exports.useEffect = useEffect11;
+          exports.useEffect = useEffect8;
           exports.useId = useId;
           exports.useImperativeHandle = useImperativeHandle3;
           exports.useInsertionEffect = useInsertionEffect;
           exports.useLayoutEffect = useLayoutEffect;
-          exports.useMemo = useMemo3;
+          exports.useMemo = useMemo5;
           exports.useReducer = useReducer;
           exports.useRef = useRef7;
           exports.useState = useState11;
@@ -1948,7 +1952,7 @@
           var NormalPriority = 3;
           var LowPriority = 4;
           var IdlePriority = 5;
-          function markTaskErrored(task, ms) {
+          function markTaskErrored(task2, ms) {
           }
           var hasPerformanceNow = typeof performance === "object" && typeof performance.now === "function";
           if (hasPerformanceNow) {
@@ -2133,9 +2137,9 @@
             var currentTime = exports.unstable_now();
             var startTime2;
             if (typeof options === "object" && options !== null) {
-              var delay = options.delay;
-              if (typeof delay === "number" && delay > 0) {
-                startTime2 = currentTime + delay;
+              var delay2 = options.delay;
+              if (typeof delay2 === "number" && delay2 > 0) {
+                startTime2 = currentTime + delay2;
               } else {
                 startTime2 = currentTime;
               }
@@ -2202,8 +2206,8 @@
           function unstable_getFirstCallbackNode() {
             return peek(taskQueue);
           }
-          function unstable_cancelCallback(task) {
-            task.callback = null;
+          function unstable_cancelCallback(task2) {
+            task2.callback = null;
           }
           function unstable_getCurrentPriorityLevel() {
             return currentPriorityLevel;
@@ -2446,8 +2450,8 @@
           function typeName(value) {
             {
               var hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
-              var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
-              return type;
+              var type2 = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+              return type2;
             }
           }
           function willCoercionThrow(value) {
@@ -2602,13 +2606,13 @@
           function getPropertyInfo(name) {
             return properties.hasOwnProperty(name) ? properties[name] : null;
           }
-          function PropertyInfoRecord(name, type, mustUseProperty, attributeName, attributeNamespace, sanitizeURL2, removeEmptyString) {
-            this.acceptsBooleans = type === BOOLEANISH_STRING || type === BOOLEAN || type === OVERLOADED_BOOLEAN;
+          function PropertyInfoRecord(name, type2, mustUseProperty, attributeName, attributeNamespace, sanitizeURL2, removeEmptyString) {
+            this.acceptsBooleans = type2 === BOOLEANISH_STRING || type2 === BOOLEAN || type2 === OVERLOADED_BOOLEAN;
             this.attributeName = attributeName;
             this.attributeNamespace = attributeNamespace;
             this.mustUseProperty = mustUseProperty;
             this.propertyName = name;
-            this.type = type;
+            this.type = type2;
             this.sanitizeURL = sanitizeURL2;
             this.removeEmptyString = removeEmptyString;
           }
@@ -3018,8 +3022,8 @@
             if (mustUseProperty) {
               var propertyName = propertyInfo.propertyName;
               if (value === null) {
-                var type = propertyInfo.type;
-                node[propertyName] = type === BOOLEAN ? false : "";
+                var type2 = propertyInfo.type;
+                node[propertyName] = type2 === BOOLEAN ? false : "";
               } else {
                 node[propertyName] = value;
               }
@@ -3103,20 +3107,20 @@
                 prevGroup = console.group;
                 prevGroupCollapsed = console.groupCollapsed;
                 prevGroupEnd = console.groupEnd;
-                var props = {
+                var props2 = {
                   configurable: true,
                   enumerable: true,
                   value: disabledLog,
                   writable: true
                 };
                 Object.defineProperties(console, {
-                  info: props,
-                  log: props,
-                  warn: props,
-                  error: props,
-                  group: props,
-                  groupCollapsed: props,
-                  groupEnd: props
+                  info: props2,
+                  log: props2,
+                  warn: props2,
+                  error: props2,
+                  group: props2,
+                  groupCollapsed: props2,
+                  groupEnd: props2
                 });
               }
               disabledDepth++;
@@ -3126,31 +3130,31 @@
             {
               disabledDepth--;
               if (disabledDepth === 0) {
-                var props = {
+                var props2 = {
                   configurable: true,
                   enumerable: true,
                   writable: true
                 };
                 Object.defineProperties(console, {
-                  log: assign({}, props, {
+                  log: assign({}, props2, {
                     value: prevLog
                   }),
-                  info: assign({}, props, {
+                  info: assign({}, props2, {
                     value: prevInfo
                   }),
-                  warn: assign({}, props, {
+                  warn: assign({}, props2, {
                     value: prevWarn
                   }),
-                  error: assign({}, props, {
+                  error: assign({}, props2, {
                     value: prevError
                   }),
-                  group: assign({}, props, {
+                  group: assign({}, props2, {
                     value: prevGroup
                   }),
-                  groupCollapsed: assign({}, props, {
+                  groupCollapsed: assign({}, props2, {
                     value: prevGroupCollapsed
                   }),
-                  groupEnd: assign({}, props, {
+                  groupEnd: assign({}, props2, {
                     value: prevGroupEnd
                   })
                 });
@@ -3298,32 +3302,32 @@
             var prototype = Component.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
-          function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
-            if (type == null) {
+          function describeUnknownElementTypeFrameInDEV(type2, source, ownerFn) {
+            if (type2 == null) {
               return "";
             }
-            if (typeof type === "function") {
+            if (typeof type2 === "function") {
               {
-                return describeNativeComponentFrame(type, shouldConstruct(type));
+                return describeNativeComponentFrame(type2, shouldConstruct(type2));
               }
             }
-            if (typeof type === "string") {
-              return describeBuiltInComponentFrame(type);
+            if (typeof type2 === "string") {
+              return describeBuiltInComponentFrame(type2);
             }
-            switch (type) {
+            switch (type2) {
               case REACT_SUSPENSE_TYPE:
                 return describeBuiltInComponentFrame("Suspense");
               case REACT_SUSPENSE_LIST_TYPE:
                 return describeBuiltInComponentFrame("SuspenseList");
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_FORWARD_REF_TYPE:
-                  return describeFunctionComponentFrame(type.render);
+                  return describeFunctionComponentFrame(type2.render);
                 case REACT_MEMO_TYPE:
-                  return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
+                  return describeUnknownElementTypeFrameInDEV(type2.type, source, ownerFn);
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
                   var init = lazyComponent._init;
                   try {
@@ -3380,25 +3384,25 @@
             var functionName = innerType.displayName || innerType.name || "";
             return functionName !== "" ? wrapperName + "(" + functionName + ")" : wrapperName;
           }
-          function getContextName(type) {
-            return type.displayName || "Context";
+          function getContextName(type2) {
+            return type2.displayName || "Context";
           }
-          function getComponentNameFromType(type) {
-            if (type == null) {
+          function getComponentNameFromType(type2) {
+            if (type2 == null) {
               return null;
             }
             {
-              if (typeof type.tag === "number") {
+              if (typeof type2.tag === "number") {
                 error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue.");
               }
             }
-            if (typeof type === "function") {
-              return type.displayName || type.name || null;
+            if (typeof type2 === "function") {
+              return type2.displayName || type2.name || null;
             }
-            if (typeof type === "string") {
-              return type;
+            if (typeof type2 === "string") {
+              return type2;
             }
-            switch (type) {
+            switch (type2) {
               case REACT_FRAGMENT_TYPE:
                 return "Fragment";
               case REACT_PORTAL_TYPE:
@@ -3412,24 +3416,24 @@
               case REACT_SUSPENSE_LIST_TYPE:
                 return "SuspenseList";
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_CONTEXT_TYPE:
-                  var context = type;
+                  var context = type2;
                   return getContextName(context) + ".Consumer";
                 case REACT_PROVIDER_TYPE:
-                  var provider = type;
+                  var provider = type2;
                   return getContextName(provider._context) + ".Provider";
                 case REACT_FORWARD_REF_TYPE:
-                  return getWrappedName(type, type.render, "ForwardRef");
+                  return getWrappedName(type2, type2.render, "ForwardRef");
                 case REACT_MEMO_TYPE:
-                  var outerName = type.displayName || null;
+                  var outerName = type2.displayName || null;
                   if (outerName !== null) {
                     return outerName;
                   }
-                  return getComponentNameFromType(type.type) || "Memo";
+                  return getComponentNameFromType(type2.type) || "Memo";
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
                   var init = lazyComponent._init;
                   try {
@@ -3446,28 +3450,28 @@
             var functionName = innerType.displayName || innerType.name || "";
             return outerType.displayName || (functionName !== "" ? wrapperName + "(" + functionName + ")" : wrapperName);
           }
-          function getContextName$1(type) {
-            return type.displayName || "Context";
+          function getContextName$1(type2) {
+            return type2.displayName || "Context";
           }
           function getComponentNameFromFiber(fiber) {
-            var tag = fiber.tag, type = fiber.type;
+            var tag = fiber.tag, type2 = fiber.type;
             switch (tag) {
               case CacheComponent:
                 return "Cache";
               case ContextConsumer:
-                var context = type;
+                var context = type2;
                 return getContextName$1(context) + ".Consumer";
               case ContextProvider:
-                var provider = type;
+                var provider = type2;
                 return getContextName$1(provider._context) + ".Provider";
               case DehydratedFragment:
                 return "DehydratedFragment";
               case ForwardRef:
-                return getWrappedName$1(type, type.render, "ForwardRef");
+                return getWrappedName$1(type2, type2.render, "ForwardRef");
               case Fragment4:
                 return "Fragment";
               case HostComponent:
-                return type;
+                return type2;
               case HostPortal:
                 return "Portal";
               case HostRoot:
@@ -3475,9 +3479,9 @@
               case HostText:
                 return "Text";
               case LazyComponent:
-                return getComponentNameFromType(type);
+                return getComponentNameFromType(type2);
               case Mode:
-                if (type === REACT_STRICT_MODE_TYPE) {
+                if (type2 === REACT_STRICT_MODE_TYPE) {
                   return "StrictMode";
                 }
                 return "Mode";
@@ -3499,11 +3503,11 @@
               case IndeterminateComponent:
               case MemoComponent:
               case SimpleMemoComponent:
-                if (typeof type === "function") {
-                  return type.displayName || type.name || null;
+                if (typeof type2 === "function") {
+                  return type2.displayName || type2.name || null;
                 }
-                if (typeof type === "string") {
-                  return type;
+                if (typeof type2 === "string") {
+                  return type2;
                 }
                 break;
             }
@@ -3556,7 +3560,7 @@
               isRendering = rendering;
             }
           }
-          function toString(value) {
+          function toString2(value) {
             return "" + value;
           }
           function getToStringValue(value) {
@@ -3584,20 +3588,20 @@
             reset: true,
             submit: true
           };
-          function checkControlledValueProps(tagName, props) {
+          function checkControlledValueProps(tagName, props2) {
             {
-              if (!(hasReadOnlyValue[props.type] || props.onChange || props.onInput || props.readOnly || props.disabled || props.value == null)) {
+              if (!(hasReadOnlyValue[props2.type] || props2.onChange || props2.onInput || props2.readOnly || props2.disabled || props2.value == null)) {
                 error("You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`.");
               }
-              if (!(props.onChange || props.readOnly || props.disabled || props.checked == null)) {
+              if (!(props2.onChange || props2.readOnly || props2.disabled || props2.checked == null)) {
                 error("You provided a `checked` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultChecked`. Otherwise, set either `onChange` or `readOnly`.");
               }
             }
           }
           function isCheckable(elem) {
-            var type = elem.type;
+            var type2 = elem.type;
             var nodeName = elem.nodeName;
-            return nodeName && nodeName.toLowerCase() === "input" && (type === "checkbox" || type === "radio");
+            return nodeName && nodeName.toLowerCase() === "input" && (type2 === "checkbox" || type2 === "radio");
           }
           function getTracker(node) {
             return node._valueTracker;
@@ -3698,14 +3702,14 @@
           var didWarnCheckedDefaultChecked = false;
           var didWarnControlledToUncontrolled = false;
           var didWarnUncontrolledToControlled = false;
-          function isControlled(props) {
-            var usesChecked = props.type === "checkbox" || props.type === "radio";
-            return usesChecked ? props.checked != null : props.value != null;
+          function isControlled(props2) {
+            var usesChecked = props2.type === "checkbox" || props2.type === "radio";
+            return usesChecked ? props2.checked != null : props2.value != null;
           }
-          function getHostProps(element, props) {
+          function getHostProps(element, props2) {
             var node = element;
-            var checked = props.checked;
-            var hostProps = assign({}, props, {
+            var checked = props2.checked;
+            var hostProps = assign({}, props2, {
               defaultChecked: void 0,
               defaultValue: void 0,
               value: void 0,
@@ -3713,37 +3717,37 @@
             });
             return hostProps;
           }
-          function initWrapperState(element, props) {
+          function initWrapperState(element, props2) {
             {
-              checkControlledValueProps("input", props);
-              if (props.checked !== void 0 && props.defaultChecked !== void 0 && !didWarnCheckedDefaultChecked) {
-                error("%s contains an input of type %s with both checked and defaultChecked props. Input elements must be either controlled or uncontrolled (specify either the checked prop, or the defaultChecked prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: https://reactjs.org/link/controlled-components", getCurrentFiberOwnerNameInDevOrNull() || "A component", props.type);
+              checkControlledValueProps("input", props2);
+              if (props2.checked !== void 0 && props2.defaultChecked !== void 0 && !didWarnCheckedDefaultChecked) {
+                error("%s contains an input of type %s with both checked and defaultChecked props. Input elements must be either controlled or uncontrolled (specify either the checked prop, or the defaultChecked prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: https://reactjs.org/link/controlled-components", getCurrentFiberOwnerNameInDevOrNull() || "A component", props2.type);
                 didWarnCheckedDefaultChecked = true;
               }
-              if (props.value !== void 0 && props.defaultValue !== void 0 && !didWarnValueDefaultValue) {
-                error("%s contains an input of type %s with both value and defaultValue props. Input elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: https://reactjs.org/link/controlled-components", getCurrentFiberOwnerNameInDevOrNull() || "A component", props.type);
+              if (props2.value !== void 0 && props2.defaultValue !== void 0 && !didWarnValueDefaultValue) {
+                error("%s contains an input of type %s with both value and defaultValue props. Input elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: https://reactjs.org/link/controlled-components", getCurrentFiberOwnerNameInDevOrNull() || "A component", props2.type);
                 didWarnValueDefaultValue = true;
               }
             }
             var node = element;
-            var defaultValue = props.defaultValue == null ? "" : props.defaultValue;
+            var defaultValue = props2.defaultValue == null ? "" : props2.defaultValue;
             node._wrapperState = {
-              initialChecked: props.checked != null ? props.checked : props.defaultChecked,
-              initialValue: getToStringValue(props.value != null ? props.value : defaultValue),
-              controlled: isControlled(props)
+              initialChecked: props2.checked != null ? props2.checked : props2.defaultChecked,
+              initialValue: getToStringValue(props2.value != null ? props2.value : defaultValue),
+              controlled: isControlled(props2)
             };
           }
-          function updateChecked(element, props) {
+          function updateChecked(element, props2) {
             var node = element;
-            var checked = props.checked;
+            var checked = props2.checked;
             if (checked != null) {
               setValueForProperty(node, "checked", checked, false);
             }
           }
-          function updateWrapper(element, props) {
+          function updateWrapper(element, props2) {
             var node = element;
             {
-              var controlled = isControlled(props);
+              var controlled = isControlled(props2);
               if (!node._wrapperState.controlled && controlled && !didWarnUncontrolledToControlled) {
                 error("A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components");
                 didWarnUncontrolledToControlled = true;
@@ -3753,43 +3757,43 @@
                 didWarnControlledToUncontrolled = true;
               }
             }
-            updateChecked(element, props);
-            var value = getToStringValue(props.value);
-            var type = props.type;
+            updateChecked(element, props2);
+            var value = getToStringValue(props2.value);
+            var type2 = props2.type;
             if (value != null) {
-              if (type === "number") {
+              if (type2 === "number") {
                 if (value === 0 && node.value === "" || node.value != value) {
-                  node.value = toString(value);
+                  node.value = toString2(value);
                 }
-              } else if (node.value !== toString(value)) {
-                node.value = toString(value);
+              } else if (node.value !== toString2(value)) {
+                node.value = toString2(value);
               }
-            } else if (type === "submit" || type === "reset") {
+            } else if (type2 === "submit" || type2 === "reset") {
               node.removeAttribute("value");
               return;
             }
             {
-              if (props.hasOwnProperty("value")) {
-                setDefaultValue(node, props.type, value);
-              } else if (props.hasOwnProperty("defaultValue")) {
-                setDefaultValue(node, props.type, getToStringValue(props.defaultValue));
+              if (props2.hasOwnProperty("value")) {
+                setDefaultValue(node, props2.type, value);
+              } else if (props2.hasOwnProperty("defaultValue")) {
+                setDefaultValue(node, props2.type, getToStringValue(props2.defaultValue));
               }
             }
             {
-              if (props.checked == null && props.defaultChecked != null) {
-                node.defaultChecked = !!props.defaultChecked;
+              if (props2.checked == null && props2.defaultChecked != null) {
+                node.defaultChecked = !!props2.defaultChecked;
               }
             }
           }
-          function postMountWrapper(element, props, isHydrating2) {
+          function postMountWrapper(element, props2, isHydrating2) {
             var node = element;
-            if (props.hasOwnProperty("value") || props.hasOwnProperty("defaultValue")) {
-              var type = props.type;
-              var isButton = type === "submit" || type === "reset";
-              if (isButton && (props.value === void 0 || props.value === null)) {
+            if (props2.hasOwnProperty("value") || props2.hasOwnProperty("defaultValue")) {
+              var type2 = props2.type;
+              var isButton = type2 === "submit" || type2 === "reset";
+              if (isButton && (props2.value === void 0 || props2.value === null)) {
                 return;
               }
-              var initialValue = toString(node._wrapperState.initialValue);
+              var initialValue = toString2(node._wrapperState.initialValue);
               if (!isHydrating2) {
                 {
                   if (initialValue !== node.value) {
@@ -3813,14 +3817,14 @@
               node.name = name;
             }
           }
-          function restoreControlledState(element, props) {
+          function restoreControlledState(element, props2) {
             var node = element;
-            updateWrapper(node, props);
-            updateNamedCousins(node, props);
+            updateWrapper(node, props2);
+            updateNamedCousins(node, props2);
           }
-          function updateNamedCousins(rootNode, props) {
-            var name = props.name;
-            if (props.type === "radio" && name != null) {
+          function updateNamedCousins(rootNode, props2) {
+            var name = props2.name;
+            if (props2.type === "radio" && name != null) {
               var queryRoot = rootNode;
               while (queryRoot.parentNode) {
                 queryRoot = queryRoot.parentNode;
@@ -3843,23 +3847,23 @@
               }
             }
           }
-          function setDefaultValue(node, type, value) {
-            if (type !== "number" || getActiveElement(node.ownerDocument) !== node) {
+          function setDefaultValue(node, type2, value) {
+            if (type2 !== "number" || getActiveElement(node.ownerDocument) !== node) {
               if (value == null) {
-                node.defaultValue = toString(node._wrapperState.initialValue);
-              } else if (node.defaultValue !== toString(value)) {
-                node.defaultValue = toString(value);
+                node.defaultValue = toString2(node._wrapperState.initialValue);
+              } else if (node.defaultValue !== toString2(value)) {
+                node.defaultValue = toString2(value);
               }
             }
           }
           var didWarnSelectedSetOnOption = false;
           var didWarnInvalidChild = false;
           var didWarnInvalidInnerHTML = false;
-          function validateProps(element, props) {
+          function validateProps(element, props2) {
             {
-              if (props.value == null) {
-                if (typeof props.children === "object" && props.children !== null) {
-                  React59.Children.forEach(props.children, function(child) {
+              if (props2.value == null) {
+                if (typeof props2.children === "object" && props2.children !== null) {
+                  React59.Children.forEach(props2.children, function(child) {
                     if (child == null) {
                       return;
                     }
@@ -3871,26 +3875,26 @@
                       error("Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>.");
                     }
                   });
-                } else if (props.dangerouslySetInnerHTML != null) {
+                } else if (props2.dangerouslySetInnerHTML != null) {
                   if (!didWarnInvalidInnerHTML) {
                     didWarnInvalidInnerHTML = true;
                     error("Pass a `value` prop if you set dangerouslyInnerHTML so React knows which value should be selected.");
                   }
                 }
               }
-              if (props.selected != null && !didWarnSelectedSetOnOption) {
+              if (props2.selected != null && !didWarnSelectedSetOnOption) {
                 error("Use the `defaultValue` or `value` props on <select> instead of setting `selected` on <option>.");
                 didWarnSelectedSetOnOption = true;
               }
             }
           }
-          function postMountWrapper$1(element, props) {
-            if (props.value != null) {
-              element.setAttribute("value", toString(getToStringValue(props.value)));
+          function postMountWrapper$1(element, props2) {
+            if (props2.value != null) {
+              element.setAttribute("value", toString2(getToStringValue(props2.value)));
             }
           }
           var isArrayImpl = Array.isArray;
-          function isArray(a) {
+          function isArray2(a) {
             return isArrayImpl(a);
           }
           var didWarnValueDefaultValue$1;
@@ -3905,18 +3909,18 @@
             return "";
           }
           var valuePropNames = ["value", "defaultValue"];
-          function checkSelectPropTypes(props) {
+          function checkSelectPropTypes(props2) {
             {
-              checkControlledValueProps("select", props);
+              checkControlledValueProps("select", props2);
               for (var i = 0; i < valuePropNames.length; i++) {
                 var propName = valuePropNames[i];
-                if (props[propName] == null) {
+                if (props2[propName] == null) {
                   continue;
                 }
-                var propNameIsArray = isArray(props[propName]);
-                if (props.multiple && !propNameIsArray) {
+                var propNameIsArray = isArray2(props2[propName]);
+                if (props2.multiple && !propNameIsArray) {
                   error("The `%s` prop supplied to <select> must be an array if `multiple` is true.%s", propName, getDeclarationErrorAddendum());
-                } else if (!props.multiple && propNameIsArray) {
+                } else if (!props2.multiple && propNameIsArray) {
                   error("The `%s` prop supplied to <select> must be a scalar value if `multiple` is false.%s", propName, getDeclarationErrorAddendum());
                 }
               }
@@ -3940,7 +3944,7 @@
                 }
               }
             } else {
-              var _selectedValue = toString(getToStringValue(propValue));
+              var _selectedValue = toString2(getToStringValue(propValue));
               var defaultSelected = null;
               for (var _i2 = 0; _i2 < options2.length; _i2++) {
                 if (options2[_i2].value === _selectedValue) {
@@ -3959,83 +3963,83 @@
               }
             }
           }
-          function getHostProps$1(element, props) {
-            return assign({}, props, {
+          function getHostProps$1(element, props2) {
+            return assign({}, props2, {
               value: void 0
             });
           }
-          function initWrapperState$1(element, props) {
+          function initWrapperState$1(element, props2) {
             var node = element;
             {
-              checkSelectPropTypes(props);
+              checkSelectPropTypes(props2);
             }
             node._wrapperState = {
-              wasMultiple: !!props.multiple
+              wasMultiple: !!props2.multiple
             };
             {
-              if (props.value !== void 0 && props.defaultValue !== void 0 && !didWarnValueDefaultValue$1) {
+              if (props2.value !== void 0 && props2.defaultValue !== void 0 && !didWarnValueDefaultValue$1) {
                 error("Select elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled select element and remove one of these props. More info: https://reactjs.org/link/controlled-components");
                 didWarnValueDefaultValue$1 = true;
               }
             }
           }
-          function postMountWrapper$2(element, props) {
+          function postMountWrapper$2(element, props2) {
             var node = element;
-            node.multiple = !!props.multiple;
-            var value = props.value;
+            node.multiple = !!props2.multiple;
+            var value = props2.value;
             if (value != null) {
-              updateOptions(node, !!props.multiple, value, false);
-            } else if (props.defaultValue != null) {
-              updateOptions(node, !!props.multiple, props.defaultValue, true);
+              updateOptions(node, !!props2.multiple, value, false);
+            } else if (props2.defaultValue != null) {
+              updateOptions(node, !!props2.multiple, props2.defaultValue, true);
             }
           }
-          function postUpdateWrapper(element, props) {
+          function postUpdateWrapper(element, props2) {
             var node = element;
             var wasMultiple = node._wrapperState.wasMultiple;
-            node._wrapperState.wasMultiple = !!props.multiple;
-            var value = props.value;
+            node._wrapperState.wasMultiple = !!props2.multiple;
+            var value = props2.value;
             if (value != null) {
-              updateOptions(node, !!props.multiple, value, false);
-            } else if (wasMultiple !== !!props.multiple) {
-              if (props.defaultValue != null) {
-                updateOptions(node, !!props.multiple, props.defaultValue, true);
+              updateOptions(node, !!props2.multiple, value, false);
+            } else if (wasMultiple !== !!props2.multiple) {
+              if (props2.defaultValue != null) {
+                updateOptions(node, !!props2.multiple, props2.defaultValue, true);
               } else {
-                updateOptions(node, !!props.multiple, props.multiple ? [] : "", false);
+                updateOptions(node, !!props2.multiple, props2.multiple ? [] : "", false);
               }
             }
           }
-          function restoreControlledState$1(element, props) {
+          function restoreControlledState$1(element, props2) {
             var node = element;
-            var value = props.value;
+            var value = props2.value;
             if (value != null) {
-              updateOptions(node, !!props.multiple, value, false);
+              updateOptions(node, !!props2.multiple, value, false);
             }
           }
           var didWarnValDefaultVal = false;
-          function getHostProps$2(element, props) {
+          function getHostProps$2(element, props2) {
             var node = element;
-            if (props.dangerouslySetInnerHTML != null) {
+            if (props2.dangerouslySetInnerHTML != null) {
               throw new Error("`dangerouslySetInnerHTML` does not make sense on <textarea>.");
             }
-            var hostProps = assign({}, props, {
+            var hostProps = assign({}, props2, {
               value: void 0,
               defaultValue: void 0,
-              children: toString(node._wrapperState.initialValue)
+              children: toString2(node._wrapperState.initialValue)
             });
             return hostProps;
           }
-          function initWrapperState$2(element, props) {
+          function initWrapperState$2(element, props2) {
             var node = element;
             {
-              checkControlledValueProps("textarea", props);
-              if (props.value !== void 0 && props.defaultValue !== void 0 && !didWarnValDefaultVal) {
+              checkControlledValueProps("textarea", props2);
+              if (props2.value !== void 0 && props2.defaultValue !== void 0 && !didWarnValDefaultVal) {
                 error("%s contains a textarea with both value and defaultValue props. Textarea elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled textarea and remove one of these props. More info: https://reactjs.org/link/controlled-components", getCurrentFiberOwnerNameInDevOrNull() || "A component");
                 didWarnValDefaultVal = true;
               }
             }
-            var initialValue = props.value;
+            var initialValue = props2.value;
             if (initialValue == null) {
-              var children = props.children, defaultValue = props.defaultValue;
+              var children = props2.children, defaultValue = props2.defaultValue;
               if (children != null) {
                 {
                   error("Use the `defaultValue` or `value` props instead of setting children on <textarea>.");
@@ -4044,7 +4048,7 @@
                   if (defaultValue != null) {
                     throw new Error("If you supply `defaultValue` on a <textarea>, do not pass children.");
                   }
-                  if (isArray(children)) {
+                  if (isArray2(children)) {
                     if (children.length > 1) {
                       throw new Error("<textarea> can only have at most one child.");
                     }
@@ -4062,24 +4066,24 @@
               initialValue: getToStringValue(initialValue)
             };
           }
-          function updateWrapper$1(element, props) {
+          function updateWrapper$1(element, props2) {
             var node = element;
-            var value = getToStringValue(props.value);
-            var defaultValue = getToStringValue(props.defaultValue);
+            var value = getToStringValue(props2.value);
+            var defaultValue = getToStringValue(props2.defaultValue);
             if (value != null) {
-              var newValue = toString(value);
+              var newValue = toString2(value);
               if (newValue !== node.value) {
                 node.value = newValue;
               }
-              if (props.defaultValue == null && node.defaultValue !== newValue) {
+              if (props2.defaultValue == null && node.defaultValue !== newValue) {
                 node.defaultValue = newValue;
               }
             }
             if (defaultValue != null) {
-              node.defaultValue = toString(defaultValue);
+              node.defaultValue = toString2(defaultValue);
             }
           }
-          function postMountWrapper$3(element, props) {
+          function postMountWrapper$3(element, props2) {
             var node = element;
             var textContent = node.textContent;
             if (textContent === node._wrapperState.initialValue) {
@@ -4088,14 +4092,14 @@
               }
             }
           }
-          function restoreControlledState$2(element, props) {
-            updateWrapper$1(element, props);
+          function restoreControlledState$2(element, props2) {
+            updateWrapper$1(element, props2);
           }
           var HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
           var MATH_NAMESPACE = "http://www.w3.org/1998/Math/MathML";
           var SVG_NAMESPACE = "http://www.w3.org/2000/svg";
-          function getIntrinsicNamespace(type) {
-            switch (type) {
+          function getIntrinsicNamespace(type2) {
+            switch (type2) {
               case "svg":
                 return SVG_NAMESPACE;
               case "math":
@@ -4104,11 +4108,11 @@
                 return HTML_NAMESPACE;
             }
           }
-          function getChildNamespace(parentNamespace, type) {
+          function getChildNamespace(parentNamespace, type2) {
             if (parentNamespace == null || parentNamespace === HTML_NAMESPACE) {
-              return getIntrinsicNamespace(type);
+              return getIntrinsicNamespace(type2);
             }
-            if (parentNamespace === SVG_NAMESPACE && type === "foreignObject") {
+            if (parentNamespace === SVG_NAMESPACE && type2 === "foreignObject") {
               return HTML_NAMESPACE;
             }
             return parentNamespace;
@@ -4449,35 +4453,35 @@
             menuitem: true
           }, omittedCloseTags);
           var HTML = "__html";
-          function assertValidProps(tag, props) {
-            if (!props) {
+          function assertValidProps(tag, props2) {
+            if (!props2) {
               return;
             }
             if (voidElementTags[tag]) {
-              if (props.children != null || props.dangerouslySetInnerHTML != null) {
+              if (props2.children != null || props2.dangerouslySetInnerHTML != null) {
                 throw new Error(tag + " is a void element tag and must neither have `children` nor use `dangerouslySetInnerHTML`.");
               }
             }
-            if (props.dangerouslySetInnerHTML != null) {
-              if (props.children != null) {
+            if (props2.dangerouslySetInnerHTML != null) {
+              if (props2.children != null) {
                 throw new Error("Can only set one of `children` or `props.dangerouslySetInnerHTML`.");
               }
-              if (typeof props.dangerouslySetInnerHTML !== "object" || !(HTML in props.dangerouslySetInnerHTML)) {
+              if (typeof props2.dangerouslySetInnerHTML !== "object" || !(HTML in props2.dangerouslySetInnerHTML)) {
                 throw new Error("`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. Please visit https://reactjs.org/link/dangerously-set-inner-html for more information.");
               }
             }
             {
-              if (!props.suppressContentEditableWarning && props.contentEditable && props.children != null) {
+              if (!props2.suppressContentEditableWarning && props2.contentEditable && props2.children != null) {
                 error("A component is `contentEditable` and contains `children` managed by React. It is now your responsibility to guarantee that none of those nodes are unexpectedly modified or duplicated. This is probably not intentional.");
               }
             }
-            if (props.style != null && typeof props.style !== "object") {
+            if (props2.style != null && typeof props2.style !== "object") {
               throw new Error("The `style` prop expects a mapping from style properties to values, not a string. For example, style={{marginRight: spacing + 'em'}} when using JSX.");
             }
           }
-          function isCustomComponent(tagName, props) {
+          function isCustomComponent(tagName, props2) {
             if (tagName.indexOf("-") === -1) {
-              return typeof props.is === "string";
+              return typeof props2.is === "string";
             }
             switch (tagName) {
               case "annotation-xml":
@@ -5069,11 +5073,11 @@
             }
             return true;
           }
-          function warnInvalidARIAProps(type, props) {
+          function warnInvalidARIAProps(type2, props2) {
             {
               var invalidProps = [];
-              for (var key in props) {
-                var isValid = validateProperty(type, key);
+              for (var key in props2) {
+                var isValid = validateProperty(type2, key);
                 if (!isValid) {
                   invalidProps.push(key);
                 }
@@ -5082,30 +5086,30 @@
                 return "`" + prop + "`";
               }).join(", ");
               if (invalidProps.length === 1) {
-                error("Invalid aria prop %s on <%s> tag. For details, see https://reactjs.org/link/invalid-aria-props", unknownPropString, type);
+                error("Invalid aria prop %s on <%s> tag. For details, see https://reactjs.org/link/invalid-aria-props", unknownPropString, type2);
               } else if (invalidProps.length > 1) {
-                error("Invalid aria props %s on <%s> tag. For details, see https://reactjs.org/link/invalid-aria-props", unknownPropString, type);
+                error("Invalid aria props %s on <%s> tag. For details, see https://reactjs.org/link/invalid-aria-props", unknownPropString, type2);
               }
             }
           }
-          function validateProperties(type, props) {
-            if (isCustomComponent(type, props)) {
+          function validateProperties(type2, props2) {
+            if (isCustomComponent(type2, props2)) {
               return;
             }
-            warnInvalidARIAProps(type, props);
+            warnInvalidARIAProps(type2, props2);
           }
           var didWarnValueNull = false;
-          function validateProperties$1(type, props) {
+          function validateProperties$1(type2, props2) {
             {
-              if (type !== "input" && type !== "textarea" && type !== "select") {
+              if (type2 !== "input" && type2 !== "textarea" && type2 !== "select") {
                 return;
               }
-              if (props != null && props.value === null && !didWarnValueNull) {
+              if (props2 != null && props2.value === null && !didWarnValueNull) {
                 didWarnValueNull = true;
-                if (type === "select" && props.multiple) {
-                  error("`value` prop on `%s` should not be null. Consider using an empty array when `multiple` is set to `true` to clear the component or `undefined` for uncontrolled components.", type);
+                if (type2 === "select" && props2.multiple) {
+                  error("`value` prop on `%s` should not be null. Consider using an empty array when `multiple` is set to `true` to clear the component or `undefined` for uncontrolled components.", type2);
                 } else {
-                  error("`value` prop on `%s` should not be null. Consider using an empty string to clear the component or `undefined` for uncontrolled components.", type);
+                  error("`value` prop on `%s` should not be null. Consider using an empty string to clear the component or `undefined` for uncontrolled components.", type2);
                 }
               }
             }
@@ -5212,11 +5216,11 @@
               return true;
             };
           }
-          var warnUnknownProperties = function(type, props, eventRegistry) {
+          var warnUnknownProperties = function(type2, props2, eventRegistry) {
             {
               var unknownProps = [];
-              for (var key in props) {
-                var isValid = validateProperty$1(type, key, props[key], eventRegistry);
+              for (var key in props2) {
+                var isValid = validateProperty$1(type2, key, props2[key], eventRegistry);
                 if (!isValid) {
                   unknownProps.push(key);
                 }
@@ -5225,17 +5229,17 @@
                 return "`" + prop + "`";
               }).join(", ");
               if (unknownProps.length === 1) {
-                error("Invalid value for prop %s on <%s> tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://reactjs.org/link/attribute-behavior ", unknownPropString, type);
+                error("Invalid value for prop %s on <%s> tag. Either remove it from the element, or pass a string or number value to keep it in the DOM. For details, see https://reactjs.org/link/attribute-behavior ", unknownPropString, type2);
               } else if (unknownProps.length > 1) {
-                error("Invalid values for props %s on <%s> tag. Either remove them from the element, or pass a string or number value to keep them in the DOM. For details, see https://reactjs.org/link/attribute-behavior ", unknownPropString, type);
+                error("Invalid values for props %s on <%s> tag. Either remove them from the element, or pass a string or number value to keep them in the DOM. For details, see https://reactjs.org/link/attribute-behavior ", unknownPropString, type2);
               }
             }
           };
-          function validateProperties$2(type, props, eventRegistry) {
-            if (isCustomComponent(type, props)) {
+          function validateProperties$2(type2, props2, eventRegistry) {
+            if (isCustomComponent(type2, props2)) {
               return;
             }
-            warnUnknownProperties(type, props, eventRegistry);
+            warnUnknownProperties(type2, props2, eventRegistry);
           }
           var IS_EVENT_HANDLE_NON_MANAGED_NODE = 1;
           var IS_NON_DELEGATED = 1 << 1;
@@ -5349,7 +5353,7 @@
           function isInteractive(tag) {
             return tag === "button" || tag === "input" || tag === "select" || tag === "textarea";
           }
-          function shouldPreventMouseEvent(name, type, props) {
+          function shouldPreventMouseEvent(name, type2, props2) {
             switch (name) {
               case "onClick":
               case "onClickCapture":
@@ -5362,7 +5366,7 @@
               case "onMouseUp":
               case "onMouseUpCapture":
               case "onMouseEnter":
-                return !!(props.disabled && isInteractive(type));
+                return !!(props2.disabled && isInteractive(type2));
               default:
                 return false;
             }
@@ -5372,12 +5376,12 @@
             if (stateNode === null) {
               return null;
             }
-            var props = getFiberCurrentPropsFromNode(stateNode);
-            if (props === null) {
+            var props2 = getFiberCurrentPropsFromNode(stateNode);
+            if (props2 === null) {
               return null;
             }
-            var listener = props[registrationName];
-            if (shouldPreventMouseEvent(registrationName, inst.type, props)) {
+            var listener = props2[registrationName];
+            if (shouldPreventMouseEvent(registrationName, inst.type, props2)) {
               return null;
             }
             if (listener && typeof listener !== "function") {
@@ -6979,7 +6983,7 @@
                 break;
               case DefaultEventPriority:
               default:
-                listenerWrapper = dispatchEvent;
+                listenerWrapper = dispatchEvent2;
                 break;
             }
             return listenerWrapper.bind(null, domEventName, eventSystemFlags, targetContainer);
@@ -6990,7 +6994,7 @@
             ReactCurrentBatchConfig.transition = null;
             try {
               setCurrentUpdatePriority(DiscreteEventPriority);
-              dispatchEvent(domEventName, eventSystemFlags, container2, nativeEvent);
+              dispatchEvent2(domEventName, eventSystemFlags, container2, nativeEvent);
             } finally {
               setCurrentUpdatePriority(previousPriority);
               ReactCurrentBatchConfig.transition = prevTransition;
@@ -7002,13 +7006,13 @@
             ReactCurrentBatchConfig.transition = null;
             try {
               setCurrentUpdatePriority(ContinuousEventPriority);
-              dispatchEvent(domEventName, eventSystemFlags, container2, nativeEvent);
+              dispatchEvent2(domEventName, eventSystemFlags, container2, nativeEvent);
             } finally {
               setCurrentUpdatePriority(previousPriority);
               ReactCurrentBatchConfig.transition = prevTransition;
             }
           }
-          function dispatchEvent(domEventName, eventSystemFlags, targetContainer, nativeEvent) {
+          function dispatchEvent2(domEventName, eventSystemFlags, targetContainer, nativeEvent) {
             if (!_enabled) {
               return;
             }
@@ -8526,9 +8530,9 @@
           var mediaEventTypes = ["abort", "canplay", "canplaythrough", "durationchange", "emptied", "encrypted", "ended", "error", "loadeddata", "loadedmetadata", "loadstart", "pause", "play", "playing", "progress", "ratechange", "resize", "seeked", "seeking", "stalled", "suspend", "timeupdate", "volumechange", "waiting"];
           var nonDelegatedEvents = new Set(["cancel", "close", "invalid", "load", "scroll", "toggle"].concat(mediaEventTypes));
           function executeDispatch(event, listener, currentTarget) {
-            var type = event.type || "unknown-event";
+            var type2 = event.type || "unknown-event";
             event.currentTarget = currentTarget;
-            invokeGuardedCallbackAndCatchFirstError(type, listener, void 0, event);
+            invokeGuardedCallbackAndCatchFirstError(type2, listener, void 0, event);
             event.currentTarget = null;
           }
           function processDispatchQueueItemsInOrder(event, dispatchListeners, inCapturePhase) {
@@ -8852,10 +8856,10 @@
               dialog: true,
               webview: true
             };
-            validatePropertiesInDevelopment = function(type, props) {
-              validateProperties(type, props);
-              validateProperties$1(type, props);
-              validateProperties$2(type, props, {
+            validatePropertiesInDevelopment = function(type2, props2) {
+              validateProperties(type2, props2);
+              validateProperties$1(type2, props2);
+              validateProperties$2(type2, props2, {
                 registrationNameDependencies,
                 possibleRegistrationNames
               });
@@ -8992,49 +8996,49 @@
               }
             }
           }
-          function createElement13(type, props, rootContainerElement, parentNamespace) {
+          function createElement13(type2, props2, rootContainerElement, parentNamespace) {
             var isCustomComponentTag;
             var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
             var domElement;
             var namespaceURI = parentNamespace;
             if (namespaceURI === HTML_NAMESPACE) {
-              namespaceURI = getIntrinsicNamespace(type);
+              namespaceURI = getIntrinsicNamespace(type2);
             }
             if (namespaceURI === HTML_NAMESPACE) {
               {
-                isCustomComponentTag = isCustomComponent(type, props);
-                if (!isCustomComponentTag && type !== type.toLowerCase()) {
-                  error("<%s /> is using incorrect casing. Use PascalCase for React components, or lowercase for HTML elements.", type);
+                isCustomComponentTag = isCustomComponent(type2, props2);
+                if (!isCustomComponentTag && type2 !== type2.toLowerCase()) {
+                  error("<%s /> is using incorrect casing. Use PascalCase for React components, or lowercase for HTML elements.", type2);
                 }
               }
-              if (type === "script") {
+              if (type2 === "script") {
                 var div = ownerDocument.createElement("div");
                 div.innerHTML = "<script><\/script>";
                 var firstChild = div.firstChild;
                 domElement = div.removeChild(firstChild);
-              } else if (typeof props.is === "string") {
-                domElement = ownerDocument.createElement(type, {
-                  is: props.is
+              } else if (typeof props2.is === "string") {
+                domElement = ownerDocument.createElement(type2, {
+                  is: props2.is
                 });
               } else {
-                domElement = ownerDocument.createElement(type);
-                if (type === "select") {
+                domElement = ownerDocument.createElement(type2);
+                if (type2 === "select") {
                   var node = domElement;
-                  if (props.multiple) {
+                  if (props2.multiple) {
                     node.multiple = true;
-                  } else if (props.size) {
-                    node.size = props.size;
+                  } else if (props2.size) {
+                    node.size = props2.size;
                   }
                 }
               }
             } else {
-              domElement = ownerDocument.createElementNS(namespaceURI, type);
+              domElement = ownerDocument.createElementNS(namespaceURI, type2);
             }
             {
               if (namespaceURI === HTML_NAMESPACE) {
-                if (!isCustomComponentTag && Object.prototype.toString.call(domElement) === "[object HTMLUnknownElement]" && !hasOwnProperty.call(warnedUnknownTags, type)) {
-                  warnedUnknownTags[type] = true;
-                  error("The tag <%s> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.", type);
+                if (!isCustomComponentTag && Object.prototype.toString.call(domElement) === "[object HTMLUnknownElement]" && !hasOwnProperty.call(warnedUnknownTags, type2)) {
+                  warnedUnknownTags[type2] = true;
+                  error("The tag <%s> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.", type2);
                 }
               }
             }
@@ -9048,65 +9052,65 @@
             {
               validatePropertiesInDevelopment(tag, rawProps);
             }
-            var props;
+            var props2;
             switch (tag) {
               case "dialog":
                 listenToNonDelegatedEvent("cancel", domElement);
                 listenToNonDelegatedEvent("close", domElement);
-                props = rawProps;
+                props2 = rawProps;
                 break;
               case "iframe":
               case "object":
               case "embed":
                 listenToNonDelegatedEvent("load", domElement);
-                props = rawProps;
+                props2 = rawProps;
                 break;
               case "video":
               case "audio":
                 for (var i = 0; i < mediaEventTypes.length; i++) {
                   listenToNonDelegatedEvent(mediaEventTypes[i], domElement);
                 }
-                props = rawProps;
+                props2 = rawProps;
                 break;
               case "source":
                 listenToNonDelegatedEvent("error", domElement);
-                props = rawProps;
+                props2 = rawProps;
                 break;
               case "img":
               case "image":
               case "link":
                 listenToNonDelegatedEvent("error", domElement);
                 listenToNonDelegatedEvent("load", domElement);
-                props = rawProps;
+                props2 = rawProps;
                 break;
               case "details":
                 listenToNonDelegatedEvent("toggle", domElement);
-                props = rawProps;
+                props2 = rawProps;
                 break;
               case "input":
                 initWrapperState(domElement, rawProps);
-                props = getHostProps(domElement, rawProps);
+                props2 = getHostProps(domElement, rawProps);
                 listenToNonDelegatedEvent("invalid", domElement);
                 break;
               case "option":
                 validateProps(domElement, rawProps);
-                props = rawProps;
+                props2 = rawProps;
                 break;
               case "select":
                 initWrapperState$1(domElement, rawProps);
-                props = getHostProps$1(domElement, rawProps);
+                props2 = getHostProps$1(domElement, rawProps);
                 listenToNonDelegatedEvent("invalid", domElement);
                 break;
               case "textarea":
                 initWrapperState$2(domElement, rawProps);
-                props = getHostProps$2(domElement, rawProps);
+                props2 = getHostProps$2(domElement, rawProps);
                 listenToNonDelegatedEvent("invalid", domElement);
                 break;
               default:
-                props = rawProps;
+                props2 = rawProps;
             }
-            assertValidProps(tag, props);
-            setInitialDOMProperties(tag, domElement, rootContainerElement, props, isCustomComponentTag);
+            assertValidProps(tag, props2);
+            setInitialDOMProperties(tag, domElement, rootContainerElement, props2, isCustomComponentTag);
             switch (tag) {
               case "input":
                 track(domElement);
@@ -9123,7 +9127,7 @@
                 postMountWrapper$2(domElement, rawProps);
                 break;
               default:
-                if (typeof props.onClick === "function") {
+                if (typeof props2.onClick === "function") {
                   trapClickOnNonInteractiveElement(domElement);
                 }
                 break;
@@ -9505,7 +9509,7 @@
               error('Did not expect server HTML to contain the text node "%s" in <%s>.', child.nodeValue, parentNode.nodeName.toLowerCase());
             }
           }
-          function warnForInsertedHydratedElement(parentNode, tag, props) {
+          function warnForInsertedHydratedElement(parentNode, tag, props2) {
             {
               if (didWarnInvalidHydration) {
                 return;
@@ -9526,16 +9530,16 @@
               error('Expected server HTML to contain a matching text node for "%s" in <%s>.', text, parentNode.nodeName.toLowerCase());
             }
           }
-          function restoreControlledState$3(domElement, tag, props) {
+          function restoreControlledState$3(domElement, tag, props2) {
             switch (tag) {
               case "input":
-                restoreControlledState(domElement, props);
+                restoreControlledState(domElement, props2);
                 return;
               case "textarea":
-                restoreControlledState$2(domElement, props);
+                restoreControlledState$2(domElement, props2);
                 return;
               case "select":
-                restoreControlledState$1(domElement, props);
+                restoreControlledState$1(domElement, props2);
                 return;
             }
           }
@@ -9777,13 +9781,13 @@
           var eventsEnabled = null;
           var selectionInformation = null;
           function getRootHostContext(rootContainerInstance) {
-            var type;
+            var type2;
             var namespace;
             var nodeType = rootContainerInstance.nodeType;
             switch (nodeType) {
               case DOCUMENT_NODE:
               case DOCUMENT_FRAGMENT_NODE: {
-                type = nodeType === DOCUMENT_NODE ? "#document" : "#fragment";
+                type2 = nodeType === DOCUMENT_NODE ? "#document" : "#fragment";
                 var root3 = rootContainerInstance.documentElement;
                 namespace = root3 ? root3.namespaceURI : getChildNamespace(null, "");
                 break;
@@ -9791,13 +9795,13 @@
               default: {
                 var container2 = nodeType === COMMENT_NODE ? rootContainerInstance.parentNode : rootContainerInstance;
                 var ownNamespace = container2.namespaceURI || null;
-                type = container2.tagName;
-                namespace = getChildNamespace(ownNamespace, type);
+                type2 = container2.tagName;
+                namespace = getChildNamespace(ownNamespace, type2);
                 break;
               }
             }
             {
-              var validatedTag = type.toLowerCase();
+              var validatedTag = type2.toLowerCase();
               var ancestorInfo = updatedAncestorInfo(null, validatedTag);
               return {
                 namespace,
@@ -9805,11 +9809,11 @@
               };
             }
           }
-          function getChildHostContext(parentHostContext, type, rootContainerInstance) {
+          function getChildHostContext(parentHostContext, type2, rootContainerInstance) {
             {
               var parentHostContextDev = parentHostContext;
-              var namespace = getChildNamespace(parentHostContextDev.namespace, type);
-              var ancestorInfo = updatedAncestorInfo(parentHostContextDev.ancestorInfo, type);
+              var namespace = getChildNamespace(parentHostContextDev.namespace, type2);
+              var ancestorInfo = updatedAncestorInfo(parentHostContextDev.ancestorInfo, type2);
               return {
                 namespace,
                 ancestorInfo
@@ -9832,53 +9836,53 @@
             eventsEnabled = null;
             selectionInformation = null;
           }
-          function createInstance(type, props, rootContainerInstance, hostContext, internalInstanceHandle) {
+          function createInstance(type2, props2, rootContainerInstance, hostContext, internalInstanceHandle) {
             var parentNamespace;
             {
               var hostContextDev = hostContext;
-              validateDOMNesting(type, null, hostContextDev.ancestorInfo);
-              if (typeof props.children === "string" || typeof props.children === "number") {
-                var string = "" + props.children;
-                var ownAncestorInfo = updatedAncestorInfo(hostContextDev.ancestorInfo, type);
+              validateDOMNesting(type2, null, hostContextDev.ancestorInfo);
+              if (typeof props2.children === "string" || typeof props2.children === "number") {
+                var string = "" + props2.children;
+                var ownAncestorInfo = updatedAncestorInfo(hostContextDev.ancestorInfo, type2);
                 validateDOMNesting(null, string, ownAncestorInfo);
               }
               parentNamespace = hostContextDev.namespace;
             }
-            var domElement = createElement13(type, props, rootContainerInstance, parentNamespace);
+            var domElement = createElement13(type2, props2, rootContainerInstance, parentNamespace);
             precacheFiberNode(internalInstanceHandle, domElement);
-            updateFiberProps(domElement, props);
+            updateFiberProps(domElement, props2);
             return domElement;
           }
           function appendInitialChild(parentInstance, child) {
             parentInstance.appendChild(child);
           }
-          function finalizeInitialChildren(domElement, type, props, rootContainerInstance, hostContext) {
-            setInitialProperties(domElement, type, props, rootContainerInstance);
-            switch (type) {
+          function finalizeInitialChildren(domElement, type2, props2, rootContainerInstance, hostContext) {
+            setInitialProperties(domElement, type2, props2, rootContainerInstance);
+            switch (type2) {
               case "button":
               case "input":
               case "select":
               case "textarea":
-                return !!props.autoFocus;
+                return !!props2.autoFocus;
               case "img":
                 return true;
               default:
                 return false;
             }
           }
-          function prepareUpdate(domElement, type, oldProps, newProps, rootContainerInstance, hostContext) {
+          function prepareUpdate(domElement, type2, oldProps, newProps, rootContainerInstance, hostContext) {
             {
               var hostContextDev = hostContext;
               if (typeof newProps.children !== typeof oldProps.children && (typeof newProps.children === "string" || typeof newProps.children === "number")) {
                 var string = "" + newProps.children;
-                var ownAncestorInfo = updatedAncestorInfo(hostContextDev.ancestorInfo, type);
+                var ownAncestorInfo = updatedAncestorInfo(hostContextDev.ancestorInfo, type2);
                 validateDOMNesting(null, string, ownAncestorInfo);
               }
             }
-            return diffProperties(domElement, type, oldProps, newProps);
+            return diffProperties(domElement, type2, oldProps, newProps);
           }
-          function shouldSetTextContent(type, props) {
-            return type === "textarea" || type === "noscript" || typeof props.children === "string" || typeof props.children === "number" || typeof props.dangerouslySetInnerHTML === "object" && props.dangerouslySetInnerHTML !== null && props.dangerouslySetInnerHTML.__html != null;
+          function shouldSetTextContent(type2, props2) {
+            return type2 === "textarea" || type2 === "noscript" || typeof props2.children === "string" || typeof props2.children === "number" || typeof props2.dangerouslySetInnerHTML === "object" && props2.dangerouslySetInnerHTML !== null && props2.dangerouslySetInnerHTML.__html != null;
           }
           function createTextInstance(text, rootContainerInstance, hostContext, internalInstanceHandle) {
             {
@@ -9908,8 +9912,8 @@
               throw error2;
             });
           }
-          function commitMount(domElement, type, newProps, internalInstanceHandle) {
-            switch (type) {
+          function commitMount(domElement, type2, newProps, internalInstanceHandle) {
+            switch (type2) {
               case "button":
               case "input":
               case "select":
@@ -9926,8 +9930,8 @@
               }
             }
           }
-          function commitUpdate(domElement, updatePayload, type, oldProps, newProps, internalInstanceHandle) {
-            updateProperties(domElement, updatePayload, type, oldProps, newProps);
+          function commitUpdate(domElement, updatePayload, type2, oldProps, newProps, internalInstanceHandle) {
+            updateProperties(domElement, updatePayload, type2, oldProps, newProps);
             updateFiberProps(domElement, newProps);
           }
           function resetTextContent(domElement) {
@@ -10017,9 +10021,9 @@
           function hideTextInstance(textInstance) {
             textInstance.nodeValue = "";
           }
-          function unhideInstance(instance, props) {
+          function unhideInstance(instance, props2) {
             instance = instance;
-            var styleProp = props[STYLE$1];
+            var styleProp = props2[STYLE$1];
             var display = styleProp !== void 0 && styleProp !== null && styleProp.hasOwnProperty("display") ? styleProp.display : null;
             instance.style.display = dangerousStyleValue("display", display);
           }
@@ -10035,8 +10039,8 @@
               }
             }
           }
-          function canHydrateInstance(instance, type, props) {
-            if (instance.nodeType !== ELEMENT_NODE || type.toLowerCase() !== instance.nodeName.toLowerCase()) {
+          function canHydrateInstance(instance, type2, props2) {
+            if (instance.nodeType !== ELEMENT_NODE || type2.toLowerCase() !== instance.nodeName.toLowerCase()) {
               return null;
             }
             return instance;
@@ -10110,16 +10114,16 @@
           function getFirstHydratableChildWithinSuspenseInstance(parentInstance) {
             return getNextHydratable(parentInstance.nextSibling);
           }
-          function hydrateInstance(instance, type, props, rootContainerInstance, hostContext, internalInstanceHandle, shouldWarnDev) {
+          function hydrateInstance(instance, type2, props2, rootContainerInstance, hostContext, internalInstanceHandle, shouldWarnDev) {
             precacheFiberNode(internalInstanceHandle, instance);
-            updateFiberProps(instance, props);
+            updateFiberProps(instance, props2);
             var parentNamespace;
             {
               var hostContextDev = hostContext;
               parentNamespace = hostContextDev.namespace;
             }
             var isConcurrentMode = (internalInstanceHandle.mode & ConcurrentMode) !== NoMode;
-            return diffHydratedProperties(instance, type, props, parentNamespace, rootContainerInstance, isConcurrentMode, shouldWarnDev);
+            return diffHydratedProperties(instance, type2, props2, parentNamespace, rootContainerInstance, isConcurrentMode, shouldWarnDev);
           }
           function hydrateTextInstance(textInstance, text, internalInstanceHandle, shouldWarnDev) {
             precacheFiberNode(internalInstanceHandle, textInstance);
@@ -10226,9 +10230,9 @@
               }
             }
           }
-          function didNotFindHydratableInstanceWithinContainer(parentContainer, type, props) {
+          function didNotFindHydratableInstanceWithinContainer(parentContainer, type2, props2) {
             {
-              warnForInsertedHydratedElement(parentContainer, type);
+              warnForInsertedHydratedElement(parentContainer, type2);
             }
           }
           function didNotFindHydratableTextInstanceWithinContainer(parentContainer, text) {
@@ -10236,11 +10240,11 @@
               warnForInsertedHydratedText(parentContainer, text);
             }
           }
-          function didNotFindHydratableInstanceWithinSuspenseInstance(parentInstance, type, props) {
+          function didNotFindHydratableInstanceWithinSuspenseInstance(parentInstance, type2, props2) {
             {
               var parentNode = parentInstance.parentNode;
               if (parentNode !== null)
-                warnForInsertedHydratedElement(parentNode, type);
+                warnForInsertedHydratedElement(parentNode, type2);
             }
           }
           function didNotFindHydratableTextInstanceWithinSuspenseInstance(parentInstance, text) {
@@ -10250,10 +10254,10 @@
                 warnForInsertedHydratedText(parentNode, text);
             }
           }
-          function didNotFindHydratableInstance(parentType, parentProps, parentInstance, type, props, isConcurrentMode) {
+          function didNotFindHydratableInstance(parentType, parentProps, parentInstance, type2, props2, isConcurrentMode) {
             {
               if (isConcurrentMode || parentProps[SUPPRESS_HYDRATION_WARNING$1] !== true) {
-                warnForInsertedHydratedElement(parentInstance, type);
+                warnForInsertedHydratedElement(parentInstance, type2);
               }
             }
           }
@@ -10345,8 +10349,8 @@
           function getFiberCurrentPropsFromNode(node) {
             return node[internalPropsKey] || null;
           }
-          function updateFiberProps(node, props) {
-            node[internalPropsKey] = props;
+          function updateFiberProps(node, props2) {
+            node[internalPropsKey] = props2;
           }
           function getEventListenerSet(node) {
             var elementListenerSet = node[internalEventHandlersKey];
@@ -10368,7 +10372,7 @@
               }
             }
           }
-          function checkPropTypes(typeSpecs, values2, location, componentName, element) {
+          function checkPropTypes(typeSpecs, values2, location2, componentName, element) {
             {
               var has2 = Function.call.bind(hasOwnProperty);
               for (var typeSpecName in typeSpecs) {
@@ -10376,23 +10380,23 @@
                   var error$1 = void 0;
                   try {
                     if (typeof typeSpecs[typeSpecName] !== "function") {
-                      var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                      var err = Error((componentName || "React class") + ": " + location2 + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
                       err.name = "Invariant Violation";
                       throw err;
                     }
-                    error$1 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+                    error$1 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location2, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
                   } catch (ex) {
                     error$1 = ex;
                   }
                   if (error$1 && !(error$1 instanceof Error)) {
                     setCurrentlyValidatingElement(element);
-                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location, typeSpecName, typeof error$1);
+                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location2, typeSpecName, typeof error$1);
                     setCurrentlyValidatingElement(null);
                   }
                   if (error$1 instanceof Error && !(error$1.message in loggedTypeFailures)) {
                     loggedTypeFailures[error$1.message] = true;
                     setCurrentlyValidatingElement(element);
-                    error("Failed %s type: %s", location, error$1.message);
+                    error("Failed %s type: %s", location2, error$1.message);
                     setCurrentlyValidatingElement(null);
                   }
                 }
@@ -10465,8 +10469,8 @@
           }
           function getMaskedContext(workInProgress2, unmaskedContext) {
             {
-              var type = workInProgress2.type;
-              var contextTypes = type.contextTypes;
+              var type2 = workInProgress2.type;
+              var contextTypes = type2.contextTypes;
               if (!contextTypes) {
                 return emptyContextObject;
               }
@@ -10493,9 +10497,9 @@
               return didPerformWorkStackCursor.current;
             }
           }
-          function isContextProvider(type) {
+          function isContextProvider(type2) {
             {
-              var childContextTypes = type.childContextTypes;
+              var childContextTypes = type2.childContextTypes;
               return childContextTypes !== null && childContextTypes !== void 0;
             }
           }
@@ -10520,10 +10524,10 @@
               push(didPerformWorkStackCursor, didChange, fiber);
             }
           }
-          function processChildContext(fiber, type, parentContext) {
+          function processChildContext(fiber, type2, parentContext) {
             {
               var instance = fiber.stateNode;
-              var childContextTypes = type.childContextTypes;
+              var childContextTypes = type2.childContextTypes;
               if (typeof instance.getChildContext !== "function") {
                 {
                   var componentName = getComponentNameFromFiber(fiber) || "Unknown";
@@ -10557,14 +10561,14 @@
               return true;
             }
           }
-          function invalidateContextProvider(workInProgress2, type, didChange) {
+          function invalidateContextProvider(workInProgress2, type2, didChange) {
             {
               var instance = workInProgress2.stateNode;
               if (!instance) {
                 throw new Error("Expected to have an instance by this point. This error is likely caused by a bug in React. Please file an issue.");
               }
               if (didChange) {
-                var mergedContext = processChildContext(workInProgress2, type, previousContext);
+                var mergedContext = processChildContext(workInProgress2, type2, previousContext);
                 instance.__reactInternalMemoizedMergedChildContext = mergedContext;
                 pop(didPerformWorkStackCursor, workInProgress2);
                 pop(contextStackCursor, workInProgress2);
@@ -10863,9 +10867,9 @@
                   var parentContainer = returnFiber.stateNode.containerInfo;
                   switch (fiber.tag) {
                     case HostComponent:
-                      var type = fiber.type;
-                      var props = fiber.pendingProps;
-                      didNotFindHydratableInstanceWithinContainer(parentContainer, type);
+                      var type2 = fiber.type;
+                      var props2 = fiber.pendingProps;
+                      didNotFindHydratableInstanceWithinContainer(parentContainer, type2);
                       break;
                     case HostText:
                       var text = fiber.pendingProps;
@@ -10937,9 +10941,9 @@
           function tryHydrate(fiber, nextInstance) {
             switch (fiber.tag) {
               case HostComponent: {
-                var type = fiber.type;
-                var props = fiber.pendingProps;
-                var instance = canHydrateInstance(nextInstance, type);
+                var type2 = fiber.type;
+                var props2 = fiber.pendingProps;
+                var instance = canHydrateInstance(nextInstance, type2);
                 if (instance !== null) {
                   fiber.stateNode = instance;
                   hydrationParentFiber = fiber;
@@ -11346,14 +11350,14 @@
           }
           function resolveDefaultProps(Component, baseProps) {
             if (Component && Component.defaultProps) {
-              var props = assign({}, baseProps);
+              var props2 = assign({}, baseProps);
               var defaultProps2 = Component.defaultProps;
               for (var propName in defaultProps2) {
-                if (props[propName] === void 0) {
-                  props[propName] = defaultProps2[propName];
+                if (props2[propName] === void 0) {
+                  props2[propName] = defaultProps2[propName];
                 }
               }
-              return props;
+              return props2;
             }
             return baseProps;
           }
@@ -11870,7 +11874,7 @@
             }
             return prevState;
           }
-          function processUpdateQueue(workInProgress2, props, instance, renderLanes2) {
+          function processUpdateQueue(workInProgress2, props2, instance, renderLanes2) {
             var queue = workInProgress2.updateQueue;
             hasForceUpdate = false;
             {
@@ -11942,7 +11946,7 @@
                     };
                     newLastBaseUpdate = newLastBaseUpdate.next = _clone;
                   }
-                  newState = getStateFromUpdate(workInProgress2, queue, update, newState, props, instance);
+                  newState = getStateFromUpdate(workInProgress2, queue, update, newState, props2, instance);
                   var callback = update.callback;
                   if (callback !== null && update.lane !== NoLane) {
                     workInProgress2.flags |= Callback;
@@ -12051,9 +12055,9 @@
                 error("%s(...): Expected the last optional `callback` argument to be a function. Instead received: %s.", callerName, callback);
               }
             };
-            warnOnUndefinedDerivedState = function(type, partialState) {
+            warnOnUndefinedDerivedState = function(type2, partialState) {
               if (partialState === void 0) {
-                var componentName = getComponentNameFromType(type) || "Component";
+                var componentName = getComponentNameFromType(type2) || "Component";
                 if (!didWarnAboutUndefinedDerivedState.has(componentName)) {
                   didWarnAboutUndefinedDerivedState.add(componentName);
                   error("%s.getDerivedStateFromProps(): A valid state object (or null) must be returned. You have returned undefined.", componentName);
@@ -12252,7 +12256,7 @@
                 error("%s: getSnapshotBeforeUpdate() is defined as a static method and will be ignored. Instead, declare it as an instance method.", name);
               }
               var _state = instance.state;
-              if (_state && (typeof _state !== "object" || isArray(_state))) {
+              if (_state && (typeof _state !== "object" || isArray2(_state))) {
                 error("%s.state: must be set to an object or null", name);
               }
               if (typeof instance.getChildContext === "function" && typeof ctor.childContextTypes !== "object") {
@@ -12268,7 +12272,7 @@
               instance._reactInternalInstance = fakeInternalInstance;
             }
           }
-          function constructClassInstance(workInProgress2, ctor, props) {
+          function constructClassInstance(workInProgress2, ctor, props2) {
             var isLegacyContextConsumer = false;
             var unmaskedContext = emptyContextObject;
             var context = emptyContextObject;
@@ -12302,12 +12306,12 @@
               isLegacyContextConsumer = contextTypes !== null && contextTypes !== void 0;
               context = isLegacyContextConsumer ? getMaskedContext(workInProgress2, unmaskedContext) : emptyContextObject;
             }
-            var instance = new ctor(props, context);
+            var instance = new ctor(props2, context);
             {
               if (workInProgress2.mode & StrictLegacyMode) {
                 setIsStrictModeForDevtools(true);
                 try {
-                  instance = new ctor(props, context);
+                  instance = new ctor(props2, context);
                 } finally {
                   setIsStrictModeForDevtools(false);
                 }
@@ -12864,7 +12868,7 @@
                     return createChild(returnFiber, init(payload), lanes);
                   }
                 }
-                if (isArray(newChild) || getIteratorFn(newChild)) {
+                if (isArray2(newChild) || getIteratorFn(newChild)) {
                   var _created3 = createFiberFromFragment(newChild, returnFiber.mode, lanes, null);
                   _created3.return = returnFiber;
                   return _created3;
@@ -12908,7 +12912,7 @@
                     return updateSlot(returnFiber, oldFiber, init(payload), lanes);
                   }
                 }
-                if (isArray(newChild) || getIteratorFn(newChild)) {
+                if (isArray2(newChild) || getIteratorFn(newChild)) {
                   if (key !== null) {
                     return null;
                   }
@@ -12943,7 +12947,7 @@
                     var init = newChild._init;
                     return updateFromMap(existingChildren, returnFiber, newIdx, init(payload), lanes);
                 }
-                if (isArray(newChild) || getIteratorFn(newChild)) {
+                if (isArray2(newChild) || getIteratorFn(newChild)) {
                   var _matchedFiber3 = existingChildren.get(newIdx) || null;
                   return updateFragment2(returnFiber, _matchedFiber3, newChild, lanes, null);
                 }
@@ -13311,7 +13315,7 @@
                     var init = newChild._init;
                     return reconcileChildFibers2(returnFiber, currentFirstChild, init(payload), lanes);
                 }
-                if (isArray(newChild)) {
+                if (isArray2(newChild)) {
                   return reconcileChildrenArray(returnFiber, currentFirstChild, newChild, lanes);
                 }
                 if (getIteratorFn(newChild)) {
@@ -13437,7 +13441,7 @@
               }
               return false;
             }
-            var props = workInProgress2.memoizedProps;
+            var props2 = workInProgress2.memoizedProps;
             {
               return true;
             }
@@ -13543,7 +13547,7 @@
           }
           function checkDepsAreArrayDev(deps) {
             {
-              if (deps !== void 0 && deps !== null && !isArray(deps)) {
+              if (deps !== void 0 && deps !== null && !isArray2(deps)) {
                 error("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", currentHookNameInDev, typeof deps);
               }
             }
@@ -13599,7 +13603,7 @@
             }
             return true;
           }
-          function renderWithHooks(current2, workInProgress2, Component, props, secondArg, nextRenderLanes) {
+          function renderWithHooks(current2, workInProgress2, Component, props2, secondArg, nextRenderLanes) {
             renderLanes = nextRenderLanes;
             currentlyRenderingFiber$1 = workInProgress2;
             {
@@ -13619,7 +13623,7 @@
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnMountInDEV;
               }
             }
-            var children = Component(props, secondArg);
+            var children = Component(props2, secondArg);
             if (didScheduleRenderPhaseUpdateDuringThisPass) {
               var numberOfReRenders = 0;
               do {
@@ -13639,7 +13643,7 @@
                   hookTypesUpdateIndexDev = -1;
                 }
                 ReactCurrentDispatcher$1.current = HooksDispatcherOnRerenderInDEV;
-                children = Component(props, secondArg);
+                children = Component(props2, secondArg);
               } while (didScheduleRenderPhaseUpdateDuringThisPass);
             }
             ReactCurrentDispatcher$1.current = ContextOnlyDispatcher;
@@ -15792,27 +15796,27 @@
           }
           function updateMemoComponent(current2, workInProgress2, Component, nextProps, renderLanes2) {
             if (current2 === null) {
-              var type = Component.type;
-              if (isSimpleFunctionComponent(type) && Component.compare === null && Component.defaultProps === void 0) {
-                var resolvedType = type;
+              var type2 = Component.type;
+              if (isSimpleFunctionComponent(type2) && Component.compare === null && Component.defaultProps === void 0) {
+                var resolvedType = type2;
                 {
-                  resolvedType = resolveFunctionForHotReloading(type);
+                  resolvedType = resolveFunctionForHotReloading(type2);
                 }
                 workInProgress2.tag = SimpleMemoComponent;
                 workInProgress2.type = resolvedType;
                 {
-                  validateFunctionComponentInDev(workInProgress2, type);
+                  validateFunctionComponentInDev(workInProgress2, type2);
                 }
                 return updateSimpleMemoComponent(current2, workInProgress2, resolvedType, nextProps, renderLanes2);
               }
               {
-                var innerPropTypes = type.propTypes;
+                var innerPropTypes = type2.propTypes;
                 if (innerPropTypes) {
                   checkPropTypes(
                     innerPropTypes,
                     nextProps,
                     "prop",
-                    getComponentNameFromType(type)
+                    getComponentNameFromType(type2)
                   );
                 }
               }
@@ -16220,14 +16224,14 @@
             if (current2 === null) {
               tryToClaimNextHydratableInstance(workInProgress2);
             }
-            var type = workInProgress2.type;
+            var type2 = workInProgress2.type;
             var nextProps = workInProgress2.pendingProps;
             var prevProps = current2 !== null ? current2.memoizedProps : null;
             var nextChildren = nextProps.children;
-            var isDirectTextChild = shouldSetTextContent(type, nextProps);
+            var isDirectTextChild = shouldSetTextContent(type2, nextProps);
             if (isDirectTextChild) {
               nextChildren = null;
-            } else if (prevProps !== null && shouldSetTextContent(type, prevProps)) {
+            } else if (prevProps !== null && shouldSetTextContent(type2, prevProps)) {
               workInProgress2.flags |= ContentReset;
             }
             markRef(current2, workInProgress2);
@@ -16242,14 +16246,14 @@
           }
           function mountLazyComponent(_current, workInProgress2, elementType, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
-            var props = workInProgress2.pendingProps;
+            var props2 = workInProgress2.pendingProps;
             var lazyComponent = elementType;
             var payload = lazyComponent._payload;
             var init = lazyComponent._init;
             var Component = init(payload);
             workInProgress2.type = Component;
             var resolvedTag = workInProgress2.tag = resolveLazyComponentTag(Component);
-            var resolvedProps = resolveDefaultProps(Component, props);
+            var resolvedProps = resolveDefaultProps(Component, props2);
             var child;
             switch (resolvedTag) {
               case FunctionComponent: {
@@ -16323,7 +16327,7 @@
           }
           function mountIndeterminateComponent(_current, workInProgress2, Component, renderLanes2) {
             resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress2);
-            var props = workInProgress2.pendingProps;
+            var props2 = workInProgress2.pendingProps;
             var context;
             {
               var unmaskedContext = getUnmaskedContext(workInProgress2, Component, false);
@@ -16348,7 +16352,7 @@
               }
               setIsRendering(true);
               ReactCurrentOwner$1.current = workInProgress2;
-              value = renderWithHooks(null, workInProgress2, Component, props, context, renderLanes2);
+              value = renderWithHooks(null, workInProgress2, Component, props2, context, renderLanes2);
               hasId = checkDidRenderIdHook();
               setIsRendering(false);
             }
@@ -16386,7 +16390,7 @@
               workInProgress2.memoizedState = value.state !== null && value.state !== void 0 ? value.state : null;
               initializeUpdateQueue(workInProgress2);
               adoptClassInstance(workInProgress2, value);
-              mountClassInstance(workInProgress2, Component, props, renderLanes2);
+              mountClassInstance(workInProgress2, Component, props2, renderLanes2);
               return finishClassComponent(null, workInProgress2, Component, true, hasContext, renderLanes2);
             } else {
               workInProgress2.tag = FunctionComponent;
@@ -16394,7 +16398,7 @@
                 if (workInProgress2.mode & StrictLegacyMode) {
                   setIsStrictModeForDevtools(true);
                   try {
-                    value = renderWithHooks(null, workInProgress2, Component, props, context, renderLanes2);
+                    value = renderWithHooks(null, workInProgress2, Component, props2, context, renderLanes2);
                     hasId = checkDidRenderIdHook();
                   } finally {
                     setIsStrictModeForDevtools(false);
@@ -16868,11 +16872,11 @@
           }
           function validateSuspenseListNestedChild(childSlot, index2) {
             {
-              var isAnArray = isArray(childSlot);
+              var isAnArray = isArray2(childSlot);
               var isIterable = !isAnArray && typeof getIteratorFn(childSlot) === "function";
               if (isAnArray || isIterable) {
-                var type = isAnArray ? "array" : "iterable";
-                error("A nested %s was passed to row #%s in <SuspenseList />. Wrap it in an additional SuspenseList to configure its revealOrder: <SuspenseList revealOrder=...> ... <SuspenseList revealOrder=...>{%s}</SuspenseList> ... </SuspenseList>", type, index2, type);
+                var type2 = isAnArray ? "array" : "iterable";
+                error("A nested %s was passed to row #%s in <SuspenseList />. Wrap it in an additional SuspenseList to configure its revealOrder: <SuspenseList revealOrder=...> ... <SuspenseList revealOrder=...>{%s}</SuspenseList> ... </SuspenseList>", type2, index2, type2);
                 return false;
               }
             }
@@ -16881,7 +16885,7 @@
           function validateSuspenseListChildren(children, revealOrder) {
             {
               if ((revealOrder === "forwards" || revealOrder === "backwards") && children !== void 0 && children !== null && children !== false) {
-                if (isArray(children)) {
+                if (isArray2(children)) {
                   for (var i = 0; i < children.length; i++) {
                     if (!validateSuspenseListNestedChild(children[i], i)) {
                       return;
@@ -17332,10 +17336,10 @@
               case HostPortal:
                 return updatePortalComponent(current2, workInProgress2, renderLanes2);
               case ForwardRef: {
-                var type = workInProgress2.type;
+                var type2 = workInProgress2.type;
                 var _unresolvedProps2 = workInProgress2.pendingProps;
-                var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
-                return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
+                var _resolvedProps2 = workInProgress2.elementType === type2 ? _unresolvedProps2 : resolveDefaultProps(type2, _unresolvedProps2);
+                return updateForwardRef(current2, workInProgress2, type2, _resolvedProps2, renderLanes2);
               }
               case Fragment4:
                 return updateFragment(current2, workInProgress2, renderLanes2);
@@ -17429,14 +17433,14 @@
             };
             updateHostContainer = function(current2, workInProgress2) {
             };
-            updateHostComponent$1 = function(current2, workInProgress2, type, newProps, rootContainerInstance) {
+            updateHostComponent$1 = function(current2, workInProgress2, type2, newProps, rootContainerInstance) {
               var oldProps = current2.memoizedProps;
               if (oldProps === newProps) {
                 return;
               }
               var instance = workInProgress2.stateNode;
               var currentHostContext = getHostContext();
-              var updatePayload = prepareUpdate(instance, type, oldProps, newProps, rootContainerInstance, currentHostContext);
+              var updatePayload = prepareUpdate(instance, type2, oldProps, newProps, rootContainerInstance, currentHostContext);
               workInProgress2.updateQueue = updatePayload;
               if (updatePayload) {
                 markUpdate(workInProgress2);
@@ -17654,9 +17658,9 @@
               case HostComponent: {
                 popHostContext(workInProgress2);
                 var rootContainerInstance = getRootHostContainer();
-                var type = workInProgress2.type;
+                var type2 = workInProgress2.type;
                 if (current2 !== null && workInProgress2.stateNode != null) {
-                  updateHostComponent$1(current2, workInProgress2, type, newProps, rootContainerInstance);
+                  updateHostComponent$1(current2, workInProgress2, type2, newProps, rootContainerInstance);
                   if (current2.ref !== workInProgress2.ref) {
                     markRef$1(workInProgress2);
                   }
@@ -17675,10 +17679,10 @@
                       markUpdate(workInProgress2);
                     }
                   } else {
-                    var instance = createInstance(type, newProps, rootContainerInstance, currentHostContext, workInProgress2);
+                    var instance = createInstance(type2, newProps, rootContainerInstance, currentHostContext, workInProgress2);
                     appendAllChildren(instance, workInProgress2, false, false);
                     workInProgress2.stateNode = instance;
-                    if (finalizeInitialChildren(instance, type, newProps, rootContainerInstance)) {
+                    if (finalizeInitialChildren(instance, type2, newProps, rootContainerInstance)) {
                       markUpdate(workInProgress2);
                     }
                   }
@@ -18480,9 +18484,9 @@
                 case HostComponent: {
                   var _instance2 = finishedWork.stateNode;
                   if (current2 === null && finishedWork.flags & Update) {
-                    var type = finishedWork.type;
-                    var props = finishedWork.memoizedProps;
-                    commitMount(_instance2, type, props);
+                    var type2 = finishedWork.type;
+                    var props2 = finishedWork.memoizedProps;
+                    commitMount(_instance2, type2, props2);
                   }
                   break;
                 }
@@ -19141,12 +19145,12 @@
                     if (_instance4 != null) {
                       var newProps = finishedWork.memoizedProps;
                       var oldProps = current2 !== null ? current2.memoizedProps : newProps;
-                      var type = finishedWork.type;
+                      var type2 = finishedWork.type;
                       var updatePayload = finishedWork.updateQueue;
                       finishedWork.updateQueue = null;
                       if (updatePayload !== null) {
                         try {
-                          commitUpdate(_instance4, updatePayload, type, oldProps, newProps, finishedWork);
+                          commitUpdate(_instance4, updatePayload, type2, oldProps, newProps, finishedWork);
                         } catch (error2) {
                           captureCommitPhaseError(finishedWork, finishedWork.return, error2);
                         }
@@ -21241,42 +21245,42 @@
               resolveFamily = handler;
             }
           };
-          function resolveFunctionForHotReloading(type) {
+          function resolveFunctionForHotReloading(type2) {
             {
               if (resolveFamily === null) {
-                return type;
+                return type2;
               }
-              var family = resolveFamily(type);
+              var family = resolveFamily(type2);
               if (family === void 0) {
-                return type;
+                return type2;
               }
               return family.current;
             }
           }
-          function resolveClassForHotReloading(type) {
-            return resolveFunctionForHotReloading(type);
+          function resolveClassForHotReloading(type2) {
+            return resolveFunctionForHotReloading(type2);
           }
-          function resolveForwardRefForHotReloading(type) {
+          function resolveForwardRefForHotReloading(type2) {
             {
               if (resolveFamily === null) {
-                return type;
+                return type2;
               }
-              var family = resolveFamily(type);
+              var family = resolveFamily(type2);
               if (family === void 0) {
-                if (type !== null && type !== void 0 && typeof type.render === "function") {
-                  var currentRender = resolveFunctionForHotReloading(type.render);
-                  if (type.render !== currentRender) {
+                if (type2 !== null && type2 !== void 0 && typeof type2.render === "function") {
+                  var currentRender = resolveFunctionForHotReloading(type2.render);
+                  if (type2.render !== currentRender) {
                     var syntheticType = {
                       $$typeof: REACT_FORWARD_REF_TYPE,
                       render: currentRender
                     };
-                    if (type.displayName !== void 0) {
-                      syntheticType.displayName = type.displayName;
+                    if (type2.displayName !== void 0) {
+                      syntheticType.displayName = type2.displayName;
                     }
                     return syntheticType;
                   }
                 }
-                return type;
+                return type2;
               }
               return family.current;
             }
@@ -21373,16 +21377,16 @@
           };
           function scheduleFibersWithFamiliesRecursively(fiber, updatedFamilies, staleFamilies) {
             {
-              var alternate = fiber.alternate, child = fiber.child, sibling = fiber.sibling, tag = fiber.tag, type = fiber.type;
+              var alternate = fiber.alternate, child = fiber.child, sibling = fiber.sibling, tag = fiber.tag, type2 = fiber.type;
               var candidateType = null;
               switch (tag) {
                 case FunctionComponent:
                 case SimpleMemoComponent:
                 case ClassComponent:
-                  candidateType = type;
+                  candidateType = type2;
                   break;
                 case ForwardRef:
-                  candidateType = type.render;
+                  candidateType = type2.render;
                   break;
               }
               if (resolveFamily === null) {
@@ -21438,16 +21442,16 @@
           };
           function findHostInstancesForMatchingFibersRecursively(fiber, types, hostInstances) {
             {
-              var child = fiber.child, sibling = fiber.sibling, tag = fiber.tag, type = fiber.type;
+              var child = fiber.child, sibling = fiber.sibling, tag = fiber.tag, type2 = fiber.type;
               var candidateType = null;
               switch (tag) {
                 case FunctionComponent:
                 case SimpleMemoComponent:
                 case ClassComponent:
-                  candidateType = type;
+                  candidateType = type2;
                   break;
                 case ForwardRef:
-                  candidateType = type.render;
+                  candidateType = type2.render;
                   break;
               }
               var didMatch = false;
@@ -21583,8 +21587,8 @@
             var prototype = Component.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
-          function isSimpleFunctionComponent(type) {
-            return typeof type === "function" && !shouldConstruct$1(type) && type.defaultProps === void 0;
+          function isSimpleFunctionComponent(type2) {
+            return typeof type2 === "function" && !shouldConstruct$1(type2) && type2.defaultProps === void 0;
           }
           function resolveLazyComponentTag(Component) {
             if (typeof Component === "function") {
@@ -21719,11 +21723,11 @@
             }
             return createFiber(HostRoot, null, null, mode);
           }
-          function createFiberFromTypeAndProps(type, key, pendingProps, owner, mode, lanes) {
+          function createFiberFromTypeAndProps(type2, key, pendingProps, owner, mode, lanes) {
             var fiberTag = IndeterminateComponent;
-            var resolvedType = type;
-            if (typeof type === "function") {
-              if (shouldConstruct$1(type)) {
+            var resolvedType = type2;
+            if (typeof type2 === "function") {
+              if (shouldConstruct$1(type2)) {
                 fiberTag = ClassComponent;
                 {
                   resolvedType = resolveClassForHotReloading(resolvedType);
@@ -21733,11 +21737,11 @@
                   resolvedType = resolveFunctionForHotReloading(resolvedType);
                 }
               }
-            } else if (typeof type === "string") {
+            } else if (typeof type2 === "string") {
               fiberTag = HostComponent;
             } else {
               getTag:
-                switch (type) {
+                switch (type2) {
                   case REACT_FRAGMENT_TYPE:
                     return createFiberFromFragment(pendingProps.children, mode, lanes, key);
                   case REACT_STRICT_MODE_TYPE:
@@ -21761,8 +21765,8 @@
                   case REACT_TRACING_MARKER_TYPE:
                   case REACT_DEBUG_TRACING_MODE_TYPE:
                   default: {
-                    if (typeof type === "object" && type !== null) {
-                      switch (type.$$typeof) {
+                    if (typeof type2 === "object" && type2 !== null) {
+                      switch (type2.$$typeof) {
                         case REACT_PROVIDER_TYPE:
                           fiberTag = ContextProvider;
                           break getTag;
@@ -21786,7 +21790,7 @@
                     }
                     var info = "";
                     {
-                      if (type === void 0 || typeof type === "object" && type !== null && Object.keys(type).length === 0) {
+                      if (type2 === void 0 || typeof type2 === "object" && type2 !== null && Object.keys(type2).length === 0) {
                         info += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
                       }
                       var ownerName = owner ? getComponentNameFromFiber(owner) : null;
@@ -21794,12 +21798,12 @@
                         info += "\n\nCheck the render method of `" + ownerName + "`.";
                       }
                     }
-                    throw new Error("Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) " + ("but got: " + (type == null ? type : typeof type) + "." + info));
+                    throw new Error("Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) " + ("but got: " + (type2 == null ? type2 : typeof type2) + "." + info));
                   }
                 }
             }
             var fiber = createFiber(fiberTag, pendingProps, key, mode);
-            fiber.elementType = type;
+            fiber.elementType = type2;
             fiber.type = resolvedType;
             fiber.lanes = lanes;
             {
@@ -21812,10 +21816,10 @@
             {
               owner = element._owner;
             }
-            var type = element.type;
+            var type2 = element.type;
             var key = element.key;
             var pendingProps = element.props;
-            var fiber = createFiberFromTypeAndProps(type, key, pendingProps, owner, mode, lanes);
+            var fiber = createFiberFromTypeAndProps(type2, key, pendingProps, owner, mode, lanes);
             {
               fiber._debugSource = element._source;
               fiber._debugOwner = element._owner;
@@ -22038,8 +22042,8 @@
                 if (typeof component.render === "function") {
                   throw new Error("Unable to find node on an unmounted component.");
                 } else {
-                  var keys = Object.keys(component).join(",");
-                  throw new Error("Argument appears to not be a ReactComponent. Keys: " + keys);
+                  var keys2 = Object.keys(component).join(",");
+                  throw new Error("Argument appears to not be a ReactComponent. Keys: " + keys2);
                 }
               }
               var hostFiber = findCurrentHostFiber(fiber);
@@ -22234,9 +22238,9 @@
           {
             var copyWithDeleteImpl = function(obj, path, index2) {
               var key = path[index2];
-              var updated = isArray(obj) ? obj.slice() : assign({}, obj);
+              var updated = isArray2(obj) ? obj.slice() : assign({}, obj);
               if (index2 + 1 === path.length) {
-                if (isArray(updated)) {
+                if (isArray2(updated)) {
                   updated.splice(key, 1);
                 } else {
                   delete updated[key];
@@ -22251,11 +22255,11 @@
             };
             var copyWithRenameImpl = function(obj, oldPath, newPath, index2) {
               var oldKey = oldPath[index2];
-              var updated = isArray(obj) ? obj.slice() : assign({}, obj);
+              var updated = isArray2(obj) ? obj.slice() : assign({}, obj);
               if (index2 + 1 === oldPath.length) {
                 var newKey = newPath[index2];
                 updated[newKey] = updated[oldKey];
-                if (isArray(updated)) {
+                if (isArray2(updated)) {
                   updated.splice(oldKey, 1);
                 } else {
                   delete updated[oldKey];
@@ -22289,7 +22293,7 @@
                 return value;
               }
               var key = path[index2];
-              var updated = isArray(obj) ? obj.slice() : assign({}, obj);
+              var updated = isArray2(obj) ? obj.slice() : assign({}, obj);
               updated[key] = copyWithSetImpl(obj[key], path, index2 + 1, value);
               return updated;
             };
@@ -24121,25 +24125,25 @@
           var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for("react.fundamental") : 60117;
           var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for("react.responder") : 60118;
           var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for("react.scope") : 60119;
-          function isValidElementType(type) {
-            return typeof type === "string" || typeof type === "function" || type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === "object" && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+          function isValidElementType(type2) {
+            return typeof type2 === "string" || typeof type2 === "function" || type2 === REACT_FRAGMENT_TYPE || type2 === REACT_CONCURRENT_MODE_TYPE || type2 === REACT_PROFILER_TYPE || type2 === REACT_STRICT_MODE_TYPE || type2 === REACT_SUSPENSE_TYPE || type2 === REACT_SUSPENSE_LIST_TYPE || typeof type2 === "object" && type2 !== null && (type2.$$typeof === REACT_LAZY_TYPE || type2.$$typeof === REACT_MEMO_TYPE || type2.$$typeof === REACT_PROVIDER_TYPE || type2.$$typeof === REACT_CONTEXT_TYPE || type2.$$typeof === REACT_FORWARD_REF_TYPE || type2.$$typeof === REACT_FUNDAMENTAL_TYPE || type2.$$typeof === REACT_RESPONDER_TYPE || type2.$$typeof === REACT_SCOPE_TYPE || type2.$$typeof === REACT_BLOCK_TYPE);
           }
           function typeOf(object) {
             if (typeof object === "object" && object !== null) {
               var $$typeof = object.$$typeof;
               switch ($$typeof) {
                 case REACT_ELEMENT_TYPE:
-                  var type = object.type;
-                  switch (type) {
+                  var type2 = object.type;
+                  switch (type2) {
                     case REACT_ASYNC_MODE_TYPE:
                     case REACT_CONCURRENT_MODE_TYPE:
                     case REACT_FRAGMENT_TYPE:
                     case REACT_PROFILER_TYPE:
                     case REACT_STRICT_MODE_TYPE:
                     case REACT_SUSPENSE_TYPE:
-                      return type;
+                      return type2;
                     default:
-                      var $$typeofType = type && type.$$typeof;
+                      var $$typeofType = type2 && type2.$$typeof;
                       switch ($$typeofType) {
                         case REACT_CONTEXT_TYPE:
                         case REACT_FORWARD_REF_TYPE:
@@ -24312,10 +24316,10 @@
         }
         return TYPE_STATICS[component["$$typeof"]] || REACT_STATICS;
       }
-      var defineProperty = Object.defineProperty;
+      var defineProperty2 = Object.defineProperty;
       var getOwnPropertyNames = Object.getOwnPropertyNames;
       var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-      var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+      var getOwnPropertyDescriptor2 = Object.getOwnPropertyDescriptor;
       var getPrototypeOf = Object.getPrototypeOf;
       var objectPrototype = Object.prototype;
       function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
@@ -24326,18 +24330,18 @@
               hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
             }
           }
-          var keys = getOwnPropertyNames(sourceComponent);
+          var keys2 = getOwnPropertyNames(sourceComponent);
           if (getOwnPropertySymbols) {
-            keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+            keys2 = keys2.concat(getOwnPropertySymbols(sourceComponent));
           }
           var targetStatics = getStatics(targetComponent);
           var sourceStatics = getStatics(sourceComponent);
-          for (var i = 0; i < keys.length; ++i) {
-            var key = keys[i];
+          for (var i = 0; i < keys2.length; ++i) {
+            var key = keys2[i];
             if (!KNOWN_STATICS[key] && !(blacklist && blacklist[key]) && !(sourceStatics && sourceStatics[key]) && !(targetStatics && targetStatics[key])) {
-              var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+              var descriptor = getOwnPropertyDescriptor2(sourceComponent, key);
               try {
-                defineProperty(targetComponent, key, descriptor);
+                defineProperty2(targetComponent, key, descriptor);
               } catch (e) {
               }
             }
@@ -24789,7 +24793,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             styles: styles3,
             map: sourceMap,
             next: cursor,
-            toString: function toString() {
+            toString: function toString2() {
               return "You have tried to stringify object returned from `css` function. It isn't supposed to be used directly (e.g. as value of the `className` prop), but rather handed to emotion so it can handle it (e.g. as value of `css` prop).";
             }
           };
@@ -24899,14 +24903,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         return React59.useContext(EmotionCacheContext);
       };
       exports.withEmotionCache = function withEmotionCache(func) {
-        return /* @__PURE__ */ React59.forwardRef(function(props, ref) {
+        return /* @__PURE__ */ React59.forwardRef(function(props2, ref) {
           var cache = React59.useContext(EmotionCacheContext);
-          return func(props, cache, ref);
+          return func(props2, cache, ref);
         });
       };
       if (!isBrowser) {
         exports.withEmotionCache = function withEmotionCache(func) {
-          return function(props) {
+          return function(props2) {
             var cache = React59.useContext(EmotionCacheContext);
             if (cache === null) {
               cache = createCache__default["default"]({
@@ -24914,9 +24918,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               });
               return /* @__PURE__ */ React59.createElement(EmotionCacheContext.Provider, {
                 value: cache
-              }, func(props, cache));
+              }, func(props2, cache));
             } else {
-              return func(props, cache);
+              return func(props2, cache);
             }
           };
         };
@@ -24946,23 +24950,23 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return getTheme(outerTheme, theme2);
         });
       });
-      var ThemeProvider2 = function ThemeProvider3(props) {
+      var ThemeProvider2 = function ThemeProvider3(props2) {
         var theme2 = React59.useContext(ThemeContext);
-        if (props.theme !== theme2) {
-          theme2 = createCacheWithTheme(theme2)(props.theme);
+        if (props2.theme !== theme2) {
+          theme2 = createCacheWithTheme(theme2)(props2.theme);
         }
         return /* @__PURE__ */ React59.createElement(ThemeContext.Provider, {
           value: theme2
-        }, props.children);
+        }, props2.children);
       };
       function withTheme(Component) {
         var componentName = Component.displayName || Component.name || "Component";
-        var render = function render2(props, ref) {
+        var render = function render2(props2, ref) {
           var theme2 = React59.useContext(ThemeContext);
           return /* @__PURE__ */ React59.createElement(Component, _extends2({
             theme: theme2,
             ref
-          }, props));
+          }, props2));
         };
         var WithTheme = /* @__PURE__ */ React59.forwardRef(render);
         WithTheme.displayName = "WithTheme(" + componentName + ")";
@@ -25002,18 +25006,18 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       };
       var typePropName = "__EMOTION_TYPE_PLEASE_DO_NOT_USE__";
       var labelPropName = "__EMOTION_LABEL_PLEASE_DO_NOT_USE__";
-      var createEmotionProps = function createEmotionProps2(type, props) {
-        if (typeof props.css === "string" && props.css.indexOf(":") !== -1) {
-          throw new Error("Strings are not allowed as css prop values, please wrap it in a css template literal from '@emotion/react' like this: css`" + props.css + "`");
+      var createEmotionProps = function createEmotionProps2(type2, props2) {
+        if (typeof props2.css === "string" && props2.css.indexOf(":") !== -1) {
+          throw new Error("Strings are not allowed as css prop values, please wrap it in a css template literal from '@emotion/react' like this: css`" + props2.css + "`");
         }
         var newProps = {};
-        for (var key in props) {
-          if (hasOwnProperty.call(props, key)) {
-            newProps[key] = props[key];
+        for (var key in props2) {
+          if (hasOwnProperty.call(props2, key)) {
+            newProps[key] = props2[key];
           }
         }
-        newProps[typePropName] = type;
-        if (!!props.css && (typeof props.css !== "object" || typeof props.css.name !== "string" || props.css.name.indexOf("-") === -1)) {
+        newProps[typePropName] = type2;
+        if (!!props2.css && (typeof props2.css !== "object" || typeof props2.css.name !== "string" || props2.css.name.indexOf("-") === -1)) {
           var label = getLabelFromStackTrace(new Error().stack);
           if (label)
             newProps[labelPropName] = label;
@@ -25040,31 +25044,31 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
         return null;
       };
-      var Emotion = /* @__PURE__ */ exports.withEmotionCache(function(props, cache, ref) {
-        var cssProp = props.css;
+      var Emotion = /* @__PURE__ */ exports.withEmotionCache(function(props2, cache, ref) {
+        var cssProp = props2.css;
         if (typeof cssProp === "string" && cache.registered[cssProp] !== void 0) {
           cssProp = cache.registered[cssProp];
         }
-        var WrappedComponent = props[typePropName];
+        var WrappedComponent = props2[typePropName];
         var registeredStyles = [cssProp];
         var className = "";
-        if (typeof props.className === "string") {
-          className = utils.getRegisteredStyles(cache.registered, registeredStyles, props.className);
-        } else if (props.className != null) {
-          className = props.className + " ";
+        if (typeof props2.className === "string") {
+          className = utils.getRegisteredStyles(cache.registered, registeredStyles, props2.className);
+        } else if (props2.className != null) {
+          className = props2.className + " ";
         }
         var serialized = serialize.serializeStyles(registeredStyles, void 0, React59.useContext(ThemeContext));
         if (serialized.name.indexOf("-") === -1) {
-          var labelFromStack = props[labelPropName];
+          var labelFromStack = props2[labelPropName];
           if (labelFromStack) {
             serialized = serialize.serializeStyles([serialized, "label:" + labelFromStack + ";"]);
           }
         }
         className += cache.key + "-" + serialized.name;
         var newProps = {};
-        for (var key in props) {
-          if (hasOwnProperty.call(props, key) && key !== "css" && key !== typePropName && key !== labelPropName) {
-            newProps[key] = props[key];
+        for (var key in props2) {
+          if (hasOwnProperty.call(props2, key) && key !== "css" && key !== typePropName && key !== labelPropName) {
+            newProps[key] = props2[key];
           }
         }
         newProps.ref = ref;
@@ -25228,27 +25232,27 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           }
         }
       };
-      var jsx = function jsx2(type, props) {
+      var jsx = function jsx2(type2, props2) {
         var args = arguments;
-        if (props == null || !emotionElement.hasOwnProperty.call(props, "css")) {
+        if (props2 == null || !emotionElement.hasOwnProperty.call(props2, "css")) {
           return React59.createElement.apply(void 0, args);
         }
         var argsLength = args.length;
         var createElementArgArray = new Array(argsLength);
         createElementArgArray[0] = emotionElement.Emotion;
-        createElementArgArray[1] = emotionElement.createEmotionProps(type, props);
+        createElementArgArray[1] = emotionElement.createEmotionProps(type2, props2);
         for (var i = 2; i < argsLength; i++) {
           createElementArgArray[i] = args[i];
         }
         return React59.createElement.apply(null, createElementArgArray);
       };
       var warnedAboutCssPropForGlobal = false;
-      var Global = /* @__PURE__ */ emotionElement.withEmotionCache(function(props, cache) {
-        if (!warnedAboutCssPropForGlobal && (props.className || props.css)) {
+      var Global = /* @__PURE__ */ emotionElement.withEmotionCache(function(props2, cache) {
+        if (!warnedAboutCssPropForGlobal && (props2.className || props2.css)) {
           console.error("It looks like you're using the css prop on Global, did you mean to use the styles prop instead?");
           warnedAboutCssPropForGlobal = true;
         }
-        var styles3 = props.styles;
+        var styles3 = props2.styles;
         var serialized = serialize.serializeStyles([styles3], void 0, React59.useContext(emotionElement.ThemeContext));
         if (!emotionElement.isBrowser) {
           var _ref;
@@ -25331,7 +25335,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           name,
           styles: "@keyframes " + name + "{" + insertable.styles + "}",
           anim: 1,
-          toString: function toString() {
+          toString: function toString2() {
             return "_EMO_" + this.name + "_" + this.styles + "_EMO_";
           }
         };
@@ -25408,7 +25412,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
         return null;
       };
-      var ClassNames = /* @__PURE__ */ emotionElement.withEmotionCache(function(props, cache) {
+      var ClassNames = /* @__PURE__ */ emotionElement.withEmotionCache(function(props2, cache) {
         var hasRendered = false;
         var serializedArr = [];
         var css3 = function css4() {
@@ -25437,7 +25441,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           cx,
           theme: React59.useContext(emotionElement.ThemeContext)
         };
-        var ele = props.children(content);
+        var ele = props2.children(content);
         hasRendered = true;
         return /* @__PURE__ */ React59.createElement(React59.Fragment, null, /* @__PURE__ */ React59.createElement(Insertion, {
           cache,
@@ -25596,22 +25600,22 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               styles3.push(args[i], args[0][i]);
             }
           }
-          var Styled = react.withEmotionCache(function(props, cache, ref) {
-            var FinalTag = shouldUseAs && props.as || baseTag;
+          var Styled = react.withEmotionCache(function(props2, cache, ref) {
+            var FinalTag = shouldUseAs && props2.as || baseTag;
             var className = "";
             var classInterpolations = [];
-            var mergedProps = props;
-            if (props.theme == null) {
+            var mergedProps = props2;
+            if (props2.theme == null) {
               mergedProps = {};
-              for (var key in props) {
-                mergedProps[key] = props[key];
+              for (var key in props2) {
+                mergedProps[key] = props2[key];
               }
               mergedProps.theme = React59.useContext(react.ThemeContext);
             }
-            if (typeof props.className === "string") {
-              className = utils.getRegisteredStyles(cache.registered, classInterpolations, props.className);
-            } else if (props.className != null) {
-              className = props.className + " ";
+            if (typeof props2.className === "string") {
+              className = utils.getRegisteredStyles(cache.registered, classInterpolations, props2.className);
+            } else if (props2.className != null) {
+              className = props2.className + " ";
             }
             var serialized = serialize.serializeStyles(styles3.concat(classInterpolations), cache.registered, mergedProps);
             className += cache.key + "-" + serialized.name;
@@ -25620,11 +25624,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             }
             var finalShouldForwardProp = shouldUseAs && shouldForwardProp2 === void 0 ? getDefaultShouldForwardProp(FinalTag) : defaultShouldForwardProp;
             var newProps = {};
-            for (var _key in props) {
+            for (var _key in props2) {
               if (shouldUseAs && _key === "as")
                 continue;
               if (finalShouldForwardProp(_key)) {
-                newProps[_key] = props[_key];
+                newProps[_key] = props2[_key];
               }
             }
             newProps.className = className;
@@ -25856,25 +25860,25 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for("react.fundamental") : 60117;
           var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for("react.responder") : 60118;
           var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for("react.scope") : 60119;
-          function isValidElementType(type) {
-            return typeof type === "string" || typeof type === "function" || type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === "object" && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+          function isValidElementType(type2) {
+            return typeof type2 === "string" || typeof type2 === "function" || type2 === REACT_FRAGMENT_TYPE || type2 === REACT_CONCURRENT_MODE_TYPE || type2 === REACT_PROFILER_TYPE || type2 === REACT_STRICT_MODE_TYPE || type2 === REACT_SUSPENSE_TYPE || type2 === REACT_SUSPENSE_LIST_TYPE || typeof type2 === "object" && type2 !== null && (type2.$$typeof === REACT_LAZY_TYPE || type2.$$typeof === REACT_MEMO_TYPE || type2.$$typeof === REACT_PROVIDER_TYPE || type2.$$typeof === REACT_CONTEXT_TYPE || type2.$$typeof === REACT_FORWARD_REF_TYPE || type2.$$typeof === REACT_FUNDAMENTAL_TYPE || type2.$$typeof === REACT_RESPONDER_TYPE || type2.$$typeof === REACT_SCOPE_TYPE || type2.$$typeof === REACT_BLOCK_TYPE);
           }
           function typeOf(object) {
             if (typeof object === "object" && object !== null) {
               var $$typeof = object.$$typeof;
               switch ($$typeof) {
                 case REACT_ELEMENT_TYPE:
-                  var type = object.type;
-                  switch (type) {
+                  var type2 = object.type;
+                  switch (type2) {
                     case REACT_ASYNC_MODE_TYPE:
                     case REACT_CONCURRENT_MODE_TYPE:
                     case REACT_FRAGMENT_TYPE:
                     case REACT_PROFILER_TYPE:
                     case REACT_STRICT_MODE_TYPE:
                     case REACT_SUSPENSE_TYPE:
-                      return type;
+                      return type2;
                     default:
-                      var $$typeofType = type && type.$$typeof;
+                      var $$typeofType = type2 && type2.$$typeof;
                       switch ($$typeofType) {
                         case REACT_CONTEXT_TYPE:
                         case REACT_FORWARD_REF_TYPE:
@@ -26106,7 +26110,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       var ReactPropTypesSecret;
       var loggedTypeFailures;
       var has;
-      function checkPropTypes(typeSpecs, values2, location, componentName, getStack) {
+      function checkPropTypes(typeSpecs, values2, location2, componentName, getStack2) {
         if (true) {
           for (var typeSpecName in typeSpecs) {
             if (has(typeSpecs, typeSpecName)) {
@@ -26114,25 +26118,25 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               try {
                 if (typeof typeSpecs[typeSpecName] !== "function") {
                   var err = Error(
-                    (componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`."
+                    (componentName || "React class") + ": " + location2 + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`."
                   );
                   err.name = "Invariant Violation";
                   throw err;
                 }
-                error = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+                error = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location2, null, ReactPropTypesSecret);
               } catch (ex) {
                 error = ex;
               }
               if (error && !(error instanceof Error)) {
                 printWarning(
-                  (componentName || "React class") + ": type specification of " + location + " `" + typeSpecName + "` is invalid; the type checker function must return `null` or an `Error` but returned a " + typeof error + ". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument)."
+                  (componentName || "React class") + ": type specification of " + location2 + " `" + typeSpecName + "` is invalid; the type checker function must return `null` or an `Error` but returned a " + typeof error + ". You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument)."
                 );
               }
               if (error instanceof Error && !(error.message in loggedTypeFailures)) {
                 loggedTypeFailures[error.message] = true;
-                var stack = getStack ? getStack() : "";
+                var stack = getStack2 ? getStack2() : "";
                 printWarning(
-                  "Failed " + location + " type: " + error.message + (stack != null ? stack : "")
+                  "Failed " + location2 + " type: " + error.message + (stack != null ? stack : "")
                 );
               }
             }
@@ -26223,7 +26227,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             var manualPropTypeCallCache = {};
             var manualPropTypeWarningCount = 0;
           }
-          function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+          function checkType(isRequired, props2, propName, componentName, location2, propFullName, secret) {
             componentName = componentName || ANONYMOUS;
             propFullName = propFullName || propName;
             if (secret !== ReactPropTypesSecret) {
@@ -26244,16 +26248,16 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                 }
               }
             }
-            if (props[propName] == null) {
+            if (props2[propName] == null) {
               if (isRequired) {
-                if (props[propName] === null) {
-                  return new PropTypeError("The " + location + " `" + propFullName + "` is marked as required " + ("in `" + componentName + "`, but its value is `null`."));
+                if (props2[propName] === null) {
+                  return new PropTypeError("The " + location2 + " `" + propFullName + "` is marked as required " + ("in `" + componentName + "`, but its value is `null`."));
                 }
-                return new PropTypeError("The " + location + " `" + propFullName + "` is marked as required in " + ("`" + componentName + "`, but its value is `undefined`."));
+                return new PropTypeError("The " + location2 + " `" + propFullName + "` is marked as required in " + ("`" + componentName + "`, but its value is `undefined`."));
               }
               return null;
             } else {
-              return validate(props, propName, componentName, location, propFullName);
+              return validate(props2, propName, componentName, location2, propFullName);
             }
           }
           var chainedCheckType = checkType.bind(null, false);
@@ -26261,13 +26265,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return chainedCheckType;
         }
         function createPrimitiveTypeChecker(expectedType) {
-          function validate(props, propName, componentName, location, propFullName, secret) {
-            var propValue = props[propName];
+          function validate(props2, propName, componentName, location2, propFullName, secret) {
+            var propValue = props2[propName];
             var propType = getPropType(propValue);
             if (propType !== expectedType) {
               var preciseType = getPreciseType(propValue);
               return new PropTypeError(
-                "Invalid " + location + " `" + propFullName + "` of type " + ("`" + preciseType + "` supplied to `" + componentName + "`, expected ") + ("`" + expectedType + "`."),
+                "Invalid " + location2 + " `" + propFullName + "` of type " + ("`" + preciseType + "` supplied to `" + componentName + "`, expected ") + ("`" + expectedType + "`."),
                 { expectedType }
               );
             }
@@ -26279,17 +26283,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return createChainableTypeChecker(emptyFunctionThatReturnsNull);
         }
         function createArrayOfTypeChecker(typeChecker) {
-          function validate(props, propName, componentName, location, propFullName) {
+          function validate(props2, propName, componentName, location2, propFullName) {
             if (typeof typeChecker !== "function") {
               return new PropTypeError("Property `" + propFullName + "` of component `" + componentName + "` has invalid PropType notation inside arrayOf.");
             }
-            var propValue = props[propName];
+            var propValue = props2[propName];
             if (!Array.isArray(propValue)) {
               var propType = getPropType(propValue);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an array."));
+              return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an array."));
             }
             for (var i = 0; i < propValue.length; i++) {
-              var error = typeChecker(propValue, i, componentName, location, propFullName + "[" + i + "]", ReactPropTypesSecret);
+              var error = typeChecker(propValue, i, componentName, location2, propFullName + "[" + i + "]", ReactPropTypesSecret);
               if (error instanceof Error) {
                 return error;
               }
@@ -26299,33 +26303,33 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return createChainableTypeChecker(validate);
         }
         function createElementTypeChecker() {
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
+          function validate(props2, propName, componentName, location2, propFullName) {
+            var propValue = props2[propName];
             if (!isValidElement3(propValue)) {
               var propType = getPropType(propValue);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement."));
+              return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement."));
             }
             return null;
           }
           return createChainableTypeChecker(validate);
         }
         function createElementTypeTypeChecker() {
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
+          function validate(props2, propName, componentName, location2, propFullName) {
+            var propValue = props2[propName];
             if (!ReactIs.isValidElementType(propValue)) {
               var propType = getPropType(propValue);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement type."));
+              return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected a single ReactElement type."));
             }
             return null;
           }
           return createChainableTypeChecker(validate);
         }
         function createInstanceTypeChecker(expectedClass) {
-          function validate(props, propName, componentName, location, propFullName) {
-            if (!(props[propName] instanceof expectedClass)) {
+          function validate(props2, propName, componentName, location2, propFullName) {
+            if (!(props2[propName] instanceof expectedClass)) {
               var expectedClassName = expectedClass.name || ANONYMOUS;
-              var actualClassName = getClassName(props[propName]);
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + actualClassName + "` supplied to `" + componentName + "`, expected ") + ("instance of `" + expectedClassName + "`."));
+              var actualClassName = getClassName(props2[propName]);
+              return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` of type " + ("`" + actualClassName + "` supplied to `" + componentName + "`, expected ") + ("instance of `" + expectedClassName + "`."));
             }
             return null;
           }
@@ -26344,37 +26348,37 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             }
             return emptyFunctionThatReturnsNull;
           }
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
+          function validate(props2, propName, componentName, location2, propFullName) {
+            var propValue = props2[propName];
             for (var i = 0; i < expectedValues.length; i++) {
               if (is(propValue, expectedValues[i])) {
                 return null;
               }
             }
             var valuesString = JSON.stringify(expectedValues, function replacer(key, value) {
-              var type = getPreciseType(value);
-              if (type === "symbol") {
+              var type2 = getPreciseType(value);
+              if (type2 === "symbol") {
                 return String(value);
               }
               return value;
             });
-            return new PropTypeError("Invalid " + location + " `" + propFullName + "` of value `" + String(propValue) + "` " + ("supplied to `" + componentName + "`, expected one of " + valuesString + "."));
+            return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` of value `" + String(propValue) + "` " + ("supplied to `" + componentName + "`, expected one of " + valuesString + "."));
           }
           return createChainableTypeChecker(validate);
         }
         function createObjectOfTypeChecker(typeChecker) {
-          function validate(props, propName, componentName, location, propFullName) {
+          function validate(props2, propName, componentName, location2, propFullName) {
             if (typeof typeChecker !== "function") {
               return new PropTypeError("Property `" + propFullName + "` of component `" + componentName + "` has invalid PropType notation inside objectOf.");
             }
-            var propValue = props[propName];
+            var propValue = props2[propName];
             var propType = getPropType(propValue);
             if (propType !== "object") {
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an object."));
+              return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` of type " + ("`" + propType + "` supplied to `" + componentName + "`, expected an object."));
             }
             for (var key in propValue) {
               if (has(propValue, key)) {
-                var error = typeChecker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
+                var error = typeChecker(propValue, key, componentName, location2, propFullName + "." + key, ReactPropTypesSecret);
                 if (error instanceof Error) {
                   return error;
                 }
@@ -26398,11 +26402,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               return emptyFunctionThatReturnsNull;
             }
           }
-          function validate(props, propName, componentName, location, propFullName) {
+          function validate(props2, propName, componentName, location2, propFullName) {
             var expectedTypes = [];
             for (var i2 = 0; i2 < arrayOfTypeCheckers.length; i2++) {
               var checker2 = arrayOfTypeCheckers[i2];
-              var checkerResult = checker2(props, propName, componentName, location, propFullName, ReactPropTypesSecret);
+              var checkerResult = checker2(props2, propName, componentName, location2, propFullName, ReactPropTypesSecret);
               if (checkerResult == null) {
                 return null;
               }
@@ -26411,37 +26415,37 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               }
             }
             var expectedTypesMessage = expectedTypes.length > 0 ? ", expected one of type [" + expectedTypes.join(", ") + "]" : "";
-            return new PropTypeError("Invalid " + location + " `" + propFullName + "` supplied to " + ("`" + componentName + "`" + expectedTypesMessage + "."));
+            return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` supplied to " + ("`" + componentName + "`" + expectedTypesMessage + "."));
           }
           return createChainableTypeChecker(validate);
         }
         function createNodeChecker() {
-          function validate(props, propName, componentName, location, propFullName) {
-            if (!isNode(props[propName])) {
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` supplied to " + ("`" + componentName + "`, expected a ReactNode."));
+          function validate(props2, propName, componentName, location2, propFullName) {
+            if (!isNode(props2[propName])) {
+              return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` supplied to " + ("`" + componentName + "`, expected a ReactNode."));
             }
             return null;
           }
           return createChainableTypeChecker(validate);
         }
-        function invalidValidatorError(componentName, location, propFullName, key, type) {
+        function invalidValidatorError(componentName, location2, propFullName, key, type2) {
           return new PropTypeError(
-            (componentName || "React class") + ": " + location + " type `" + propFullName + "." + key + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + type + "`."
+            (componentName || "React class") + ": " + location2 + " type `" + propFullName + "." + key + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + type2 + "`."
           );
         }
         function createShapeTypeChecker(shapeTypes) {
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
+          function validate(props2, propName, componentName, location2, propFullName) {
+            var propValue = props2[propName];
             var propType = getPropType(propValue);
             if (propType !== "object") {
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type `" + propType + "` " + ("supplied to `" + componentName + "`, expected `object`."));
+              return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` of type `" + propType + "` " + ("supplied to `" + componentName + "`, expected `object`."));
             }
             for (var key in shapeTypes) {
               var checker = shapeTypes[key];
               if (typeof checker !== "function") {
-                return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+                return invalidValidatorError(componentName, location2, propFullName, key, getPreciseType(checker));
               }
-              var error = checker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
+              var error = checker(propValue, key, componentName, location2, propFullName + "." + key, ReactPropTypesSecret);
               if (error) {
                 return error;
               }
@@ -26451,24 +26455,24 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return createChainableTypeChecker(validate);
         }
         function createStrictShapeTypeChecker(shapeTypes) {
-          function validate(props, propName, componentName, location, propFullName) {
-            var propValue = props[propName];
+          function validate(props2, propName, componentName, location2, propFullName) {
+            var propValue = props2[propName];
             var propType = getPropType(propValue);
             if (propType !== "object") {
-              return new PropTypeError("Invalid " + location + " `" + propFullName + "` of type `" + propType + "` " + ("supplied to `" + componentName + "`, expected `object`."));
+              return new PropTypeError("Invalid " + location2 + " `" + propFullName + "` of type `" + propType + "` " + ("supplied to `" + componentName + "`, expected `object`."));
             }
-            var allKeys = assign({}, props[propName], shapeTypes);
+            var allKeys = assign({}, props2[propName], shapeTypes);
             for (var key in allKeys) {
               var checker = shapeTypes[key];
               if (has(shapeTypes, key) && typeof checker !== "function") {
-                return invalidValidatorError(componentName, location, propFullName, key, getPreciseType(checker));
+                return invalidValidatorError(componentName, location2, propFullName, key, getPreciseType(checker));
               }
               if (!checker) {
                 return new PropTypeError(
-                  "Invalid " + location + " `" + propFullName + "` key `" + key + "` supplied to `" + componentName + "`.\nBad object: " + JSON.stringify(props[propName], null, "  ") + "\nValid keys: " + JSON.stringify(Object.keys(shapeTypes), null, "  ")
+                  "Invalid " + location2 + " `" + propFullName + "` key `" + key + "` supplied to `" + componentName + "`.\nBad object: " + JSON.stringify(props2[propName], null, "  ") + "\nValid keys: " + JSON.stringify(Object.keys(shapeTypes), null, "  ")
                 );
               }
-              var error = checker(propValue, key, componentName, location, propFullName + "." + key, ReactPropTypesSecret);
+              var error = checker(propValue, key, componentName, location2, propFullName + "." + key, ReactPropTypesSecret);
               if (error) {
                 return error;
               }
@@ -26563,17 +26567,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return propType;
         }
         function getPostfixForTypeWarning(value) {
-          var type = getPreciseType(value);
-          switch (type) {
+          var type2 = getPreciseType(value);
+          switch (type2) {
             case "array":
             case "object":
-              return "an " + type;
+              return "an " + type2;
             case "boolean":
             case "date":
             case "regexp":
-              return "a " + type;
+              return "a " + type2;
             default:
-              return type;
+              return type2;
           }
         }
         function getClassName(propValue) {
@@ -26673,15 +26677,15 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           {
             REACT_MODULE_REFERENCE = Symbol.for("react.module.reference");
           }
-          function isValidElementType(type) {
-            if (typeof type === "string" || typeof type === "function") {
+          function isValidElementType(type2) {
+            if (typeof type2 === "string" || typeof type2 === "function") {
               return true;
             }
-            if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || enableDebugTracing || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
+            if (type2 === REACT_FRAGMENT_TYPE || type2 === REACT_PROFILER_TYPE || enableDebugTracing || type2 === REACT_STRICT_MODE_TYPE || type2 === REACT_SUSPENSE_TYPE || type2 === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type2 === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
               return true;
             }
-            if (typeof type === "object" && type !== null) {
-              if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_MODULE_REFERENCE || type.getModuleId !== void 0) {
+            if (typeof type2 === "object" && type2 !== null) {
+              if (type2.$$typeof === REACT_LAZY_TYPE || type2.$$typeof === REACT_MEMO_TYPE || type2.$$typeof === REACT_PROVIDER_TYPE || type2.$$typeof === REACT_CONTEXT_TYPE || type2.$$typeof === REACT_FORWARD_REF_TYPE || type2.$$typeof === REACT_MODULE_REFERENCE || type2.getModuleId !== void 0) {
                 return true;
               }
             }
@@ -26695,25 +26699,25 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             var functionName = innerType.displayName || innerType.name || "";
             return functionName !== "" ? wrapperName + "(" + functionName + ")" : wrapperName;
           }
-          function getContextName(type) {
-            return type.displayName || "Context";
+          function getContextName(type2) {
+            return type2.displayName || "Context";
           }
-          function getComponentNameFromType(type) {
-            if (type == null) {
+          function getComponentNameFromType(type2) {
+            if (type2 == null) {
               return null;
             }
             {
-              if (typeof type.tag === "number") {
+              if (typeof type2.tag === "number") {
                 error("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue.");
               }
             }
-            if (typeof type === "function") {
-              return type.displayName || type.name || null;
+            if (typeof type2 === "function") {
+              return type2.displayName || type2.name || null;
             }
-            if (typeof type === "string") {
-              return type;
+            if (typeof type2 === "string") {
+              return type2;
             }
-            switch (type) {
+            switch (type2) {
               case REACT_FRAGMENT_TYPE:
                 return "Fragment";
               case REACT_PORTAL_TYPE:
@@ -26727,24 +26731,24 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               case REACT_SUSPENSE_LIST_TYPE:
                 return "SuspenseList";
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_CONTEXT_TYPE:
-                  var context = type;
+                  var context = type2;
                   return getContextName(context) + ".Consumer";
                 case REACT_PROVIDER_TYPE:
-                  var provider = type;
+                  var provider = type2;
                   return getContextName(provider._context) + ".Provider";
                 case REACT_FORWARD_REF_TYPE:
-                  return getWrappedName(type, type.render, "ForwardRef");
+                  return getWrappedName(type2, type2.render, "ForwardRef");
                 case REACT_MEMO_TYPE:
-                  var outerName = type.displayName || null;
+                  var outerName = type2.displayName || null;
                   if (outerName !== null) {
                     return outerName;
                   }
-                  return getComponentNameFromType(type.type) || "Memo";
+                  return getComponentNameFromType(type2.type) || "Memo";
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
                   var init = lazyComponent._init;
                   try {
@@ -26779,20 +26783,20 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                 prevGroup = console.group;
                 prevGroupCollapsed = console.groupCollapsed;
                 prevGroupEnd = console.groupEnd;
-                var props = {
+                var props2 = {
                   configurable: true,
                   enumerable: true,
                   value: disabledLog,
                   writable: true
                 };
                 Object.defineProperties(console, {
-                  info: props,
-                  log: props,
-                  warn: props,
-                  error: props,
-                  group: props,
-                  groupCollapsed: props,
-                  groupEnd: props
+                  info: props2,
+                  log: props2,
+                  warn: props2,
+                  error: props2,
+                  group: props2,
+                  groupCollapsed: props2,
+                  groupEnd: props2
                 });
               }
               disabledDepth++;
@@ -26802,31 +26806,31 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             {
               disabledDepth--;
               if (disabledDepth === 0) {
-                var props = {
+                var props2 = {
                   configurable: true,
                   enumerable: true,
                   writable: true
                 };
                 Object.defineProperties(console, {
-                  log: assign({}, props, {
+                  log: assign({}, props2, {
                     value: prevLog
                   }),
-                  info: assign({}, props, {
+                  info: assign({}, props2, {
                     value: prevInfo
                   }),
-                  warn: assign({}, props, {
+                  warn: assign({}, props2, {
                     value: prevWarn
                   }),
-                  error: assign({}, props, {
+                  error: assign({}, props2, {
                     value: prevError
                   }),
-                  group: assign({}, props, {
+                  group: assign({}, props2, {
                     value: prevGroup
                   }),
-                  groupCollapsed: assign({}, props, {
+                  groupCollapsed: assign({}, props2, {
                     value: prevGroupCollapsed
                   }),
-                  groupEnd: assign({}, props, {
+                  groupEnd: assign({}, props2, {
                     value: prevGroupEnd
                   })
                 });
@@ -26969,32 +26973,32 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             var prototype = Component.prototype;
             return !!(prototype && prototype.isReactComponent);
           }
-          function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
-            if (type == null) {
+          function describeUnknownElementTypeFrameInDEV(type2, source, ownerFn) {
+            if (type2 == null) {
               return "";
             }
-            if (typeof type === "function") {
+            if (typeof type2 === "function") {
               {
-                return describeNativeComponentFrame(type, shouldConstruct(type));
+                return describeNativeComponentFrame(type2, shouldConstruct(type2));
               }
             }
-            if (typeof type === "string") {
-              return describeBuiltInComponentFrame(type);
+            if (typeof type2 === "string") {
+              return describeBuiltInComponentFrame(type2);
             }
-            switch (type) {
+            switch (type2) {
               case REACT_SUSPENSE_TYPE:
                 return describeBuiltInComponentFrame("Suspense");
               case REACT_SUSPENSE_LIST_TYPE:
                 return describeBuiltInComponentFrame("SuspenseList");
             }
-            if (typeof type === "object") {
-              switch (type.$$typeof) {
+            if (typeof type2 === "object") {
+              switch (type2.$$typeof) {
                 case REACT_FORWARD_REF_TYPE:
-                  return describeFunctionComponentFrame(type.render);
+                  return describeFunctionComponentFrame(type2.render);
                 case REACT_MEMO_TYPE:
-                  return describeUnknownElementTypeFrameInDEV(type.type, source, ownerFn);
+                  return describeUnknownElementTypeFrameInDEV(type2.type, source, ownerFn);
                 case REACT_LAZY_TYPE: {
-                  var lazyComponent = type;
+                  var lazyComponent = type2;
                   var payload = lazyComponent._payload;
                   var init = lazyComponent._init;
                   try {
@@ -27020,7 +27024,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               }
             }
           }
-          function checkPropTypes(typeSpecs, values2, location, componentName, element) {
+          function checkPropTypes(typeSpecs, values2, location2, componentName, element) {
             {
               var has = Function.call.bind(hasOwnProperty);
               for (var typeSpecName in typeSpecs) {
@@ -27028,23 +27032,23 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                   var error$1 = void 0;
                   try {
                     if (typeof typeSpecs[typeSpecName] !== "function") {
-                      var err = Error((componentName || "React class") + ": " + location + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                      var err = Error((componentName || "React class") + ": " + location2 + " type `" + typeSpecName + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof typeSpecs[typeSpecName] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
                       err.name = "Invariant Violation";
                       throw err;
                     }
-                    error$1 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+                    error$1 = typeSpecs[typeSpecName](values2, typeSpecName, componentName, location2, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
                   } catch (ex) {
                     error$1 = ex;
                   }
                   if (error$1 && !(error$1 instanceof Error)) {
                     setCurrentlyValidatingElement(element);
-                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location, typeSpecName, typeof error$1);
+                    error("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", componentName || "React class", location2, typeSpecName, typeof error$1);
                     setCurrentlyValidatingElement(null);
                   }
                   if (error$1 instanceof Error && !(error$1.message in loggedTypeFailures)) {
                     loggedTypeFailures[error$1.message] = true;
                     setCurrentlyValidatingElement(element);
-                    error("Failed %s type: %s", location, error$1.message);
+                    error("Failed %s type: %s", location2, error$1.message);
                     setCurrentlyValidatingElement(null);
                   }
                 }
@@ -27052,14 +27056,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             }
           }
           var isArrayImpl = Array.isArray;
-          function isArray(a) {
+          function isArray2(a) {
             return isArrayImpl(a);
           }
           function typeName(value) {
             {
               var hasToStringTag = typeof Symbol === "function" && Symbol.toStringTag;
-              var type = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
-              return type;
+              var type2 = hasToStringTag && value[Symbol.toStringTag] || value.constructor.name || "Object";
+              return type2;
             }
           }
           function willCoercionThrow(value) {
@@ -27129,7 +27133,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               }
             }
           }
-          function defineKeyPropWarningGetter(props, displayName) {
+          function defineKeyPropWarningGetter(props2, displayName) {
             {
               var warnAboutAccessingKey = function() {
                 if (!specialPropKeyWarningShown) {
@@ -27138,13 +27142,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                 }
               };
               warnAboutAccessingKey.isReactWarning = true;
-              Object.defineProperty(props, "key", {
+              Object.defineProperty(props2, "key", {
                 get: warnAboutAccessingKey,
                 configurable: true
               });
             }
           }
-          function defineRefPropWarningGetter(props, displayName) {
+          function defineRefPropWarningGetter(props2, displayName) {
             {
               var warnAboutAccessingRef = function() {
                 if (!specialPropRefWarningShown) {
@@ -27153,19 +27157,19 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                 }
               };
               warnAboutAccessingRef.isReactWarning = true;
-              Object.defineProperty(props, "ref", {
+              Object.defineProperty(props2, "ref", {
                 get: warnAboutAccessingRef,
                 configurable: true
               });
             }
           }
-          var ReactElement = function(type, key, ref, self2, source, owner, props) {
+          var ReactElement = function(type2, key, ref, self2, source, owner, props2) {
             var element = {
               $$typeof: REACT_ELEMENT_TYPE,
-              type,
+              type: type2,
               key,
               ref,
-              props,
+              props: props2,
               _owner: owner
             };
             {
@@ -27195,10 +27199,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             }
             return element;
           };
-          function jsxDEV(type, config, maybeKey, source, self2) {
+          function jsxDEV(type2, config, maybeKey, source, self2) {
             {
               var propName;
-              var props = {};
+              var props2 = {};
               var key = null;
               var ref = null;
               if (maybeKey !== void 0) {
@@ -27219,27 +27223,27 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               }
               for (propName in config) {
                 if (hasOwnProperty.call(config, propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
-                  props[propName] = config[propName];
+                  props2[propName] = config[propName];
                 }
               }
-              if (type && type.defaultProps) {
-                var defaultProps2 = type.defaultProps;
+              if (type2 && type2.defaultProps) {
+                var defaultProps2 = type2.defaultProps;
                 for (propName in defaultProps2) {
-                  if (props[propName] === void 0) {
-                    props[propName] = defaultProps2[propName];
+                  if (props2[propName] === void 0) {
+                    props2[propName] = defaultProps2[propName];
                   }
                 }
               }
               if (key || ref) {
-                var displayName = typeof type === "function" ? type.displayName || type.name || "Unknown" : type;
+                var displayName = typeof type2 === "function" ? type2.displayName || type2.name || "Unknown" : type2;
                 if (key) {
-                  defineKeyPropWarningGetter(props, displayName);
+                  defineKeyPropWarningGetter(props2, displayName);
                 }
                 if (ref) {
-                  defineRefPropWarningGetter(props, displayName);
+                  defineRefPropWarningGetter(props2, displayName);
                 }
               }
-              return ReactElement(type, key, ref, self2, source, ReactCurrentOwner.current, props);
+              return ReactElement(type2, key, ref, self2, source, ReactCurrentOwner.current, props2);
             }
           }
           var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
@@ -27323,7 +27327,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               if (typeof node !== "object") {
                 return;
               }
-              if (isArray(node)) {
+              if (isArray2(node)) {
                 for (var i = 0; i < node.length; i++) {
                   var child = node[i];
                   if (isValidElement3(child)) {
@@ -27352,36 +27356,36 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           }
           function validatePropTypes(element) {
             {
-              var type = element.type;
-              if (type === null || type === void 0 || typeof type === "string") {
+              var type2 = element.type;
+              if (type2 === null || type2 === void 0 || typeof type2 === "string") {
                 return;
               }
               var propTypes;
-              if (typeof type === "function") {
-                propTypes = type.propTypes;
-              } else if (typeof type === "object" && (type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_MEMO_TYPE)) {
-                propTypes = type.propTypes;
+              if (typeof type2 === "function") {
+                propTypes = type2.propTypes;
+              } else if (typeof type2 === "object" && (type2.$$typeof === REACT_FORWARD_REF_TYPE || type2.$$typeof === REACT_MEMO_TYPE)) {
+                propTypes = type2.propTypes;
               } else {
                 return;
               }
               if (propTypes) {
-                var name = getComponentNameFromType(type);
+                var name = getComponentNameFromType(type2);
                 checkPropTypes(propTypes, element.props, "prop", name, element);
-              } else if (type.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
+              } else if (type2.PropTypes !== void 0 && !propTypesMisspellWarningShown) {
                 propTypesMisspellWarningShown = true;
-                var _name = getComponentNameFromType(type);
+                var _name = getComponentNameFromType(type2);
                 error("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", _name || "Unknown");
               }
-              if (typeof type.getDefaultProps === "function" && !type.getDefaultProps.isReactClassApproved) {
+              if (typeof type2.getDefaultProps === "function" && !type2.getDefaultProps.isReactClassApproved) {
                 error("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
               }
             }
           }
           function validateFragmentProps(fragment) {
             {
-              var keys = Object.keys(fragment.props);
-              for (var i = 0; i < keys.length; i++) {
-                var key = keys[i];
+              var keys2 = Object.keys(fragment.props);
+              for (var i = 0; i < keys2.length; i++) {
+                var key = keys2[i];
                 if (key !== "children" && key !== "key") {
                   setCurrentlyValidatingElement$1(fragment);
                   error("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", key);
@@ -27396,12 +27400,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               }
             }
           }
-          function jsxWithValidation(type, props, key, isStaticChildren, source, self2) {
+          function jsxWithValidation(type2, props2, key, isStaticChildren, source, self2) {
             {
-              var validType = isValidElementType(type);
+              var validType = isValidElementType(type2);
               if (!validType) {
                 var info = "";
-                if (type === void 0 || typeof type === "object" && type !== null && Object.keys(type).length === 0) {
+                if (type2 === void 0 || typeof type2 === "object" && type2 !== null && Object.keys(type2).length === 0) {
                   info += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.";
                 }
                 var sourceInfo = getSourceInfoErrorAddendum(source);
@@ -27411,29 +27415,29 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                   info += getDeclarationErrorAddendum();
                 }
                 var typeString;
-                if (type === null) {
+                if (type2 === null) {
                   typeString = "null";
-                } else if (isArray(type)) {
+                } else if (isArray2(type2)) {
                   typeString = "array";
-                } else if (type !== void 0 && type.$$typeof === REACT_ELEMENT_TYPE) {
-                  typeString = "<" + (getComponentNameFromType(type.type) || "Unknown") + " />";
+                } else if (type2 !== void 0 && type2.$$typeof === REACT_ELEMENT_TYPE) {
+                  typeString = "<" + (getComponentNameFromType(type2.type) || "Unknown") + " />";
                   info = " Did you accidentally export a JSX literal instead of a component?";
                 } else {
-                  typeString = typeof type;
+                  typeString = typeof type2;
                 }
                 error("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
               }
-              var element = jsxDEV(type, props, key, source, self2);
+              var element = jsxDEV(type2, props2, key, source, self2);
               if (element == null) {
                 return element;
               }
               if (validType) {
-                var children = props.children;
+                var children = props2.children;
                 if (children !== void 0) {
                   if (isStaticChildren) {
-                    if (isArray(children)) {
+                    if (isArray2(children)) {
                       for (var i = 0; i < children.length; i++) {
-                        validateChildKeys(children[i], type);
+                        validateChildKeys(children[i], type2);
                       }
                       if (Object.freeze) {
                         Object.freeze(children);
@@ -27442,11 +27446,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
                       error("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
                     }
                   } else {
-                    validateChildKeys(children, type);
+                    validateChildKeys(children, type2);
                   }
                 }
               }
-              if (type === REACT_FRAGMENT_TYPE) {
+              if (type2 === REACT_FRAGMENT_TYPE) {
                 validateFragmentProps(element);
               } else {
                 validatePropTypes(element);
@@ -27454,14 +27458,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               return element;
             }
           }
-          function jsxWithValidationStatic(type, props, key) {
+          function jsxWithValidationStatic(type2, props2, key) {
             {
-              return jsxWithValidation(type, props, key, true);
+              return jsxWithValidation(type2, props2, key, true);
             }
           }
-          function jsxWithValidationDynamic(type, props, key) {
+          function jsxWithValidationDynamic(type2, props2, key) {
             {
-              return jsxWithValidation(type, props, key, false);
+              return jsxWithValidation(type2, props2, key, false);
             }
           }
           var jsx = jsxWithValidationDynamic;
@@ -27542,11 +27546,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         key: "css",
         prepend: true
       });
-      function StyledEngineProvider(props) {
+      function StyledEngineProvider(props2) {
         const {
           injectFirst,
           children
-        } = props;
+        } = props2;
         return injectFirst ? /* @__PURE__ */ (0, _jsxRuntime.jsx)(_react2.CacheProvider, {
           value: cache,
           children
@@ -27631,11 +27635,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       function isEmpty(obj) {
         return obj === void 0 || obj === null || Object.keys(obj).length === 0;
       }
-      function GlobalStyles2(props) {
+      function GlobalStyles2(props2) {
         const {
           styles: styles3,
           defaultTheme: defaultTheme3 = {}
-        } = props;
+        } = props2;
         const globalStyles = typeof styles3 === "function" ? (themeInput) => styles3(isEmpty(themeInput) ? defaultTheme3 : themeInput) : styles3;
         return /* @__PURE__ */ (0, _jsxRuntime.jsx)(_react2.Global, {
           styles: globalStyles
@@ -27821,8 +27825,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         } = elementType;
         return Boolean(prototype.isReactComponent);
       }
-      function acceptingRef(props, propName, componentName, location, propFullName) {
-        const element = props[propName];
+      function acceptingRef(props2, propName, componentName, location2, propFullName) {
+        const element = props2[propName];
         const safePropName = propFullName || propName;
         if (element == null || typeof window === "undefined") {
           return null;
@@ -27833,7 +27837,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           warningHint = "Did you accidentally use a plain function component for an element instead?";
         }
         if (warningHint !== void 0) {
-          return new Error(`Invalid ${location} \`${safePropName}\` supplied to \`${componentName}\`. Expected an element that can hold a ref. ${warningHint} For more information see https://mui.com/r/caveat-with-refs-guide`);
+          return new Error(`Invalid ${location2} \`${safePropName}\` supplied to \`${componentName}\`. Expected an element that can hold a ref. ${warningHint} For more information see https://mui.com/r/caveat-with-refs-guide`);
         }
         return null;
       }
@@ -27861,8 +27865,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         } = elementType;
         return Boolean(prototype.isReactComponent);
       }
-      function elementTypeAcceptingRef2(props, propName, componentName, location, propFullName) {
-        const propValue = props[propName];
+      function elementTypeAcceptingRef2(props2, propName, componentName, location2, propFullName) {
+        const propValue = props2[propName];
         const safePropName = propFullName || propName;
         if (propValue == null || typeof window === "undefined") {
           return null;
@@ -27872,7 +27876,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           warningHint = "Did you accidentally provide a plain function component instead?";
         }
         if (warningHint !== void 0) {
-          return new Error(`Invalid ${location} \`${safePropName}\` supplied to \`${componentName}\`. Expected an element type that can hold a ref. ${warningHint} For more information see https://mui.com/r/caveat-with-refs-guide`);
+          return new Error(`Invalid ${location2} \`${safePropName}\` supplied to \`${componentName}\`. Expected an element type that can hold a ref. ${warningHint} For more information see https://mui.com/r/caveat-with-refs-guide`);
         }
         return null;
       }
@@ -27897,8 +27901,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return propTypes;
         }
         return (0, _extends2.default)({}, propTypes, {
-          [specialProperty]: (props) => {
-            const unsupportedProps = Object.keys(props).filter((prop) => !propTypes.hasOwnProperty(prop));
+          [specialProperty]: (props2) => {
+            const unsupportedProps = Object.keys(props2).filter((prop) => !propTypes.hasOwnProperty(prop));
             if (unsupportedProps.length > 0) {
               return new Error(`The following props are not supported: ${unsupportedProps.map((prop) => `\`${prop}\``).join(", ")}. Please remove them.`);
             }
@@ -27957,15 +27961,15 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           {
             REACT_MODULE_REFERENCE = Symbol.for("react.module.reference");
           }
-          function isValidElementType(type) {
-            if (typeof type === "string" || typeof type === "function") {
+          function isValidElementType(type2) {
+            if (typeof type2 === "string" || typeof type2 === "function") {
               return true;
             }
-            if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || enableDebugTracing || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
+            if (type2 === REACT_FRAGMENT_TYPE || type2 === REACT_PROFILER_TYPE || enableDebugTracing || type2 === REACT_STRICT_MODE_TYPE || type2 === REACT_SUSPENSE_TYPE || type2 === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden || type2 === REACT_OFFSCREEN_TYPE || enableScopeAPI || enableCacheElement || enableTransitionTracing) {
               return true;
             }
-            if (typeof type === "object" && type !== null) {
-              if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_MODULE_REFERENCE || type.getModuleId !== void 0) {
+            if (typeof type2 === "object" && type2 !== null) {
+              if (type2.$$typeof === REACT_LAZY_TYPE || type2.$$typeof === REACT_MEMO_TYPE || type2.$$typeof === REACT_PROVIDER_TYPE || type2.$$typeof === REACT_CONTEXT_TYPE || type2.$$typeof === REACT_FORWARD_REF_TYPE || type2.$$typeof === REACT_MODULE_REFERENCE || type2.getModuleId !== void 0) {
                 return true;
               }
             }
@@ -27976,16 +27980,16 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               var $$typeof = object.$$typeof;
               switch ($$typeof) {
                 case REACT_ELEMENT_TYPE:
-                  var type = object.type;
-                  switch (type) {
+                  var type2 = object.type;
+                  switch (type2) {
                     case REACT_FRAGMENT_TYPE:
                     case REACT_PROFILER_TYPE:
                     case REACT_STRICT_MODE_TYPE:
                     case REACT_SUSPENSE_TYPE:
                     case REACT_SUSPENSE_LIST_TYPE:
-                      return type;
+                      return type2;
                     default:
-                      var $$typeofType = type && type.$$typeof;
+                      var $$typeofType = type2 && type2.$$typeof;
                       switch ($$typeofType) {
                         case REACT_SERVER_CONTEXT_TYPE:
                         case REACT_CONTEXT_TYPE:
@@ -28173,17 +28177,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         value: true
       });
       exports.default = HTMLElementType3;
-      function HTMLElementType3(props, propName, componentName, location, propFullName) {
+      function HTMLElementType3(props2, propName, componentName, location2, propFullName) {
         if (false) {
           return null;
         }
-        const propValue = props[propName];
+        const propValue = props2[propName];
         const safePropName = propFullName || propName;
         if (propValue == null) {
           return null;
         }
         if (propValue && propValue.nodeType !== 1) {
-          return new Error(`Invalid ${location} \`${safePropName}\` supplied to \`${componentName}\`. Expected an HTMLElement.`);
+          return new Error(`Invalid ${location2} \`${safePropName}\` supplied to \`${componentName}\`. Expected an HTMLElement.`);
         }
         return null;
       }
@@ -28298,11 +28302,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         if (false) {
           return () => null;
         }
-        return (props, propName, componentName, location, propFullName) => {
+        return (props2, propName, componentName, location2, propFullName) => {
           const componentNameSafe = componentName || "<<anonymous>>";
           const propFullNameSafe = propFullName || propName;
-          if (typeof props[propName] !== "undefined") {
-            return new Error(`The ${location} \`${propFullNameSafe}\` of \`${componentNameSafe}\` is deprecated. ${reason}`);
+          if (typeof props2[propName] !== "undefined") {
+            return new Error(`The ${location2} \`${propFullNameSafe}\` of \`${componentNameSafe}\` is deprecated. ${reason}`);
           }
           return null;
         };
@@ -28409,16 +28413,16 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return () => null;
         }
         const prevPropTypes = Component ? (0, _extends2.default)({}, Component.propTypes) : null;
-        const requireProp = (requiredProp) => (props, propName, componentName, location, propFullName, ...args) => {
+        const requireProp = (requiredProp) => (props2, propName, componentName, location2, propFullName, ...args) => {
           const propFullNameSafe = propFullName || propName;
           const defaultTypeChecker = prevPropTypes == null ? void 0 : prevPropTypes[propFullNameSafe];
           if (defaultTypeChecker) {
-            const typeCheckerResult = defaultTypeChecker(props, propName, componentName, location, propFullName, ...args);
+            const typeCheckerResult = defaultTypeChecker(props2, propName, componentName, location2, propFullName, ...args);
             if (typeCheckerResult) {
               return typeCheckerResult;
             }
           }
-          if (typeof props[propName] !== "undefined" && !props[requiredProp]) {
+          if (typeof props2[propName] !== "undefined" && !props2[requiredProp]) {
             return new Error(`The prop \`${propFullNameSafe}\` of \`${componentNameInError}\` can only be used together with the \`${requiredProp}\` prop.`);
           }
           return null;
@@ -28577,12 +28581,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         value: true
       });
       exports.default = unsupportedProp;
-      function unsupportedProp(props, propName, componentName, location, propFullName) {
+      function unsupportedProp(props2, propName, componentName, location2, propFullName) {
         if (false) {
           return null;
         }
         const propFullNameSafe = propFullName || propName;
-        if (typeof props[propName] !== "undefined") {
+        if (typeof props2[propName] !== "undefined") {
           return new Error(`The prop \`${propFullNameSafe}\` is not supported. Please remove it.`);
         }
         return null;
@@ -28864,10 +28868,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       };
       function focusTriggersKeyboardModality(node) {
         const {
-          type,
+          type: type2,
           tagName
         } = node;
-        if (tagName === "INPUT" && inputTypesWhitelist[type] && !node.readOnly) {
+        if (tagName === "INPUT" && inputTypesWhitelist[type2] && !node.readOnly) {
           return true;
         }
         if (tagName === "TEXTAREA" && !node.readOnly) {
@@ -29013,8 +29017,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         if (direction !== "rtl") {
           return scrollLeft;
         }
-        const type = detectScrollType();
-        switch (type) {
+        const type2 = detectScrollType();
+        switch (type2) {
           case "negative":
             return element.scrollWidth - element.clientWidth + scrollLeft;
           case "reverse":
@@ -29145,20 +29149,20 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         return typeof x === "number" && isFinite(x) && Math.floor(x) === x;
       }
       var isInteger = Number.isInteger || ponyfillIsInteger;
-      function requiredInteger(props, propName, componentName, location) {
-        const propValue = props[propName];
+      function requiredInteger(props2, propName, componentName, location2) {
+        const propValue = props2[propName];
         if (propValue == null || !isInteger(propValue)) {
           const propType = getTypeByValue(propValue);
-          return new RangeError(`Invalid ${location} \`${propName}\` of type \`${propType}\` supplied to \`${componentName}\`, expected \`integer\`.`);
+          return new RangeError(`Invalid ${location2} \`${propName}\` of type \`${propType}\` supplied to \`${componentName}\`, expected \`integer\`.`);
         }
         return null;
       }
-      function validator(props, propName, ...other) {
-        const propValue = props[propName];
+      function validator(props2, propName, ...other) {
+        const propValue = props2[propName];
         if (propValue === void 0) {
           return null;
         }
-        return requiredInteger(props, propName, ...other);
+        return requiredInteger(props2, propName, ...other);
       }
       function validatorNoop() {
         return null;
@@ -29180,8 +29184,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       });
       exports.default = resolveProps2;
       var _extends2 = _interopRequireDefault(require_extends());
-      function resolveProps2(defaultProps2, props) {
-        const output = (0, _extends2.default)({}, props);
+      function resolveProps2(defaultProps2, props2) {
+        const output = (0, _extends2.default)({}, props2);
         Object.keys(defaultProps2).forEach((propName) => {
           if (output[propName] === void 0) {
             output[propName] = defaultProps2[propName];
@@ -29843,8 +29847,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         keys: ["xs", "sm", "md", "lg", "xl"],
         up: (key) => `@media (min-width:${values2[key]}px)`
       };
-      function handleBreakpoints3(props, propValue, styleFromPropValue) {
-        const theme2 = props.theme || {};
+      function handleBreakpoints3(props2, propValue, styleFromPropValue) {
+        const theme2 = props2.theme || {};
         if (Array.isArray(propValue)) {
           const themeBreakpoints = theme2.breakpoints || defaultBreakpoints;
           return propValue.reduce((acc, item, index) => {
@@ -29869,16 +29873,16 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         return output;
       }
       function breakpoints(styleFunction) {
-        const newStyleFunction = (props) => {
-          const theme2 = props.theme || {};
-          const base = styleFunction(props);
+        const newStyleFunction = (props2) => {
+          const theme2 = props2.theme || {};
+          const base = styleFunction(props2);
           const themeBreakpoints = theme2.breakpoints || defaultBreakpoints;
           const extended = themeBreakpoints.keys.reduce((acc, key) => {
-            if (props[key]) {
+            if (props2[key]) {
               acc = acc || {};
               acc[themeBreakpoints.up(key)] = styleFunction((0, _extends2.default)({
                 theme: theme2
-              }, props[key]));
+              }, props2[key]));
             }
             return acc;
           }, null);
@@ -29945,12 +29949,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         base: customBase
       }) {
         const base = customBase || computeBreakpointsBase(breakpointValues, themeBreakpoints);
-        const keys = Object.keys(base);
-        if (keys.length === 0) {
+        const keys2 = Object.keys(base);
+        if (keys2.length === 0) {
           return breakpointValues;
         }
         let previous;
-        return keys.reduce((acc, breakpoint, i) => {
+        return keys2.reduce((acc, breakpoint, i) => {
           if (Array.isArray(breakpointValues)) {
             acc[breakpoint] = breakpointValues[i] != null ? breakpointValues[i] : breakpointValues[previous];
             previous = i;
@@ -30019,12 +30023,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           themeKey,
           transform
         } = options;
-        const fn = (props) => {
-          if (props[prop] == null) {
+        const fn = (props2) => {
+          if (props2[prop] == null) {
             return null;
           }
-          const propValue = props[prop];
-          const theme2 = props.theme;
+          const propValue = props2[prop];
+          const theme2 = props2.theme;
           const themeMapping = getPath(theme2, themeKey) || {};
           const styleFromPropValue = (propValueFinal) => {
             let value = getValue2(themeMapping, transform, propValueFinal);
@@ -30038,7 +30042,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
               [cssProperty]: value
             };
           };
-          return (0, _breakpoints.handleBreakpoints)(props, propValue, styleFromPropValue);
+          return (0, _breakpoints.handleBreakpoints)(props2, propValue, styleFromPropValue);
         };
         fn.propTypes = true ? {
           [prop]: _responsivePropType.default
@@ -30068,10 +30072,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           });
           return acc;
         }, {});
-        const fn = (props) => {
-          return Object.keys(props).reduce((acc, prop) => {
+        const fn = (props2) => {
+          return Object.keys(props2).reduce((acc, prop) => {
             if (handlers[prop]) {
-              return (0, _merge.default)(acc, handlers[prop](props));
+              return (0, _merge.default)(acc, handlers[prop](props2));
             }
             return acc;
           }, {});
@@ -30221,37 +30225,37 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return acc;
         }, {});
       }
-      function resolveCssProperty(props, keys, prop, transformer) {
-        if (keys.indexOf(prop) === -1) {
+      function resolveCssProperty(props2, keys2, prop, transformer) {
+        if (keys2.indexOf(prop) === -1) {
           return null;
         }
         const cssProperties = getCssProperties(prop);
         const styleFromPropValue = getStyleFromPropValue(cssProperties, transformer);
-        const propValue = props[prop];
-        return (0, _breakpoints.handleBreakpoints)(props, propValue, styleFromPropValue);
+        const propValue = props2[prop];
+        return (0, _breakpoints.handleBreakpoints)(props2, propValue, styleFromPropValue);
       }
-      function style2(props, keys) {
-        const transformer = createUnarySpacing2(props.theme);
-        return Object.keys(props).map((prop) => resolveCssProperty(props, keys, prop, transformer)).reduce(_merge.default, {});
+      function style2(props2, keys2) {
+        const transformer = createUnarySpacing2(props2.theme);
+        return Object.keys(props2).map((prop) => resolveCssProperty(props2, keys2, prop, transformer)).reduce(_merge.default, {});
       }
-      function margin(props) {
-        return style2(props, marginKeys);
+      function margin(props2) {
+        return style2(props2, marginKeys);
       }
       margin.propTypes = true ? marginKeys.reduce((obj, key) => {
         obj[key] = _responsivePropType.default;
         return obj;
       }, {}) : {};
       margin.filterProps = marginKeys;
-      function padding(props) {
-        return style2(props, paddingKeys);
+      function padding(props2) {
+        return style2(props2, paddingKeys);
       }
       padding.propTypes = true ? paddingKeys.reduce((obj, key) => {
         obj[key] = _responsivePropType.default;
         return obj;
       }, {}) : {};
       padding.filterProps = paddingKeys;
-      function spacing(props) {
-        return style2(props, spacingKeys);
+      function spacing(props2) {
+        return style2(props2, spacingKeys);
       }
       spacing.propTypes = true ? spacingKeys.reduce((obj, key) => {
         obj[key] = _responsivePropType.default;
@@ -30338,13 +30342,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         themeKey: "palette"
       });
       exports.borderLeftColor = borderLeftColor;
-      var borderRadius = (props) => {
-        if (props.borderRadius !== void 0 && props.borderRadius !== null) {
-          const transformer = (0, _spacing.createUnaryUnit)(props.theme, "shape.borderRadius", 4, "borderRadius");
+      var borderRadius = (props2) => {
+        if (props2.borderRadius !== void 0 && props2.borderRadius !== null) {
+          const transformer = (0, _spacing.createUnaryUnit)(props2.theme, "shape.borderRadius", 4, "borderRadius");
           const styleFromPropValue = (propValue) => ({
             borderRadius: (0, _spacing.getValue)(transformer, propValue)
           });
-          return (0, _breakpoints.handleBreakpoints)(props, props.borderRadius, styleFromPropValue);
+          return (0, _breakpoints.handleBreakpoints)(props2, props2.borderRadius, styleFromPropValue);
         }
         return null;
       };
@@ -30488,13 +30492,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       var _spacing = require_spacing();
       var _breakpoints = require_breakpoints();
       var _responsivePropType = _interopRequireDefault(require_responsivePropType());
-      var gap = (props) => {
-        if (props.gap !== void 0 && props.gap !== null) {
-          const transformer = (0, _spacing.createUnaryUnit)(props.theme, "spacing", 8, "gap");
+      var gap = (props2) => {
+        if (props2.gap !== void 0 && props2.gap !== null) {
+          const transformer = (0, _spacing.createUnaryUnit)(props2.theme, "spacing", 8, "gap");
           const styleFromPropValue = (propValue) => ({
             gap: (0, _spacing.getValue)(transformer, propValue)
           });
-          return (0, _breakpoints.handleBreakpoints)(props, props.gap, styleFromPropValue);
+          return (0, _breakpoints.handleBreakpoints)(props2, props2.gap, styleFromPropValue);
         }
         return null;
       };
@@ -30503,13 +30507,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         gap: _responsivePropType.default
       } : {};
       gap.filterProps = ["gap"];
-      var columnGap = (props) => {
-        if (props.columnGap !== void 0 && props.columnGap !== null) {
-          const transformer = (0, _spacing.createUnaryUnit)(props.theme, "spacing", 8, "columnGap");
+      var columnGap = (props2) => {
+        if (props2.columnGap !== void 0 && props2.columnGap !== null) {
+          const transformer = (0, _spacing.createUnaryUnit)(props2.theme, "spacing", 8, "columnGap");
           const styleFromPropValue = (propValue) => ({
             columnGap: (0, _spacing.getValue)(transformer, propValue)
           });
-          return (0, _breakpoints.handleBreakpoints)(props, props.columnGap, styleFromPropValue);
+          return (0, _breakpoints.handleBreakpoints)(props2, props2.columnGap, styleFromPropValue);
         }
         return null;
       };
@@ -30518,13 +30522,13 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         columnGap: _responsivePropType.default
       } : {};
       columnGap.filterProps = ["columnGap"];
-      var rowGap = (props) => {
-        if (props.rowGap !== void 0 && props.rowGap !== null) {
-          const transformer = (0, _spacing.createUnaryUnit)(props.theme, "spacing", 8, "rowGap");
+      var rowGap = (props2) => {
+        if (props2.rowGap !== void 0 && props2.rowGap !== null) {
+          const transformer = (0, _spacing.createUnaryUnit)(props2.theme, "spacing", 8, "rowGap");
           const styleFromPropValue = (propValue) => ({
             rowGap: (0, _spacing.getValue)(transformer, propValue)
           });
-          return (0, _breakpoints.handleBreakpoints)(props, props.rowGap, styleFromPropValue);
+          return (0, _breakpoints.handleBreakpoints)(props2, props2.rowGap, styleFromPropValue);
         }
         return null;
       };
@@ -30688,16 +30692,16 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         transform
       });
       exports.width = width;
-      var maxWidth = (props) => {
-        if (props.maxWidth !== void 0 && props.maxWidth !== null) {
+      var maxWidth = (props2) => {
+        if (props2.maxWidth !== void 0 && props2.maxWidth !== null) {
           const styleFromPropValue = (propValue) => {
             var _props$theme, _props$theme$breakpoi, _props$theme$breakpoi2;
-            const breakpoint = ((_props$theme = props.theme) == null ? void 0 : (_props$theme$breakpoi = _props$theme.breakpoints) == null ? void 0 : (_props$theme$breakpoi2 = _props$theme$breakpoi.values) == null ? void 0 : _props$theme$breakpoi2[propValue]) || _breakpoints.values[propValue];
+            const breakpoint = ((_props$theme = props2.theme) == null ? void 0 : (_props$theme$breakpoi = _props$theme.breakpoints) == null ? void 0 : (_props$theme$breakpoi2 = _props$theme$breakpoi.values) == null ? void 0 : _props$theme$breakpoi2[propValue]) || _breakpoints.values[propValue];
             return {
               maxWidth: breakpoint || transform(propValue)
             };
           };
-          return (0, _breakpoints.handleBreakpoints)(props, props.maxWidth, styleFromPropValue);
+          return (0, _breakpoints.handleBreakpoints)(props2, props2.maxWidth, styleFromPropValue);
         }
         return null;
       };
@@ -30884,7 +30888,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       var _getThemeValue = require_getThemeValue();
       var _breakpoints = require_breakpoints();
       function objectsHaveSameKeys(...objects) {
-        const allKeys = objects.reduce((keys, object) => keys.concat(Object.keys(object)), []);
+        const allKeys = objects.reduce((keys2, object) => keys2.concat(Object.keys(object)), []);
         const union = new Set(allKeys);
         return objects.every((object) => union.size === Object.keys(object).length);
       }
@@ -30908,11 +30912,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             [prop]: value
           };
         }
-        function styleFunctionSx2(props) {
+        function styleFunctionSx2(props2) {
           const {
             sx,
             theme: theme2 = {}
-          } = props || {};
+          } = props2 || {};
           if (!sx) {
             return null;
           }
@@ -31003,24 +31007,24 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       var _utils = require_utils();
       var _getThemeValue = require_getThemeValue();
       var _excluded32 = ["sx"];
-      var splitProps = (props) => {
+      var splitProps = (props2) => {
         const result = {
           systemProps: {},
           otherProps: {}
         };
-        Object.keys(props).forEach((prop) => {
+        Object.keys(props2).forEach((prop) => {
           if (_getThemeValue.propToStyleFunction[prop]) {
-            result.systemProps[prop] = props[prop];
+            result.systemProps[prop] = props2[prop];
           } else {
-            result.otherProps[prop] = props[prop];
+            result.otherProps[prop] = props2[prop];
           }
         });
         return result;
       };
-      function extendSxProp4(props) {
+      function extendSxProp4(props2) {
         const {
           sx: inSx
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const {
           systemProps,
           otherProps
@@ -31221,7 +31225,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           step = 5
         } = breakpoints, other = (0, _objectWithoutPropertiesLoose2.default)(breakpoints, _excluded32);
         const sortedValues = sortBreakpointsValues(values2);
-        const keys = Object.keys(sortedValues);
+        const keys2 = Object.keys(sortedValues);
         function up(key) {
           const value = typeof values2[key] === "number" ? values2[key] : key;
           return `@media (min-width:${value}${unit})`;
@@ -31231,27 +31235,27 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return `@media (max-width:${value - step / 100}${unit})`;
         }
         function between(start, end) {
-          const endIndex = keys.indexOf(end);
-          return `@media (min-width:${typeof values2[start] === "number" ? values2[start] : start}${unit}) and (max-width:${(endIndex !== -1 && typeof values2[keys[endIndex]] === "number" ? values2[keys[endIndex]] : end) - step / 100}${unit})`;
+          const endIndex = keys2.indexOf(end);
+          return `@media (min-width:${typeof values2[start] === "number" ? values2[start] : start}${unit}) and (max-width:${(endIndex !== -1 && typeof values2[keys2[endIndex]] === "number" ? values2[keys2[endIndex]] : end) - step / 100}${unit})`;
         }
         function only(key) {
-          if (keys.indexOf(key) + 1 < keys.length) {
-            return between(key, keys[keys.indexOf(key) + 1]);
+          if (keys2.indexOf(key) + 1 < keys2.length) {
+            return between(key, keys2[keys2.indexOf(key) + 1]);
           }
           return up(key);
         }
         function not(key) {
-          const keyIndex = keys.indexOf(key);
+          const keyIndex = keys2.indexOf(key);
           if (keyIndex === 0) {
-            return up(keys[1]);
+            return up(keys2[1]);
           }
-          if (keyIndex === keys.length - 1) {
-            return down(keys[keyIndex]);
+          if (keyIndex === keys2.length - 1) {
+            return down(keys2[keyIndex]);
           }
-          return between(key, keys[keys.indexOf(key) + 1]).replace("@media", "@media not all and");
+          return between(key, keys2[keys2.indexOf(key) + 1]).replace("@media", "@media not all and");
         }
         return (0, _extends2.default)({
-          keys,
+          keys: keys2,
           values: sortedValues,
           up,
           down,
@@ -31589,11 +31593,11 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         }
         return (0, _extends2.default)({}, outerTheme, localTheme);
       }
-      function ThemeProvider2(props) {
+      function ThemeProvider2(props2) {
         const {
           children,
           theme: localTheme
-        } = props;
+        } = props2;
         const outerTheme = (0, _useTheme.default)();
         if (true) {
           if (outerTheme === null && typeof localTheme === "function") {
@@ -31911,16 +31915,16 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       function isEmpty(string) {
         return string.length === 0;
       }
-      function propsToClassKey(props) {
+      function propsToClassKey(props2) {
         const {
           variant
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         let classKey = variant || "";
         Object.keys(other).sort().forEach((key) => {
           if (key === "color") {
-            classKey += isEmpty(classKey) ? props[key] : (0, _utils.unstable_capitalize)(props[key]);
+            classKey += isEmpty(classKey) ? props2[key] : (0, _utils.unstable_capitalize)(props2[key]);
           } else {
-            classKey += `${isEmpty(classKey) ? key : (0, _utils.unstable_capitalize)(key)}${(0, _utils.unstable_capitalize)(props[key].toString())}`;
+            classKey += `${isEmpty(classKey) ? key : (0, _utils.unstable_capitalize)(key)}${(0, _utils.unstable_capitalize)(props2[key].toString())}`;
           }
         });
         return classKey;
@@ -32011,18 +32015,18 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         });
         return variantsStyles;
       };
-      var variantsResolver = (props, styles3, theme2, name) => {
+      var variantsResolver = (props2, styles3, theme2, name) => {
         var _theme$components, _theme$components$nam;
         const {
           ownerState = {}
-        } = props;
+        } = props2;
         const variantsStyles = [];
         const themeVariants = theme2 == null ? void 0 : (_theme$components = theme2.components) == null ? void 0 : (_theme$components$nam = _theme$components[name]) == null ? void 0 : _theme$components$nam.variants;
         if (themeVariants) {
           themeVariants.forEach((themeVariant) => {
             let isMatch = true;
             Object.keys(themeVariant.props).forEach((key) => {
-              if (ownerState[key] !== themeVariant.props[key] && props[key] !== themeVariant.props[key]) {
+              if (ownerState[key] !== themeVariant.props[key] && props2[key] !== themeVariant.props[key]) {
                 isMatch = false;
               }
             });
@@ -32048,9 +32052,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           slotShouldForwardProp: slotShouldForwardProp2 = shouldForwardProp2,
           styleFunctionSx = _styleFunctionSx.default
         } = input;
-        const systemSx = (props) => {
-          const theme2 = isEmpty(props.theme) ? defaultTheme3 : props.theme;
-          return styleFunctionSx((0, _extends2.default)({}, props, {
+        const systemSx = (props2) => {
+          const theme2 = isEmpty(props2.theme) ? defaultTheme3 : props2.theme;
+          return styleFunctionSx((0, _extends2.default)({}, props2, {
             theme: theme2
           }));
         };
@@ -32097,25 +32101,25 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
             }) : [];
             let transformedStyleArg = styleArg;
             if (componentName && overridesResolver4) {
-              expressionsWithDefaultTheme.push((props) => {
-                const theme2 = isEmpty(props.theme) ? defaultTheme3 : props.theme;
+              expressionsWithDefaultTheme.push((props2) => {
+                const theme2 = isEmpty(props2.theme) ? defaultTheme3 : props2.theme;
                 const styleOverrides = getStyleOverrides(componentName, theme2);
                 if (styleOverrides) {
                   const resolvedStyleOverrides = {};
                   Object.entries(styleOverrides).forEach(([slotKey, slotStyle]) => {
-                    resolvedStyleOverrides[slotKey] = typeof slotStyle === "function" ? slotStyle((0, _extends2.default)({}, props, {
+                    resolvedStyleOverrides[slotKey] = typeof slotStyle === "function" ? slotStyle((0, _extends2.default)({}, props2, {
                       theme: theme2
                     })) : slotStyle;
                   });
-                  return overridesResolver4(props, resolvedStyleOverrides);
+                  return overridesResolver4(props2, resolvedStyleOverrides);
                 }
                 return null;
               });
             }
             if (componentName && !skipVariantsResolver) {
-              expressionsWithDefaultTheme.push((props) => {
-                const theme2 = isEmpty(props.theme) ? defaultTheme3 : props.theme;
-                return variantsResolver(props, getVariantStyles(componentName, theme2), theme2, componentName);
+              expressionsWithDefaultTheme.push((props2) => {
+                const theme2 = isEmpty(props2.theme) ? defaultTheme3 : props2.theme;
+                return variantsResolver(props2, getVariantStyles(componentName, theme2), theme2, componentName);
               });
             }
             if (!skipSx) {
@@ -32187,12 +32191,12 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         const {
           theme: theme2,
           name,
-          props
+          props: props2
         } = params;
         if (!theme2 || !theme2.components || !theme2.components[name] || !theme2.components[name].defaultProps) {
-          return props;
+          return props2;
         }
-        return (0, _utils.internal_resolveProps)(theme2.components[name].defaultProps, props);
+        return (0, _utils.internal_resolveProps)(theme2.components[name].defaultProps, props2);
       }
     }
   });
@@ -32209,7 +32213,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
       var _getThemeProps = _interopRequireDefault(require_getThemeProps());
       var _useTheme = _interopRequireDefault(require_useTheme3());
       function useThemeProps2({
-        props,
+        props: props2,
         name,
         defaultTheme: defaultTheme3
       }) {
@@ -32217,7 +32221,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
         const mergedProps = (0, _getThemeProps.default)({
           theme: theme2,
           name,
-          props
+          props: props2
         });
         return mergedProps;
       }
@@ -32300,14 +32304,14 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_liter
           return decomposeColor(hexToRgb(color));
         }
         const marker = color.indexOf("(");
-        const type = color.substring(0, marker);
-        if (["rgb", "rgba", "hsl", "hsla", "color"].indexOf(type) === -1) {
+        const type2 = color.substring(0, marker);
+        if (["rgb", "rgba", "hsl", "hsla", "color"].indexOf(type2) === -1) {
           throw new Error(true ? `MUI: Unsupported \`${color}\` color.
 The following formats are supported: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color().` : (0, _utils.formatMuiErrorMessage)(9, color));
         }
         let values2 = color.substring(marker + 1, color.length - 1);
         let colorSpace;
-        if (type === "color") {
+        if (type2 === "color") {
           values2 = values2.split(" ");
           colorSpace = values2.shift();
           if (values2.length === 4 && values2[3].charAt(0) === "/") {
@@ -32322,7 +32326,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         values2 = values2.map((value) => parseFloat(value));
         return {
-          type,
+          type: type2,
           values: values2,
           colorSpace
         };
@@ -32334,24 +32338,24 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       exports.colorChannel = colorChannel;
       function recomposeColor(color) {
         const {
-          type,
+          type: type2,
           colorSpace
         } = color;
         let {
           values: values2
         } = color;
-        if (type.indexOf("rgb") !== -1) {
+        if (type2.indexOf("rgb") !== -1) {
           values2 = values2.map((n, i) => i < 3 ? parseInt(n, 10) : n);
-        } else if (type.indexOf("hsl") !== -1) {
+        } else if (type2.indexOf("hsl") !== -1) {
           values2[1] = `${values2[1]}%`;
           values2[2] = `${values2[2]}%`;
         }
-        if (type.indexOf("color") !== -1) {
+        if (type2.indexOf("color") !== -1) {
           values2 = `${colorSpace} ${values2.join(" ")}`;
         } else {
           values2 = `${values2.join(", ")}`;
         }
-        return `${type}(${values2})`;
+        return `${type2}(${values2})`;
       }
       function rgbToHex(color) {
         if (color.indexOf("#") === 0) {
@@ -32372,14 +32376,14 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         const l = values2[2] / 100;
         const a = s * Math.min(l, 1 - l);
         const f = (n, k = (n + h / 30) % 12) => l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-        let type = "rgb";
+        let type2 = "rgb";
         const rgb = [Math.round(f(0) * 255), Math.round(f(8) * 255), Math.round(f(4) * 255)];
         if (color.type === "hsla") {
-          type += "a";
+          type2 += "a";
           rgb.push(values2[3]);
         }
         return recomposeColor({
-          type,
+          type: type2,
           values: rgb
         });
       }
@@ -32500,21 +32504,21 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return newObj;
       }
-      function InnerThemeProvider(props) {
+      function InnerThemeProvider(props2) {
         const theme2 = (0, _useTheme.default)();
         return /* @__PURE__ */ (0, _jsxRuntime.jsx)(_styledEngine.ThemeContext.Provider, {
           value: typeof theme2 === "object" ? theme2 : {},
-          children: props.children
+          children: props2.children
         });
       }
       true ? InnerThemeProvider.propTypes = {
         children: _propTypes.default.node
       } : void 0;
-      function ThemeProvider2(props) {
+      function ThemeProvider2(props2) {
         const {
           children,
           theme: localTheme
-        } = props;
+        } = props2;
         return /* @__PURE__ */ (0, _jsxRuntime.jsx)(_privateTheming.ThemeProvider, {
           theme: localTheme,
           children: /* @__PURE__ */ (0, _jsxRuntime.jsx)(InnerThemeProvider, {
@@ -32562,10 +32566,10 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       exports.assignNestedKeys = void 0;
       exports.default = cssVarsParser;
       exports.walkObjectDeep = void 0;
-      var assignNestedKeys = (obj, keys, value, arrayKeys = []) => {
+      var assignNestedKeys = (obj, keys2, value, arrayKeys = []) => {
         let temp = obj;
-        keys.forEach((k, index) => {
-          if (index === keys.length - 1) {
+        keys2.forEach((k, index) => {
+          if (index === keys2.length - 1) {
             if (Array.isArray(temp)) {
               temp[Number(k)] = value;
             } else if (temp && typeof temp === "object") {
@@ -32597,12 +32601,12 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         recurse(obj);
       };
       exports.walkObjectDeep = walkObjectDeep;
-      var getCssValue = (keys, value) => {
+      var getCssValue = (keys2, value) => {
         if (typeof value === "number") {
-          if (["lineHeight", "fontWeight", "opacity", "zIndex"].some((prop) => keys.includes(prop))) {
+          if (["lineHeight", "fontWeight", "opacity", "zIndex"].some((prop) => keys2.includes(prop))) {
             return value;
           }
-          const lastKey = keys[keys.length - 1];
+          const lastKey = keys2[keys2.length - 1];
           if (lastKey.toLowerCase().indexOf("opacity") >= 0) {
             return value;
           }
@@ -32620,19 +32624,19 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         const parsedTheme = {};
         walkObjectDeep(
           theme2,
-          (keys, value, arrayKeys) => {
+          (keys2, value, arrayKeys) => {
             if (typeof value === "string" || typeof value === "number") {
-              if (!shouldSkipGeneratingVar || shouldSkipGeneratingVar && !shouldSkipGeneratingVar(keys, value)) {
-                const cssVar = `--${prefix ? `${prefix}-` : ""}${keys.join("-")}`;
+              if (!shouldSkipGeneratingVar || shouldSkipGeneratingVar && !shouldSkipGeneratingVar(keys2, value)) {
+                const cssVar = `--${prefix ? `${prefix}-` : ""}${keys2.join("-")}`;
                 Object.assign(css2, {
-                  [cssVar]: getCssValue(keys, value)
+                  [cssVar]: getCssValue(keys2, value)
                 });
-                assignNestedKeys(vars, keys, `var(${cssVar})`, arrayKeys);
+                assignNestedKeys(vars, keys2, `var(${cssVar})`, arrayKeys);
               }
             }
-            assignNestedKeys(parsedTheme, keys, value, arrayKeys);
+            assignNestedKeys(parsedTheme, keys2, value, arrayKeys);
           },
-          (keys) => keys[0] === "vars"
+          (keys2) => keys2[0] === "vars"
         );
         return {
           css: css2,
@@ -33366,10 +33370,10 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       var defaultCreateStyledComponent = (0, _styled.default)("div", {
         name: "MuiContainer",
         slot: "Root",
-        overridesResolver: (props, styles3) => {
+        overridesResolver: (props2, styles3) => {
           const {
             ownerState
-          } = props;
+          } = props2;
           return [styles3.root, styles3[`maxWidth${(0, _utils.unstable_capitalize)(String(ownerState.maxWidth))}`], ownerState.fixed && styles3.fixed, ownerState.disableGutters && styles3.disableGutters];
         }
       });
@@ -33440,15 +33444,15 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           }
         }));
         const Container2 = /* @__PURE__ */ React59.forwardRef(function Container3(inProps, ref) {
-          const props = useThemeProps2(inProps);
+          const props2 = useThemeProps2(inProps);
           const {
             className,
             component = "div",
             disableGutters = false,
             fixed = false,
             maxWidth = "lg"
-          } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
-          const ownerState = (0, _extends2.default)({}, props, {
+          } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
+          const ownerState = (0, _extends2.default)({}, props2, {
             component,
             disableGutters,
             fixed,
@@ -33627,8 +33631,8 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             }, breakpointValue);
           });
         } else if (responsize && typeof responsize === "object") {
-          const keys = Object.keys(responsize).length > breakpoints.keys.length ? breakpoints.keys : Object.keys(responsize);
-          keys.forEach((key) => {
+          const keys2 = Object.keys(responsize).length > breakpoints.keys.length ? breakpoints.keys : Object.keys(responsize);
+          keys2.forEach((key) => {
             if (breakpoints.keys.indexOf(key) !== -1) {
               const breakpointValue = responsize[key];
               if (breakpointValue !== void 0) {
@@ -33913,11 +33917,11 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       var defaultCreateStyledComponent = (0, _styled.default)("div", {
         name: "MuiGrid",
         slot: "Root",
-        overridesResolver: (props, styles3) => styles3.root
+        overridesResolver: (props2, styles3) => styles3.root
       });
-      function useThemePropsDefault(props) {
+      function useThemePropsDefault(props2) {
         return (0, _useThemeProps.default)({
-          props,
+          props: props2,
           name: "MuiGrid",
           defaultTheme: defaultTheme3
         });
@@ -33935,11 +33939,11 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             container: container2,
             direction,
             spacing,
-            wrap,
+            wrap: wrap2,
             gridSize
           } = ownerState;
           const slots = {
-            root: ["root", container2 && "container", wrap !== "wrap" && `wrap-xs-${String(wrap)}`, ...(0, _gridGenerator.generateDirectionClasses)(direction), ...(0, _gridGenerator.generateSizeClassNames)(gridSize), ...container2 ? (0, _gridGenerator.generateSpacingClassNames)(spacing, theme2.breakpoints.keys[0]) : []]
+            root: ["root", container2 && "container", wrap2 !== "wrap" && `wrap-xs-${String(wrap2)}`, ...(0, _gridGenerator.generateDirectionClasses)(direction), ...(0, _gridGenerator.generateSizeClassNames)(gridSize), ...container2 ? (0, _gridGenerator.generateSpacingClassNames)(spacing, theme2.breakpoints.keys[0]) : []]
           };
           return (0, _utils.unstable_composeClasses)(slots, (slot) => (0, _utils.unstable_generateUtilityClass)(componentName, slot), {});
         };
@@ -33948,7 +33952,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           var _inProps$columns, _inProps$spacing, _ref, _inProps$rowSpacing, _ref2, _inProps$columnSpacin, _ref3, _disableEqualOverflow;
           const theme2 = (0, _useTheme.default)();
           const themeProps = useThemeProps2(inProps);
-          const props = (0, _styleFunctionSx.extendSxProp)(themeProps);
+          const props2 = (0, _styleFunctionSx.extendSxProp)(themeProps);
           const nested = React59.useContext(NestedContext);
           const overflow = React59.useContext(OverflowContext);
           const {
@@ -33957,12 +33961,12 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             container: container2 = false,
             component = "div",
             direction = "row",
-            wrap = "wrap",
+            wrap: wrap2 = "wrap",
             spacing: spacingProp = 0,
             rowSpacing: rowSpacingProp = spacingProp,
             columnSpacing: columnSpacingProp = spacingProp,
             disableEqualOverflow: themeDisableEqualOverflow
-          } = props, rest = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+          } = props2, rest = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
           let disableEqualOverflow = themeDisableEqualOverflow;
           if (nested && themeDisableEqualOverflow !== void 0) {
             disableEqualOverflow = inProps.disableEqualOverflow;
@@ -33983,12 +33987,12 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           const spacing = (_inProps$spacing = inProps.spacing) != null ? _inProps$spacing : nested ? void 0 : spacingProp;
           const rowSpacing = (_ref = (_inProps$rowSpacing = inProps.rowSpacing) != null ? _inProps$rowSpacing : inProps.spacing) != null ? _ref : nested ? void 0 : rowSpacingProp;
           const columnSpacing = (_ref2 = (_inProps$columnSpacin = inProps.columnSpacing) != null ? _inProps$columnSpacin : inProps.spacing) != null ? _ref2 : nested ? void 0 : columnSpacingProp;
-          const ownerState = (0, _extends2.default)({}, props, {
+          const ownerState = (0, _extends2.default)({}, props2, {
             nested,
             columns,
             container: container2,
             direction,
-            wrap,
+            wrap: wrap2,
             spacing,
             rowSpacing,
             columnSpacing,
@@ -34119,7 +34123,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         "item",
         ...SPACINGS2.map((spacing) => `spacing-xs-${spacing}`),
         ...DIRECTIONS2.map((direction) => `direction-xs-${direction}`),
-        ...WRAPS2.map((wrap) => `wrap-xs-${wrap}`),
+        ...WRAPS2.map((wrap2) => `wrap-xs-${wrap2}`),
         ...GRID_SIZES2.map((size) => `grid-xs-${size}`),
         ...GRID_SIZES2.map((size) => `grid-sm-${size}`),
         ...GRID_SIZES2.map((size) => `grid-md-${size}`),
@@ -34300,11 +34304,11 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       var defaultCreateStyledComponent = (0, _styled.default)("div", {
         name: "MuiStack",
         slot: "Root",
-        overridesResolver: (props, styles3) => styles3.root
+        overridesResolver: (props2, styles3) => styles3.root
       });
-      function useThemePropsDefault(props) {
+      function useThemePropsDefault(props2) {
         return (0, _useThemeProps.default)({
-          props,
+          props: props2,
           name: "MuiStack",
           defaultTheme: defaultTheme3
         });
@@ -34400,7 +34404,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         const StackRoot2 = createStyledComponent(style2);
         const Stack3 = /* @__PURE__ */ React59.forwardRef(function Grid3(inProps, ref) {
           const themeProps = useThemeProps2(inProps);
-          const props = (0, _styleFunctionSx.extendSxProp)(themeProps);
+          const props2 = (0, _styleFunctionSx.extendSxProp)(themeProps);
           const {
             component = "div",
             direction = "column",
@@ -34408,7 +34412,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             divider,
             children,
             className
-          } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+          } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
           const ownerState = {
             direction,
             spacing
@@ -35312,15 +35316,15 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         if (!getSlotProps) {
           const joinedClasses2 = (0, _clsx.default)(externalForwardedProps == null ? void 0 : externalForwardedProps.className, externalSlotProps == null ? void 0 : externalSlotProps.className, className, additionalProps == null ? void 0 : additionalProps.className);
           const mergedStyle2 = (0, _extends2.default)({}, additionalProps == null ? void 0 : additionalProps.style, externalForwardedProps == null ? void 0 : externalForwardedProps.style, externalSlotProps == null ? void 0 : externalSlotProps.style);
-          const props2 = (0, _extends2.default)({}, additionalProps, externalForwardedProps, externalSlotProps);
+          const props3 = (0, _extends2.default)({}, additionalProps, externalForwardedProps, externalSlotProps);
           if (joinedClasses2.length > 0) {
-            props2.className = joinedClasses2;
+            props3.className = joinedClasses2;
           }
           if (Object.keys(mergedStyle2).length > 0) {
-            props2.style = mergedStyle2;
+            props3.style = mergedStyle2;
           }
           return {
-            props: props2,
+            props: props3,
             internalRef: void 0
           };
         }
@@ -35330,15 +35334,15 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         const internalSlotProps = getSlotProps(eventHandlers);
         const joinedClasses = (0, _clsx.default)(internalSlotProps == null ? void 0 : internalSlotProps.className, additionalProps == null ? void 0 : additionalProps.className, className, externalForwardedProps == null ? void 0 : externalForwardedProps.className, externalSlotProps == null ? void 0 : externalSlotProps.className);
         const mergedStyle = (0, _extends2.default)({}, internalSlotProps == null ? void 0 : internalSlotProps.style, additionalProps == null ? void 0 : additionalProps.style, externalForwardedProps == null ? void 0 : externalForwardedProps.style, externalSlotProps == null ? void 0 : externalSlotProps.style);
-        const props = (0, _extends2.default)({}, internalSlotProps, additionalProps, otherPropsWithoutEventHandlers, componentsPropsWithoutEventHandlers);
+        const props2 = (0, _extends2.default)({}, internalSlotProps, additionalProps, otherPropsWithoutEventHandlers, componentsPropsWithoutEventHandlers);
         if (joinedClasses.length > 0) {
-          props.className = joinedClasses;
+          props2.className = joinedClasses;
         }
         if (Object.keys(mergedStyle).length > 0) {
-          props.style = mergedStyle;
+          props2.style = mergedStyle;
         }
         return {
-          props,
+          props: props2,
           internalRef: internalSlotProps.ref
         };
       }
@@ -35376,10 +35380,10 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           externalSlotProps: resolvedComponentsProps
         }));
         const ref = (0, _utils.unstable_useForkRef)(internalRef, resolvedComponentsProps == null ? void 0 : resolvedComponentsProps.ref, (_parameters$additiona = parameters.additionalProps) == null ? void 0 : _parameters$additiona.ref);
-        const props = (0, _appendOwnerState.default)(elementType, (0, _extends2.default)({}, mergedProps, {
+        const props2 = (0, _appendOwnerState.default)(elementType, (0, _extends2.default)({}, mergedProps, {
           ref
         }), ownerState);
-        return props;
+        return props2;
       }
     }
   });
@@ -35567,16 +35571,16 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       }
       var defaultFilterOptions = createFilterOptions();
       var pageSize = 5;
-      function useAutocomplete(props) {
+      function useAutocomplete(props2) {
         const {
           autoComplete = false,
           autoHighlight = false,
           autoSelect = false,
           blurOnSelect = false,
-          clearOnBlur = !props.freeSolo,
+          clearOnBlur = !props2.freeSolo,
           clearOnEscape = false,
           componentName = "useAutocomplete",
-          defaultValue = props.multiple ? [] : null,
+          defaultValue = props2.multiple ? [] : null,
           disableClearable = false,
           disableCloseOnSelect = false,
           disabled: disabledProp,
@@ -35591,7 +35595,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             return (_option$label = option.label) != null ? _option$label : option;
           },
           groupBy,
-          handleHomeEndKeys = !props.freeSolo,
+          handleHomeEndKeys = !props2.freeSolo,
           id: idProp,
           includeInputInList = false,
           inputValue: inputValueProp,
@@ -35606,9 +35610,9 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           openOnFocus = false,
           options,
           readOnly = false,
-          selectOnFocus = !props.freeSolo,
+          selectOnFocus = !props2.freeSolo,
           value: valueProp
-        } = props;
+        } = props2;
         const id = (0, _utils.unstable_useId)(idProp);
         let getOptionLabel = getOptionLabelProp;
         getOptionLabel = (option) => {
@@ -36600,7 +36604,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _badgeUnstyledClasses.getBadgeUnstyledUtilityClass, void 0);
       };
-      var BadgeUnstyled = /* @__PURE__ */ React59.forwardRef(function BadgeUnstyled2(props, ref) {
+      var BadgeUnstyled = /* @__PURE__ */ React59.forwardRef(function BadgeUnstyled2(props2, ref) {
         const {
           component,
           children,
@@ -36608,16 +36612,16 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           componentsProps = {},
           max: maxProp = 99,
           showZero = false
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const {
           badgeContent,
           max,
           displayValue,
           invisible
-        } = (0, _useBadge.default)((0, _extends2.default)({}, props, {
+        } = (0, _useBadge.default)((0, _extends2.default)({}, props2, {
           max: maxProp
         }));
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           badgeContent,
           invisible,
           max,
@@ -36876,7 +36880,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           ref: externalRef,
           tabIndex,
           to,
-          type
+          type: type2
         } = parameters;
         const buttonRef = React59.useRef();
         const [active, setActive] = React59.useState(false);
@@ -36982,7 +36986,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         const handleRef = (0, _utils.unstable_useForkRef)(updateHostElementName, externalRef, focusVisibleRef, buttonRef);
         const buttonProps = {};
         if (hostElementName === "BUTTON") {
-          buttonProps.type = type != null ? type : "button";
+          buttonProps.type = type2 != null ? type2 : "button";
           if (focusableWhenDisabled) {
             buttonProps["aria-disabled"] = disabled;
           } else {
@@ -37003,7 +37007,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           const externalEventHandlers = (0, _extends2.default)({}, propsEventHandlers, otherHandlers);
           delete externalEventHandlers.onFocusVisible;
           return (0, _extends2.default)({
-            type
+            type: type2
           }, externalEventHandlers, buttonProps, {
             onBlur: createHandleBlur(externalEventHandlers),
             onClick: createHandleClick(externalEventHandlers),
@@ -37095,7 +37099,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _buttonUnstyledClasses.getButtonUnstyledUtilityClass, {});
       };
-      var ButtonUnstyled = /* @__PURE__ */ React59.forwardRef(function ButtonUnstyled2(props, forwardedRef) {
+      var ButtonUnstyled = /* @__PURE__ */ React59.forwardRef(function ButtonUnstyled2(props2, forwardedRef) {
         var _ref;
         const {
           action,
@@ -37104,14 +37108,14 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           components = {},
           componentsProps = {},
           focusableWhenDisabled = false
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const buttonRef = React59.useRef();
         const {
           active,
           focusVisible,
           setFocusVisible,
           getRootProps
-        } = (0, _useButton.default)((0, _extends2.default)({}, props, {
+        } = (0, _useButton.default)((0, _extends2.default)({}, props2, {
           focusableWhenDisabled
         }));
         React59.useImperativeHandle(action, () => ({
@@ -37120,7 +37124,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             buttonRef.current.focus();
           }
         }), [setFocusVisible]);
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           active,
           focusableWhenDisabled,
           focusVisible
@@ -37359,14 +37363,14 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       function clickedRootScrollbar(event, doc) {
         return doc.documentElement.clientWidth < event.clientX || doc.documentElement.clientHeight < event.clientY;
       }
-      function ClickAwayListener(props) {
+      function ClickAwayListener(props2) {
         const {
           children,
           disableReactTree = false,
           mouseEvent = "onClick",
           onClickAway,
           touchEvent = "onTouchEnd"
-        } = props;
+        } = props2;
         const movedRef = React59.useRef(false);
         const nodeRef = React59.useRef(null);
         const activatedRef = React59.useRef(false);
@@ -37645,7 +37649,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       function defaultIsEnabled() {
         return true;
       }
-      function FocusTrap(props) {
+      function FocusTrap(props2) {
         const {
           children,
           disableAutoFocus = false,
@@ -37654,7 +37658,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           getTabbable = defaultGetTabbable,
           isEnabled = defaultIsEnabled,
           open
-        } = props;
+        } = props2;
         const ignoreNextEnforceFocus = React59.useRef();
         const sentinelStart = React59.useRef(null);
         const sentinelEnd = React59.useRef(null);
@@ -37983,7 +37987,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _formControlUnstyledClasses.getFormControlUnstyledUtilityClass, {});
       }
-      var FormControlUnstyled = /* @__PURE__ */ React59.forwardRef(function FormControlUnstyled2(props, ref) {
+      var FormControlUnstyled = /* @__PURE__ */ React59.forwardRef(function FormControlUnstyled2(props2, ref) {
         var _ref;
         const {
           defaultValue,
@@ -37996,7 +38000,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           onChange,
           required = false,
           value: incomingValue
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const [value, setValue] = (0, _utils.unstable_useControlled)({
           controlled: incomingValue,
           default: defaultValue,
@@ -38008,7 +38012,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         if (disabled && focused) {
           setFocused(false);
         }
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           disabled,
           error,
           filled,
@@ -38499,7 +38503,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return newObj;
       }
-      var InputUnstyled = /* @__PURE__ */ React59.forwardRef(function InputUnstyled2(props, forwardedRef) {
+      var InputUnstyled = /* @__PURE__ */ React59.forwardRef(function InputUnstyled2(props2, forwardedRef) {
         var _ref, _components$Textarea, _components$Input;
         const {
           "aria-describedby": ariaDescribedby,
@@ -38533,7 +38537,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           rows,
           minRows,
           maxRows
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const {
           getRootProps,
           getInputProps,
@@ -38552,14 +38556,14 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           required,
           value
         });
-        const type = !multiline ? typeProp != null ? typeProp : "text" : void 0;
-        const ownerState = (0, _extends2.default)({}, props, {
+        const type2 = !multiline ? typeProp != null ? typeProp : "text" : void 0;
+        const ownerState = (0, _extends2.default)({}, props2, {
           disabled: disabledState,
           error: errorState,
           focused,
           formControlContext,
           multiline,
-          type
+          type: type2
         });
         const rootStateClasses = {
           [_inputUnstyledClasses.default.disabled]: disabledState,
@@ -38586,7 +38590,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           name,
           placeholder,
           readOnly,
-          type
+          type: type2
         };
         const Root2 = (_ref = component != null ? component : components.Root) != null ? _ref : "div";
         const rootProps = (0, _utils.useSlotProps)({
@@ -38902,16 +38906,16 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         const nextIndex = findValidOptionToHighlight(nextIndexCandidate, lookupDirection, options, highlightDisabled, isOptionDisabled, wrapAround);
         return (_options$nextIndex = options[nextIndex]) != null ? _options$nextIndex : null;
       }
-      function handleOptionSelection(option, state, props) {
+      function handleOptionSelection(option, state, props2) {
         const {
           multiple,
           optionComparer = (o, v) => o === v,
           isOptionDisabled = () => false
-        } = props;
+        } = props2;
         const {
           selectedValue
         } = state;
-        const optionIndex = props.options.findIndex((o) => props.optionComparer(option, o));
+        const optionIndex = props2.options.findIndex((o) => props2.optionComparer(option, o));
         if (isOptionDisabled(option, optionIndex)) {
           return state;
         }
@@ -38932,14 +38936,14 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           highlightedValue: option
         };
       }
-      function handleKeyDown(event, state, props) {
+      function handleKeyDown(event, state, props2) {
         const {
           options,
           isOptionDisabled,
           disableListWrap,
           disabledItemsFocusable,
           optionComparer
-        } = props;
+        } = props2;
         const moveHighlight = (diff, direction, wrapAround) => {
           return getNewHighlightedOption(options, state.highlightedValue, diff, direction, disabledItemsFocusable != null ? disabledItemsFocusable : false, isOptionDisabled != null ? isOptionDisabled : () => false, wrapAround, optionComparer);
         };
@@ -38973,7 +38977,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             if (state.highlightedValue === null) {
               return state;
             }
-            return handleOptionSelection(state.highlightedValue, state, props);
+            return handleOptionSelection(state.highlightedValue, state, props2);
           default:
             break;
         }
@@ -38992,7 +38996,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return text.indexOf(searchString) === 0;
       };
-      function handleTextNavigation(state, searchString, props) {
+      function handleTextNavigation(state, searchString, props2) {
         const {
           options,
           isOptionDisabled,
@@ -39000,7 +39004,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           disabledItemsFocusable,
           optionComparer,
           optionStringifier
-        } = props;
+        } = props2;
         const moveHighlight = (previouslyHighlightedOption) => {
           return getNewHighlightedOption(options, previouslyHighlightedOption, 1, "next", disabledItemsFocusable != null ? disabledItemsFocusable : false, isOptionDisabled != null ? isOptionDisabled : () => false, !(disableListWrap != null ? disableListWrap : false), optionComparer);
         };
@@ -39019,12 +39023,12 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return state;
       }
-      function handleOptionsChange(options, previousOptions, state, props) {
+      function handleOptionsChange(options, previousOptions, state, props2) {
         var _options$find, _options$find2;
         const {
           multiple,
           optionComparer
-        } = props;
+        } = props2;
         const newHighlightedOption = state.highlightedValue == null ? null : (_options$find = options.find((option) => optionComparer(option, state.highlightedValue))) != null ? _options$find : null;
         if (multiple) {
           var _ref3;
@@ -39043,9 +39047,9 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       }
       function defaultListboxReducer(state, action) {
         const {
-          type
+          type: type2
         } = action;
-        switch (type) {
+        switch (type2) {
           case _useListbox.ActionTypes.keyDown:
             return handleKeyDown(action.event, state, action.props);
           case _useListbox.ActionTypes.optionClick:
@@ -39121,10 +39125,10 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return newObj;
       }
-      function getControlledState(internalState, props) {
-        if (props.value !== void 0) {
+      function getControlledState(internalState, props2) {
+        if (props2.value !== void 0) {
           return (0, _extends2.default)({}, internalState, {
-            selectedValue: props.value
+            selectedValue: props2.value
           });
         }
         return internalState;
@@ -39171,16 +39175,16 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           lastActionRef.current = null;
         }, [nextState.selectedValue, nextState.highlightedValue, internalPreviousState, propsRef, lastActionRef]);
       }
-      function useControllableReducer(internalReducer, externalReducer, props) {
+      function useControllableReducer(internalReducer, externalReducer, props2) {
         var _ref;
         const {
           value,
           defaultValue
-        } = props;
-        const propsRef = React59.useRef(props);
-        propsRef.current = props;
+        } = props2;
+        const propsRef = React59.useRef(props2);
+        propsRef.current = props2;
         const actionRef = React59.useRef(null);
-        const initialSelectedValue = (_ref = value === void 0 ? defaultValue : value) != null ? _ref : props.multiple ? [] : null;
+        const initialSelectedValue = (_ref = value === void 0 ? defaultValue : value) != null ? _ref : props2.multiple ? [] : null;
         const initalState = {
           highlightedValue: null,
           selectedValue: initialSelectedValue
@@ -39261,7 +39265,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       var defaultOptionComparer = (optionA, optionB) => optionA === optionB;
       var defaultIsOptionDisabled = () => false;
       var defaultOptionStringifier = (option) => typeof option === "string" ? option : String(option);
-      function useListbox(props) {
+      function useListbox(props2) {
         var _props$optionIdGenera, _options$highlightedI;
         const {
           disabledItemsFocusable = false,
@@ -39275,13 +39279,13 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           optionStringifier = defaultOptionStringifier,
           options,
           stateReducer: externalReducer
-        } = props;
+        } = props2;
         const id = (0, _utils.unstable_useId)(idProp);
         function defaultIdGenerator(_3, index) {
           return `${id}-option-${index}`;
         }
-        const optionIdGenerator = (_props$optionIdGenera = props.optionIdGenerator) != null ? _props$optionIdGenera : defaultIdGenerator;
-        const propsWithDefaults = (0, _extends2.default)({}, props, {
+        const optionIdGenerator = (_props$optionIdGenera = props2.optionIdGenerator) != null ? _props$optionIdGenera : defaultIdGenerator;
+        const propsWithDefaults = (0, _extends2.default)({}, props2, {
           disabledItemsFocusable,
           disableListWrap,
           focusManagement,
@@ -40377,8 +40381,8 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       function mergePaddingObject(paddingObject) {
         return Object.assign({}, getFreshSideObject(), paddingObject);
       }
-      function expandToHashMap(value, keys) {
-        return keys.reduce(function(hashMap, key) {
+      function expandToHashMap(value, keys2) {
+        return keys2.reduce(function(hashMap, key) {
           hashMap[key] = value;
           return hashMap;
         }, {});
@@ -41321,12 +41325,12 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       function getContainer(container2) {
         return typeof container2 === "function" ? container2() : container2;
       }
-      var Portal = /* @__PURE__ */ React59.forwardRef(function Portal2(props, ref) {
+      var Portal = /* @__PURE__ */ React59.forwardRef(function Portal2(props2, ref) {
         const {
           children,
           container: container2,
           disablePortal = false
-        } = props;
+        } = props2;
         const [mountNode, setMountNode] = React59.useState(null);
         const handleRef = (0, _utils.unstable_useForkRef)(/* @__PURE__ */ React59.isValidElement(children) ? children.ref : null, ref);
         (0, _utils.unstable_useEnhancedEffect)(() => {
@@ -41494,7 +41498,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         return (0, _composeClasses.default)(slots, _popperUnstyledClasses.getPopperUnstyledUtilityClass, {});
       };
       var defaultPopperOptions = {};
-      var PopperTooltip = /* @__PURE__ */ React59.forwardRef(function PopperTooltip2(props, ref) {
+      var PopperTooltip = /* @__PURE__ */ React59.forwardRef(function PopperTooltip2(props2, ref) {
         var _ref;
         const {
           anchorEl,
@@ -41511,7 +41515,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           popperOptions,
           popperRef: popperRefProp,
           TransitionProps
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const tooltipRef = React59.useRef(null);
         const ownRef = (0, _utils.unstable_useForkRef)(tooltipRef, ref);
         const popperRef = React59.useRef(null);
@@ -41597,14 +41601,14 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             role: "tooltip",
             ref: ownRef
           },
-          ownerState: (0, _extends2.default)({}, props, ownerState),
+          ownerState: (0, _extends2.default)({}, props2, ownerState),
           className: classes.root
         });
         return /* @__PURE__ */ (0, _jsxRuntime.jsx)(Root2, (0, _extends2.default)({}, rootProps, {
           children: typeof children === "function" ? children(childProps) : children
         }));
       });
-      var PopperUnstyled = /* @__PURE__ */ React59.forwardRef(function PopperUnstyled2(props, ref) {
+      var PopperUnstyled = /* @__PURE__ */ React59.forwardRef(function PopperUnstyled2(props2, ref) {
         const {
           anchorEl,
           children,
@@ -41619,7 +41623,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           popperRef,
           style: style2,
           transition = false
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded210);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded210);
         const [exited, setExited] = React59.useState(true);
         const handleEnter = () => {
           setExited(false);
@@ -41661,9 +41665,9 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         });
       });
       true ? PopperUnstyled.propTypes = {
-        anchorEl: (0, _utils.chainPropTypes)(_propTypes.default.oneOfType([_utils.HTMLElementType, _propTypes.default.object, _propTypes.default.func]), (props) => {
-          if (props.open) {
-            const resolvedAnchorEl = resolveAnchorEl(props.anchorEl);
+        anchorEl: (0, _utils.chainPropTypes)(_propTypes.default.oneOfType([_utils.HTMLElementType, _propTypes.default.object, _propTypes.default.func]), (props2) => {
+          if (props2.open) {
+            const resolvedAnchorEl = resolveAnchorEl(props2.anchorEl);
             if (resolvedAnchorEl && resolvedAnchorEl.nodeType === 1) {
               const box = resolvedAnchorEl.getBoundingClientRect();
               if (box.top === 0 && box.left === 0 && box.right === 0 && box.bottom === 0) {
@@ -41802,7 +41806,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _menuUnstyledClasses.getMenuUnstyledUtilityClass, {});
       }
-      var MenuUnstyled = /* @__PURE__ */ React59.forwardRef(function MenuUnstyled2(props, forwardedRef) {
+      var MenuUnstyled = /* @__PURE__ */ React59.forwardRef(function MenuUnstyled2(props2, forwardedRef) {
         var _ref, _components$Listbox;
         const {
           actions,
@@ -41815,7 +41819,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           listboxId,
           onClose,
           open = false
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const {
           registerItem,
           unregisterItem,
@@ -41833,7 +41837,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           highlightFirstItem,
           highlightLastItem
         }), [highlightFirstItem, highlightLastItem]);
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           open
         });
         const classes = getUtilityClasses(ownerState);
@@ -42132,13 +42136,13 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return newObj;
       }
-      function useMenuItem(props) {
+      function useMenuItem(props2) {
         var _itemState$disabled;
         const {
           disabled = false,
           ref,
           label
-        } = props;
+        } = props2;
         const id = (0, _utils.unstable_useId)();
         const menuContext = React59.useContext(_MenuUnstyled.MenuUnstyledContext);
         const itemRef = React59.useRef(null);
@@ -42287,7 +42291,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _menuItemUnstyledClasses.getMenuItemUnstyledUtilityClass, {});
       }
-      var MenuItemUnstyled = /* @__PURE__ */ React59.forwardRef(function MenuItemUnstyled2(props, ref) {
+      var MenuItemUnstyled = /* @__PURE__ */ React59.forwardRef(function MenuItemUnstyled2(props2, ref) {
         var _ref;
         const {
           children,
@@ -42296,7 +42300,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           components = {},
           componentsProps = {},
           label
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const {
           getRootProps,
           disabled,
@@ -42306,7 +42310,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           ref,
           label
         });
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           disabled,
           focusVisible
         });
@@ -42533,10 +42537,10 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         });
         return idx;
       }
-      function handleContainer(containerInfo, props) {
+      function handleContainer(containerInfo, props2) {
         const restoreStyle = [];
         const container2 = containerInfo.container;
-        if (!props.disableScrollLock) {
+        if (!props2.disableScrollLock) {
           if (isOverflowing(container2)) {
             const scrollbarSize = (0, _utils.unstable_getScrollbarSize)((0, _utils.unstable_ownerDocument)(container2));
             restoreStyle.push({
@@ -42634,11 +42638,11 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           });
           return modalIndex;
         }
-        mount(modal, props) {
+        mount(modal, props2) {
           const containerIndex = findIndexOf(this.containers, (item) => item.modals.indexOf(modal) !== -1);
           const containerInfo = this.containers[containerIndex];
           if (!containerInfo.restore) {
-            containerInfo.restore = handleContainer(containerInfo, props);
+            containerInfo.restore = handleContainer(containerInfo, props2);
           }
         }
         remove(modal, ariaHiddenState = true) {
@@ -42770,11 +42774,11 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       function getContainer(container2) {
         return typeof container2 === "function" ? container2() : container2;
       }
-      function getHasTransition(props) {
-        return props.children ? props.children.props.hasOwnProperty("in") : false;
+      function getHasTransition(props2) {
+        return props2.children ? props2.children.props.hasOwnProperty("in") : false;
       }
       var defaultManager = new _ModalManager.default();
-      var ModalUnstyled2 = /* @__PURE__ */ React59.forwardRef(function ModalUnstyled3(props, ref) {
+      var ModalUnstyled2 = /* @__PURE__ */ React59.forwardRef(function ModalUnstyled3(props2, ref) {
         var _props$ariaHidden;
         const {
           children,
@@ -42799,14 +42803,14 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           open,
           onTransitionEnter,
           onTransitionExited
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const [exited, setExited] = React59.useState(true);
         const modal = React59.useRef({});
         const mountNodeRef = React59.useRef(null);
         const modalRef = React59.useRef(null);
         const handleRef = (0, _utils.unstable_useForkRef)(modalRef, ref);
-        const hasTransition = getHasTransition(props);
-        const ariaHiddenProp = (_props$ariaHidden = props["aria-hidden"]) != null ? _props$ariaHidden : true;
+        const hasTransition = getHasTransition(props2);
+        const ariaHiddenProp = (_props$ariaHidden = props2["aria-hidden"]) != null ? _props$ariaHidden : true;
         const getDoc = () => (0, _utils.unstable_ownerDocument)(mountNodeRef.current);
         const getModal = () => {
           modal.current.modalRef = modalRef.current;
@@ -42853,7 +42857,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             handleClose();
           }
         }, [open, handleClose, hasTransition, closeAfterTransition, handleOpen]);
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           classes: classesProp,
           closeAfterTransition,
           disableAutoFocus,
@@ -43223,7 +43227,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return newObj;
       }
-      function useSelect(props) {
+      function useSelect(props2) {
         const {
           buttonRef: buttonRefProp,
           defaultValue,
@@ -43237,7 +43241,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           options,
           optionStringifier = _defaultOptionStringifier.default,
           value: valueProp
-        } = props;
+        } = props2;
         const buttonRef = React59.useRef(null);
         const handleButtonRef = (0, _utils.unstable_useForkRef)(buttonRefProp, buttonRef);
         const listboxRef = React59.useRef(null);
@@ -43346,10 +43350,10 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         });
         const selectedOption = React59.useMemo(() => {
           var _props$options$find;
-          return props.multiple ? props.options.filter((o) => value.includes(o.value)) : (_props$options$find = props.options.find((o) => o.value === value)) != null ? _props$options$find : null;
-        }, [props.multiple, props.options, value]);
+          return props2.multiple ? props2.options.filter((o) => value.includes(o.value)) : (_props$options$find = props2.options.find((o) => o.value === value)) != null ? _props$options$find : null;
+        }, [props2.multiple, props2.options, value]);
         let useListboxParameters;
-        if (props.multiple) {
+        if (props2.multiple) {
           const onChangeMultiple = onChange;
           useListboxParameters = {
             id: listboxId,
@@ -43602,7 +43606,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _selectUnstyledClasses.getSelectUnstyledUtilityClass, {});
       }
-      var MultiSelectUnstyled = /* @__PURE__ */ React59.forwardRef(function MultiSelectUnstyled2(props, forwardedRef) {
+      var MultiSelectUnstyled = /* @__PURE__ */ React59.forwardRef(function MultiSelectUnstyled2(props2, forwardedRef) {
         var _props$renderValue, _ref, _components$Listbox, _components$Popper;
         const {
           autoFocus,
@@ -43621,8 +43625,8 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           onListboxOpenChange,
           optionStringifier = _defaultOptionStringifier.default,
           value: valueProp
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
-        const renderValue = (_props$renderValue = props.renderValue) != null ? _props$renderValue : defaultRenderMultipleValues;
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
+        const renderValue = (_props$renderValue = props2.renderValue) != null ? _props$renderValue : defaultRenderMultipleValues;
         const [groupedOptions, setGroupedOptions] = React59.useState([]);
         const options = React59.useMemo(() => (0, _utils2.flattenOptionGroups)(groupedOptions), [groupedOptions]);
         const [listboxOpen, setListboxOpen] = (0, _utils.unstable_useControlled)({
@@ -43675,7 +43679,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           optionStringifier,
           value: valueProp
         });
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           active: buttonActive,
           defaultListboxOpen,
           disabled,
@@ -43871,12 +43875,12 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return newObj;
       }
-      function NoSsr(props) {
+      function NoSsr(props2) {
         const {
           children,
           defer = false,
           fallback = null
-        } = props;
+        } = props2;
         const [mountedState, setMountedState] = React59.useState(false);
         (0, _utils.unstable_useEnhancedEffect)(() => {
           if (!defer) {
@@ -43970,13 +43974,13 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _optionGroupUnstyledClasses.getOptionGroupUnstyledUtilityClass, {});
       }
-      var OptionGroupUnstyled = /* @__PURE__ */ _react.default.forwardRef(function OptionGroupUnstyled2(props, ref) {
+      var OptionGroupUnstyled = /* @__PURE__ */ _react.default.forwardRef(function OptionGroupUnstyled2(props2, ref) {
         const {
           component,
           components = {},
           disabled = false,
           componentsProps = {}
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const Root2 = component || (components == null ? void 0 : components.Root) || "li";
         const Label = (components == null ? void 0 : components.Label) || "span";
         const List3 = (components == null ? void 0 : components.List) || "ul";
@@ -43988,26 +43992,26 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           additionalProps: {
             ref
           },
-          ownerState: props,
+          ownerState: props2,
           className: classes.root
         });
         const labelProps = (0, _utils.useSlotProps)({
           elementType: Label,
           externalSlotProps: componentsProps.label,
-          ownerState: props,
+          ownerState: props2,
           className: classes.label
         });
         const listProps = (0, _utils.useSlotProps)({
           elementType: List3,
           externalSlotProps: componentsProps.list,
-          ownerState: props,
+          ownerState: props2,
           className: classes.list
         });
         return /* @__PURE__ */ (0, _jsxRuntime.jsxs)(Root2, (0, _extends2.default)({}, rootProps, {
           children: [/* @__PURE__ */ (0, _jsxRuntime.jsx)(Label, (0, _extends2.default)({}, labelProps, {
-            children: props.label
+            children: props2.label
           })), /* @__PURE__ */ (0, _jsxRuntime.jsx)(List3, (0, _extends2.default)({}, listProps, {
-            children: props.children
+            children: props2.children
           }))]
         }));
       });
@@ -44189,7 +44193,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _optionUnstyledClasses.getOptionUnstyledUtilityClass, {});
       }
-      var OptionUnstyled = /* @__PURE__ */ _react.default.forwardRef(function OptionUnstyled2(props, ref) {
+      var OptionUnstyled = /* @__PURE__ */ _react.default.forwardRef(function OptionUnstyled2(props2, ref) {
         const {
           children,
           component,
@@ -44198,7 +44202,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           disabled,
           value,
           label
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const selectContext = _react.default.useContext(_SelectUnstyledContext.SelectUnstyledContext);
         if (!selectContext) {
           throw new Error("OptionUnstyled must be used within a SelectUnstyled");
@@ -44212,7 +44216,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         const optionState = selectContext.getOptionState(selectOption);
         const optionProps = selectContext.getOptionProps(selectOption);
         const listboxRef = selectContext.listboxRef;
-        const ownerState = (0, _extends2.default)({}, props, optionState);
+        const ownerState = (0, _extends2.default)({}, props2, optionState);
         const optionRef = _react.default.useRef(null);
         const handleRef = (0, _utils.unstable_useForkRef)(ref, optionRef);
         _react.default.useEffect(() => {
@@ -44456,7 +44460,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _selectUnstyledClasses.getSelectUnstyledUtilityClass, {});
       }
-      var SelectUnstyled = /* @__PURE__ */ React59.forwardRef(function SelectUnstyled2(props, forwardedRef) {
+      var SelectUnstyled = /* @__PURE__ */ React59.forwardRef(function SelectUnstyled2(props2, forwardedRef) {
         var _ref, _components$Listbox, _components$Popper;
         const {
           autoFocus,
@@ -44476,7 +44480,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           optionStringifier = _defaultOptionStringifier.default,
           renderValue: renderValueProp,
           value: valueProp
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const renderValue = renderValueProp != null ? renderValueProp : defaultRenderSingleValue;
         const [groupedOptions, setGroupedOptions] = React59.useState([]);
         const options = React59.useMemo(() => (0, _utils2.flattenOptionGroups)(groupedOptions), [groupedOptions]);
@@ -44530,7 +44534,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           optionStringifier,
           value: valueProp
         });
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           active: buttonActive,
           defaultListboxOpen,
           disabled,
@@ -44860,10 +44864,10 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return newObj;
       }
-      var useValueLabelClasses = (props) => {
+      var useValueLabelClasses = (props2) => {
         const {
           open
-        } = props;
+        } = props2;
         const utilityClasses = {
           offset: (0, _clsx.default)(open && _sliderUnstyledClasses.default.valueLabelOpen),
           circle: _sliderUnstyledClasses.default.valueLabelCircle,
@@ -44871,13 +44875,13 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return utilityClasses;
       };
-      function SliderValueLabelUnstyled2(props) {
+      function SliderValueLabelUnstyled2(props2) {
         const {
           children,
           className,
           value
-        } = props;
-        const classes = useValueLabelClasses(props);
+        } = props2;
+        const classes = useValueLabelClasses(props2);
         return /* @__PURE__ */ React59.cloneElement(children, {
           className: (0, _clsx.default)(children.props.className)
         }, /* @__PURE__ */ (0, _jsxRuntime.jsxs)(React59.Fragment, {
@@ -45592,7 +45596,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       var Forward = ({
         children
       }) => children;
-      var SliderUnstyled2 = /* @__PURE__ */ React59.forwardRef(function SliderUnstyled3(props, ref) {
+      var SliderUnstyled2 = /* @__PURE__ */ React59.forwardRef(function SliderUnstyled3(props2, ref) {
         var _ref, _components$Rail, _components$Track, _components$Thumb, _components$ValueLabe, _components$Mark, _components$MarkLabel;
         const {
           "aria-label": ariaLabel,
@@ -45617,8 +45621,8 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           isRtl = false,
           components = {},
           componentsProps = {}
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
-        const ownerState = (0, _extends2.default)({}, props, {
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
+        const ownerState = (0, _extends2.default)({}, props2, {
           marks: marksProp,
           classes: classesProp,
           disabled,
@@ -45779,17 +45783,17 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }));
       });
       true ? SliderUnstyled2.propTypes = {
-        "aria-label": (0, _utils.chainPropTypes)(_propTypes.default.string, (props) => {
-          const range = Array.isArray(props.value || props.defaultValue);
-          if (range && props["aria-label"] != null) {
+        "aria-label": (0, _utils.chainPropTypes)(_propTypes.default.string, (props2) => {
+          const range = Array.isArray(props2.value || props2.defaultValue);
+          if (range && props2["aria-label"] != null) {
             return new Error("MUI: You need to use the `getAriaLabel` prop instead of `aria-label` when using a range slider.");
           }
           return null;
         }),
         "aria-labelledby": _propTypes.default.string,
-        "aria-valuetext": (0, _utils.chainPropTypes)(_propTypes.default.string, (props) => {
-          const range = Array.isArray(props.value || props.defaultValue);
-          if (range && props["aria-valuetext"] != null) {
+        "aria-valuetext": (0, _utils.chainPropTypes)(_propTypes.default.string, (props2) => {
+          const range = Array.isArray(props2.value || props2.defaultValue);
+          if (range && props2["aria-valuetext"] != null) {
             return new Error("MUI: You need to use the `getAriaValueText` prop instead of `aria-valuetext` when using a range slider.");
           }
           return null;
@@ -46198,7 +46202,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _snackbarUnstyledClasses.getSnackbarUnstyledUtilityClass, void 0);
       };
-      var SnackbarUnstyled = /* @__PURE__ */ React59.forwardRef(function SnackbarUnstyled2(props, ref) {
+      var SnackbarUnstyled = /* @__PURE__ */ React59.forwardRef(function SnackbarUnstyled2(props2, ref) {
         const {
           autoHideDuration = null,
           children,
@@ -46210,12 +46214,12 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           onClose,
           open,
           resumeHideDuration
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const classes = useUtilityClasses21();
         const {
           getRootProps,
           onClickAway
-        } = (0, _useSnackbar.default)((0, _extends2.default)({}, props, {
+        } = (0, _useSnackbar.default)((0, _extends2.default)({}, props2, {
           autoHideDuration,
           disableWindowBlurListener,
           onClose,
@@ -46223,7 +46227,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           resumeHideDuration,
           ref
         }));
-        const ownerState = props;
+        const ownerState = props2;
         const Root2 = component || components.Root || "div";
         const rootProps = (0, _utils.useSlotProps)({
           elementType: Root2,
@@ -46474,7 +46478,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         }
         return newObj;
       }
-      function useSwitch(props) {
+      function useSwitch(props2) {
         const {
           checked: checkedProp,
           defaultChecked,
@@ -46485,7 +46489,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           onFocusVisible,
           readOnly,
           required
-        } = props;
+        } = props2;
         const [checked, setCheckedState] = (0, _utils.unstable_useControlled)({
           controlled: checkedProp,
           default: Boolean(defaultChecked),
@@ -46655,7 +46659,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _switchUnstyledClasses.getSwitchUnstyledUtilityClass, {});
       };
-      var SwitchUnstyled = /* @__PURE__ */ React59.forwardRef(function SwitchUnstyled2(props, ref) {
+      var SwitchUnstyled = /* @__PURE__ */ React59.forwardRef(function SwitchUnstyled2(props2, ref) {
         var _ref, _components$Thumb, _components$Input, _components$Track;
         const {
           checked: checkedProp,
@@ -46669,7 +46673,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           onFocus,
           onFocusVisible,
           readOnly: readOnlyProp
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const useSwitchProps = {
           checked: checkedProp,
           defaultChecked,
@@ -46687,7 +46691,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           focusVisible,
           readOnly
         } = (0, _useSwitch.default)(useSwitchProps);
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           checked,
           disabled,
           focusVisible,
@@ -46968,10 +46972,10 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       var BackPageIconDefault = () => _span4 || (_span4 = /* @__PURE__ */ (0, _jsxRuntime.jsx)("span", {
         children: "\u21FD"
       }));
-      function defaultGetAriaLabel(type) {
-        return `Go to ${type} page`;
+      function defaultGetAriaLabel(type2) {
+        return `Go to ${type2} page`;
       }
-      var TablePaginationActionsUnstyled = /* @__PURE__ */ React59.forwardRef(function TablePaginationActionsUnstyled2(props, ref) {
+      var TablePaginationActionsUnstyled = /* @__PURE__ */ React59.forwardRef(function TablePaginationActionsUnstyled2(props2, ref) {
         var _ref, _components$Root, _components$FirstButt, _components$LastButto, _components$NextButto, _components$BackButto, _components$LastPageI, _components$FirstPage, _components$NextPageI, _components$BackPageI;
         const {
           component,
@@ -46985,8 +46989,8 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           showFirstButton = false,
           showLastButton = false,
           direction
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
-        const ownerState = props;
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
+        const ownerState = props2;
         const handleFirstPageButtonClick = (event) => {
           onPageChange(event, 0);
         };
@@ -47165,8 +47169,8 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       }) {
         return `${from}\u2013${to} of ${count !== -1 ? count : `more than ${to}`}`;
       }
-      function defaultGetAriaLabel(type) {
-        return `Go to ${type} page`;
+      function defaultGetAriaLabel(type2) {
+        return `Go to ${type2} page`;
       }
       var useUtilityClasses21 = () => {
         const slots = {
@@ -47183,7 +47187,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _tablePaginationUnstyledClasses.getTablePaginationUnstyledUtilityClass, {});
       };
-      var TablePaginationUnstyled = /* @__PURE__ */ React59.forwardRef(function TablePaginationUnstyled2(props, ref) {
+      var TablePaginationUnstyled = /* @__PURE__ */ React59.forwardRef(function TablePaginationUnstyled2(props2, ref) {
         var _ref, _components$Select, _components$Actions, _components$MenuItem, _components$SelectLab, _components$Displayed, _components$Toolbar, _components$Spacer;
         const {
           component,
@@ -47201,8 +47205,8 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           rowsPerPage,
           rowsPerPageOptions = [10, 25, 50, 100],
           selectId: selectIdProp
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
-        const ownerState = props;
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
+        const ownerState = props2;
         const classes = useUtilityClasses21();
         let colSpan;
         if (!component || component === "td" || !(0, _isHostComponent.default)(component)) {
@@ -47348,12 +47352,12 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         labelRowsPerPage: _propTypes.default.node,
         onPageChange: _propTypes.default.func.isRequired,
         onRowsPerPageChange: _propTypes.default.func,
-        page: (0, _utils.chainPropTypes)(_utils.integerPropType.isRequired, (props) => {
+        page: (0, _utils.chainPropTypes)(_utils.integerPropType.isRequired, (props2) => {
           const {
             count,
             page,
             rowsPerPage
-          } = props;
+          } = props2;
           if (count === -1) {
             return null;
           }
@@ -47791,7 +47795,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _tabsUnstyledClasses.getTabsUnstyledUtilityClass, {});
       };
-      var TabsUnstyled = /* @__PURE__ */ React59.forwardRef((props, ref) => {
+      var TabsUnstyled = /* @__PURE__ */ React59.forwardRef((props2, ref) => {
         var _ref;
         const {
           children,
@@ -47800,11 +47804,11 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           component,
           components = {},
           componentsProps = {}
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const {
           tabsContextValue
-        } = (0, _useTabs.default)(props);
-        const ownerState = (0, _extends2.default)({}, props, {
+        } = (0, _useTabs.default)(props2);
+        const ownerState = (0, _extends2.default)({}, props2, {
           orientation,
           direction
         });
@@ -48100,19 +48104,19 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _tabPanelUnstyledClasses.getTabPanelUnstyledUtilityClass, {});
       };
-      var TabPanelUnstyled = /* @__PURE__ */ React59.forwardRef(function TabPanelUnstyled2(props, ref) {
+      var TabPanelUnstyled = /* @__PURE__ */ React59.forwardRef(function TabPanelUnstyled2(props2, ref) {
         var _ref;
         const {
           children,
           components = {},
           componentsProps = {},
           component
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const {
           hidden,
           getRootProps
-        } = (0, _useTabPanel.default)(props);
-        const ownerState = (0, _extends2.default)({}, props, {
+        } = (0, _useTabPanel.default)(props2);
+        const ownerState = (0, _extends2.default)({}, props2, {
           hidden
         });
         const classes = useUtilityClasses21(ownerState);
@@ -48556,22 +48560,22 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _tabsListUnstyledClasses.getTabsListUnstyledUtilityClass, {});
       };
-      var TabsListUnstyled = /* @__PURE__ */ React59.forwardRef((props, ref) => {
+      var TabsListUnstyled = /* @__PURE__ */ React59.forwardRef((props2, ref) => {
         var _ref;
         const {
           component,
           components = {},
           componentsProps = {}
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const {
           isRtl,
           orientation,
           getRootProps,
           processChildren
-        } = (0, _useTabsList.default)((0, _extends2.default)({}, props, {
+        } = (0, _useTabsList.default)((0, _extends2.default)({}, props2, {
           ref
         }));
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           isRtl,
           orientation
         });
@@ -48921,7 +48925,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
         };
         return (0, _composeClasses.default)(slots, _tabUnstyledClasses.getTabUnstyledUtilityClass, {});
       };
-      var TabUnstyled = /* @__PURE__ */ React59.forwardRef(function TabUnstyled2(props, ref) {
+      var TabUnstyled = /* @__PURE__ */ React59.forwardRef(function TabUnstyled2(props2, ref) {
         var _ref;
         const {
           action,
@@ -48930,7 +48934,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           component,
           components = {},
           componentsProps = {}
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const tabRef = React59.useRef();
         const handleRef = (0, _utils.unstable_useForkRef)(tabRef, ref);
         const {
@@ -48939,7 +48943,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           setFocusVisible,
           selected,
           getRootProps
-        } = (0, _useTab.default)((0, _extends2.default)({}, props, {
+        } = (0, _useTab.default)((0, _extends2.default)({}, props2, {
           ref: handleRef
         }));
         React59.useImperativeHandle(action, () => ({
@@ -48948,7 +48952,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             tabRef.current.focus();
           }
         }), [setFocusVisible]);
-        const ownerState = (0, _extends2.default)({}, props, {
+        const ownerState = (0, _extends2.default)({}, props2, {
           active,
           focusVisible,
           disabled,
@@ -49206,14 +49210,14 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
       function isEmpty(obj) {
         return obj === void 0 || obj === null || Object.keys(obj).length === 0;
       }
-      var TextareaAutosize = /* @__PURE__ */ React59.forwardRef(function TextareaAutosize2(props, ref) {
+      var TextareaAutosize = /* @__PURE__ */ React59.forwardRef(function TextareaAutosize2(props2, ref) {
         const {
           onChange,
           maxRows,
           minRows = 1,
           style: style2,
           value
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
         const {
           current: isControlled
         } = React59.useRef(value != null);
@@ -49231,7 +49235,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
           }
           const inputShallow = shadowRef.current;
           inputShallow.style.width = computedStyle.width;
-          inputShallow.value = input.value || props.placeholder || "x";
+          inputShallow.value = input.value || props2.placeholder || "x";
           if (inputShallow.value.slice(-1) === "\n") {
             inputShallow.value += " ";
           }
@@ -49255,7 +49259,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             outerHeightStyle,
             overflow
           };
-        }, [maxRows, minRows, props.placeholder]);
+        }, [maxRows, minRows, props2.placeholder]);
         const updateState = (prevState, newState) => {
           const {
             outerHeightStyle,
@@ -49344,7 +49348,7 @@ The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rg
             }, style2)
           }, other)), /* @__PURE__ */ (0, _jsxRuntime.jsx)("textarea", {
             "aria-hidden": true,
-            className: props.className,
+            className: props2.className,
             readOnly: true,
             ref: shadowRef,
             tabIndex: -1,
@@ -50707,16 +50711,16 @@ const theme2 = createTheme({ palette: {
       function createTransitions2(inputTransitions) {
         const mergedEasing = (0, _extends2.default)({}, easing2, inputTransitions.easing);
         const mergedDuration = (0, _extends2.default)({}, duration2, inputTransitions.duration);
-        const create = (props = ["all"], options = {}) => {
+        const create = (props2 = ["all"], options = {}) => {
           const {
             duration: durationOption = mergedDuration.standard,
             easing: easingOption = mergedEasing.easeInOut,
-            delay = 0
+            delay: delay2 = 0
           } = options, other = (0, _objectWithoutPropertiesLoose2.default)(options, _excluded32);
           if (true) {
             const isString = (value) => typeof value === "string";
             const isNumber = (value) => !isNaN(parseFloat(value));
-            if (!isString(props) && !Array.isArray(props)) {
+            if (!isString(props2) && !Array.isArray(props2)) {
               console.error('MUI: Argument "props" must be a string or Array.');
             }
             if (!isNumber(durationOption) && !isString(durationOption)) {
@@ -50725,14 +50729,14 @@ const theme2 = createTheme({ palette: {
             if (!isString(easingOption)) {
               console.error('MUI: Argument "easing" must be a string.');
             }
-            if (!isNumber(delay) && !isString(delay)) {
+            if (!isNumber(delay2) && !isString(delay2)) {
               console.error('MUI: Argument "delay" must be a number or a string.');
             }
             if (Object.keys(other).length !== 0) {
               console.error(`MUI: Unrecognized argument(s) [${Object.keys(other).join(",")}].`);
             }
           }
-          return (Array.isArray(props) ? props : [props]).map((animatedProp) => `${animatedProp} ${typeof durationOption === "string" ? durationOption : formatMs2(durationOption)} ${easingOption} ${typeof delay === "string" ? delay : formatMs2(delay)}`).join(",");
+          return (Array.isArray(props2) ? props2 : [props2]).map((animatedProp) => `${animatedProp} ${typeof durationOption === "string" ? durationOption : formatMs2(durationOption)} ${easingOption} ${typeof delay2 === "string" ? delay2 : formatMs2(delay2)}`).join(",");
         };
         return (0, _extends2.default)({
           getAutoHeightDuration: getAutoHeightDuration2,
@@ -50884,11 +50888,11 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       var _system = require_system();
       var _defaultTheme = _interopRequireDefault(require_defaultTheme());
       function useThemeProps2({
-        props,
+        props: props2,
         name
       }) {
         return (0, _system.useThemeProps)({
-          props,
+          props: props2,
           name,
           defaultTheme: _defaultTheme.default
         });
@@ -51012,10 +51016,10 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       var SvgIconRoot2 = (0, _styled.default)("svg", {
         name: "MuiSvgIcon",
         slot: "Root",
-        overridesResolver: (props, styles3) => {
+        overridesResolver: (props2, styles3) => {
           const {
             ownerState
-          } = props;
+          } = props2;
           return [styles3.root, ownerState.color !== "inherit" && styles3[`color${(0, _capitalize.default)(ownerState.color)}`], styles3[`fontSize${(0, _capitalize.default)(ownerState.fontSize)}`]];
         }
       })(({
@@ -51047,7 +51051,7 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         };
       });
       var SvgIcon4 = /* @__PURE__ */ React59.forwardRef(function SvgIcon5(inProps, ref) {
-        const props = (0, _useThemeProps.default)({
+        const props2 = (0, _useThemeProps.default)({
           props: inProps,
           name: "MuiSvgIcon"
         });
@@ -51061,8 +51065,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
           inheritViewBox = false,
           titleAccess,
           viewBox = "0 0 24 24"
-        } = props, other = (0, _objectWithoutPropertiesLoose2.default)(props, _excluded32);
-        const ownerState = (0, _extends2.default)({}, props, {
+        } = props2, other = (0, _objectWithoutPropertiesLoose2.default)(props2, _excluded32);
+        const ownerState = (0, _extends2.default)({}, props2, {
           color,
           component,
           fontSize,
@@ -51242,10 +51246,10 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return newObj;
       }
       function createSvgIcon2(path, displayName) {
-        const Component = (props, ref) => /* @__PURE__ */ (0, _jsxRuntime.jsx)(_SvgIcon.default, (0, _extends2.default)({
+        const Component = (props2, ref) => /* @__PURE__ */ (0, _jsxRuntime.jsx)(_SvgIcon.default, (0, _extends2.default)({
           "data-testid": `${displayName}Icon`,
           ref
-        }, props, {
+        }, props2, {
           children: path
         }));
         if (true) {
@@ -59891,6 +59895,4870 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
     }
   });
 
+  // node_modules/dexie/dist/modern/dexie.mjs
+  var dexie_exports = {};
+  __export(dexie_exports, {
+    Dexie: () => Dexie$1,
+    RangeSet: () => RangeSet,
+    default: () => Dexie$1,
+    liveQuery: () => liveQuery,
+    mergeRanges: () => mergeRanges,
+    rangesOverlap: () => rangesOverlap
+  });
+  function extend(obj, extension) {
+    if (typeof extension !== "object")
+      return obj;
+    keys(extension).forEach(function(key) {
+      obj[key] = extension[key];
+    });
+    return obj;
+  }
+  function hasOwn(obj, prop) {
+    return _hasOwn.call(obj, prop);
+  }
+  function props(proto, extension) {
+    if (typeof extension === "function")
+      extension = extension(getProto(proto));
+    (typeof Reflect === "undefined" ? keys : Reflect.ownKeys)(extension).forEach((key) => {
+      setProp(proto, key, extension[key]);
+    });
+  }
+  function setProp(obj, prop, functionOrGetSet, options) {
+    defineProperty(obj, prop, extend(functionOrGetSet && hasOwn(functionOrGetSet, "get") && typeof functionOrGetSet.get === "function" ? { get: functionOrGetSet.get, set: functionOrGetSet.set, configurable: true } : { value: functionOrGetSet, configurable: true, writable: true }, options));
+  }
+  function derive(Child) {
+    return {
+      from: function(Parent) {
+        Child.prototype = Object.create(Parent.prototype);
+        setProp(Child.prototype, "constructor", Child);
+        return {
+          extend: props.bind(null, Child.prototype)
+        };
+      }
+    };
+  }
+  function getPropertyDescriptor(obj, prop) {
+    const pd = getOwnPropertyDescriptor(obj, prop);
+    let proto;
+    return pd || (proto = getProto(obj)) && getPropertyDescriptor(proto, prop);
+  }
+  function slice(args, start, end) {
+    return _slice.call(args, start, end);
+  }
+  function override(origFunc, overridedFactory) {
+    return overridedFactory(origFunc);
+  }
+  function assert(b) {
+    if (!b)
+      throw new Error("Assertion Failed");
+  }
+  function asap$1(fn) {
+    if (_global.setImmediate)
+      setImmediate(fn);
+    else
+      setTimeout(fn, 0);
+  }
+  function arrayToObject(array, extractor) {
+    return array.reduce((result, item, i) => {
+      var nameAndValue = extractor(item, i);
+      if (nameAndValue)
+        result[nameAndValue[0]] = nameAndValue[1];
+      return result;
+    }, {});
+  }
+  function tryCatch(fn, onerror, args) {
+    try {
+      fn.apply(null, args);
+    } catch (ex) {
+      onerror && onerror(ex);
+    }
+  }
+  function getByKeyPath(obj, keyPath) {
+    if (hasOwn(obj, keyPath))
+      return obj[keyPath];
+    if (!keyPath)
+      return obj;
+    if (typeof keyPath !== "string") {
+      var rv = [];
+      for (var i = 0, l = keyPath.length; i < l; ++i) {
+        var val = getByKeyPath(obj, keyPath[i]);
+        rv.push(val);
+      }
+      return rv;
+    }
+    var period = keyPath.indexOf(".");
+    if (period !== -1) {
+      var innerObj = obj[keyPath.substr(0, period)];
+      return innerObj === void 0 ? void 0 : getByKeyPath(innerObj, keyPath.substr(period + 1));
+    }
+    return void 0;
+  }
+  function setByKeyPath(obj, keyPath, value) {
+    if (!obj || keyPath === void 0)
+      return;
+    if ("isFrozen" in Object && Object.isFrozen(obj))
+      return;
+    if (typeof keyPath !== "string" && "length" in keyPath) {
+      assert(typeof value !== "string" && "length" in value);
+      for (var i = 0, l = keyPath.length; i < l; ++i) {
+        setByKeyPath(obj, keyPath[i], value[i]);
+      }
+    } else {
+      var period = keyPath.indexOf(".");
+      if (period !== -1) {
+        var currentKeyPath = keyPath.substr(0, period);
+        var remainingKeyPath = keyPath.substr(period + 1);
+        if (remainingKeyPath === "")
+          if (value === void 0) {
+            if (isArray(obj) && !isNaN(parseInt(currentKeyPath)))
+              obj.splice(currentKeyPath, 1);
+            else
+              delete obj[currentKeyPath];
+          } else
+            obj[currentKeyPath] = value;
+        else {
+          var innerObj = obj[currentKeyPath];
+          if (!innerObj || !hasOwn(obj, currentKeyPath))
+            innerObj = obj[currentKeyPath] = {};
+          setByKeyPath(innerObj, remainingKeyPath, value);
+        }
+      } else {
+        if (value === void 0) {
+          if (isArray(obj) && !isNaN(parseInt(keyPath)))
+            obj.splice(keyPath, 1);
+          else
+            delete obj[keyPath];
+        } else
+          obj[keyPath] = value;
+      }
+    }
+  }
+  function delByKeyPath(obj, keyPath) {
+    if (typeof keyPath === "string")
+      setByKeyPath(obj, keyPath, void 0);
+    else if ("length" in keyPath)
+      [].map.call(keyPath, function(kp) {
+        setByKeyPath(obj, kp, void 0);
+      });
+  }
+  function shallowClone(obj) {
+    var rv = {};
+    for (var m in obj) {
+      if (hasOwn(obj, m))
+        rv[m] = obj[m];
+    }
+    return rv;
+  }
+  function flatten(a) {
+    return concat.apply([], a);
+  }
+  function deepClone(any) {
+    circularRefs = typeof WeakMap !== "undefined" && /* @__PURE__ */ new WeakMap();
+    const rv = innerDeepClone(any);
+    circularRefs = null;
+    return rv;
+  }
+  function innerDeepClone(any) {
+    if (!any || typeof any !== "object")
+      return any;
+    let rv = circularRefs && circularRefs.get(any);
+    if (rv)
+      return rv;
+    if (isArray(any)) {
+      rv = [];
+      circularRefs && circularRefs.set(any, rv);
+      for (var i = 0, l = any.length; i < l; ++i) {
+        rv.push(innerDeepClone(any[i]));
+      }
+    } else if (intrinsicTypes.indexOf(any.constructor) >= 0) {
+      rv = any;
+    } else {
+      const proto = getProto(any);
+      rv = proto === Object.prototype ? {} : Object.create(proto);
+      circularRefs && circularRefs.set(any, rv);
+      for (var prop in any) {
+        if (hasOwn(any, prop)) {
+          rv[prop] = innerDeepClone(any[prop]);
+        }
+      }
+    }
+    return rv;
+  }
+  function toStringTag(o) {
+    return toString.call(o).slice(8, -1);
+  }
+  function getArrayOf(arrayLike) {
+    var i, a, x, it;
+    if (arguments.length === 1) {
+      if (isArray(arrayLike))
+        return arrayLike.slice();
+      if (this === NO_CHAR_ARRAY && typeof arrayLike === "string")
+        return [arrayLike];
+      if (it = getIteratorOf(arrayLike)) {
+        a = [];
+        while (x = it.next(), !x.done)
+          a.push(x.value);
+        return a;
+      }
+      if (arrayLike == null)
+        return [arrayLike];
+      i = arrayLike.length;
+      if (typeof i === "number") {
+        a = new Array(i);
+        while (i--)
+          a[i] = arrayLike[i];
+        return a;
+      }
+      return [arrayLike];
+    }
+    i = arguments.length;
+    a = new Array(i);
+    while (i--)
+      a[i] = arguments[i];
+    return a;
+  }
+  function setDebug(value, filter) {
+    debug = value;
+    libraryFilter = filter;
+  }
+  function getErrorWithStack() {
+    if (NEEDS_THROW_FOR_STACK)
+      try {
+        getErrorWithStack.arguments;
+        throw new Error();
+      } catch (e) {
+        return e;
+      }
+    return new Error();
+  }
+  function prettyStack(exception, numIgnoredFrames) {
+    var stack = exception.stack;
+    if (!stack)
+      return "";
+    numIgnoredFrames = numIgnoredFrames || 0;
+    if (stack.indexOf(exception.name) === 0)
+      numIgnoredFrames += (exception.name + exception.message).split("\n").length;
+    return stack.split("\n").slice(numIgnoredFrames).filter(libraryFilter).map((frame) => "\n" + frame).join("");
+  }
+  function DexieError(name, msg) {
+    this._e = getErrorWithStack();
+    this.name = name;
+    this.message = msg;
+  }
+  function getMultiErrorMessage(msg, failures) {
+    return msg + ". Errors: " + Object.keys(failures).map((key) => failures[key].toString()).filter((v, i, s) => s.indexOf(v) === i).join("\n");
+  }
+  function ModifyError(msg, failures, successCount, failedKeys) {
+    this._e = getErrorWithStack();
+    this.failures = failures;
+    this.failedKeys = failedKeys;
+    this.successCount = successCount;
+    this.message = getMultiErrorMessage(msg, failures);
+  }
+  function BulkError(msg, failures) {
+    this._e = getErrorWithStack();
+    this.name = "BulkError";
+    this.failures = Object.keys(failures).map((pos) => failures[pos]);
+    this.failuresByPos = failures;
+    this.message = getMultiErrorMessage(msg, failures);
+  }
+  function mapError(domError, message) {
+    if (!domError || domError instanceof DexieError || domError instanceof TypeError || domError instanceof SyntaxError || !domError.name || !exceptionMap[domError.name])
+      return domError;
+    var rv = new exceptionMap[domError.name](message || domError.message, domError);
+    if ("stack" in domError) {
+      setProp(rv, "stack", { get: function() {
+        return this.inner.stack;
+      } });
+    }
+    return rv;
+  }
+  function nop() {
+  }
+  function mirror(val) {
+    return val;
+  }
+  function pureFunctionChain(f1, f2) {
+    if (f1 == null || f1 === mirror)
+      return f2;
+    return function(val) {
+      return f2(f1(val));
+    };
+  }
+  function callBoth(on1, on2) {
+    return function() {
+      on1.apply(this, arguments);
+      on2.apply(this, arguments);
+    };
+  }
+  function hookCreatingChain(f1, f2) {
+    if (f1 === nop)
+      return f2;
+    return function() {
+      var res = f1.apply(this, arguments);
+      if (res !== void 0)
+        arguments[0] = res;
+      var onsuccess = this.onsuccess, onerror = this.onerror;
+      this.onsuccess = null;
+      this.onerror = null;
+      var res2 = f2.apply(this, arguments);
+      if (onsuccess)
+        this.onsuccess = this.onsuccess ? callBoth(onsuccess, this.onsuccess) : onsuccess;
+      if (onerror)
+        this.onerror = this.onerror ? callBoth(onerror, this.onerror) : onerror;
+      return res2 !== void 0 ? res2 : res;
+    };
+  }
+  function hookDeletingChain(f1, f2) {
+    if (f1 === nop)
+      return f2;
+    return function() {
+      f1.apply(this, arguments);
+      var onsuccess = this.onsuccess, onerror = this.onerror;
+      this.onsuccess = this.onerror = null;
+      f2.apply(this, arguments);
+      if (onsuccess)
+        this.onsuccess = this.onsuccess ? callBoth(onsuccess, this.onsuccess) : onsuccess;
+      if (onerror)
+        this.onerror = this.onerror ? callBoth(onerror, this.onerror) : onerror;
+    };
+  }
+  function hookUpdatingChain(f1, f2) {
+    if (f1 === nop)
+      return f2;
+    return function(modifications) {
+      var res = f1.apply(this, arguments);
+      extend(modifications, res);
+      var onsuccess = this.onsuccess, onerror = this.onerror;
+      this.onsuccess = null;
+      this.onerror = null;
+      var res2 = f2.apply(this, arguments);
+      if (onsuccess)
+        this.onsuccess = this.onsuccess ? callBoth(onsuccess, this.onsuccess) : onsuccess;
+      if (onerror)
+        this.onerror = this.onerror ? callBoth(onerror, this.onerror) : onerror;
+      return res === void 0 ? res2 === void 0 ? void 0 : res2 : extend(res, res2);
+    };
+  }
+  function reverseStoppableEventChain(f1, f2) {
+    if (f1 === nop)
+      return f2;
+    return function() {
+      if (f2.apply(this, arguments) === false)
+        return false;
+      return f1.apply(this, arguments);
+    };
+  }
+  function promisableChain(f1, f2) {
+    if (f1 === nop)
+      return f2;
+    return function() {
+      var res = f1.apply(this, arguments);
+      if (res && typeof res.then === "function") {
+        var thiz = this, i = arguments.length, args = new Array(i);
+        while (i--)
+          args[i] = arguments[i];
+        return res.then(function() {
+          return f2.apply(thiz, args);
+        });
+      }
+      return f2.apply(this, arguments);
+    };
+  }
+  function DexiePromise(fn) {
+    if (typeof this !== "object")
+      throw new TypeError("Promises must be constructed via new");
+    this._listeners = [];
+    this.onuncatched = nop;
+    this._lib = false;
+    var psd = this._PSD = PSD;
+    if (debug) {
+      this._stackHolder = getErrorWithStack();
+      this._prev = null;
+      this._numPrev = 0;
+    }
+    if (typeof fn !== "function") {
+      if (fn !== INTERNAL)
+        throw new TypeError("Not a function");
+      this._state = arguments[1];
+      this._value = arguments[2];
+      if (this._state === false)
+        handleRejection(this, this._value);
+      return;
+    }
+    this._state = null;
+    this._value = null;
+    ++psd.ref;
+    executePromiseTask(this, fn);
+  }
+  function Listener(onFulfilled, onRejected, resolve, reject, zone) {
+    this.onFulfilled = typeof onFulfilled === "function" ? onFulfilled : null;
+    this.onRejected = typeof onRejected === "function" ? onRejected : null;
+    this.resolve = resolve;
+    this.reject = reject;
+    this.psd = zone;
+  }
+  function executePromiseTask(promise, fn) {
+    try {
+      fn((value) => {
+        if (promise._state !== null)
+          return;
+        if (value === promise)
+          throw new TypeError("A promise cannot be resolved with itself.");
+        var shouldExecuteTick = promise._lib && beginMicroTickScope();
+        if (value && typeof value.then === "function") {
+          executePromiseTask(promise, (resolve, reject) => {
+            value instanceof DexiePromise ? value._then(resolve, reject) : value.then(resolve, reject);
+          });
+        } else {
+          promise._state = true;
+          promise._value = value;
+          propagateAllListeners(promise);
+        }
+        if (shouldExecuteTick)
+          endMicroTickScope();
+      }, handleRejection.bind(null, promise));
+    } catch (ex) {
+      handleRejection(promise, ex);
+    }
+  }
+  function handleRejection(promise, reason) {
+    rejectingErrors.push(reason);
+    if (promise._state !== null)
+      return;
+    var shouldExecuteTick = promise._lib && beginMicroTickScope();
+    reason = rejectionMapper(reason);
+    promise._state = false;
+    promise._value = reason;
+    debug && reason !== null && typeof reason === "object" && !reason._promise && tryCatch(() => {
+      var origProp = getPropertyDescriptor(reason, "stack");
+      reason._promise = promise;
+      setProp(reason, "stack", {
+        get: () => stack_being_generated ? origProp && (origProp.get ? origProp.get.apply(reason) : origProp.value) : promise.stack
+      });
+    });
+    addPossiblyUnhandledError(promise);
+    propagateAllListeners(promise);
+    if (shouldExecuteTick)
+      endMicroTickScope();
+  }
+  function propagateAllListeners(promise) {
+    var listeners = promise._listeners;
+    promise._listeners = [];
+    for (var i = 0, len = listeners.length; i < len; ++i) {
+      propagateToListener(promise, listeners[i]);
+    }
+    var psd = promise._PSD;
+    --psd.ref || psd.finalize();
+    if (numScheduledCalls === 0) {
+      ++numScheduledCalls;
+      asap(() => {
+        if (--numScheduledCalls === 0)
+          finalizePhysicalTick();
+      }, []);
+    }
+  }
+  function propagateToListener(promise, listener) {
+    if (promise._state === null) {
+      promise._listeners.push(listener);
+      return;
+    }
+    var cb = promise._state ? listener.onFulfilled : listener.onRejected;
+    if (cb === null) {
+      return (promise._state ? listener.resolve : listener.reject)(promise._value);
+    }
+    ++listener.psd.ref;
+    ++numScheduledCalls;
+    asap(callListener, [cb, promise, listener]);
+  }
+  function callListener(cb, promise, listener) {
+    try {
+      currentFulfiller = promise;
+      var ret, value = promise._value;
+      if (promise._state) {
+        ret = cb(value);
+      } else {
+        if (rejectingErrors.length)
+          rejectingErrors = [];
+        ret = cb(value);
+        if (rejectingErrors.indexOf(value) === -1)
+          markErrorAsHandled(promise);
+      }
+      listener.resolve(ret);
+    } catch (e) {
+      listener.reject(e);
+    } finally {
+      currentFulfiller = null;
+      if (--numScheduledCalls === 0)
+        finalizePhysicalTick();
+      --listener.psd.ref || listener.psd.finalize();
+    }
+  }
+  function getStack(promise, stacks, limit) {
+    if (stacks.length === limit)
+      return stacks;
+    var stack = "";
+    if (promise._state === false) {
+      var failure = promise._value, errorName, message;
+      if (failure != null) {
+        errorName = failure.name || "Error";
+        message = failure.message || failure;
+        stack = prettyStack(failure, 0);
+      } else {
+        errorName = failure;
+        message = "";
+      }
+      stacks.push(errorName + (message ? ": " + message : "") + stack);
+    }
+    if (debug) {
+      stack = prettyStack(promise._stackHolder, 2);
+      if (stack && stacks.indexOf(stack) === -1)
+        stacks.push(stack);
+      if (promise._prev)
+        getStack(promise._prev, stacks, limit);
+    }
+    return stacks;
+  }
+  function linkToPreviousPromise(promise, prev) {
+    var numPrev = prev ? prev._numPrev + 1 : 0;
+    if (numPrev < LONG_STACKS_CLIP_LIMIT) {
+      promise._prev = prev;
+      promise._numPrev = numPrev;
+    }
+  }
+  function physicalTick() {
+    beginMicroTickScope() && endMicroTickScope();
+  }
+  function beginMicroTickScope() {
+    var wasRootExec = isOutsideMicroTick;
+    isOutsideMicroTick = false;
+    needsNewPhysicalTick = false;
+    return wasRootExec;
+  }
+  function endMicroTickScope() {
+    var callbacks, i, l;
+    do {
+      while (microtickQueue.length > 0) {
+        callbacks = microtickQueue;
+        microtickQueue = [];
+        l = callbacks.length;
+        for (i = 0; i < l; ++i) {
+          var item = callbacks[i];
+          item[0].apply(null, item[1]);
+        }
+      }
+    } while (microtickQueue.length > 0);
+    isOutsideMicroTick = true;
+    needsNewPhysicalTick = true;
+  }
+  function finalizePhysicalTick() {
+    var unhandledErrs = unhandledErrors;
+    unhandledErrors = [];
+    unhandledErrs.forEach((p) => {
+      p._PSD.onunhandled.call(null, p._value, p);
+    });
+    var finalizers = tickFinalizers.slice(0);
+    var i = finalizers.length;
+    while (i)
+      finalizers[--i]();
+  }
+  function run_at_end_of_this_or_next_physical_tick(fn) {
+    function finalizer() {
+      fn();
+      tickFinalizers.splice(tickFinalizers.indexOf(finalizer), 1);
+    }
+    tickFinalizers.push(finalizer);
+    ++numScheduledCalls;
+    asap(() => {
+      if (--numScheduledCalls === 0)
+        finalizePhysicalTick();
+    }, []);
+  }
+  function addPossiblyUnhandledError(promise) {
+    if (!unhandledErrors.some((p) => p._value === promise._value))
+      unhandledErrors.push(promise);
+  }
+  function markErrorAsHandled(promise) {
+    var i = unhandledErrors.length;
+    while (i)
+      if (unhandledErrors[--i]._value === promise._value) {
+        unhandledErrors.splice(i, 1);
+        return;
+      }
+  }
+  function PromiseReject(reason) {
+    return new DexiePromise(INTERNAL, false, reason);
+  }
+  function wrap(fn, errorCatcher) {
+    var psd = PSD;
+    return function() {
+      var wasRootExec = beginMicroTickScope(), outerScope = PSD;
+      try {
+        switchToZone(psd, true);
+        return fn.apply(this, arguments);
+      } catch (e) {
+        errorCatcher && errorCatcher(e);
+      } finally {
+        switchToZone(outerScope, false);
+        if (wasRootExec)
+          endMicroTickScope();
+      }
+    };
+  }
+  function newScope(fn, props2, a1, a2) {
+    var parent = PSD, psd = Object.create(parent);
+    psd.parent = parent;
+    psd.ref = 0;
+    psd.global = false;
+    psd.id = ++zone_id_counter;
+    var globalEnv = globalPSD.env;
+    psd.env = patchGlobalPromise ? {
+      Promise: DexiePromise,
+      PromiseProp: { value: DexiePromise, configurable: true, writable: true },
+      all: DexiePromise.all,
+      race: DexiePromise.race,
+      allSettled: DexiePromise.allSettled,
+      any: DexiePromise.any,
+      resolve: DexiePromise.resolve,
+      reject: DexiePromise.reject,
+      nthen: getPatchedPromiseThen(globalEnv.nthen, psd),
+      gthen: getPatchedPromiseThen(globalEnv.gthen, psd)
+    } : {};
+    if (props2)
+      extend(psd, props2);
+    ++parent.ref;
+    psd.finalize = function() {
+      --this.parent.ref || this.parent.finalize();
+    };
+    var rv = usePSD(psd, fn, a1, a2);
+    if (psd.ref === 0)
+      psd.finalize();
+    return rv;
+  }
+  function incrementExpectedAwaits() {
+    if (!task.id)
+      task.id = ++taskCounter;
+    ++task.awaits;
+    task.echoes += ZONE_ECHO_LIMIT;
+    return task.id;
+  }
+  function decrementExpectedAwaits() {
+    if (!task.awaits)
+      return false;
+    if (--task.awaits === 0)
+      task.id = 0;
+    task.echoes = task.awaits * ZONE_ECHO_LIMIT;
+    return true;
+  }
+  function onPossibleParallellAsync(possiblePromise) {
+    if (task.echoes && possiblePromise && possiblePromise.constructor === NativePromise) {
+      incrementExpectedAwaits();
+      return possiblePromise.then((x) => {
+        decrementExpectedAwaits();
+        return x;
+      }, (e) => {
+        decrementExpectedAwaits();
+        return rejection(e);
+      });
+    }
+    return possiblePromise;
+  }
+  function zoneEnterEcho(targetZone) {
+    ++totalEchoes;
+    if (!task.echoes || --task.echoes === 0) {
+      task.echoes = task.id = 0;
+    }
+    zoneStack.push(PSD);
+    switchToZone(targetZone, true);
+  }
+  function zoneLeaveEcho() {
+    var zone = zoneStack[zoneStack.length - 1];
+    zoneStack.pop();
+    switchToZone(zone, false);
+  }
+  function switchToZone(targetZone, bEnteringZone) {
+    var currentZone = PSD;
+    if (bEnteringZone ? task.echoes && (!zoneEchoes++ || targetZone !== PSD) : zoneEchoes && (!--zoneEchoes || targetZone !== PSD)) {
+      enqueueNativeMicroTask(bEnteringZone ? zoneEnterEcho.bind(null, targetZone) : zoneLeaveEcho);
+    }
+    if (targetZone === PSD)
+      return;
+    PSD = targetZone;
+    if (currentZone === globalPSD)
+      globalPSD.env = snapShot();
+    if (patchGlobalPromise) {
+      var GlobalPromise = globalPSD.env.Promise;
+      var targetEnv = targetZone.env;
+      nativePromiseProto.then = targetEnv.nthen;
+      GlobalPromise.prototype.then = targetEnv.gthen;
+      if (currentZone.global || targetZone.global) {
+        Object.defineProperty(_global, "Promise", targetEnv.PromiseProp);
+        GlobalPromise.all = targetEnv.all;
+        GlobalPromise.race = targetEnv.race;
+        GlobalPromise.resolve = targetEnv.resolve;
+        GlobalPromise.reject = targetEnv.reject;
+        if (targetEnv.allSettled)
+          GlobalPromise.allSettled = targetEnv.allSettled;
+        if (targetEnv.any)
+          GlobalPromise.any = targetEnv.any;
+      }
+    }
+  }
+  function snapShot() {
+    var GlobalPromise = _global.Promise;
+    return patchGlobalPromise ? {
+      Promise: GlobalPromise,
+      PromiseProp: Object.getOwnPropertyDescriptor(_global, "Promise"),
+      all: GlobalPromise.all,
+      race: GlobalPromise.race,
+      allSettled: GlobalPromise.allSettled,
+      any: GlobalPromise.any,
+      resolve: GlobalPromise.resolve,
+      reject: GlobalPromise.reject,
+      nthen: nativePromiseProto.then,
+      gthen: GlobalPromise.prototype.then
+    } : {};
+  }
+  function usePSD(psd, fn, a1, a2, a3) {
+    var outerScope = PSD;
+    try {
+      switchToZone(psd, true);
+      return fn(a1, a2, a3);
+    } finally {
+      switchToZone(outerScope, false);
+    }
+  }
+  function enqueueNativeMicroTask(job) {
+    nativePromiseThen.call(resolvedNativePromise, job);
+  }
+  function nativeAwaitCompatibleWrap(fn, zone, possibleAwait, cleanup) {
+    return typeof fn !== "function" ? fn : function() {
+      var outerZone = PSD;
+      if (possibleAwait)
+        incrementExpectedAwaits();
+      switchToZone(zone, true);
+      try {
+        return fn.apply(this, arguments);
+      } finally {
+        switchToZone(outerZone, false);
+        if (cleanup)
+          enqueueNativeMicroTask(decrementExpectedAwaits);
+      }
+    };
+  }
+  function getPatchedPromiseThen(origThen, zone) {
+    return function(onResolved, onRejected) {
+      return origThen.call(this, nativeAwaitCompatibleWrap(onResolved, zone), nativeAwaitCompatibleWrap(onRejected, zone));
+    };
+  }
+  function globalError(err, promise) {
+    var rv;
+    try {
+      rv = promise.onuncatched(err);
+    } catch (e) {
+    }
+    if (rv !== false)
+      try {
+        var event, eventData = { promise, reason: err };
+        if (_global.document && document.createEvent) {
+          event = document.createEvent("Event");
+          event.initEvent(UNHANDLEDREJECTION, true, true);
+          extend(event, eventData);
+        } else if (_global.CustomEvent) {
+          event = new CustomEvent(UNHANDLEDREJECTION, { detail: eventData });
+          extend(event, eventData);
+        }
+        if (event && _global.dispatchEvent) {
+          dispatchEvent(event);
+          if (!_global.PromiseRejectionEvent && _global.onunhandledrejection)
+            try {
+              _global.onunhandledrejection(event);
+            } catch (_3) {
+            }
+        }
+        if (debug && event && !event.defaultPrevented) {
+          console.warn(`Unhandled rejection: ${err.stack || err}`);
+        }
+      } catch (e) {
+      }
+  }
+  function tempTransaction(db2, mode, storeNames, fn) {
+    if (!db2.idbdb || !db2._state.openComplete && (!PSD.letThrough && !db2._vip)) {
+      if (db2._state.openComplete) {
+        return rejection(new exceptions.DatabaseClosed(db2._state.dbOpenError));
+      }
+      if (!db2._state.isBeingOpened) {
+        if (!db2._options.autoOpen)
+          return rejection(new exceptions.DatabaseClosed());
+        db2.open().catch(nop);
+      }
+      return db2._state.dbReadyPromise.then(() => tempTransaction(db2, mode, storeNames, fn));
+    } else {
+      var trans = db2._createTransaction(mode, storeNames, db2._dbSchema);
+      try {
+        trans.create();
+        db2._state.PR1398_maxLoop = 3;
+      } catch (ex) {
+        if (ex.name === errnames.InvalidState && db2.isOpen() && --db2._state.PR1398_maxLoop > 0) {
+          console.warn("Dexie: Need to reopen db");
+          db2._close();
+          return db2.open().then(() => tempTransaction(db2, mode, storeNames, fn));
+        }
+        return rejection(ex);
+      }
+      return trans._promise(mode, (resolve, reject) => {
+        return newScope(() => {
+          PSD.trans = trans;
+          return fn(resolve, reject, trans);
+        });
+      }).then((result) => {
+        return trans._completion.then(() => result);
+      });
+    }
+  }
+  function combine(filter1, filter2) {
+    return filter1 ? filter2 ? function() {
+      return filter1.apply(this, arguments) && filter2.apply(this, arguments);
+    } : filter1 : filter2;
+  }
+  function workaroundForUndefinedPrimKey(keyPath) {
+    return typeof keyPath === "string" && !/\./.test(keyPath) ? (obj) => {
+      if (obj[keyPath] === void 0 && keyPath in obj) {
+        obj = deepClone(obj);
+        delete obj[keyPath];
+      }
+      return obj;
+    } : (obj) => obj;
+  }
+  function Events(ctx) {
+    var evs = {};
+    var rv = function(eventName, subscriber) {
+      if (subscriber) {
+        var i2 = arguments.length, args = new Array(i2 - 1);
+        while (--i2)
+          args[i2 - 1] = arguments[i2];
+        evs[eventName].subscribe.apply(null, args);
+        return ctx;
+      } else if (typeof eventName === "string") {
+        return evs[eventName];
+      }
+    };
+    rv.addEventType = add;
+    for (var i = 1, l = arguments.length; i < l; ++i) {
+      add(arguments[i]);
+    }
+    return rv;
+    function add(eventName, chainFunction, defaultFunction) {
+      if (typeof eventName === "object")
+        return addConfiguredEvents(eventName);
+      if (!chainFunction)
+        chainFunction = reverseStoppableEventChain;
+      if (!defaultFunction)
+        defaultFunction = nop;
+      var context = {
+        subscribers: [],
+        fire: defaultFunction,
+        subscribe: function(cb) {
+          if (context.subscribers.indexOf(cb) === -1) {
+            context.subscribers.push(cb);
+            context.fire = chainFunction(context.fire, cb);
+          }
+        },
+        unsubscribe: function(cb) {
+          context.subscribers = context.subscribers.filter(function(fn) {
+            return fn !== cb;
+          });
+          context.fire = context.subscribers.reduce(chainFunction, defaultFunction);
+        }
+      };
+      evs[eventName] = rv[eventName] = context;
+      return context;
+    }
+    function addConfiguredEvents(cfg) {
+      keys(cfg).forEach(function(eventName) {
+        var args = cfg[eventName];
+        if (isArray(args)) {
+          add(eventName, cfg[eventName][0], cfg[eventName][1]);
+        } else if (args === "asap") {
+          var context = add(eventName, mirror, function fire() {
+            var i2 = arguments.length, args2 = new Array(i2);
+            while (i2--)
+              args2[i2] = arguments[i2];
+            context.subscribers.forEach(function(fn) {
+              asap$1(function fireEvent() {
+                fn.apply(null, args2);
+              });
+            });
+          });
+        } else
+          throw new exceptions.InvalidArgument("Invalid event config");
+      });
+    }
+  }
+  function makeClassConstructor(prototype, constructor) {
+    derive(constructor).from({ prototype });
+    return constructor;
+  }
+  function createTableConstructor(db2) {
+    return makeClassConstructor(Table.prototype, function Table2(name, tableSchema, trans) {
+      this.db = db2;
+      this._tx = trans;
+      this.name = name;
+      this.schema = tableSchema;
+      this.hook = db2._allTables[name] ? db2._allTables[name].hook : Events(null, {
+        "creating": [hookCreatingChain, nop],
+        "reading": [pureFunctionChain, mirror],
+        "updating": [hookUpdatingChain, nop],
+        "deleting": [hookDeletingChain, nop]
+      });
+    });
+  }
+  function isPlainKeyRange(ctx, ignoreLimitFilter) {
+    return !(ctx.filter || ctx.algorithm || ctx.or) && (ignoreLimitFilter ? ctx.justLimit : !ctx.replayFilter);
+  }
+  function addFilter(ctx, fn) {
+    ctx.filter = combine(ctx.filter, fn);
+  }
+  function addReplayFilter(ctx, factory, isLimitFilter) {
+    var curr = ctx.replayFilter;
+    ctx.replayFilter = curr ? () => combine(curr(), factory()) : factory;
+    ctx.justLimit = isLimitFilter && !curr;
+  }
+  function addMatchFilter(ctx, fn) {
+    ctx.isMatch = combine(ctx.isMatch, fn);
+  }
+  function getIndexOrStore(ctx, coreSchema) {
+    if (ctx.isPrimKey)
+      return coreSchema.primaryKey;
+    const index = coreSchema.getIndexByKeyPath(ctx.index);
+    if (!index)
+      throw new exceptions.Schema("KeyPath " + ctx.index + " on object store " + coreSchema.name + " is not indexed");
+    return index;
+  }
+  function openCursor(ctx, coreTable, trans) {
+    const index = getIndexOrStore(ctx, coreTable.schema);
+    return coreTable.openCursor({
+      trans,
+      values: !ctx.keysOnly,
+      reverse: ctx.dir === "prev",
+      unique: !!ctx.unique,
+      query: {
+        index,
+        range: ctx.range
+      }
+    });
+  }
+  function iter(ctx, fn, coreTrans, coreTable) {
+    const filter = ctx.replayFilter ? combine(ctx.filter, ctx.replayFilter()) : ctx.filter;
+    if (!ctx.or) {
+      return iterate(openCursor(ctx, coreTable, coreTrans), combine(ctx.algorithm, filter), fn, !ctx.keysOnly && ctx.valueMapper);
+    } else {
+      const set = {};
+      const union = (item, cursor, advance) => {
+        if (!filter || filter(cursor, advance, (result) => cursor.stop(result), (err) => cursor.fail(err))) {
+          var primaryKey = cursor.primaryKey;
+          var key = "" + primaryKey;
+          if (key === "[object ArrayBuffer]")
+            key = "" + new Uint8Array(primaryKey);
+          if (!hasOwn(set, key)) {
+            set[key] = true;
+            fn(item, cursor, advance);
+          }
+        }
+      };
+      return Promise.all([
+        ctx.or._iterate(union, coreTrans),
+        iterate(openCursor(ctx, coreTable, coreTrans), ctx.algorithm, union, !ctx.keysOnly && ctx.valueMapper)
+      ]);
+    }
+  }
+  function iterate(cursorPromise, filter, fn, valueMapper) {
+    var mappedFn = valueMapper ? (x, c, a) => fn(valueMapper(x), c, a) : fn;
+    var wrappedFn = wrap(mappedFn);
+    return cursorPromise.then((cursor) => {
+      if (cursor) {
+        return cursor.start(() => {
+          var c = () => cursor.continue();
+          if (!filter || filter(cursor, (advancer) => c = advancer, (val) => {
+            cursor.stop(val);
+            c = nop;
+          }, (e) => {
+            cursor.fail(e);
+            c = nop;
+          }))
+            wrappedFn(cursor.value, cursor, (advancer) => c = advancer);
+          c();
+        });
+      }
+    });
+  }
+  function cmp(a, b) {
+    try {
+      const ta = type(a);
+      const tb = type(b);
+      if (ta !== tb) {
+        if (ta === "Array")
+          return 1;
+        if (tb === "Array")
+          return -1;
+        if (ta === "binary")
+          return 1;
+        if (tb === "binary")
+          return -1;
+        if (ta === "string")
+          return 1;
+        if (tb === "string")
+          return -1;
+        if (ta === "Date")
+          return 1;
+        if (tb !== "Date")
+          return NaN;
+        return -1;
+      }
+      switch (ta) {
+        case "number":
+        case "Date":
+        case "string":
+          return a > b ? 1 : a < b ? -1 : 0;
+        case "binary": {
+          return compareUint8Arrays(getUint8Array(a), getUint8Array(b));
+        }
+        case "Array":
+          return compareArrays(a, b);
+      }
+    } catch (_a) {
+    }
+    return NaN;
+  }
+  function compareArrays(a, b) {
+    const al = a.length;
+    const bl = b.length;
+    const l = al < bl ? al : bl;
+    for (let i = 0; i < l; ++i) {
+      const res = cmp(a[i], b[i]);
+      if (res !== 0)
+        return res;
+    }
+    return al === bl ? 0 : al < bl ? -1 : 1;
+  }
+  function compareUint8Arrays(a, b) {
+    const al = a.length;
+    const bl = b.length;
+    const l = al < bl ? al : bl;
+    for (let i = 0; i < l; ++i) {
+      if (a[i] !== b[i])
+        return a[i] < b[i] ? -1 : 1;
+    }
+    return al === bl ? 0 : al < bl ? -1 : 1;
+  }
+  function type(x) {
+    const t = typeof x;
+    if (t !== "object")
+      return t;
+    if (ArrayBuffer.isView(x))
+      return "binary";
+    const tsTag = toStringTag(x);
+    return tsTag === "ArrayBuffer" ? "binary" : tsTag;
+  }
+  function getUint8Array(a) {
+    if (a instanceof Uint8Array)
+      return a;
+    if (ArrayBuffer.isView(a))
+      return new Uint8Array(a.buffer, a.byteOffset, a.byteLength);
+    return new Uint8Array(a);
+  }
+  function createCollectionConstructor(db2) {
+    return makeClassConstructor(Collection.prototype, function Collection2(whereClause, keyRangeGenerator) {
+      this.db = db2;
+      let keyRange = AnyRange, error = null;
+      if (keyRangeGenerator)
+        try {
+          keyRange = keyRangeGenerator();
+        } catch (ex) {
+          error = ex;
+        }
+      const whereCtx = whereClause._ctx;
+      const table = whereCtx.table;
+      const readingHook = table.hook.reading.fire;
+      this._ctx = {
+        table,
+        index: whereCtx.index,
+        isPrimKey: !whereCtx.index || table.schema.primKey.keyPath && whereCtx.index === table.schema.primKey.name,
+        range: keyRange,
+        keysOnly: false,
+        dir: "next",
+        unique: "",
+        algorithm: null,
+        filter: null,
+        replayFilter: null,
+        justLimit: true,
+        isMatch: null,
+        offset: 0,
+        limit: Infinity,
+        error,
+        or: whereCtx.or,
+        valueMapper: readingHook !== mirror ? readingHook : null
+      };
+    });
+  }
+  function simpleCompare(a, b) {
+    return a < b ? -1 : a === b ? 0 : 1;
+  }
+  function simpleCompareReverse(a, b) {
+    return a > b ? -1 : a === b ? 0 : 1;
+  }
+  function fail(collectionOrWhereClause, err, T) {
+    var collection = collectionOrWhereClause instanceof WhereClause ? new collectionOrWhereClause.Collection(collectionOrWhereClause) : collectionOrWhereClause;
+    collection._ctx.error = T ? new T(err) : new TypeError(err);
+    return collection;
+  }
+  function emptyCollection(whereClause) {
+    return new whereClause.Collection(whereClause, () => rangeEqual("")).limit(0);
+  }
+  function upperFactory(dir) {
+    return dir === "next" ? (s) => s.toUpperCase() : (s) => s.toLowerCase();
+  }
+  function lowerFactory(dir) {
+    return dir === "next" ? (s) => s.toLowerCase() : (s) => s.toUpperCase();
+  }
+  function nextCasing(key, lowerKey, upperNeedle, lowerNeedle, cmp2, dir) {
+    var length = Math.min(key.length, lowerNeedle.length);
+    var llp = -1;
+    for (var i = 0; i < length; ++i) {
+      var lwrKeyChar = lowerKey[i];
+      if (lwrKeyChar !== lowerNeedle[i]) {
+        if (cmp2(key[i], upperNeedle[i]) < 0)
+          return key.substr(0, i) + upperNeedle[i] + upperNeedle.substr(i + 1);
+        if (cmp2(key[i], lowerNeedle[i]) < 0)
+          return key.substr(0, i) + lowerNeedle[i] + upperNeedle.substr(i + 1);
+        if (llp >= 0)
+          return key.substr(0, llp) + lowerKey[llp] + upperNeedle.substr(llp + 1);
+        return null;
+      }
+      if (cmp2(key[i], lwrKeyChar) < 0)
+        llp = i;
+    }
+    if (length < lowerNeedle.length && dir === "next")
+      return key + upperNeedle.substr(key.length);
+    if (length < key.length && dir === "prev")
+      return key.substr(0, upperNeedle.length);
+    return llp < 0 ? null : key.substr(0, llp) + lowerNeedle[llp] + upperNeedle.substr(llp + 1);
+  }
+  function addIgnoreCaseAlgorithm(whereClause, match, needles, suffix) {
+    var upper, lower, compare, upperNeedles, lowerNeedles, direction, nextKeySuffix, needlesLen = needles.length;
+    if (!needles.every((s) => typeof s === "string")) {
+      return fail(whereClause, STRING_EXPECTED);
+    }
+    function initDirection(dir) {
+      upper = upperFactory(dir);
+      lower = lowerFactory(dir);
+      compare = dir === "next" ? simpleCompare : simpleCompareReverse;
+      var needleBounds = needles.map(function(needle) {
+        return { lower: lower(needle), upper: upper(needle) };
+      }).sort(function(a, b) {
+        return compare(a.lower, b.lower);
+      });
+      upperNeedles = needleBounds.map(function(nb) {
+        return nb.upper;
+      });
+      lowerNeedles = needleBounds.map(function(nb) {
+        return nb.lower;
+      });
+      direction = dir;
+      nextKeySuffix = dir === "next" ? "" : suffix;
+    }
+    initDirection("next");
+    var c = new whereClause.Collection(whereClause, () => createRange(upperNeedles[0], lowerNeedles[needlesLen - 1] + suffix));
+    c._ondirectionchange = function(direction2) {
+      initDirection(direction2);
+    };
+    var firstPossibleNeedle = 0;
+    c._addAlgorithm(function(cursor, advance, resolve) {
+      var key = cursor.key;
+      if (typeof key !== "string")
+        return false;
+      var lowerKey = lower(key);
+      if (match(lowerKey, lowerNeedles, firstPossibleNeedle)) {
+        return true;
+      } else {
+        var lowestPossibleCasing = null;
+        for (var i = firstPossibleNeedle; i < needlesLen; ++i) {
+          var casing = nextCasing(key, lowerKey, upperNeedles[i], lowerNeedles[i], compare, direction);
+          if (casing === null && lowestPossibleCasing === null)
+            firstPossibleNeedle = i + 1;
+          else if (lowestPossibleCasing === null || compare(lowestPossibleCasing, casing) > 0) {
+            lowestPossibleCasing = casing;
+          }
+        }
+        if (lowestPossibleCasing !== null) {
+          advance(function() {
+            cursor.continue(lowestPossibleCasing + nextKeySuffix);
+          });
+        } else {
+          advance(resolve);
+        }
+        return false;
+      }
+    });
+    return c;
+  }
+  function createRange(lower, upper, lowerOpen, upperOpen) {
+    return {
+      type: 2,
+      lower,
+      upper,
+      lowerOpen,
+      upperOpen
+    };
+  }
+  function rangeEqual(value) {
+    return {
+      type: 1,
+      lower: value,
+      upper: value
+    };
+  }
+  function createWhereClauseConstructor(db2) {
+    return makeClassConstructor(WhereClause.prototype, function WhereClause2(table, index, orCollection) {
+      this.db = db2;
+      this._ctx = {
+        table,
+        index: index === ":id" ? null : index,
+        or: orCollection
+      };
+      const indexedDB2 = db2._deps.indexedDB;
+      if (!indexedDB2)
+        throw new exceptions.MissingAPI();
+      this._cmp = this._ascending = indexedDB2.cmp.bind(indexedDB2);
+      this._descending = (a, b) => indexedDB2.cmp(b, a);
+      this._max = (a, b) => indexedDB2.cmp(a, b) > 0 ? a : b;
+      this._min = (a, b) => indexedDB2.cmp(a, b) < 0 ? a : b;
+      this._IDBKeyRange = db2._deps.IDBKeyRange;
+    });
+  }
+  function eventRejectHandler(reject) {
+    return wrap(function(event) {
+      preventDefault(event);
+      reject(event.target.error);
+      return false;
+    });
+  }
+  function preventDefault(event) {
+    if (event.stopPropagation)
+      event.stopPropagation();
+    if (event.preventDefault)
+      event.preventDefault();
+  }
+  function createTransactionConstructor(db2) {
+    return makeClassConstructor(Transaction.prototype, function Transaction2(mode, storeNames, dbschema, chromeTransactionDurability, parent) {
+      this.db = db2;
+      this.mode = mode;
+      this.storeNames = storeNames;
+      this.schema = dbschema;
+      this.chromeTransactionDurability = chromeTransactionDurability;
+      this.idbtrans = null;
+      this.on = Events(this, "complete", "error", "abort");
+      this.parent = parent || null;
+      this.active = true;
+      this._reculock = 0;
+      this._blockedFuncs = [];
+      this._resolve = null;
+      this._reject = null;
+      this._waitingFor = null;
+      this._waitingQueue = null;
+      this._spinCount = 0;
+      this._completion = new DexiePromise((resolve, reject) => {
+        this._resolve = resolve;
+        this._reject = reject;
+      });
+      this._completion.then(() => {
+        this.active = false;
+        this.on.complete.fire();
+      }, (e) => {
+        var wasActive = this.active;
+        this.active = false;
+        this.on.error.fire(e);
+        this.parent ? this.parent._reject(e) : wasActive && this.idbtrans && this.idbtrans.abort();
+        return rejection(e);
+      });
+    });
+  }
+  function createIndexSpec(name, keyPath, unique, multi, auto, compound, isPrimKey) {
+    return {
+      name,
+      keyPath,
+      unique,
+      multi,
+      auto,
+      compound,
+      src: (unique && !isPrimKey ? "&" : "") + (multi ? "*" : "") + (auto ? "++" : "") + nameFromKeyPath(keyPath)
+    };
+  }
+  function nameFromKeyPath(keyPath) {
+    return typeof keyPath === "string" ? keyPath : keyPath ? "[" + [].join.call(keyPath, "+") + "]" : "";
+  }
+  function createTableSchema(name, primKey, indexes) {
+    return {
+      name,
+      primKey,
+      indexes,
+      mappedClass: null,
+      idxByName: arrayToObject(indexes, (index) => [index.name, index])
+    };
+  }
+  function safariMultiStoreFix(storeNames) {
+    return storeNames.length === 1 ? storeNames[0] : storeNames;
+  }
+  function getKeyExtractor(keyPath) {
+    if (keyPath == null) {
+      return () => void 0;
+    } else if (typeof keyPath === "string") {
+      return getSinglePathKeyExtractor(keyPath);
+    } else {
+      return (obj) => getByKeyPath(obj, keyPath);
+    }
+  }
+  function getSinglePathKeyExtractor(keyPath) {
+    const split = keyPath.split(".");
+    if (split.length === 1) {
+      return (obj) => obj[keyPath];
+    } else {
+      return (obj) => getByKeyPath(obj, keyPath);
+    }
+  }
+  function arrayify(arrayLike) {
+    return [].slice.call(arrayLike);
+  }
+  function getKeyPathAlias(keyPath) {
+    return keyPath == null ? ":id" : typeof keyPath === "string" ? keyPath : `[${keyPath.join("+")}]`;
+  }
+  function createDBCore(db2, IdbKeyRange, tmpTrans) {
+    function extractSchema(db3, trans) {
+      const tables2 = arrayify(db3.objectStoreNames);
+      return {
+        schema: {
+          name: db3.name,
+          tables: tables2.map((table) => trans.objectStore(table)).map((store) => {
+            const { keyPath, autoIncrement } = store;
+            const compound = isArray(keyPath);
+            const outbound = keyPath == null;
+            const indexByKeyPath = {};
+            const result = {
+              name: store.name,
+              primaryKey: {
+                name: null,
+                isPrimaryKey: true,
+                outbound,
+                compound,
+                keyPath,
+                autoIncrement,
+                unique: true,
+                extractKey: getKeyExtractor(keyPath)
+              },
+              indexes: arrayify(store.indexNames).map((indexName) => store.index(indexName)).map((index) => {
+                const { name, unique, multiEntry, keyPath: keyPath2 } = index;
+                const compound2 = isArray(keyPath2);
+                const result2 = {
+                  name,
+                  compound: compound2,
+                  keyPath: keyPath2,
+                  unique,
+                  multiEntry,
+                  extractKey: getKeyExtractor(keyPath2)
+                };
+                indexByKeyPath[getKeyPathAlias(keyPath2)] = result2;
+                return result2;
+              }),
+              getIndexByKeyPath: (keyPath2) => indexByKeyPath[getKeyPathAlias(keyPath2)]
+            };
+            indexByKeyPath[":id"] = result.primaryKey;
+            if (keyPath != null) {
+              indexByKeyPath[getKeyPathAlias(keyPath)] = result.primaryKey;
+            }
+            return result;
+          })
+        },
+        hasGetAll: tables2.length > 0 && "getAll" in trans.objectStore(tables2[0]) && !(typeof navigator !== "undefined" && /Safari/.test(navigator.userAgent) && !/(Chrome\/|Edge\/)/.test(navigator.userAgent) && [].concat(navigator.userAgent.match(/Safari\/(\d*)/))[1] < 604)
+      };
+    }
+    function makeIDBKeyRange(range) {
+      if (range.type === 3)
+        return null;
+      if (range.type === 4)
+        throw new Error("Cannot convert never type to IDBKeyRange");
+      const { lower, upper, lowerOpen, upperOpen } = range;
+      const idbRange = lower === void 0 ? upper === void 0 ? null : IdbKeyRange.upperBound(upper, !!upperOpen) : upper === void 0 ? IdbKeyRange.lowerBound(lower, !!lowerOpen) : IdbKeyRange.bound(lower, upper, !!lowerOpen, !!upperOpen);
+      return idbRange;
+    }
+    function createDbCoreTable(tableSchema) {
+      const tableName = tableSchema.name;
+      function mutate({ trans, type: type2, keys: keys2, values: values2, range }) {
+        return new Promise((resolve, reject) => {
+          resolve = wrap(resolve);
+          const store = trans.objectStore(tableName);
+          const outbound = store.keyPath == null;
+          const isAddOrPut = type2 === "put" || type2 === "add";
+          if (!isAddOrPut && type2 !== "delete" && type2 !== "deleteRange")
+            throw new Error("Invalid operation type: " + type2);
+          const { length } = keys2 || values2 || { length: 1 };
+          if (keys2 && values2 && keys2.length !== values2.length) {
+            throw new Error("Given keys array must have same length as given values array.");
+          }
+          if (length === 0)
+            return resolve({ numFailures: 0, failures: {}, results: [], lastResult: void 0 });
+          let req;
+          const reqs = [];
+          const failures = [];
+          let numFailures = 0;
+          const errorHandler = (event) => {
+            ++numFailures;
+            preventDefault(event);
+          };
+          if (type2 === "deleteRange") {
+            if (range.type === 4)
+              return resolve({ numFailures, failures, results: [], lastResult: void 0 });
+            if (range.type === 3)
+              reqs.push(req = store.clear());
+            else
+              reqs.push(req = store.delete(makeIDBKeyRange(range)));
+          } else {
+            const [args1, args2] = isAddOrPut ? outbound ? [values2, keys2] : [values2, null] : [keys2, null];
+            if (isAddOrPut) {
+              for (let i = 0; i < length; ++i) {
+                reqs.push(req = args2 && args2[i] !== void 0 ? store[type2](args1[i], args2[i]) : store[type2](args1[i]));
+                req.onerror = errorHandler;
+              }
+            } else {
+              for (let i = 0; i < length; ++i) {
+                reqs.push(req = store[type2](args1[i]));
+                req.onerror = errorHandler;
+              }
+            }
+          }
+          const done = (event) => {
+            const lastResult = event.target.result;
+            reqs.forEach((req2, i) => req2.error != null && (failures[i] = req2.error));
+            resolve({
+              numFailures,
+              failures,
+              results: type2 === "delete" ? keys2 : reqs.map((req2) => req2.result),
+              lastResult
+            });
+          };
+          req.onerror = (event) => {
+            errorHandler(event);
+            done(event);
+          };
+          req.onsuccess = done;
+        });
+      }
+      function openCursor2({ trans, values: values2, query: query2, reverse, unique }) {
+        return new Promise((resolve, reject) => {
+          resolve = wrap(resolve);
+          const { index, range } = query2;
+          const store = trans.objectStore(tableName);
+          const source = index.isPrimaryKey ? store : store.index(index.name);
+          const direction = reverse ? unique ? "prevunique" : "prev" : unique ? "nextunique" : "next";
+          const req = values2 || !("openKeyCursor" in source) ? source.openCursor(makeIDBKeyRange(range), direction) : source.openKeyCursor(makeIDBKeyRange(range), direction);
+          req.onerror = eventRejectHandler(reject);
+          req.onsuccess = wrap((ev) => {
+            const cursor = req.result;
+            if (!cursor) {
+              resolve(null);
+              return;
+            }
+            cursor.___id = ++_id_counter;
+            cursor.done = false;
+            const _cursorContinue = cursor.continue.bind(cursor);
+            let _cursorContinuePrimaryKey = cursor.continuePrimaryKey;
+            if (_cursorContinuePrimaryKey)
+              _cursorContinuePrimaryKey = _cursorContinuePrimaryKey.bind(cursor);
+            const _cursorAdvance = cursor.advance.bind(cursor);
+            const doThrowCursorIsNotStarted = () => {
+              throw new Error("Cursor not started");
+            };
+            const doThrowCursorIsStopped = () => {
+              throw new Error("Cursor not stopped");
+            };
+            cursor.trans = trans;
+            cursor.stop = cursor.continue = cursor.continuePrimaryKey = cursor.advance = doThrowCursorIsNotStarted;
+            cursor.fail = wrap(reject);
+            cursor.next = function() {
+              let gotOne = 1;
+              return this.start(() => gotOne-- ? this.continue() : this.stop()).then(() => this);
+            };
+            cursor.start = (callback) => {
+              const iterationPromise = new Promise((resolveIteration, rejectIteration) => {
+                resolveIteration = wrap(resolveIteration);
+                req.onerror = eventRejectHandler(rejectIteration);
+                cursor.fail = rejectIteration;
+                cursor.stop = (value) => {
+                  cursor.stop = cursor.continue = cursor.continuePrimaryKey = cursor.advance = doThrowCursorIsStopped;
+                  resolveIteration(value);
+                };
+              });
+              const guardedCallback = () => {
+                if (req.result) {
+                  try {
+                    callback();
+                  } catch (err) {
+                    cursor.fail(err);
+                  }
+                } else {
+                  cursor.done = true;
+                  cursor.start = () => {
+                    throw new Error("Cursor behind last entry");
+                  };
+                  cursor.stop();
+                }
+              };
+              req.onsuccess = wrap((ev2) => {
+                req.onsuccess = guardedCallback;
+                guardedCallback();
+              });
+              cursor.continue = _cursorContinue;
+              cursor.continuePrimaryKey = _cursorContinuePrimaryKey;
+              cursor.advance = _cursorAdvance;
+              guardedCallback();
+              return iterationPromise;
+            };
+            resolve(cursor);
+          }, reject);
+        });
+      }
+      function query(hasGetAll2) {
+        return (request) => {
+          return new Promise((resolve, reject) => {
+            resolve = wrap(resolve);
+            const { trans, values: values2, limit, query: query2 } = request;
+            const nonInfinitLimit = limit === Infinity ? void 0 : limit;
+            const { index, range } = query2;
+            const store = trans.objectStore(tableName);
+            const source = index.isPrimaryKey ? store : store.index(index.name);
+            const idbKeyRange = makeIDBKeyRange(range);
+            if (limit === 0)
+              return resolve({ result: [] });
+            if (hasGetAll2) {
+              const req = values2 ? source.getAll(idbKeyRange, nonInfinitLimit) : source.getAllKeys(idbKeyRange, nonInfinitLimit);
+              req.onsuccess = (event) => resolve({ result: event.target.result });
+              req.onerror = eventRejectHandler(reject);
+            } else {
+              let count = 0;
+              const req = values2 || !("openKeyCursor" in source) ? source.openCursor(idbKeyRange) : source.openKeyCursor(idbKeyRange);
+              const result = [];
+              req.onsuccess = (event) => {
+                const cursor = req.result;
+                if (!cursor)
+                  return resolve({ result });
+                result.push(values2 ? cursor.value : cursor.primaryKey);
+                if (++count === limit)
+                  return resolve({ result });
+                cursor.continue();
+              };
+              req.onerror = eventRejectHandler(reject);
+            }
+          });
+        };
+      }
+      return {
+        name: tableName,
+        schema: tableSchema,
+        mutate,
+        getMany({ trans, keys: keys2 }) {
+          return new Promise((resolve, reject) => {
+            resolve = wrap(resolve);
+            const store = trans.objectStore(tableName);
+            const length = keys2.length;
+            const result = new Array(length);
+            let keyCount = 0;
+            let callbackCount = 0;
+            let req;
+            const successHandler = (event) => {
+              const req2 = event.target;
+              if ((result[req2._pos] = req2.result) != null)
+                ;
+              if (++callbackCount === keyCount)
+                resolve(result);
+            };
+            const errorHandler = eventRejectHandler(reject);
+            for (let i = 0; i < length; ++i) {
+              const key = keys2[i];
+              if (key != null) {
+                req = store.get(keys2[i]);
+                req._pos = i;
+                req.onsuccess = successHandler;
+                req.onerror = errorHandler;
+                ++keyCount;
+              }
+            }
+            if (keyCount === 0)
+              resolve(result);
+          });
+        },
+        get({ trans, key }) {
+          return new Promise((resolve, reject) => {
+            resolve = wrap(resolve);
+            const store = trans.objectStore(tableName);
+            const req = store.get(key);
+            req.onsuccess = (event) => resolve(event.target.result);
+            req.onerror = eventRejectHandler(reject);
+          });
+        },
+        query: query(hasGetAll),
+        openCursor: openCursor2,
+        count({ query: query2, trans }) {
+          const { index, range } = query2;
+          return new Promise((resolve, reject) => {
+            const store = trans.objectStore(tableName);
+            const source = index.isPrimaryKey ? store : store.index(index.name);
+            const idbKeyRange = makeIDBKeyRange(range);
+            const req = idbKeyRange ? source.count(idbKeyRange) : source.count();
+            req.onsuccess = wrap((ev) => resolve(ev.target.result));
+            req.onerror = eventRejectHandler(reject);
+          });
+        }
+      };
+    }
+    const { schema, hasGetAll } = extractSchema(db2, tmpTrans);
+    const tables = schema.tables.map((tableSchema) => createDbCoreTable(tableSchema));
+    const tableMap = {};
+    tables.forEach((table) => tableMap[table.name] = table);
+    return {
+      stack: "dbcore",
+      transaction: db2.transaction.bind(db2),
+      table(name) {
+        const result = tableMap[name];
+        if (!result)
+          throw new Error(`Table '${name}' not found`);
+        return tableMap[name];
+      },
+      MIN_KEY: -Infinity,
+      MAX_KEY: getMaxKey(IdbKeyRange),
+      schema
+    };
+  }
+  function createMiddlewareStack(stackImpl, middlewares) {
+    return middlewares.reduce((down, { create }) => ({ ...down, ...create(down) }), stackImpl);
+  }
+  function createMiddlewareStacks(middlewares, idbdb, { IDBKeyRange, indexedDB: indexedDB2 }, tmpTrans) {
+    const dbcore = createMiddlewareStack(createDBCore(idbdb, IDBKeyRange, tmpTrans), middlewares.dbcore);
+    return {
+      dbcore
+    };
+  }
+  function generateMiddlewareStacks({ _novip: db2 }, tmpTrans) {
+    const idbdb = tmpTrans.db;
+    const stacks = createMiddlewareStacks(db2._middlewares, idbdb, db2._deps, tmpTrans);
+    db2.core = stacks.dbcore;
+    db2.tables.forEach((table) => {
+      const tableName = table.name;
+      if (db2.core.schema.tables.some((tbl) => tbl.name === tableName)) {
+        table.core = db2.core.table(tableName);
+        if (db2[tableName] instanceof db2.Table) {
+          db2[tableName].core = table.core;
+        }
+      }
+    });
+  }
+  function setApiOnPlace({ _novip: db2 }, objs, tableNames, dbschema) {
+    tableNames.forEach((tableName) => {
+      const schema = dbschema[tableName];
+      objs.forEach((obj) => {
+        const propDesc = getPropertyDescriptor(obj, tableName);
+        if (!propDesc || "value" in propDesc && propDesc.value === void 0) {
+          if (obj === db2.Transaction.prototype || obj instanceof db2.Transaction) {
+            setProp(obj, tableName, {
+              get() {
+                return this.table(tableName);
+              },
+              set(value) {
+                defineProperty(this, tableName, { value, writable: true, configurable: true, enumerable: true });
+              }
+            });
+          } else {
+            obj[tableName] = new db2.Table(tableName, schema);
+          }
+        }
+      });
+    });
+  }
+  function removeTablesApi({ _novip: db2 }, objs) {
+    objs.forEach((obj) => {
+      for (let key in obj) {
+        if (obj[key] instanceof db2.Table)
+          delete obj[key];
+      }
+    });
+  }
+  function lowerVersionFirst(a, b) {
+    return a._cfg.version - b._cfg.version;
+  }
+  function runUpgraders(db2, oldVersion, idbUpgradeTrans, reject) {
+    const globalSchema = db2._dbSchema;
+    const trans = db2._createTransaction("readwrite", db2._storeNames, globalSchema);
+    trans.create(idbUpgradeTrans);
+    trans._completion.catch(reject);
+    const rejectTransaction = trans._reject.bind(trans);
+    const transless = PSD.transless || PSD;
+    newScope(() => {
+      PSD.trans = trans;
+      PSD.transless = transless;
+      if (oldVersion === 0) {
+        keys(globalSchema).forEach((tableName) => {
+          createTable(idbUpgradeTrans, tableName, globalSchema[tableName].primKey, globalSchema[tableName].indexes);
+        });
+        generateMiddlewareStacks(db2, idbUpgradeTrans);
+        DexiePromise.follow(() => db2.on.populate.fire(trans)).catch(rejectTransaction);
+      } else
+        updateTablesAndIndexes(db2, oldVersion, trans, idbUpgradeTrans).catch(rejectTransaction);
+    });
+  }
+  function updateTablesAndIndexes({ _novip: db2 }, oldVersion, trans, idbUpgradeTrans) {
+    const queue = [];
+    const versions = db2._versions;
+    let globalSchema = db2._dbSchema = buildGlobalSchema(db2, db2.idbdb, idbUpgradeTrans);
+    let anyContentUpgraderHasRun = false;
+    const versToRun = versions.filter((v) => v._cfg.version >= oldVersion);
+    versToRun.forEach((version) => {
+      queue.push(() => {
+        const oldSchema = globalSchema;
+        const newSchema = version._cfg.dbschema;
+        adjustToExistingIndexNames(db2, oldSchema, idbUpgradeTrans);
+        adjustToExistingIndexNames(db2, newSchema, idbUpgradeTrans);
+        globalSchema = db2._dbSchema = newSchema;
+        const diff = getSchemaDiff(oldSchema, newSchema);
+        diff.add.forEach((tuple) => {
+          createTable(idbUpgradeTrans, tuple[0], tuple[1].primKey, tuple[1].indexes);
+        });
+        diff.change.forEach((change) => {
+          if (change.recreate) {
+            throw new exceptions.Upgrade("Not yet support for changing primary key");
+          } else {
+            const store = idbUpgradeTrans.objectStore(change.name);
+            change.add.forEach((idx) => addIndex(store, idx));
+            change.change.forEach((idx) => {
+              store.deleteIndex(idx.name);
+              addIndex(store, idx);
+            });
+            change.del.forEach((idxName) => store.deleteIndex(idxName));
+          }
+        });
+        const contentUpgrade = version._cfg.contentUpgrade;
+        if (contentUpgrade && version._cfg.version > oldVersion) {
+          generateMiddlewareStacks(db2, idbUpgradeTrans);
+          trans._memoizedTables = {};
+          anyContentUpgraderHasRun = true;
+          let upgradeSchema = shallowClone(newSchema);
+          diff.del.forEach((table) => {
+            upgradeSchema[table] = oldSchema[table];
+          });
+          removeTablesApi(db2, [db2.Transaction.prototype]);
+          setApiOnPlace(db2, [db2.Transaction.prototype], keys(upgradeSchema), upgradeSchema);
+          trans.schema = upgradeSchema;
+          const contentUpgradeIsAsync = isAsyncFunction(contentUpgrade);
+          if (contentUpgradeIsAsync) {
+            incrementExpectedAwaits();
+          }
+          let returnValue;
+          const promiseFollowed = DexiePromise.follow(() => {
+            returnValue = contentUpgrade(trans);
+            if (returnValue) {
+              if (contentUpgradeIsAsync) {
+                var decrementor = decrementExpectedAwaits.bind(null, null);
+                returnValue.then(decrementor, decrementor);
+              }
+            }
+          });
+          return returnValue && typeof returnValue.then === "function" ? DexiePromise.resolve(returnValue) : promiseFollowed.then(() => returnValue);
+        }
+      });
+      queue.push((idbtrans) => {
+        if (!anyContentUpgraderHasRun || !hasIEDeleteObjectStoreBug) {
+          const newSchema = version._cfg.dbschema;
+          deleteRemovedTables(newSchema, idbtrans);
+        }
+        removeTablesApi(db2, [db2.Transaction.prototype]);
+        setApiOnPlace(db2, [db2.Transaction.prototype], db2._storeNames, db2._dbSchema);
+        trans.schema = db2._dbSchema;
+      });
+    });
+    function runQueue() {
+      return queue.length ? DexiePromise.resolve(queue.shift()(trans.idbtrans)).then(runQueue) : DexiePromise.resolve();
+    }
+    return runQueue().then(() => {
+      createMissingTables(globalSchema, idbUpgradeTrans);
+    });
+  }
+  function getSchemaDiff(oldSchema, newSchema) {
+    const diff = {
+      del: [],
+      add: [],
+      change: []
+    };
+    let table;
+    for (table in oldSchema) {
+      if (!newSchema[table])
+        diff.del.push(table);
+    }
+    for (table in newSchema) {
+      const oldDef = oldSchema[table], newDef = newSchema[table];
+      if (!oldDef) {
+        diff.add.push([table, newDef]);
+      } else {
+        const change = {
+          name: table,
+          def: newDef,
+          recreate: false,
+          del: [],
+          add: [],
+          change: []
+        };
+        if ("" + (oldDef.primKey.keyPath || "") !== "" + (newDef.primKey.keyPath || "") || oldDef.primKey.auto !== newDef.primKey.auto && !isIEOrEdge) {
+          change.recreate = true;
+          diff.change.push(change);
+        } else {
+          const oldIndexes = oldDef.idxByName;
+          const newIndexes = newDef.idxByName;
+          let idxName;
+          for (idxName in oldIndexes) {
+            if (!newIndexes[idxName])
+              change.del.push(idxName);
+          }
+          for (idxName in newIndexes) {
+            const oldIdx = oldIndexes[idxName], newIdx = newIndexes[idxName];
+            if (!oldIdx)
+              change.add.push(newIdx);
+            else if (oldIdx.src !== newIdx.src)
+              change.change.push(newIdx);
+          }
+          if (change.del.length > 0 || change.add.length > 0 || change.change.length > 0) {
+            diff.change.push(change);
+          }
+        }
+      }
+    }
+    return diff;
+  }
+  function createTable(idbtrans, tableName, primKey, indexes) {
+    const store = idbtrans.db.createObjectStore(tableName, primKey.keyPath ? { keyPath: primKey.keyPath, autoIncrement: primKey.auto } : { autoIncrement: primKey.auto });
+    indexes.forEach((idx) => addIndex(store, idx));
+    return store;
+  }
+  function createMissingTables(newSchema, idbtrans) {
+    keys(newSchema).forEach((tableName) => {
+      if (!idbtrans.db.objectStoreNames.contains(tableName)) {
+        createTable(idbtrans, tableName, newSchema[tableName].primKey, newSchema[tableName].indexes);
+      }
+    });
+  }
+  function deleteRemovedTables(newSchema, idbtrans) {
+    [].slice.call(idbtrans.db.objectStoreNames).forEach((storeName) => newSchema[storeName] == null && idbtrans.db.deleteObjectStore(storeName));
+  }
+  function addIndex(store, idx) {
+    store.createIndex(idx.name, idx.keyPath, { unique: idx.unique, multiEntry: idx.multi });
+  }
+  function buildGlobalSchema(db2, idbdb, tmpTrans) {
+    const globalSchema = {};
+    const dbStoreNames = slice(idbdb.objectStoreNames, 0);
+    dbStoreNames.forEach((storeName) => {
+      const store = tmpTrans.objectStore(storeName);
+      let keyPath = store.keyPath;
+      const primKey = createIndexSpec(nameFromKeyPath(keyPath), keyPath || "", false, false, !!store.autoIncrement, keyPath && typeof keyPath !== "string", true);
+      const indexes = [];
+      for (let j = 0; j < store.indexNames.length; ++j) {
+        const idbindex = store.index(store.indexNames[j]);
+        keyPath = idbindex.keyPath;
+        var index = createIndexSpec(idbindex.name, keyPath, !!idbindex.unique, !!idbindex.multiEntry, false, keyPath && typeof keyPath !== "string", false);
+        indexes.push(index);
+      }
+      globalSchema[storeName] = createTableSchema(storeName, primKey, indexes);
+    });
+    return globalSchema;
+  }
+  function readGlobalSchema({ _novip: db2 }, idbdb, tmpTrans) {
+    db2.verno = idbdb.version / 10;
+    const globalSchema = db2._dbSchema = buildGlobalSchema(db2, idbdb, tmpTrans);
+    db2._storeNames = slice(idbdb.objectStoreNames, 0);
+    setApiOnPlace(db2, [db2._allTables], keys(globalSchema), globalSchema);
+  }
+  function verifyInstalledSchema(db2, tmpTrans) {
+    const installedSchema = buildGlobalSchema(db2, db2.idbdb, tmpTrans);
+    const diff = getSchemaDiff(installedSchema, db2._dbSchema);
+    return !(diff.add.length || diff.change.some((ch) => ch.add.length || ch.change.length));
+  }
+  function adjustToExistingIndexNames({ _novip: db2 }, schema, idbtrans) {
+    const storeNames = idbtrans.db.objectStoreNames;
+    for (let i = 0; i < storeNames.length; ++i) {
+      const storeName = storeNames[i];
+      const store = idbtrans.objectStore(storeName);
+      db2._hasGetAll = "getAll" in store;
+      for (let j = 0; j < store.indexNames.length; ++j) {
+        const indexName = store.indexNames[j];
+        const keyPath = store.index(indexName).keyPath;
+        const dexieName = typeof keyPath === "string" ? keyPath : "[" + slice(keyPath).join("+") + "]";
+        if (schema[storeName]) {
+          const indexSpec = schema[storeName].idxByName[dexieName];
+          if (indexSpec) {
+            indexSpec.name = indexName;
+            delete schema[storeName].idxByName[dexieName];
+            schema[storeName].idxByName[indexName] = indexSpec;
+          }
+        }
+      }
+    }
+    if (typeof navigator !== "undefined" && /Safari/.test(navigator.userAgent) && !/(Chrome\/|Edge\/)/.test(navigator.userAgent) && _global.WorkerGlobalScope && _global instanceof _global.WorkerGlobalScope && [].concat(navigator.userAgent.match(/Safari\/(\d*)/))[1] < 604) {
+      db2._hasGetAll = false;
+    }
+  }
+  function parseIndexSyntax(primKeyAndIndexes) {
+    return primKeyAndIndexes.split(",").map((index, indexNum) => {
+      index = index.trim();
+      const name = index.replace(/([&*]|\+\+)/g, "");
+      const keyPath = /^\[/.test(name) ? name.match(/^\[(.*)\]$/)[1].split("+") : name;
+      return createIndexSpec(name, keyPath || null, /\&/.test(index), /\*/.test(index), /\+\+/.test(index), isArray(keyPath), indexNum === 0);
+    });
+  }
+  function createVersionConstructor(db2) {
+    return makeClassConstructor(Version.prototype, function Version2(versionNumber) {
+      this.db = db2;
+      this._cfg = {
+        version: versionNumber,
+        storesSource: null,
+        dbschema: {},
+        tables: {},
+        contentUpgrade: null
+      };
+    });
+  }
+  function getDbNamesTable(indexedDB2, IDBKeyRange) {
+    let dbNamesDB = indexedDB2["_dbNamesDB"];
+    if (!dbNamesDB) {
+      dbNamesDB = indexedDB2["_dbNamesDB"] = new Dexie$1(DBNAMES_DB, {
+        addons: [],
+        indexedDB: indexedDB2,
+        IDBKeyRange
+      });
+      dbNamesDB.version(1).stores({ dbnames: "name" });
+    }
+    return dbNamesDB.table("dbnames");
+  }
+  function hasDatabasesNative(indexedDB2) {
+    return indexedDB2 && typeof indexedDB2.databases === "function";
+  }
+  function getDatabaseNames({ indexedDB: indexedDB2, IDBKeyRange }) {
+    return hasDatabasesNative(indexedDB2) ? Promise.resolve(indexedDB2.databases()).then((infos) => infos.map((info) => info.name).filter((name) => name !== DBNAMES_DB)) : getDbNamesTable(indexedDB2, IDBKeyRange).toCollection().primaryKeys();
+  }
+  function _onDatabaseCreated({ indexedDB: indexedDB2, IDBKeyRange }, name) {
+    !hasDatabasesNative(indexedDB2) && name !== DBNAMES_DB && getDbNamesTable(indexedDB2, IDBKeyRange).put({ name }).catch(nop);
+  }
+  function _onDatabaseDeleted({ indexedDB: indexedDB2, IDBKeyRange }, name) {
+    !hasDatabasesNative(indexedDB2) && name !== DBNAMES_DB && getDbNamesTable(indexedDB2, IDBKeyRange).delete(name).catch(nop);
+  }
+  function vip(fn) {
+    return newScope(function() {
+      PSD.letThrough = true;
+      return fn();
+    });
+  }
+  function idbReady() {
+    var isSafari = !navigator.userAgentData && /Safari\//.test(navigator.userAgent) && !/Chrom(e|ium)\//.test(navigator.userAgent);
+    if (!isSafari || !indexedDB.databases)
+      return Promise.resolve();
+    var intervalId;
+    return new Promise(function(resolve) {
+      var tryIdb = function() {
+        return indexedDB.databases().finally(resolve);
+      };
+      intervalId = setInterval(tryIdb, 100);
+      tryIdb();
+    }).finally(function() {
+      return clearInterval(intervalId);
+    });
+  }
+  function dexieOpen(db2) {
+    const state = db2._state;
+    const { indexedDB: indexedDB2 } = db2._deps;
+    if (state.isBeingOpened || db2.idbdb)
+      return state.dbReadyPromise.then(() => state.dbOpenError ? rejection(state.dbOpenError) : db2);
+    debug && (state.openCanceller._stackHolder = getErrorWithStack());
+    state.isBeingOpened = true;
+    state.dbOpenError = null;
+    state.openComplete = false;
+    const openCanceller = state.openCanceller;
+    function throwIfCancelled() {
+      if (state.openCanceller !== openCanceller)
+        throw new exceptions.DatabaseClosed("db.open() was cancelled");
+    }
+    let resolveDbReady = state.dbReadyResolve, upgradeTransaction = null, wasCreated = false;
+    return DexiePromise.race([openCanceller, (typeof navigator === "undefined" ? DexiePromise.resolve() : idbReady()).then(() => new DexiePromise((resolve, reject) => {
+      throwIfCancelled();
+      if (!indexedDB2)
+        throw new exceptions.MissingAPI();
+      const dbName = db2.name;
+      const req = state.autoSchema ? indexedDB2.open(dbName) : indexedDB2.open(dbName, Math.round(db2.verno * 10));
+      if (!req)
+        throw new exceptions.MissingAPI();
+      req.onerror = eventRejectHandler(reject);
+      req.onblocked = wrap(db2._fireOnBlocked);
+      req.onupgradeneeded = wrap((e) => {
+        upgradeTransaction = req.transaction;
+        if (state.autoSchema && !db2._options.allowEmptyDB) {
+          req.onerror = preventDefault;
+          upgradeTransaction.abort();
+          req.result.close();
+          const delreq = indexedDB2.deleteDatabase(dbName);
+          delreq.onsuccess = delreq.onerror = wrap(() => {
+            reject(new exceptions.NoSuchDatabase(`Database ${dbName} doesnt exist`));
+          });
+        } else {
+          upgradeTransaction.onerror = eventRejectHandler(reject);
+          var oldVer = e.oldVersion > Math.pow(2, 62) ? 0 : e.oldVersion;
+          wasCreated = oldVer < 1;
+          db2._novip.idbdb = req.result;
+          runUpgraders(db2, oldVer / 10, upgradeTransaction, reject);
+        }
+      }, reject);
+      req.onsuccess = wrap(() => {
+        upgradeTransaction = null;
+        const idbdb = db2._novip.idbdb = req.result;
+        const objectStoreNames = slice(idbdb.objectStoreNames);
+        if (objectStoreNames.length > 0)
+          try {
+            const tmpTrans = idbdb.transaction(safariMultiStoreFix(objectStoreNames), "readonly");
+            if (state.autoSchema)
+              readGlobalSchema(db2, idbdb, tmpTrans);
+            else {
+              adjustToExistingIndexNames(db2, db2._dbSchema, tmpTrans);
+              if (!verifyInstalledSchema(db2, tmpTrans)) {
+                console.warn(`Dexie SchemaDiff: Schema was extended without increasing the number passed to db.version(). Some queries may fail.`);
+              }
+            }
+            generateMiddlewareStacks(db2, tmpTrans);
+          } catch (e) {
+          }
+        connections.push(db2);
+        idbdb.onversionchange = wrap((ev) => {
+          state.vcFired = true;
+          db2.on("versionchange").fire(ev);
+        });
+        idbdb.onclose = wrap((ev) => {
+          db2.on("close").fire(ev);
+        });
+        if (wasCreated)
+          _onDatabaseCreated(db2._deps, dbName);
+        resolve();
+      }, reject);
+    }))]).then(() => {
+      throwIfCancelled();
+      state.onReadyBeingFired = [];
+      return DexiePromise.resolve(vip(() => db2.on.ready.fire(db2.vip))).then(function fireRemainders() {
+        if (state.onReadyBeingFired.length > 0) {
+          let remainders = state.onReadyBeingFired.reduce(promisableChain, nop);
+          state.onReadyBeingFired = [];
+          return DexiePromise.resolve(vip(() => remainders(db2.vip))).then(fireRemainders);
+        }
+      });
+    }).finally(() => {
+      state.onReadyBeingFired = null;
+      state.isBeingOpened = false;
+    }).then(() => {
+      return db2;
+    }).catch((err) => {
+      state.dbOpenError = err;
+      try {
+        upgradeTransaction && upgradeTransaction.abort();
+      } catch (_a) {
+      }
+      if (openCanceller === state.openCanceller) {
+        db2._close();
+      }
+      return rejection(err);
+    }).finally(() => {
+      state.openComplete = true;
+      resolveDbReady();
+    });
+  }
+  function awaitIterator(iterator) {
+    var callNext = (result) => iterator.next(result), doThrow = (error) => iterator.throw(error), onSuccess = step(callNext), onError = step(doThrow);
+    function step(getNext) {
+      return (val) => {
+        var next = getNext(val), value = next.value;
+        return next.done ? value : !value || typeof value.then !== "function" ? isArray(value) ? Promise.all(value).then(onSuccess, onError) : onSuccess(value) : value.then(onSuccess, onError);
+      };
+    }
+    return step(callNext)();
+  }
+  function extractTransactionArgs(mode, _tableArgs_, scopeFunc) {
+    var i = arguments.length;
+    if (i < 2)
+      throw new exceptions.InvalidArgument("Too few arguments");
+    var args = new Array(i - 1);
+    while (--i)
+      args[i - 1] = arguments[i];
+    scopeFunc = args.pop();
+    var tables = flatten(args);
+    return [mode, tables, scopeFunc];
+  }
+  function enterTransactionScope(db2, mode, storeNames, parentTransaction, scopeFunc) {
+    return DexiePromise.resolve().then(() => {
+      const transless = PSD.transless || PSD;
+      const trans = db2._createTransaction(mode, storeNames, db2._dbSchema, parentTransaction);
+      const zoneProps = {
+        trans,
+        transless
+      };
+      if (parentTransaction) {
+        trans.idbtrans = parentTransaction.idbtrans;
+      } else {
+        try {
+          trans.create();
+          db2._state.PR1398_maxLoop = 3;
+        } catch (ex) {
+          if (ex.name === errnames.InvalidState && db2.isOpen() && --db2._state.PR1398_maxLoop > 0) {
+            console.warn("Dexie: Need to reopen db");
+            db2._close();
+            return db2.open().then(() => enterTransactionScope(db2, mode, storeNames, null, scopeFunc));
+          }
+          return rejection(ex);
+        }
+      }
+      const scopeFuncIsAsync = isAsyncFunction(scopeFunc);
+      if (scopeFuncIsAsync) {
+        incrementExpectedAwaits();
+      }
+      let returnValue;
+      const promiseFollowed = DexiePromise.follow(() => {
+        returnValue = scopeFunc.call(trans, trans);
+        if (returnValue) {
+          if (scopeFuncIsAsync) {
+            var decrementor = decrementExpectedAwaits.bind(null, null);
+            returnValue.then(decrementor, decrementor);
+          } else if (typeof returnValue.next === "function" && typeof returnValue.throw === "function") {
+            returnValue = awaitIterator(returnValue);
+          }
+        }
+      }, zoneProps);
+      return (returnValue && typeof returnValue.then === "function" ? DexiePromise.resolve(returnValue).then((x) => trans.active ? x : rejection(new exceptions.PrematureCommit("Transaction committed too early. See http://bit.ly/2kdckMn"))) : promiseFollowed.then(() => returnValue)).then((x) => {
+        if (parentTransaction)
+          trans._resolve();
+        return trans._completion.then(() => x);
+      }).catch((e) => {
+        trans._reject(e);
+        return rejection(e);
+      });
+    });
+  }
+  function pad(a, value, count) {
+    const result = isArray(a) ? a.slice() : [a];
+    for (let i = 0; i < count; ++i)
+      result.push(value);
+    return result;
+  }
+  function createVirtualIndexMiddleware(down) {
+    return {
+      ...down,
+      table(tableName) {
+        const table = down.table(tableName);
+        const { schema } = table;
+        const indexLookup = {};
+        const allVirtualIndexes = [];
+        function addVirtualIndexes(keyPath, keyTail, lowLevelIndex) {
+          const keyPathAlias = getKeyPathAlias(keyPath);
+          const indexList = indexLookup[keyPathAlias] = indexLookup[keyPathAlias] || [];
+          const keyLength = keyPath == null ? 0 : typeof keyPath === "string" ? 1 : keyPath.length;
+          const isVirtual = keyTail > 0;
+          const virtualIndex = {
+            ...lowLevelIndex,
+            isVirtual,
+            keyTail,
+            keyLength,
+            extractKey: getKeyExtractor(keyPath),
+            unique: !isVirtual && lowLevelIndex.unique
+          };
+          indexList.push(virtualIndex);
+          if (!virtualIndex.isPrimaryKey) {
+            allVirtualIndexes.push(virtualIndex);
+          }
+          if (keyLength > 1) {
+            const virtualKeyPath = keyLength === 2 ? keyPath[0] : keyPath.slice(0, keyLength - 1);
+            addVirtualIndexes(virtualKeyPath, keyTail + 1, lowLevelIndex);
+          }
+          indexList.sort((a, b) => a.keyTail - b.keyTail);
+          return virtualIndex;
+        }
+        const primaryKey = addVirtualIndexes(schema.primaryKey.keyPath, 0, schema.primaryKey);
+        indexLookup[":id"] = [primaryKey];
+        for (const index of schema.indexes) {
+          addVirtualIndexes(index.keyPath, 0, index);
+        }
+        function findBestIndex(keyPath) {
+          const result2 = indexLookup[getKeyPathAlias(keyPath)];
+          return result2 && result2[0];
+        }
+        function translateRange(range, keyTail) {
+          return {
+            type: range.type === 1 ? 2 : range.type,
+            lower: pad(range.lower, range.lowerOpen ? down.MAX_KEY : down.MIN_KEY, keyTail),
+            lowerOpen: true,
+            upper: pad(range.upper, range.upperOpen ? down.MIN_KEY : down.MAX_KEY, keyTail),
+            upperOpen: true
+          };
+        }
+        function translateRequest(req) {
+          const index = req.query.index;
+          return index.isVirtual ? {
+            ...req,
+            query: {
+              index,
+              range: translateRange(req.query.range, index.keyTail)
+            }
+          } : req;
+        }
+        const result = {
+          ...table,
+          schema: {
+            ...schema,
+            primaryKey,
+            indexes: allVirtualIndexes,
+            getIndexByKeyPath: findBestIndex
+          },
+          count(req) {
+            return table.count(translateRequest(req));
+          },
+          query(req) {
+            return table.query(translateRequest(req));
+          },
+          openCursor(req) {
+            const { keyTail, isVirtual, keyLength } = req.query.index;
+            if (!isVirtual)
+              return table.openCursor(req);
+            function createVirtualCursor(cursor) {
+              function _continue(key) {
+                key != null ? cursor.continue(pad(key, req.reverse ? down.MAX_KEY : down.MIN_KEY, keyTail)) : req.unique ? cursor.continue(cursor.key.slice(0, keyLength).concat(req.reverse ? down.MIN_KEY : down.MAX_KEY, keyTail)) : cursor.continue();
+              }
+              const virtualCursor = Object.create(cursor, {
+                continue: { value: _continue },
+                continuePrimaryKey: {
+                  value(key, primaryKey2) {
+                    cursor.continuePrimaryKey(pad(key, down.MAX_KEY, keyTail), primaryKey2);
+                  }
+                },
+                primaryKey: {
+                  get() {
+                    return cursor.primaryKey;
+                  }
+                },
+                key: {
+                  get() {
+                    const key = cursor.key;
+                    return keyLength === 1 ? key[0] : key.slice(0, keyLength);
+                  }
+                },
+                value: {
+                  get() {
+                    return cursor.value;
+                  }
+                }
+              });
+              return virtualCursor;
+            }
+            return table.openCursor(translateRequest(req)).then((cursor) => cursor && createVirtualCursor(cursor));
+          }
+        };
+        return result;
+      }
+    };
+  }
+  function getObjectDiff(a, b, rv, prfx) {
+    rv = rv || {};
+    prfx = prfx || "";
+    keys(a).forEach((prop) => {
+      if (!hasOwn(b, prop)) {
+        rv[prfx + prop] = void 0;
+      } else {
+        var ap = a[prop], bp = b[prop];
+        if (typeof ap === "object" && typeof bp === "object" && ap && bp) {
+          const apTypeName = toStringTag(ap);
+          const bpTypeName = toStringTag(bp);
+          if (apTypeName !== bpTypeName) {
+            rv[prfx + prop] = b[prop];
+          } else if (apTypeName === "Object") {
+            getObjectDiff(ap, bp, rv, prfx + prop + ".");
+          } else if (ap !== bp) {
+            rv[prfx + prop] = b[prop];
+          }
+        } else if (ap !== bp)
+          rv[prfx + prop] = b[prop];
+      }
+    });
+    keys(b).forEach((prop) => {
+      if (!hasOwn(a, prop)) {
+        rv[prfx + prop] = b[prop];
+      }
+    });
+    return rv;
+  }
+  function getEffectiveKeys(primaryKey, req) {
+    if (req.type === "delete")
+      return req.keys;
+    return req.keys || req.values.map(primaryKey.extractKey);
+  }
+  function getExistingValues(table, req, effectiveKeys) {
+    return req.type === "add" ? Promise.resolve([]) : table.getMany({ trans: req.trans, keys: effectiveKeys, cache: "immutable" });
+  }
+  function getFromTransactionCache(keys2, cache, clone) {
+    try {
+      if (!cache)
+        return null;
+      if (cache.keys.length < keys2.length)
+        return null;
+      const result = [];
+      for (let i = 0, j = 0; i < cache.keys.length && j < keys2.length; ++i) {
+        if (cmp(cache.keys[i], keys2[j]) !== 0)
+          continue;
+        result.push(clone ? deepClone(cache.values[i]) : cache.values[i]);
+        ++j;
+      }
+      return result.length === keys2.length ? result : null;
+    } catch (_a) {
+      return null;
+    }
+  }
+  function isEmptyRange(node) {
+    return !("from" in node);
+  }
+  function addRange(target, from, to) {
+    const diff = cmp(from, to);
+    if (isNaN(diff))
+      return;
+    if (diff > 0)
+      throw RangeError();
+    if (isEmptyRange(target))
+      return extend(target, { from, to, d: 1 });
+    const left = target.l;
+    const right = target.r;
+    if (cmp(to, target.from) < 0) {
+      left ? addRange(left, from, to) : target.l = { from, to, d: 1, l: null, r: null };
+      return rebalance(target);
+    }
+    if (cmp(from, target.to) > 0) {
+      right ? addRange(right, from, to) : target.r = { from, to, d: 1, l: null, r: null };
+      return rebalance(target);
+    }
+    if (cmp(from, target.from) < 0) {
+      target.from = from;
+      target.l = null;
+      target.d = right ? right.d + 1 : 1;
+    }
+    if (cmp(to, target.to) > 0) {
+      target.to = to;
+      target.r = null;
+      target.d = target.l ? target.l.d + 1 : 1;
+    }
+    const rightWasCutOff = !target.r;
+    if (left && !target.l) {
+      mergeRanges(target, left);
+    }
+    if (right && rightWasCutOff) {
+      mergeRanges(target, right);
+    }
+  }
+  function mergeRanges(target, newSet) {
+    function _addRangeSet(target2, { from, to, l, r }) {
+      addRange(target2, from, to);
+      if (l)
+        _addRangeSet(target2, l);
+      if (r)
+        _addRangeSet(target2, r);
+    }
+    if (!isEmptyRange(newSet))
+      _addRangeSet(target, newSet);
+  }
+  function rangesOverlap(rangeSet1, rangeSet2) {
+    const i1 = getRangeSetIterator(rangeSet2);
+    let nextResult1 = i1.next();
+    if (nextResult1.done)
+      return false;
+    let a = nextResult1.value;
+    const i2 = getRangeSetIterator(rangeSet1);
+    let nextResult2 = i2.next(a.from);
+    let b = nextResult2.value;
+    while (!nextResult1.done && !nextResult2.done) {
+      if (cmp(b.from, a.to) <= 0 && cmp(b.to, a.from) >= 0)
+        return true;
+      cmp(a.from, b.from) < 0 ? a = (nextResult1 = i1.next(b.from)).value : b = (nextResult2 = i2.next(a.from)).value;
+    }
+    return false;
+  }
+  function getRangeSetIterator(node) {
+    let state = isEmptyRange(node) ? null : { s: 0, n: node };
+    return {
+      next(key) {
+        const keyProvided = arguments.length > 0;
+        while (state) {
+          switch (state.s) {
+            case 0:
+              state.s = 1;
+              if (keyProvided) {
+                while (state.n.l && cmp(key, state.n.from) < 0)
+                  state = { up: state, n: state.n.l, s: 1 };
+              } else {
+                while (state.n.l)
+                  state = { up: state, n: state.n.l, s: 1 };
+              }
+            case 1:
+              state.s = 2;
+              if (!keyProvided || cmp(key, state.n.to) <= 0)
+                return { value: state.n, done: false };
+            case 2:
+              if (state.n.r) {
+                state.s = 3;
+                state = { up: state, n: state.n.r, s: 0 };
+                continue;
+              }
+            case 3:
+              state = state.up;
+          }
+        }
+        return { done: true };
+      }
+    };
+  }
+  function rebalance(target) {
+    var _a, _b;
+    const diff = (((_a = target.r) === null || _a === void 0 ? void 0 : _a.d) || 0) - (((_b = target.l) === null || _b === void 0 ? void 0 : _b.d) || 0);
+    const r = diff > 1 ? "r" : diff < -1 ? "l" : "";
+    if (r) {
+      const l = r === "r" ? "l" : "r";
+      const rootClone = { ...target };
+      const oldRootRight = target[r];
+      target.from = oldRootRight.from;
+      target.to = oldRootRight.to;
+      target[r] = oldRootRight[r];
+      rootClone[r] = oldRootRight[l];
+      target[l] = rootClone;
+      rootClone.d = computeDepth(rootClone);
+    }
+    target.d = computeDepth(target);
+  }
+  function computeDepth({ r, l }) {
+    return (r ? l ? Math.max(r.d, l.d) : r.d : l ? l.d : 0) + 1;
+  }
+  function trackAffectedIndexes(getRangeSet, schema, oldObjs, newObjs) {
+    function addAffectedIndex(ix) {
+      const rangeSet = getRangeSet(ix.name || "");
+      function extractKey(obj) {
+        return obj != null ? ix.extractKey(obj) : null;
+      }
+      const addKeyOrKeys = (key) => ix.multiEntry && isArray(key) ? key.forEach((key2) => rangeSet.addKey(key2)) : rangeSet.addKey(key);
+      (oldObjs || newObjs).forEach((_3, i) => {
+        const oldKey = oldObjs && extractKey(oldObjs[i]);
+        const newKey = newObjs && extractKey(newObjs[i]);
+        if (cmp(oldKey, newKey) !== 0) {
+          if (oldKey != null)
+            addKeyOrKeys(oldKey);
+          if (newKey != null)
+            addKeyOrKeys(newKey);
+        }
+      });
+    }
+    schema.indexes.forEach(addAffectedIndex);
+  }
+  function extendObservabilitySet(target, newSet) {
+    keys(newSet).forEach((part) => {
+      const rangeSet = target[part] || (target[part] = new RangeSet());
+      mergeRanges(rangeSet, newSet[part]);
+    });
+    return target;
+  }
+  function liveQuery(querier) {
+    return new Observable((observer) => {
+      const scopeFuncIsAsync = isAsyncFunction(querier);
+      function execute(subscr) {
+        if (scopeFuncIsAsync) {
+          incrementExpectedAwaits();
+        }
+        const exec = () => newScope(querier, { subscr, trans: null });
+        const rv = PSD.trans ? usePSD(PSD.transless, exec) : exec();
+        if (scopeFuncIsAsync) {
+          rv.then(decrementExpectedAwaits, decrementExpectedAwaits);
+        }
+        return rv;
+      }
+      let closed = false;
+      let accumMuts = {};
+      let currentObs = {};
+      const subscription = {
+        get closed() {
+          return closed;
+        },
+        unsubscribe: () => {
+          closed = true;
+          globalEvents.storagemutated.unsubscribe(mutationListener);
+        }
+      };
+      observer.start && observer.start(subscription);
+      let querying = false, startedListening = false;
+      function shouldNotify() {
+        return keys(currentObs).some((key) => accumMuts[key] && rangesOverlap(accumMuts[key], currentObs[key]));
+      }
+      const mutationListener = (parts) => {
+        extendObservabilitySet(accumMuts, parts);
+        if (shouldNotify()) {
+          doQuery();
+        }
+      };
+      const doQuery = () => {
+        if (querying || closed)
+          return;
+        accumMuts = {};
+        const subscr = {};
+        const ret = execute(subscr);
+        if (!startedListening) {
+          globalEvents(DEXIE_STORAGE_MUTATED_EVENT_NAME, mutationListener);
+          startedListening = true;
+        }
+        querying = true;
+        Promise.resolve(ret).then((result) => {
+          querying = false;
+          if (closed)
+            return;
+          if (shouldNotify()) {
+            doQuery();
+          } else {
+            accumMuts = {};
+            currentObs = subscr;
+            observer.next && observer.next(result);
+          }
+        }, (err) => {
+          querying = false;
+          observer.error && observer.error(err);
+          subscription.unsubscribe();
+        });
+      };
+      doQuery();
+      return subscription;
+    });
+  }
+  function propagateLocally(updateParts) {
+    let wasMe = propagatingLocally;
+    try {
+      propagatingLocally = true;
+      globalEvents.storagemutated.fire(updateParts);
+    } finally {
+      propagatingLocally = wasMe;
+    }
+  }
+  function propagateMessageLocally({ data }) {
+    if (data && data.type === STORAGE_MUTATED_DOM_EVENT_NAME) {
+      propagateLocally(data.changedParts);
+    }
+  }
+  var _global, keys, isArray, getProto, _hasOwn, defineProperty, getOwnPropertyDescriptor, _slice, concat, intrinsicTypeNames, intrinsicTypes, circularRefs, toString, iteratorSymbol, getIteratorOf, NO_CHAR_ARRAY, isAsyncFunction, debug, libraryFilter, NEEDS_THROW_FOR_STACK, dexieErrorNames, idbDomErrorNames, errorList, defaultTexts, errnames, BaseException, exceptions, exceptionMap, fullNameExceptions, INTERNAL, LONG_STACKS_CLIP_LIMIT, MAX_LONG_STACKS, ZONE_ECHO_LIMIT, resolvedNativePromise, nativePromiseProto, resolvedGlobalPromise, nativePromiseThen, NativePromise, patchGlobalPromise, stack_being_generated, schedulePhysicalTick, asap, isOutsideMicroTick, needsNewPhysicalTick, unhandledErrors, rejectingErrors, currentFulfiller, rejectionMapper, globalPSD, PSD, microtickQueue, numScheduledCalls, tickFinalizers, thenProp, task, taskCounter, zoneStack, zoneEchoes, totalEchoes, zone_id_counter, UNHANDLEDREJECTION, rejection, DEXIE_VERSION, maxString, minKey, INVALID_KEY_ARGUMENT, STRING_EXPECTED, connections, isIEOrEdge, hasIEDeleteObjectStoreBug, hangsOnDeleteLargeKeyRange, dexieStackFrameFilter, DBNAMES_DB, READONLY, READWRITE, AnyRange, Table, Collection, deleteCallback, WhereClause, DEXIE_STORAGE_MUTATED_EVENT_NAME, STORAGE_MUTATED_DOM_EVENT_NAME, globalEvents, Transaction, getMaxKey, _id_counter, Version, virtualIndexMiddleware, hooksMiddleware, cacheExistingValuesMiddleware, RangeSet, observabilityMiddleware, Dexie$1, symbolObservable, Observable, domDeps, Dexie, propagatingLocally;
+  var init_dexie = __esm({
+    "node_modules/dexie/dist/modern/dexie.mjs"() {
+      _global = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : global;
+      keys = Object.keys;
+      isArray = Array.isArray;
+      if (typeof Promise !== "undefined" && !_global.Promise) {
+        _global.Promise = Promise;
+      }
+      getProto = Object.getPrototypeOf;
+      _hasOwn = {}.hasOwnProperty;
+      defineProperty = Object.defineProperty;
+      getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+      _slice = [].slice;
+      concat = [].concat;
+      intrinsicTypeNames = "Boolean,String,Date,RegExp,Blob,File,FileList,FileSystemFileHandle,ArrayBuffer,DataView,Uint8ClampedArray,ImageBitmap,ImageData,Map,Set,CryptoKey".split(",").concat(flatten([8, 16, 32, 64].map((num) => ["Int", "Uint", "Float"].map((t) => t + num + "Array")))).filter((t) => _global[t]);
+      intrinsicTypes = intrinsicTypeNames.map((t) => _global[t]);
+      arrayToObject(intrinsicTypeNames, (x) => [x, true]);
+      circularRefs = null;
+      ({ toString } = {});
+      iteratorSymbol = typeof Symbol !== "undefined" ? Symbol.iterator : "@@iterator";
+      getIteratorOf = typeof iteratorSymbol === "symbol" ? function(x) {
+        var i;
+        return x != null && (i = x[iteratorSymbol]) && i.apply(x);
+      } : function() {
+        return null;
+      };
+      NO_CHAR_ARRAY = {};
+      isAsyncFunction = typeof Symbol !== "undefined" ? (fn) => fn[Symbol.toStringTag] === "AsyncFunction" : () => false;
+      debug = typeof location !== "undefined" && /^(http|https):\/\/(localhost|127\.0\.0\.1)/.test(location.href);
+      libraryFilter = () => true;
+      NEEDS_THROW_FOR_STACK = !new Error("").stack;
+      dexieErrorNames = [
+        "Modify",
+        "Bulk",
+        "OpenFailed",
+        "VersionChange",
+        "Schema",
+        "Upgrade",
+        "InvalidTable",
+        "MissingAPI",
+        "NoSuchDatabase",
+        "InvalidArgument",
+        "SubTransaction",
+        "Unsupported",
+        "Internal",
+        "DatabaseClosed",
+        "PrematureCommit",
+        "ForeignAwait"
+      ];
+      idbDomErrorNames = [
+        "Unknown",
+        "Constraint",
+        "Data",
+        "TransactionInactive",
+        "ReadOnly",
+        "Version",
+        "NotFound",
+        "InvalidState",
+        "InvalidAccess",
+        "Abort",
+        "Timeout",
+        "QuotaExceeded",
+        "Syntax",
+        "DataClone"
+      ];
+      errorList = dexieErrorNames.concat(idbDomErrorNames);
+      defaultTexts = {
+        VersionChanged: "Database version changed by other database connection",
+        DatabaseClosed: "Database has been closed",
+        Abort: "Transaction aborted",
+        TransactionInactive: "Transaction has already completed or failed",
+        MissingAPI: "IndexedDB API missing. Please visit https://tinyurl.com/y2uuvskb"
+      };
+      derive(DexieError).from(Error).extend({
+        stack: {
+          get: function() {
+            return this._stack || (this._stack = this.name + ": " + this.message + prettyStack(this._e, 2));
+          }
+        },
+        toString: function() {
+          return this.name + ": " + this.message;
+        }
+      });
+      derive(ModifyError).from(DexieError);
+      derive(BulkError).from(DexieError);
+      errnames = errorList.reduce((obj, name) => (obj[name] = name + "Error", obj), {});
+      BaseException = DexieError;
+      exceptions = errorList.reduce((obj, name) => {
+        var fullName = name + "Error";
+        function DexieError2(msgOrInner, inner) {
+          this._e = getErrorWithStack();
+          this.name = fullName;
+          if (!msgOrInner) {
+            this.message = defaultTexts[name] || fullName;
+            this.inner = null;
+          } else if (typeof msgOrInner === "string") {
+            this.message = `${msgOrInner}${!inner ? "" : "\n " + inner}`;
+            this.inner = inner || null;
+          } else if (typeof msgOrInner === "object") {
+            this.message = `${msgOrInner.name} ${msgOrInner.message}`;
+            this.inner = msgOrInner;
+          }
+        }
+        derive(DexieError2).from(BaseException);
+        obj[name] = DexieError2;
+        return obj;
+      }, {});
+      exceptions.Syntax = SyntaxError;
+      exceptions.Type = TypeError;
+      exceptions.Range = RangeError;
+      exceptionMap = idbDomErrorNames.reduce((obj, name) => {
+        obj[name + "Error"] = exceptions[name];
+        return obj;
+      }, {});
+      fullNameExceptions = errorList.reduce((obj, name) => {
+        if (["Syntax", "Type", "Range"].indexOf(name) === -1)
+          obj[name + "Error"] = exceptions[name];
+        return obj;
+      }, {});
+      fullNameExceptions.ModifyError = ModifyError;
+      fullNameExceptions.DexieError = DexieError;
+      fullNameExceptions.BulkError = BulkError;
+      INTERNAL = {};
+      LONG_STACKS_CLIP_LIMIT = 100;
+      MAX_LONG_STACKS = 20;
+      ZONE_ECHO_LIMIT = 100;
+      [resolvedNativePromise, nativePromiseProto, resolvedGlobalPromise] = typeof Promise === "undefined" ? [] : (() => {
+        let globalP = Promise.resolve();
+        if (typeof crypto === "undefined" || !crypto.subtle)
+          return [globalP, getProto(globalP), globalP];
+        const nativeP = crypto.subtle.digest("SHA-512", new Uint8Array([0]));
+        return [
+          nativeP,
+          getProto(nativeP),
+          globalP
+        ];
+      })();
+      nativePromiseThen = nativePromiseProto && nativePromiseProto.then;
+      NativePromise = resolvedNativePromise && resolvedNativePromise.constructor;
+      patchGlobalPromise = !!resolvedGlobalPromise;
+      stack_being_generated = false;
+      schedulePhysicalTick = resolvedGlobalPromise ? () => {
+        resolvedGlobalPromise.then(physicalTick);
+      } : _global.setImmediate ? setImmediate.bind(null, physicalTick) : _global.MutationObserver ? () => {
+        var hiddenDiv = document.createElement("div");
+        new MutationObserver(() => {
+          physicalTick();
+          hiddenDiv = null;
+        }).observe(hiddenDiv, { attributes: true });
+        hiddenDiv.setAttribute("i", "1");
+      } : () => {
+        setTimeout(physicalTick, 0);
+      };
+      asap = function(callback, args) {
+        microtickQueue.push([callback, args]);
+        if (needsNewPhysicalTick) {
+          schedulePhysicalTick();
+          needsNewPhysicalTick = false;
+        }
+      };
+      isOutsideMicroTick = true;
+      needsNewPhysicalTick = true;
+      unhandledErrors = [];
+      rejectingErrors = [];
+      currentFulfiller = null;
+      rejectionMapper = mirror;
+      globalPSD = {
+        id: "global",
+        global: true,
+        ref: 0,
+        unhandleds: [],
+        onunhandled: globalError,
+        pgp: false,
+        env: {},
+        finalize: function() {
+          this.unhandleds.forEach((uh) => {
+            try {
+              globalError(uh[0], uh[1]);
+            } catch (e) {
+            }
+          });
+        }
+      };
+      PSD = globalPSD;
+      microtickQueue = [];
+      numScheduledCalls = 0;
+      tickFinalizers = [];
+      thenProp = {
+        get: function() {
+          var psd = PSD, microTaskId = totalEchoes;
+          function then(onFulfilled, onRejected) {
+            var possibleAwait = !psd.global && (psd !== PSD || microTaskId !== totalEchoes);
+            const cleanup = possibleAwait && !decrementExpectedAwaits();
+            var rv = new DexiePromise((resolve, reject) => {
+              propagateToListener(this, new Listener(nativeAwaitCompatibleWrap(onFulfilled, psd, possibleAwait, cleanup), nativeAwaitCompatibleWrap(onRejected, psd, possibleAwait, cleanup), resolve, reject, psd));
+            });
+            debug && linkToPreviousPromise(rv, this);
+            return rv;
+          }
+          then.prototype = INTERNAL;
+          return then;
+        },
+        set: function(value) {
+          setProp(this, "then", value && value.prototype === INTERNAL ? thenProp : {
+            get: function() {
+              return value;
+            },
+            set: thenProp.set
+          });
+        }
+      };
+      props(DexiePromise.prototype, {
+        then: thenProp,
+        _then: function(onFulfilled, onRejected) {
+          propagateToListener(this, new Listener(null, null, onFulfilled, onRejected, PSD));
+        },
+        catch: function(onRejected) {
+          if (arguments.length === 1)
+            return this.then(null, onRejected);
+          var type2 = arguments[0], handler = arguments[1];
+          return typeof type2 === "function" ? this.then(null, (err) => err instanceof type2 ? handler(err) : PromiseReject(err)) : this.then(null, (err) => err && err.name === type2 ? handler(err) : PromiseReject(err));
+        },
+        finally: function(onFinally) {
+          return this.then((value) => {
+            onFinally();
+            return value;
+          }, (err) => {
+            onFinally();
+            return PromiseReject(err);
+          });
+        },
+        stack: {
+          get: function() {
+            if (this._stack)
+              return this._stack;
+            try {
+              stack_being_generated = true;
+              var stacks = getStack(this, [], MAX_LONG_STACKS);
+              var stack = stacks.join("\nFrom previous: ");
+              if (this._state !== null)
+                this._stack = stack;
+              return stack;
+            } finally {
+              stack_being_generated = false;
+            }
+          }
+        },
+        timeout: function(ms, msg) {
+          return ms < Infinity ? new DexiePromise((resolve, reject) => {
+            var handle = setTimeout(() => reject(new exceptions.Timeout(msg)), ms);
+            this.then(resolve, reject).finally(clearTimeout.bind(null, handle));
+          }) : this;
+        }
+      });
+      if (typeof Symbol !== "undefined" && Symbol.toStringTag)
+        setProp(DexiePromise.prototype, Symbol.toStringTag, "Dexie.Promise");
+      globalPSD.env = snapShot();
+      props(DexiePromise, {
+        all: function() {
+          var values2 = getArrayOf.apply(null, arguments).map(onPossibleParallellAsync);
+          return new DexiePromise(function(resolve, reject) {
+            if (values2.length === 0)
+              resolve([]);
+            var remaining = values2.length;
+            values2.forEach((a, i) => DexiePromise.resolve(a).then((x) => {
+              values2[i] = x;
+              if (!--remaining)
+                resolve(values2);
+            }, reject));
+          });
+        },
+        resolve: (value) => {
+          if (value instanceof DexiePromise)
+            return value;
+          if (value && typeof value.then === "function")
+            return new DexiePromise((resolve, reject) => {
+              value.then(resolve, reject);
+            });
+          var rv = new DexiePromise(INTERNAL, true, value);
+          linkToPreviousPromise(rv, currentFulfiller);
+          return rv;
+        },
+        reject: PromiseReject,
+        race: function() {
+          var values2 = getArrayOf.apply(null, arguments).map(onPossibleParallellAsync);
+          return new DexiePromise((resolve, reject) => {
+            values2.map((value) => DexiePromise.resolve(value).then(resolve, reject));
+          });
+        },
+        PSD: {
+          get: () => PSD,
+          set: (value) => PSD = value
+        },
+        totalEchoes: { get: () => totalEchoes },
+        newPSD: newScope,
+        usePSD,
+        scheduler: {
+          get: () => asap,
+          set: (value) => {
+            asap = value;
+          }
+        },
+        rejectionMapper: {
+          get: () => rejectionMapper,
+          set: (value) => {
+            rejectionMapper = value;
+          }
+        },
+        follow: (fn, zoneProps) => {
+          return new DexiePromise((resolve, reject) => {
+            return newScope((resolve2, reject2) => {
+              var psd = PSD;
+              psd.unhandleds = [];
+              psd.onunhandled = reject2;
+              psd.finalize = callBoth(function() {
+                run_at_end_of_this_or_next_physical_tick(() => {
+                  this.unhandleds.length === 0 ? resolve2() : reject2(this.unhandleds[0]);
+                });
+              }, psd.finalize);
+              fn();
+            }, zoneProps, resolve, reject);
+          });
+        }
+      });
+      if (NativePromise) {
+        if (NativePromise.allSettled)
+          setProp(DexiePromise, "allSettled", function() {
+            const possiblePromises = getArrayOf.apply(null, arguments).map(onPossibleParallellAsync);
+            return new DexiePromise((resolve) => {
+              if (possiblePromises.length === 0)
+                resolve([]);
+              let remaining = possiblePromises.length;
+              const results = new Array(remaining);
+              possiblePromises.forEach((p, i) => DexiePromise.resolve(p).then((value) => results[i] = { status: "fulfilled", value }, (reason) => results[i] = { status: "rejected", reason }).then(() => --remaining || resolve(results)));
+            });
+          });
+        if (NativePromise.any && typeof AggregateError !== "undefined")
+          setProp(DexiePromise, "any", function() {
+            const possiblePromises = getArrayOf.apply(null, arguments).map(onPossibleParallellAsync);
+            return new DexiePromise((resolve, reject) => {
+              if (possiblePromises.length === 0)
+                reject(new AggregateError([]));
+              let remaining = possiblePromises.length;
+              const failures = new Array(remaining);
+              possiblePromises.forEach((p, i) => DexiePromise.resolve(p).then((value) => resolve(value), (failure) => {
+                failures[i] = failure;
+                if (!--remaining)
+                  reject(new AggregateError(failures));
+              }));
+            });
+          });
+      }
+      task = { awaits: 0, echoes: 0, id: 0 };
+      taskCounter = 0;
+      zoneStack = [];
+      zoneEchoes = 0;
+      totalEchoes = 0;
+      zone_id_counter = 0;
+      if (("" + nativePromiseThen).indexOf("[native code]") === -1) {
+        incrementExpectedAwaits = decrementExpectedAwaits = nop;
+      }
+      UNHANDLEDREJECTION = "unhandledrejection";
+      rejection = DexiePromise.reject;
+      DEXIE_VERSION = "3.2.2";
+      maxString = String.fromCharCode(65535);
+      minKey = -Infinity;
+      INVALID_KEY_ARGUMENT = "Invalid key provided. Keys must be of type string, number, Date or Array<string | number | Date>.";
+      STRING_EXPECTED = "String expected.";
+      connections = [];
+      isIEOrEdge = typeof navigator !== "undefined" && /(MSIE|Trident|Edge)/.test(navigator.userAgent);
+      hasIEDeleteObjectStoreBug = isIEOrEdge;
+      hangsOnDeleteLargeKeyRange = isIEOrEdge;
+      dexieStackFrameFilter = (frame) => !/(dexie\.js|dexie\.min\.js)/.test(frame);
+      DBNAMES_DB = "__dbnames";
+      READONLY = "readonly";
+      READWRITE = "readwrite";
+      AnyRange = {
+        type: 3,
+        lower: -Infinity,
+        lowerOpen: false,
+        upper: [[]],
+        upperOpen: false
+      };
+      Table = class {
+        _trans(mode, fn, writeLocked) {
+          const trans = this._tx || PSD.trans;
+          const tableName = this.name;
+          function checkTableInTransaction(resolve, reject, trans2) {
+            if (!trans2.schema[tableName])
+              throw new exceptions.NotFound("Table " + tableName + " not part of transaction");
+            return fn(trans2.idbtrans, trans2);
+          }
+          const wasRootExec = beginMicroTickScope();
+          try {
+            return trans && trans.db === this.db ? trans === PSD.trans ? trans._promise(mode, checkTableInTransaction, writeLocked) : newScope(() => trans._promise(mode, checkTableInTransaction, writeLocked), { trans, transless: PSD.transless || PSD }) : tempTransaction(this.db, mode, [this.name], checkTableInTransaction);
+          } finally {
+            if (wasRootExec)
+              endMicroTickScope();
+          }
+        }
+        get(keyOrCrit, cb) {
+          if (keyOrCrit && keyOrCrit.constructor === Object)
+            return this.where(keyOrCrit).first(cb);
+          return this._trans("readonly", (trans) => {
+            return this.core.get({ trans, key: keyOrCrit }).then((res) => this.hook.reading.fire(res));
+          }).then(cb);
+        }
+        where(indexOrCrit) {
+          if (typeof indexOrCrit === "string")
+            return new this.db.WhereClause(this, indexOrCrit);
+          if (isArray(indexOrCrit))
+            return new this.db.WhereClause(this, `[${indexOrCrit.join("+")}]`);
+          const keyPaths = keys(indexOrCrit);
+          if (keyPaths.length === 1)
+            return this.where(keyPaths[0]).equals(indexOrCrit[keyPaths[0]]);
+          const compoundIndex = this.schema.indexes.concat(this.schema.primKey).filter((ix) => ix.compound && keyPaths.every((keyPath) => ix.keyPath.indexOf(keyPath) >= 0) && ix.keyPath.every((keyPath) => keyPaths.indexOf(keyPath) >= 0))[0];
+          if (compoundIndex && this.db._maxKey !== maxString)
+            return this.where(compoundIndex.name).equals(compoundIndex.keyPath.map((kp) => indexOrCrit[kp]));
+          if (!compoundIndex && debug)
+            console.warn(`The query ${JSON.stringify(indexOrCrit)} on ${this.name} would benefit of a compound index [${keyPaths.join("+")}]`);
+          const { idxByName } = this.schema;
+          const idb = this.db._deps.indexedDB;
+          function equals(a, b) {
+            try {
+              return idb.cmp(a, b) === 0;
+            } catch (e) {
+              return false;
+            }
+          }
+          const [idx, filterFunction] = keyPaths.reduce(([prevIndex, prevFilterFn], keyPath) => {
+            const index = idxByName[keyPath];
+            const value = indexOrCrit[keyPath];
+            return [
+              prevIndex || index,
+              prevIndex || !index ? combine(prevFilterFn, index && index.multi ? (x) => {
+                const prop = getByKeyPath(x, keyPath);
+                return isArray(prop) && prop.some((item) => equals(value, item));
+              } : (x) => equals(value, getByKeyPath(x, keyPath))) : prevFilterFn
+            ];
+          }, [null, null]);
+          return idx ? this.where(idx.name).equals(indexOrCrit[idx.keyPath]).filter(filterFunction) : compoundIndex ? this.filter(filterFunction) : this.where(keyPaths).equals("");
+        }
+        filter(filterFunction) {
+          return this.toCollection().and(filterFunction);
+        }
+        count(thenShortcut) {
+          return this.toCollection().count(thenShortcut);
+        }
+        offset(offset) {
+          return this.toCollection().offset(offset);
+        }
+        limit(numRows) {
+          return this.toCollection().limit(numRows);
+        }
+        each(callback) {
+          return this.toCollection().each(callback);
+        }
+        toArray(thenShortcut) {
+          return this.toCollection().toArray(thenShortcut);
+        }
+        toCollection() {
+          return new this.db.Collection(new this.db.WhereClause(this));
+        }
+        orderBy(index) {
+          return new this.db.Collection(new this.db.WhereClause(this, isArray(index) ? `[${index.join("+")}]` : index));
+        }
+        reverse() {
+          return this.toCollection().reverse();
+        }
+        mapToClass(constructor) {
+          this.schema.mappedClass = constructor;
+          const readHook = (obj) => {
+            if (!obj)
+              return obj;
+            const res = Object.create(constructor.prototype);
+            for (var m in obj)
+              if (hasOwn(obj, m))
+                try {
+                  res[m] = obj[m];
+                } catch (_3) {
+                }
+            return res;
+          };
+          if (this.schema.readHook) {
+            this.hook.reading.unsubscribe(this.schema.readHook);
+          }
+          this.schema.readHook = readHook;
+          this.hook("reading", readHook);
+          return constructor;
+        }
+        defineClass() {
+          function Class(content) {
+            extend(this, content);
+          }
+          return this.mapToClass(Class);
+        }
+        add(obj, key) {
+          const { auto, keyPath } = this.schema.primKey;
+          let objToAdd = obj;
+          if (keyPath && auto) {
+            objToAdd = workaroundForUndefinedPrimKey(keyPath)(obj);
+          }
+          return this._trans("readwrite", (trans) => {
+            return this.core.mutate({ trans, type: "add", keys: key != null ? [key] : null, values: [objToAdd] });
+          }).then((res) => res.numFailures ? DexiePromise.reject(res.failures[0]) : res.lastResult).then((lastResult) => {
+            if (keyPath) {
+              try {
+                setByKeyPath(obj, keyPath, lastResult);
+              } catch (_3) {
+              }
+            }
+            return lastResult;
+          });
+        }
+        update(keyOrObject, modifications) {
+          if (typeof keyOrObject === "object" && !isArray(keyOrObject)) {
+            const key = getByKeyPath(keyOrObject, this.schema.primKey.keyPath);
+            if (key === void 0)
+              return rejection(new exceptions.InvalidArgument("Given object does not contain its primary key"));
+            try {
+              if (typeof modifications !== "function") {
+                keys(modifications).forEach((keyPath) => {
+                  setByKeyPath(keyOrObject, keyPath, modifications[keyPath]);
+                });
+              } else {
+                modifications(keyOrObject, { value: keyOrObject, primKey: key });
+              }
+            } catch (_a) {
+            }
+            return this.where(":id").equals(key).modify(modifications);
+          } else {
+            return this.where(":id").equals(keyOrObject).modify(modifications);
+          }
+        }
+        put(obj, key) {
+          const { auto, keyPath } = this.schema.primKey;
+          let objToAdd = obj;
+          if (keyPath && auto) {
+            objToAdd = workaroundForUndefinedPrimKey(keyPath)(obj);
+          }
+          return this._trans("readwrite", (trans) => this.core.mutate({ trans, type: "put", values: [objToAdd], keys: key != null ? [key] : null })).then((res) => res.numFailures ? DexiePromise.reject(res.failures[0]) : res.lastResult).then((lastResult) => {
+            if (keyPath) {
+              try {
+                setByKeyPath(obj, keyPath, lastResult);
+              } catch (_3) {
+              }
+            }
+            return lastResult;
+          });
+        }
+        delete(key) {
+          return this._trans("readwrite", (trans) => this.core.mutate({ trans, type: "delete", keys: [key] })).then((res) => res.numFailures ? DexiePromise.reject(res.failures[0]) : void 0);
+        }
+        clear() {
+          return this._trans("readwrite", (trans) => this.core.mutate({ trans, type: "deleteRange", range: AnyRange })).then((res) => res.numFailures ? DexiePromise.reject(res.failures[0]) : void 0);
+        }
+        bulkGet(keys2) {
+          return this._trans("readonly", (trans) => {
+            return this.core.getMany({
+              keys: keys2,
+              trans
+            }).then((result) => result.map((res) => this.hook.reading.fire(res)));
+          });
+        }
+        bulkAdd(objects, keysOrOptions, options) {
+          const keys2 = Array.isArray(keysOrOptions) ? keysOrOptions : void 0;
+          options = options || (keys2 ? void 0 : keysOrOptions);
+          const wantResults = options ? options.allKeys : void 0;
+          return this._trans("readwrite", (trans) => {
+            const { auto, keyPath } = this.schema.primKey;
+            if (keyPath && keys2)
+              throw new exceptions.InvalidArgument("bulkAdd(): keys argument invalid on tables with inbound keys");
+            if (keys2 && keys2.length !== objects.length)
+              throw new exceptions.InvalidArgument("Arguments objects and keys must have the same length");
+            const numObjects = objects.length;
+            let objectsToAdd = keyPath && auto ? objects.map(workaroundForUndefinedPrimKey(keyPath)) : objects;
+            return this.core.mutate({ trans, type: "add", keys: keys2, values: objectsToAdd, wantResults }).then(({ numFailures, results, lastResult, failures }) => {
+              const result = wantResults ? results : lastResult;
+              if (numFailures === 0)
+                return result;
+              throw new BulkError(`${this.name}.bulkAdd(): ${numFailures} of ${numObjects} operations failed`, failures);
+            });
+          });
+        }
+        bulkPut(objects, keysOrOptions, options) {
+          const keys2 = Array.isArray(keysOrOptions) ? keysOrOptions : void 0;
+          options = options || (keys2 ? void 0 : keysOrOptions);
+          const wantResults = options ? options.allKeys : void 0;
+          return this._trans("readwrite", (trans) => {
+            const { auto, keyPath } = this.schema.primKey;
+            if (keyPath && keys2)
+              throw new exceptions.InvalidArgument("bulkPut(): keys argument invalid on tables with inbound keys");
+            if (keys2 && keys2.length !== objects.length)
+              throw new exceptions.InvalidArgument("Arguments objects and keys must have the same length");
+            const numObjects = objects.length;
+            let objectsToPut = keyPath && auto ? objects.map(workaroundForUndefinedPrimKey(keyPath)) : objects;
+            return this.core.mutate({ trans, type: "put", keys: keys2, values: objectsToPut, wantResults }).then(({ numFailures, results, lastResult, failures }) => {
+              const result = wantResults ? results : lastResult;
+              if (numFailures === 0)
+                return result;
+              throw new BulkError(`${this.name}.bulkPut(): ${numFailures} of ${numObjects} operations failed`, failures);
+            });
+          });
+        }
+        bulkDelete(keys2) {
+          const numKeys = keys2.length;
+          return this._trans("readwrite", (trans) => {
+            return this.core.mutate({ trans, type: "delete", keys: keys2 });
+          }).then(({ numFailures, lastResult, failures }) => {
+            if (numFailures === 0)
+              return lastResult;
+            throw new BulkError(`${this.name}.bulkDelete(): ${numFailures} of ${numKeys} operations failed`, failures);
+          });
+        }
+      };
+      Collection = class {
+        _read(fn, cb) {
+          var ctx = this._ctx;
+          return ctx.error ? ctx.table._trans(null, rejection.bind(null, ctx.error)) : ctx.table._trans("readonly", fn).then(cb);
+        }
+        _write(fn) {
+          var ctx = this._ctx;
+          return ctx.error ? ctx.table._trans(null, rejection.bind(null, ctx.error)) : ctx.table._trans("readwrite", fn, "locked");
+        }
+        _addAlgorithm(fn) {
+          var ctx = this._ctx;
+          ctx.algorithm = combine(ctx.algorithm, fn);
+        }
+        _iterate(fn, coreTrans) {
+          return iter(this._ctx, fn, coreTrans, this._ctx.table.core);
+        }
+        clone(props2) {
+          var rv = Object.create(this.constructor.prototype), ctx = Object.create(this._ctx);
+          if (props2)
+            extend(ctx, props2);
+          rv._ctx = ctx;
+          return rv;
+        }
+        raw() {
+          this._ctx.valueMapper = null;
+          return this;
+        }
+        each(fn) {
+          var ctx = this._ctx;
+          return this._read((trans) => iter(ctx, fn, trans, ctx.table.core));
+        }
+        count(cb) {
+          return this._read((trans) => {
+            const ctx = this._ctx;
+            const coreTable = ctx.table.core;
+            if (isPlainKeyRange(ctx, true)) {
+              return coreTable.count({
+                trans,
+                query: {
+                  index: getIndexOrStore(ctx, coreTable.schema),
+                  range: ctx.range
+                }
+              }).then((count2) => Math.min(count2, ctx.limit));
+            } else {
+              var count = 0;
+              return iter(ctx, () => {
+                ++count;
+                return false;
+              }, trans, coreTable).then(() => count);
+            }
+          }).then(cb);
+        }
+        sortBy(keyPath, cb) {
+          const parts = keyPath.split(".").reverse(), lastPart = parts[0], lastIndex = parts.length - 1;
+          function getval(obj, i) {
+            if (i)
+              return getval(obj[parts[i]], i - 1);
+            return obj[lastPart];
+          }
+          var order = this._ctx.dir === "next" ? 1 : -1;
+          function sorter(a, b) {
+            var aVal = getval(a, lastIndex), bVal = getval(b, lastIndex);
+            return aVal < bVal ? -order : aVal > bVal ? order : 0;
+          }
+          return this.toArray(function(a) {
+            return a.sort(sorter);
+          }).then(cb);
+        }
+        toArray(cb) {
+          return this._read((trans) => {
+            var ctx = this._ctx;
+            if (ctx.dir === "next" && isPlainKeyRange(ctx, true) && ctx.limit > 0) {
+              const { valueMapper } = ctx;
+              const index = getIndexOrStore(ctx, ctx.table.core.schema);
+              return ctx.table.core.query({
+                trans,
+                limit: ctx.limit,
+                values: true,
+                query: {
+                  index,
+                  range: ctx.range
+                }
+              }).then(({ result }) => valueMapper ? result.map(valueMapper) : result);
+            } else {
+              const a = [];
+              return iter(ctx, (item) => a.push(item), trans, ctx.table.core).then(() => a);
+            }
+          }, cb);
+        }
+        offset(offset) {
+          var ctx = this._ctx;
+          if (offset <= 0)
+            return this;
+          ctx.offset += offset;
+          if (isPlainKeyRange(ctx)) {
+            addReplayFilter(ctx, () => {
+              var offsetLeft = offset;
+              return (cursor, advance) => {
+                if (offsetLeft === 0)
+                  return true;
+                if (offsetLeft === 1) {
+                  --offsetLeft;
+                  return false;
+                }
+                advance(() => {
+                  cursor.advance(offsetLeft);
+                  offsetLeft = 0;
+                });
+                return false;
+              };
+            });
+          } else {
+            addReplayFilter(ctx, () => {
+              var offsetLeft = offset;
+              return () => --offsetLeft < 0;
+            });
+          }
+          return this;
+        }
+        limit(numRows) {
+          this._ctx.limit = Math.min(this._ctx.limit, numRows);
+          addReplayFilter(this._ctx, () => {
+            var rowsLeft = numRows;
+            return function(cursor, advance, resolve) {
+              if (--rowsLeft <= 0)
+                advance(resolve);
+              return rowsLeft >= 0;
+            };
+          }, true);
+          return this;
+        }
+        until(filterFunction, bIncludeStopEntry) {
+          addFilter(this._ctx, function(cursor, advance, resolve) {
+            if (filterFunction(cursor.value)) {
+              advance(resolve);
+              return bIncludeStopEntry;
+            } else {
+              return true;
+            }
+          });
+          return this;
+        }
+        first(cb) {
+          return this.limit(1).toArray(function(a) {
+            return a[0];
+          }).then(cb);
+        }
+        last(cb) {
+          return this.reverse().first(cb);
+        }
+        filter(filterFunction) {
+          addFilter(this._ctx, function(cursor) {
+            return filterFunction(cursor.value);
+          });
+          addMatchFilter(this._ctx, filterFunction);
+          return this;
+        }
+        and(filter) {
+          return this.filter(filter);
+        }
+        or(indexName) {
+          return new this.db.WhereClause(this._ctx.table, indexName, this);
+        }
+        reverse() {
+          this._ctx.dir = this._ctx.dir === "prev" ? "next" : "prev";
+          if (this._ondirectionchange)
+            this._ondirectionchange(this._ctx.dir);
+          return this;
+        }
+        desc() {
+          return this.reverse();
+        }
+        eachKey(cb) {
+          var ctx = this._ctx;
+          ctx.keysOnly = !ctx.isMatch;
+          return this.each(function(val, cursor) {
+            cb(cursor.key, cursor);
+          });
+        }
+        eachUniqueKey(cb) {
+          this._ctx.unique = "unique";
+          return this.eachKey(cb);
+        }
+        eachPrimaryKey(cb) {
+          var ctx = this._ctx;
+          ctx.keysOnly = !ctx.isMatch;
+          return this.each(function(val, cursor) {
+            cb(cursor.primaryKey, cursor);
+          });
+        }
+        keys(cb) {
+          var ctx = this._ctx;
+          ctx.keysOnly = !ctx.isMatch;
+          var a = [];
+          return this.each(function(item, cursor) {
+            a.push(cursor.key);
+          }).then(function() {
+            return a;
+          }).then(cb);
+        }
+        primaryKeys(cb) {
+          var ctx = this._ctx;
+          if (ctx.dir === "next" && isPlainKeyRange(ctx, true) && ctx.limit > 0) {
+            return this._read((trans) => {
+              var index = getIndexOrStore(ctx, ctx.table.core.schema);
+              return ctx.table.core.query({
+                trans,
+                values: false,
+                limit: ctx.limit,
+                query: {
+                  index,
+                  range: ctx.range
+                }
+              });
+            }).then(({ result }) => result).then(cb);
+          }
+          ctx.keysOnly = !ctx.isMatch;
+          var a = [];
+          return this.each(function(item, cursor) {
+            a.push(cursor.primaryKey);
+          }).then(function() {
+            return a;
+          }).then(cb);
+        }
+        uniqueKeys(cb) {
+          this._ctx.unique = "unique";
+          return this.keys(cb);
+        }
+        firstKey(cb) {
+          return this.limit(1).keys(function(a) {
+            return a[0];
+          }).then(cb);
+        }
+        lastKey(cb) {
+          return this.reverse().firstKey(cb);
+        }
+        distinct() {
+          var ctx = this._ctx, idx = ctx.index && ctx.table.schema.idxByName[ctx.index];
+          if (!idx || !idx.multi)
+            return this;
+          var set = {};
+          addFilter(this._ctx, function(cursor) {
+            var strKey = cursor.primaryKey.toString();
+            var found = hasOwn(set, strKey);
+            set[strKey] = true;
+            return !found;
+          });
+          return this;
+        }
+        modify(changes) {
+          var ctx = this._ctx;
+          return this._write((trans) => {
+            var modifyer;
+            if (typeof changes === "function") {
+              modifyer = changes;
+            } else {
+              var keyPaths = keys(changes);
+              var numKeys = keyPaths.length;
+              modifyer = function(item) {
+                var anythingModified = false;
+                for (var i = 0; i < numKeys; ++i) {
+                  var keyPath = keyPaths[i], val = changes[keyPath];
+                  if (getByKeyPath(item, keyPath) !== val) {
+                    setByKeyPath(item, keyPath, val);
+                    anythingModified = true;
+                  }
+                }
+                return anythingModified;
+              };
+            }
+            const coreTable = ctx.table.core;
+            const { outbound, extractKey } = coreTable.schema.primaryKey;
+            const limit = this.db._options.modifyChunkSize || 200;
+            const totalFailures = [];
+            let successCount = 0;
+            const failedKeys = [];
+            const applyMutateResult = (expectedCount, res) => {
+              const { failures, numFailures } = res;
+              successCount += expectedCount - numFailures;
+              for (let pos of keys(failures)) {
+                totalFailures.push(failures[pos]);
+              }
+            };
+            return this.clone().primaryKeys().then((keys2) => {
+              const nextChunk = (offset) => {
+                const count = Math.min(limit, keys2.length - offset);
+                return coreTable.getMany({
+                  trans,
+                  keys: keys2.slice(offset, offset + count),
+                  cache: "immutable"
+                }).then((values2) => {
+                  const addValues = [];
+                  const putValues = [];
+                  const putKeys = outbound ? [] : null;
+                  const deleteKeys = [];
+                  for (let i = 0; i < count; ++i) {
+                    const origValue = values2[i];
+                    const ctx2 = {
+                      value: deepClone(origValue),
+                      primKey: keys2[offset + i]
+                    };
+                    if (modifyer.call(ctx2, ctx2.value, ctx2) !== false) {
+                      if (ctx2.value == null) {
+                        deleteKeys.push(keys2[offset + i]);
+                      } else if (!outbound && cmp(extractKey(origValue), extractKey(ctx2.value)) !== 0) {
+                        deleteKeys.push(keys2[offset + i]);
+                        addValues.push(ctx2.value);
+                      } else {
+                        putValues.push(ctx2.value);
+                        if (outbound)
+                          putKeys.push(keys2[offset + i]);
+                      }
+                    }
+                  }
+                  const criteria = isPlainKeyRange(ctx) && ctx.limit === Infinity && (typeof changes !== "function" || changes === deleteCallback) && {
+                    index: ctx.index,
+                    range: ctx.range
+                  };
+                  return Promise.resolve(addValues.length > 0 && coreTable.mutate({ trans, type: "add", values: addValues }).then((res) => {
+                    for (let pos in res.failures) {
+                      deleteKeys.splice(parseInt(pos), 1);
+                    }
+                    applyMutateResult(addValues.length, res);
+                  })).then(() => (putValues.length > 0 || criteria && typeof changes === "object") && coreTable.mutate({
+                    trans,
+                    type: "put",
+                    keys: putKeys,
+                    values: putValues,
+                    criteria,
+                    changeSpec: typeof changes !== "function" && changes
+                  }).then((res) => applyMutateResult(putValues.length, res))).then(() => (deleteKeys.length > 0 || criteria && changes === deleteCallback) && coreTable.mutate({
+                    trans,
+                    type: "delete",
+                    keys: deleteKeys,
+                    criteria
+                  }).then((res) => applyMutateResult(deleteKeys.length, res))).then(() => {
+                    return keys2.length > offset + count && nextChunk(offset + limit);
+                  });
+                });
+              };
+              return nextChunk(0).then(() => {
+                if (totalFailures.length > 0)
+                  throw new ModifyError("Error modifying one or more objects", totalFailures, successCount, failedKeys);
+                return keys2.length;
+              });
+            });
+          });
+        }
+        delete() {
+          var ctx = this._ctx, range = ctx.range;
+          if (isPlainKeyRange(ctx) && (ctx.isPrimKey && !hangsOnDeleteLargeKeyRange || range.type === 3)) {
+            return this._write((trans) => {
+              const { primaryKey } = ctx.table.core.schema;
+              const coreRange = range;
+              return ctx.table.core.count({ trans, query: { index: primaryKey, range: coreRange } }).then((count) => {
+                return ctx.table.core.mutate({ trans, type: "deleteRange", range: coreRange }).then(({ failures, lastResult, results, numFailures }) => {
+                  if (numFailures)
+                    throw new ModifyError("Could not delete some values", Object.keys(failures).map((pos) => failures[pos]), count - numFailures);
+                  return count - numFailures;
+                });
+              });
+            });
+          }
+          return this.modify(deleteCallback);
+        }
+      };
+      deleteCallback = (value, ctx) => ctx.value = null;
+      WhereClause = class {
+        get Collection() {
+          return this._ctx.table.db.Collection;
+        }
+        between(lower, upper, includeLower, includeUpper) {
+          includeLower = includeLower !== false;
+          includeUpper = includeUpper === true;
+          try {
+            if (this._cmp(lower, upper) > 0 || this._cmp(lower, upper) === 0 && (includeLower || includeUpper) && !(includeLower && includeUpper))
+              return emptyCollection(this);
+            return new this.Collection(this, () => createRange(lower, upper, !includeLower, !includeUpper));
+          } catch (e) {
+            return fail(this, INVALID_KEY_ARGUMENT);
+          }
+        }
+        equals(value) {
+          if (value == null)
+            return fail(this, INVALID_KEY_ARGUMENT);
+          return new this.Collection(this, () => rangeEqual(value));
+        }
+        above(value) {
+          if (value == null)
+            return fail(this, INVALID_KEY_ARGUMENT);
+          return new this.Collection(this, () => createRange(value, void 0, true));
+        }
+        aboveOrEqual(value) {
+          if (value == null)
+            return fail(this, INVALID_KEY_ARGUMENT);
+          return new this.Collection(this, () => createRange(value, void 0, false));
+        }
+        below(value) {
+          if (value == null)
+            return fail(this, INVALID_KEY_ARGUMENT);
+          return new this.Collection(this, () => createRange(void 0, value, false, true));
+        }
+        belowOrEqual(value) {
+          if (value == null)
+            return fail(this, INVALID_KEY_ARGUMENT);
+          return new this.Collection(this, () => createRange(void 0, value));
+        }
+        startsWith(str) {
+          if (typeof str !== "string")
+            return fail(this, STRING_EXPECTED);
+          return this.between(str, str + maxString, true, true);
+        }
+        startsWithIgnoreCase(str) {
+          if (str === "")
+            return this.startsWith(str);
+          return addIgnoreCaseAlgorithm(this, (x, a) => x.indexOf(a[0]) === 0, [str], maxString);
+        }
+        equalsIgnoreCase(str) {
+          return addIgnoreCaseAlgorithm(this, (x, a) => x === a[0], [str], "");
+        }
+        anyOfIgnoreCase() {
+          var set = getArrayOf.apply(NO_CHAR_ARRAY, arguments);
+          if (set.length === 0)
+            return emptyCollection(this);
+          return addIgnoreCaseAlgorithm(this, (x, a) => a.indexOf(x) !== -1, set, "");
+        }
+        startsWithAnyOfIgnoreCase() {
+          var set = getArrayOf.apply(NO_CHAR_ARRAY, arguments);
+          if (set.length === 0)
+            return emptyCollection(this);
+          return addIgnoreCaseAlgorithm(this, (x, a) => a.some((n) => x.indexOf(n) === 0), set, maxString);
+        }
+        anyOf() {
+          const set = getArrayOf.apply(NO_CHAR_ARRAY, arguments);
+          let compare = this._cmp;
+          try {
+            set.sort(compare);
+          } catch (e) {
+            return fail(this, INVALID_KEY_ARGUMENT);
+          }
+          if (set.length === 0)
+            return emptyCollection(this);
+          const c = new this.Collection(this, () => createRange(set[0], set[set.length - 1]));
+          c._ondirectionchange = (direction) => {
+            compare = direction === "next" ? this._ascending : this._descending;
+            set.sort(compare);
+          };
+          let i = 0;
+          c._addAlgorithm((cursor, advance, resolve) => {
+            const key = cursor.key;
+            while (compare(key, set[i]) > 0) {
+              ++i;
+              if (i === set.length) {
+                advance(resolve);
+                return false;
+              }
+            }
+            if (compare(key, set[i]) === 0) {
+              return true;
+            } else {
+              advance(() => {
+                cursor.continue(set[i]);
+              });
+              return false;
+            }
+          });
+          return c;
+        }
+        notEqual(value) {
+          return this.inAnyRange([[minKey, value], [value, this.db._maxKey]], { includeLowers: false, includeUppers: false });
+        }
+        noneOf() {
+          const set = getArrayOf.apply(NO_CHAR_ARRAY, arguments);
+          if (set.length === 0)
+            return new this.Collection(this);
+          try {
+            set.sort(this._ascending);
+          } catch (e) {
+            return fail(this, INVALID_KEY_ARGUMENT);
+          }
+          const ranges = set.reduce((res, val) => res ? res.concat([[res[res.length - 1][1], val]]) : [[minKey, val]], null);
+          ranges.push([set[set.length - 1], this.db._maxKey]);
+          return this.inAnyRange(ranges, { includeLowers: false, includeUppers: false });
+        }
+        inAnyRange(ranges, options) {
+          const cmp2 = this._cmp, ascending = this._ascending, descending = this._descending, min = this._min, max = this._max;
+          if (ranges.length === 0)
+            return emptyCollection(this);
+          if (!ranges.every((range) => range[0] !== void 0 && range[1] !== void 0 && ascending(range[0], range[1]) <= 0)) {
+            return fail(this, "First argument to inAnyRange() must be an Array of two-value Arrays [lower,upper] where upper must not be lower than lower", exceptions.InvalidArgument);
+          }
+          const includeLowers = !options || options.includeLowers !== false;
+          const includeUppers = options && options.includeUppers === true;
+          function addRange2(ranges2, newRange) {
+            let i = 0, l = ranges2.length;
+            for (; i < l; ++i) {
+              const range = ranges2[i];
+              if (cmp2(newRange[0], range[1]) < 0 && cmp2(newRange[1], range[0]) > 0) {
+                range[0] = min(range[0], newRange[0]);
+                range[1] = max(range[1], newRange[1]);
+                break;
+              }
+            }
+            if (i === l)
+              ranges2.push(newRange);
+            return ranges2;
+          }
+          let sortDirection = ascending;
+          function rangeSorter(a, b) {
+            return sortDirection(a[0], b[0]);
+          }
+          let set;
+          try {
+            set = ranges.reduce(addRange2, []);
+            set.sort(rangeSorter);
+          } catch (ex) {
+            return fail(this, INVALID_KEY_ARGUMENT);
+          }
+          let rangePos = 0;
+          const keyIsBeyondCurrentEntry = includeUppers ? (key) => ascending(key, set[rangePos][1]) > 0 : (key) => ascending(key, set[rangePos][1]) >= 0;
+          const keyIsBeforeCurrentEntry = includeLowers ? (key) => descending(key, set[rangePos][0]) > 0 : (key) => descending(key, set[rangePos][0]) >= 0;
+          function keyWithinCurrentRange(key) {
+            return !keyIsBeyondCurrentEntry(key) && !keyIsBeforeCurrentEntry(key);
+          }
+          let checkKey = keyIsBeyondCurrentEntry;
+          const c = new this.Collection(this, () => createRange(set[0][0], set[set.length - 1][1], !includeLowers, !includeUppers));
+          c._ondirectionchange = (direction) => {
+            if (direction === "next") {
+              checkKey = keyIsBeyondCurrentEntry;
+              sortDirection = ascending;
+            } else {
+              checkKey = keyIsBeforeCurrentEntry;
+              sortDirection = descending;
+            }
+            set.sort(rangeSorter);
+          };
+          c._addAlgorithm((cursor, advance, resolve) => {
+            var key = cursor.key;
+            while (checkKey(key)) {
+              ++rangePos;
+              if (rangePos === set.length) {
+                advance(resolve);
+                return false;
+              }
+            }
+            if (keyWithinCurrentRange(key)) {
+              return true;
+            } else if (this._cmp(key, set[rangePos][1]) === 0 || this._cmp(key, set[rangePos][0]) === 0) {
+              return false;
+            } else {
+              advance(() => {
+                if (sortDirection === ascending)
+                  cursor.continue(set[rangePos][0]);
+                else
+                  cursor.continue(set[rangePos][1]);
+              });
+              return false;
+            }
+          });
+          return c;
+        }
+        startsWithAnyOf() {
+          const set = getArrayOf.apply(NO_CHAR_ARRAY, arguments);
+          if (!set.every((s) => typeof s === "string")) {
+            return fail(this, "startsWithAnyOf() only works with strings");
+          }
+          if (set.length === 0)
+            return emptyCollection(this);
+          return this.inAnyRange(set.map((str) => [str, str + maxString]));
+        }
+      };
+      DEXIE_STORAGE_MUTATED_EVENT_NAME = "storagemutated";
+      STORAGE_MUTATED_DOM_EVENT_NAME = "x-storagemutated-1";
+      globalEvents = Events(null, DEXIE_STORAGE_MUTATED_EVENT_NAME);
+      Transaction = class {
+        _lock() {
+          assert(!PSD.global);
+          ++this._reculock;
+          if (this._reculock === 1 && !PSD.global)
+            PSD.lockOwnerFor = this;
+          return this;
+        }
+        _unlock() {
+          assert(!PSD.global);
+          if (--this._reculock === 0) {
+            if (!PSD.global)
+              PSD.lockOwnerFor = null;
+            while (this._blockedFuncs.length > 0 && !this._locked()) {
+              var fnAndPSD = this._blockedFuncs.shift();
+              try {
+                usePSD(fnAndPSD[1], fnAndPSD[0]);
+              } catch (e) {
+              }
+            }
+          }
+          return this;
+        }
+        _locked() {
+          return this._reculock && PSD.lockOwnerFor !== this;
+        }
+        create(idbtrans) {
+          if (!this.mode)
+            return this;
+          const idbdb = this.db.idbdb;
+          const dbOpenError = this.db._state.dbOpenError;
+          assert(!this.idbtrans);
+          if (!idbtrans && !idbdb) {
+            switch (dbOpenError && dbOpenError.name) {
+              case "DatabaseClosedError":
+                throw new exceptions.DatabaseClosed(dbOpenError);
+              case "MissingAPIError":
+                throw new exceptions.MissingAPI(dbOpenError.message, dbOpenError);
+              default:
+                throw new exceptions.OpenFailed(dbOpenError);
+            }
+          }
+          if (!this.active)
+            throw new exceptions.TransactionInactive();
+          assert(this._completion._state === null);
+          idbtrans = this.idbtrans = idbtrans || (this.db.core ? this.db.core.transaction(this.storeNames, this.mode, { durability: this.chromeTransactionDurability }) : idbdb.transaction(this.storeNames, this.mode, { durability: this.chromeTransactionDurability }));
+          idbtrans.onerror = wrap((ev) => {
+            preventDefault(ev);
+            this._reject(idbtrans.error);
+          });
+          idbtrans.onabort = wrap((ev) => {
+            preventDefault(ev);
+            this.active && this._reject(new exceptions.Abort(idbtrans.error));
+            this.active = false;
+            this.on("abort").fire(ev);
+          });
+          idbtrans.oncomplete = wrap(() => {
+            this.active = false;
+            this._resolve();
+            if ("mutatedParts" in idbtrans) {
+              globalEvents.storagemutated.fire(idbtrans["mutatedParts"]);
+            }
+          });
+          return this;
+        }
+        _promise(mode, fn, bWriteLock) {
+          if (mode === "readwrite" && this.mode !== "readwrite")
+            return rejection(new exceptions.ReadOnly("Transaction is readonly"));
+          if (!this.active)
+            return rejection(new exceptions.TransactionInactive());
+          if (this._locked()) {
+            return new DexiePromise((resolve, reject) => {
+              this._blockedFuncs.push([() => {
+                this._promise(mode, fn, bWriteLock).then(resolve, reject);
+              }, PSD]);
+            });
+          } else if (bWriteLock) {
+            return newScope(() => {
+              var p2 = new DexiePromise((resolve, reject) => {
+                this._lock();
+                const rv = fn(resolve, reject, this);
+                if (rv && rv.then)
+                  rv.then(resolve, reject);
+              });
+              p2.finally(() => this._unlock());
+              p2._lib = true;
+              return p2;
+            });
+          } else {
+            var p = new DexiePromise((resolve, reject) => {
+              var rv = fn(resolve, reject, this);
+              if (rv && rv.then)
+                rv.then(resolve, reject);
+            });
+            p._lib = true;
+            return p;
+          }
+        }
+        _root() {
+          return this.parent ? this.parent._root() : this;
+        }
+        waitFor(promiseLike) {
+          var root2 = this._root();
+          const promise = DexiePromise.resolve(promiseLike);
+          if (root2._waitingFor) {
+            root2._waitingFor = root2._waitingFor.then(() => promise);
+          } else {
+            root2._waitingFor = promise;
+            root2._waitingQueue = [];
+            var store = root2.idbtrans.objectStore(root2.storeNames[0]);
+            (function spin() {
+              ++root2._spinCount;
+              while (root2._waitingQueue.length)
+                root2._waitingQueue.shift()();
+              if (root2._waitingFor)
+                store.get(-Infinity).onsuccess = spin;
+            })();
+          }
+          var currentWaitPromise = root2._waitingFor;
+          return new DexiePromise((resolve, reject) => {
+            promise.then((res) => root2._waitingQueue.push(wrap(resolve.bind(null, res))), (err) => root2._waitingQueue.push(wrap(reject.bind(null, err)))).finally(() => {
+              if (root2._waitingFor === currentWaitPromise) {
+                root2._waitingFor = null;
+              }
+            });
+          });
+        }
+        abort() {
+          if (this.active) {
+            this.active = false;
+            if (this.idbtrans)
+              this.idbtrans.abort();
+            this._reject(new exceptions.Abort());
+          }
+        }
+        table(tableName) {
+          const memoizedTables = this._memoizedTables || (this._memoizedTables = {});
+          if (hasOwn(memoizedTables, tableName))
+            return memoizedTables[tableName];
+          const tableSchema = this.schema[tableName];
+          if (!tableSchema) {
+            throw new exceptions.NotFound("Table " + tableName + " not part of transaction");
+          }
+          const transactionBoundTable = new this.db.Table(tableName, tableSchema, this);
+          transactionBoundTable.core = this.db.core.table(tableName);
+          memoizedTables[tableName] = transactionBoundTable;
+          return transactionBoundTable;
+        }
+      };
+      getMaxKey = (IdbKeyRange) => {
+        try {
+          IdbKeyRange.only([[]]);
+          getMaxKey = () => [[]];
+          return [[]];
+        } catch (e) {
+          getMaxKey = () => maxString;
+          return maxString;
+        }
+      };
+      _id_counter = 0;
+      Version = class {
+        _parseStoresSpec(stores, outSchema) {
+          keys(stores).forEach((tableName) => {
+            if (stores[tableName] !== null) {
+              var indexes = parseIndexSyntax(stores[tableName]);
+              var primKey = indexes.shift();
+              if (primKey.multi)
+                throw new exceptions.Schema("Primary key cannot be multi-valued");
+              indexes.forEach((idx) => {
+                if (idx.auto)
+                  throw new exceptions.Schema("Only primary key can be marked as autoIncrement (++)");
+                if (!idx.keyPath)
+                  throw new exceptions.Schema("Index must have a name and cannot be an empty string");
+              });
+              outSchema[tableName] = createTableSchema(tableName, primKey, indexes);
+            }
+          });
+        }
+        stores(stores) {
+          const db2 = this.db;
+          this._cfg.storesSource = this._cfg.storesSource ? extend(this._cfg.storesSource, stores) : stores;
+          const versions = db2._versions;
+          const storesSpec = {};
+          let dbschema = {};
+          versions.forEach((version) => {
+            extend(storesSpec, version._cfg.storesSource);
+            dbschema = version._cfg.dbschema = {};
+            version._parseStoresSpec(storesSpec, dbschema);
+          });
+          db2._dbSchema = dbschema;
+          removeTablesApi(db2, [db2._allTables, db2, db2.Transaction.prototype]);
+          setApiOnPlace(db2, [db2._allTables, db2, db2.Transaction.prototype, this._cfg.tables], keys(dbschema), dbschema);
+          db2._storeNames = keys(dbschema);
+          return this;
+        }
+        upgrade(upgradeFunction) {
+          this._cfg.contentUpgrade = promisableChain(this._cfg.contentUpgrade || nop, upgradeFunction);
+          return this;
+        }
+      };
+      virtualIndexMiddleware = {
+        stack: "dbcore",
+        name: "VirtualIndexMiddleware",
+        level: 1,
+        create: createVirtualIndexMiddleware
+      };
+      hooksMiddleware = {
+        stack: "dbcore",
+        name: "HooksMiddleware",
+        level: 2,
+        create: (downCore) => ({
+          ...downCore,
+          table(tableName) {
+            const downTable = downCore.table(tableName);
+            const { primaryKey } = downTable.schema;
+            const tableMiddleware = {
+              ...downTable,
+              mutate(req) {
+                const dxTrans = PSD.trans;
+                const { deleting, creating, updating } = dxTrans.table(tableName).hook;
+                switch (req.type) {
+                  case "add":
+                    if (creating.fire === nop)
+                      break;
+                    return dxTrans._promise("readwrite", () => addPutOrDelete(req), true);
+                  case "put":
+                    if (creating.fire === nop && updating.fire === nop)
+                      break;
+                    return dxTrans._promise("readwrite", () => addPutOrDelete(req), true);
+                  case "delete":
+                    if (deleting.fire === nop)
+                      break;
+                    return dxTrans._promise("readwrite", () => addPutOrDelete(req), true);
+                  case "deleteRange":
+                    if (deleting.fire === nop)
+                      break;
+                    return dxTrans._promise("readwrite", () => deleteRange(req), true);
+                }
+                return downTable.mutate(req);
+                function addPutOrDelete(req2) {
+                  const dxTrans2 = PSD.trans;
+                  const keys2 = req2.keys || getEffectiveKeys(primaryKey, req2);
+                  if (!keys2)
+                    throw new Error("Keys missing");
+                  req2 = req2.type === "add" || req2.type === "put" ? { ...req2, keys: keys2 } : { ...req2 };
+                  if (req2.type !== "delete")
+                    req2.values = [...req2.values];
+                  if (req2.keys)
+                    req2.keys = [...req2.keys];
+                  return getExistingValues(downTable, req2, keys2).then((existingValues) => {
+                    const contexts = keys2.map((key, i) => {
+                      const existingValue = existingValues[i];
+                      const ctx = { onerror: null, onsuccess: null };
+                      if (req2.type === "delete") {
+                        deleting.fire.call(ctx, key, existingValue, dxTrans2);
+                      } else if (req2.type === "add" || existingValue === void 0) {
+                        const generatedPrimaryKey = creating.fire.call(ctx, key, req2.values[i], dxTrans2);
+                        if (key == null && generatedPrimaryKey != null) {
+                          key = generatedPrimaryKey;
+                          req2.keys[i] = key;
+                          if (!primaryKey.outbound) {
+                            setByKeyPath(req2.values[i], primaryKey.keyPath, key);
+                          }
+                        }
+                      } else {
+                        const objectDiff = getObjectDiff(existingValue, req2.values[i]);
+                        const additionalChanges = updating.fire.call(ctx, objectDiff, key, existingValue, dxTrans2);
+                        if (additionalChanges) {
+                          const requestedValue = req2.values[i];
+                          Object.keys(additionalChanges).forEach((keyPath) => {
+                            if (hasOwn(requestedValue, keyPath)) {
+                              requestedValue[keyPath] = additionalChanges[keyPath];
+                            } else {
+                              setByKeyPath(requestedValue, keyPath, additionalChanges[keyPath]);
+                            }
+                          });
+                        }
+                      }
+                      return ctx;
+                    });
+                    return downTable.mutate(req2).then(({ failures, results, numFailures, lastResult }) => {
+                      for (let i = 0; i < keys2.length; ++i) {
+                        const primKey = results ? results[i] : keys2[i];
+                        const ctx = contexts[i];
+                        if (primKey == null) {
+                          ctx.onerror && ctx.onerror(failures[i]);
+                        } else {
+                          ctx.onsuccess && ctx.onsuccess(
+                            req2.type === "put" && existingValues[i] ? req2.values[i] : primKey
+                          );
+                        }
+                      }
+                      return { failures, results, numFailures, lastResult };
+                    }).catch((error) => {
+                      contexts.forEach((ctx) => ctx.onerror && ctx.onerror(error));
+                      return Promise.reject(error);
+                    });
+                  });
+                }
+                function deleteRange(req2) {
+                  return deleteNextChunk(req2.trans, req2.range, 1e4);
+                }
+                function deleteNextChunk(trans, range, limit) {
+                  return downTable.query({ trans, values: false, query: { index: primaryKey, range }, limit }).then(({ result }) => {
+                    return addPutOrDelete({ type: "delete", keys: result, trans }).then((res) => {
+                      if (res.numFailures > 0)
+                        return Promise.reject(res.failures[0]);
+                      if (result.length < limit) {
+                        return { failures: [], numFailures: 0, lastResult: void 0 };
+                      } else {
+                        return deleteNextChunk(trans, { ...range, lower: result[result.length - 1], lowerOpen: true }, limit);
+                      }
+                    });
+                  });
+                }
+              }
+            };
+            return tableMiddleware;
+          }
+        })
+      };
+      cacheExistingValuesMiddleware = {
+        stack: "dbcore",
+        level: -1,
+        create: (core) => {
+          return {
+            table: (tableName) => {
+              const table = core.table(tableName);
+              return {
+                ...table,
+                getMany: (req) => {
+                  if (!req.cache) {
+                    return table.getMany(req);
+                  }
+                  const cachedResult = getFromTransactionCache(req.keys, req.trans["_cache"], req.cache === "clone");
+                  if (cachedResult) {
+                    return DexiePromise.resolve(cachedResult);
+                  }
+                  return table.getMany(req).then((res) => {
+                    req.trans["_cache"] = {
+                      keys: req.keys,
+                      values: req.cache === "clone" ? deepClone(res) : res
+                    };
+                    return res;
+                  });
+                },
+                mutate: (req) => {
+                  if (req.type !== "add")
+                    req.trans["_cache"] = null;
+                  return table.mutate(req);
+                }
+              };
+            }
+          };
+        }
+      };
+      RangeSet = function(fromOrTree, to) {
+        if (this) {
+          extend(this, arguments.length ? { d: 1, from: fromOrTree, to: arguments.length > 1 ? to : fromOrTree } : { d: 0 });
+        } else {
+          const rv = new RangeSet();
+          if (fromOrTree && "d" in fromOrTree) {
+            extend(rv, fromOrTree);
+          }
+          return rv;
+        }
+      };
+      props(RangeSet.prototype, {
+        add(rangeSet) {
+          mergeRanges(this, rangeSet);
+          return this;
+        },
+        addKey(key) {
+          addRange(this, key, key);
+          return this;
+        },
+        addKeys(keys2) {
+          keys2.forEach((key) => addRange(this, key, key));
+          return this;
+        },
+        [iteratorSymbol]() {
+          return getRangeSetIterator(this);
+        }
+      });
+      observabilityMiddleware = {
+        stack: "dbcore",
+        level: 0,
+        create: (core) => {
+          const dbName = core.schema.name;
+          const FULL_RANGE = new RangeSet(core.MIN_KEY, core.MAX_KEY);
+          return {
+            ...core,
+            table: (tableName) => {
+              const table = core.table(tableName);
+              const { schema } = table;
+              const { primaryKey } = schema;
+              const { extractKey, outbound } = primaryKey;
+              const tableClone = {
+                ...table,
+                mutate: (req) => {
+                  const trans = req.trans;
+                  const mutatedParts = trans.mutatedParts || (trans.mutatedParts = {});
+                  const getRangeSet = (indexName) => {
+                    const part = `idb://${dbName}/${tableName}/${indexName}`;
+                    return mutatedParts[part] || (mutatedParts[part] = new RangeSet());
+                  };
+                  const pkRangeSet = getRangeSet("");
+                  const delsRangeSet = getRangeSet(":dels");
+                  const { type: type2 } = req;
+                  let [keys2, newObjs] = req.type === "deleteRange" ? [req.range] : req.type === "delete" ? [req.keys] : req.values.length < 50 ? [[], req.values] : [];
+                  const oldCache = req.trans["_cache"];
+                  return table.mutate(req).then((res) => {
+                    if (isArray(keys2)) {
+                      if (type2 !== "delete")
+                        keys2 = res.results;
+                      pkRangeSet.addKeys(keys2);
+                      const oldObjs = getFromTransactionCache(keys2, oldCache);
+                      if (!oldObjs && type2 !== "add") {
+                        delsRangeSet.addKeys(keys2);
+                      }
+                      if (oldObjs || newObjs) {
+                        trackAffectedIndexes(getRangeSet, schema, oldObjs, newObjs);
+                      }
+                    } else if (keys2) {
+                      const range = { from: keys2.lower, to: keys2.upper };
+                      delsRangeSet.add(range);
+                      pkRangeSet.add(range);
+                    } else {
+                      pkRangeSet.add(FULL_RANGE);
+                      delsRangeSet.add(FULL_RANGE);
+                      schema.indexes.forEach((idx) => getRangeSet(idx.name).add(FULL_RANGE));
+                    }
+                    return res;
+                  });
+                }
+              };
+              const getRange = ({ query: { index, range } }) => {
+                var _a, _b;
+                return [
+                  index,
+                  new RangeSet((_a = range.lower) !== null && _a !== void 0 ? _a : core.MIN_KEY, (_b = range.upper) !== null && _b !== void 0 ? _b : core.MAX_KEY)
+                ];
+              };
+              const readSubscribers = {
+                get: (req) => [primaryKey, new RangeSet(req.key)],
+                getMany: (req) => [primaryKey, new RangeSet().addKeys(req.keys)],
+                count: getRange,
+                query: getRange,
+                openCursor: getRange
+              };
+              keys(readSubscribers).forEach((method) => {
+                tableClone[method] = function(req) {
+                  const { subscr } = PSD;
+                  if (subscr) {
+                    const getRangeSet = (indexName) => {
+                      const part = `idb://${dbName}/${tableName}/${indexName}`;
+                      return subscr[part] || (subscr[part] = new RangeSet());
+                    };
+                    const pkRangeSet = getRangeSet("");
+                    const delsRangeSet = getRangeSet(":dels");
+                    const [queriedIndex, queriedRanges] = readSubscribers[method](req);
+                    getRangeSet(queriedIndex.name || "").add(queriedRanges);
+                    if (!queriedIndex.isPrimaryKey) {
+                      if (method === "count") {
+                        delsRangeSet.add(FULL_RANGE);
+                      } else {
+                        const keysPromise = method === "query" && outbound && req.values && table.query({
+                          ...req,
+                          values: false
+                        });
+                        return table[method].apply(this, arguments).then((res) => {
+                          if (method === "query") {
+                            if (outbound && req.values) {
+                              return keysPromise.then(({ result: resultingKeys }) => {
+                                pkRangeSet.addKeys(resultingKeys);
+                                return res;
+                              });
+                            }
+                            const pKeys = req.values ? res.result.map(extractKey) : res.result;
+                            if (req.values) {
+                              pkRangeSet.addKeys(pKeys);
+                            } else {
+                              delsRangeSet.addKeys(pKeys);
+                            }
+                          } else if (method === "openCursor") {
+                            const cursor = res;
+                            const wantValues = req.values;
+                            return cursor && Object.create(cursor, {
+                              key: {
+                                get() {
+                                  delsRangeSet.addKey(cursor.primaryKey);
+                                  return cursor.key;
+                                }
+                              },
+                              primaryKey: {
+                                get() {
+                                  const pkey = cursor.primaryKey;
+                                  delsRangeSet.addKey(pkey);
+                                  return pkey;
+                                }
+                              },
+                              value: {
+                                get() {
+                                  wantValues && pkRangeSet.addKey(cursor.primaryKey);
+                                  return cursor.value;
+                                }
+                              }
+                            });
+                          }
+                          return res;
+                        });
+                      }
+                    }
+                  }
+                  return table[method].apply(this, arguments);
+                };
+              });
+              return tableClone;
+            }
+          };
+        }
+      };
+      Dexie$1 = class {
+        constructor(name, options) {
+          this._middlewares = {};
+          this.verno = 0;
+          const deps = Dexie$1.dependencies;
+          this._options = options = {
+            addons: Dexie$1.addons,
+            autoOpen: true,
+            indexedDB: deps.indexedDB,
+            IDBKeyRange: deps.IDBKeyRange,
+            ...options
+          };
+          this._deps = {
+            indexedDB: options.indexedDB,
+            IDBKeyRange: options.IDBKeyRange
+          };
+          const { addons } = options;
+          this._dbSchema = {};
+          this._versions = [];
+          this._storeNames = [];
+          this._allTables = {};
+          this.idbdb = null;
+          this._novip = this;
+          const state = {
+            dbOpenError: null,
+            isBeingOpened: false,
+            onReadyBeingFired: null,
+            openComplete: false,
+            dbReadyResolve: nop,
+            dbReadyPromise: null,
+            cancelOpen: nop,
+            openCanceller: null,
+            autoSchema: true,
+            PR1398_maxLoop: 3
+          };
+          state.dbReadyPromise = new DexiePromise((resolve) => {
+            state.dbReadyResolve = resolve;
+          });
+          state.openCanceller = new DexiePromise((_3, reject) => {
+            state.cancelOpen = reject;
+          });
+          this._state = state;
+          this.name = name;
+          this.on = Events(this, "populate", "blocked", "versionchange", "close", { ready: [promisableChain, nop] });
+          this.on.ready.subscribe = override(this.on.ready.subscribe, (subscribe) => {
+            return (subscriber, bSticky) => {
+              Dexie$1.vip(() => {
+                const state2 = this._state;
+                if (state2.openComplete) {
+                  if (!state2.dbOpenError)
+                    DexiePromise.resolve().then(subscriber);
+                  if (bSticky)
+                    subscribe(subscriber);
+                } else if (state2.onReadyBeingFired) {
+                  state2.onReadyBeingFired.push(subscriber);
+                  if (bSticky)
+                    subscribe(subscriber);
+                } else {
+                  subscribe(subscriber);
+                  const db2 = this;
+                  if (!bSticky)
+                    subscribe(function unsubscribe() {
+                      db2.on.ready.unsubscribe(subscriber);
+                      db2.on.ready.unsubscribe(unsubscribe);
+                    });
+                }
+              });
+            };
+          });
+          this.Collection = createCollectionConstructor(this);
+          this.Table = createTableConstructor(this);
+          this.Transaction = createTransactionConstructor(this);
+          this.Version = createVersionConstructor(this);
+          this.WhereClause = createWhereClauseConstructor(this);
+          this.on("versionchange", (ev) => {
+            if (ev.newVersion > 0)
+              console.warn(`Another connection wants to upgrade database '${this.name}'. Closing db now to resume the upgrade.`);
+            else
+              console.warn(`Another connection wants to delete database '${this.name}'. Closing db now to resume the delete request.`);
+            this.close();
+          });
+          this.on("blocked", (ev) => {
+            if (!ev.newVersion || ev.newVersion < ev.oldVersion)
+              console.warn(`Dexie.delete('${this.name}') was blocked`);
+            else
+              console.warn(`Upgrade '${this.name}' blocked by other connection holding version ${ev.oldVersion / 10}`);
+          });
+          this._maxKey = getMaxKey(options.IDBKeyRange);
+          this._createTransaction = (mode, storeNames, dbschema, parentTransaction) => new this.Transaction(mode, storeNames, dbschema, this._options.chromeTransactionDurability, parentTransaction);
+          this._fireOnBlocked = (ev) => {
+            this.on("blocked").fire(ev);
+            connections.filter((c) => c.name === this.name && c !== this && !c._state.vcFired).map((c) => c.on("versionchange").fire(ev));
+          };
+          this.use(virtualIndexMiddleware);
+          this.use(hooksMiddleware);
+          this.use(observabilityMiddleware);
+          this.use(cacheExistingValuesMiddleware);
+          this.vip = Object.create(this, { _vip: { value: true } });
+          addons.forEach((addon) => addon(this));
+        }
+        version(versionNumber) {
+          if (isNaN(versionNumber) || versionNumber < 0.1)
+            throw new exceptions.Type(`Given version is not a positive number`);
+          versionNumber = Math.round(versionNumber * 10) / 10;
+          if (this.idbdb || this._state.isBeingOpened)
+            throw new exceptions.Schema("Cannot add version when database is open");
+          this.verno = Math.max(this.verno, versionNumber);
+          const versions = this._versions;
+          var versionInstance = versions.filter((v) => v._cfg.version === versionNumber)[0];
+          if (versionInstance)
+            return versionInstance;
+          versionInstance = new this.Version(versionNumber);
+          versions.push(versionInstance);
+          versions.sort(lowerVersionFirst);
+          versionInstance.stores({});
+          this._state.autoSchema = false;
+          return versionInstance;
+        }
+        _whenReady(fn) {
+          return this.idbdb && (this._state.openComplete || PSD.letThrough || this._vip) ? fn() : new DexiePromise((resolve, reject) => {
+            if (this._state.openComplete) {
+              return reject(new exceptions.DatabaseClosed(this._state.dbOpenError));
+            }
+            if (!this._state.isBeingOpened) {
+              if (!this._options.autoOpen) {
+                reject(new exceptions.DatabaseClosed());
+                return;
+              }
+              this.open().catch(nop);
+            }
+            this._state.dbReadyPromise.then(resolve, reject);
+          }).then(fn);
+        }
+        use({ stack, create, level, name }) {
+          if (name)
+            this.unuse({ stack, name });
+          const middlewares = this._middlewares[stack] || (this._middlewares[stack] = []);
+          middlewares.push({ stack, create, level: level == null ? 10 : level, name });
+          middlewares.sort((a, b) => a.level - b.level);
+          return this;
+        }
+        unuse({ stack, name, create }) {
+          if (stack && this._middlewares[stack]) {
+            this._middlewares[stack] = this._middlewares[stack].filter((mw) => create ? mw.create !== create : name ? mw.name !== name : false);
+          }
+          return this;
+        }
+        open() {
+          return dexieOpen(this);
+        }
+        _close() {
+          const state = this._state;
+          const idx = connections.indexOf(this);
+          if (idx >= 0)
+            connections.splice(idx, 1);
+          if (this.idbdb) {
+            try {
+              this.idbdb.close();
+            } catch (e) {
+            }
+            this._novip.idbdb = null;
+          }
+          state.dbReadyPromise = new DexiePromise((resolve) => {
+            state.dbReadyResolve = resolve;
+          });
+          state.openCanceller = new DexiePromise((_3, reject) => {
+            state.cancelOpen = reject;
+          });
+        }
+        close() {
+          this._close();
+          const state = this._state;
+          this._options.autoOpen = false;
+          state.dbOpenError = new exceptions.DatabaseClosed();
+          if (state.isBeingOpened)
+            state.cancelOpen(state.dbOpenError);
+        }
+        delete() {
+          const hasArguments = arguments.length > 0;
+          const state = this._state;
+          return new DexiePromise((resolve, reject) => {
+            const doDelete = () => {
+              this.close();
+              var req = this._deps.indexedDB.deleteDatabase(this.name);
+              req.onsuccess = wrap(() => {
+                _onDatabaseDeleted(this._deps, this.name);
+                resolve();
+              });
+              req.onerror = eventRejectHandler(reject);
+              req.onblocked = this._fireOnBlocked;
+            };
+            if (hasArguments)
+              throw new exceptions.InvalidArgument("Arguments not allowed in db.delete()");
+            if (state.isBeingOpened) {
+              state.dbReadyPromise.then(doDelete);
+            } else {
+              doDelete();
+            }
+          });
+        }
+        backendDB() {
+          return this.idbdb;
+        }
+        isOpen() {
+          return this.idbdb !== null;
+        }
+        hasBeenClosed() {
+          const dbOpenError = this._state.dbOpenError;
+          return dbOpenError && dbOpenError.name === "DatabaseClosed";
+        }
+        hasFailed() {
+          return this._state.dbOpenError !== null;
+        }
+        dynamicallyOpened() {
+          return this._state.autoSchema;
+        }
+        get tables() {
+          return keys(this._allTables).map((name) => this._allTables[name]);
+        }
+        transaction() {
+          const args = extractTransactionArgs.apply(this, arguments);
+          return this._transaction.apply(this, args);
+        }
+        _transaction(mode, tables, scopeFunc) {
+          let parentTransaction = PSD.trans;
+          if (!parentTransaction || parentTransaction.db !== this || mode.indexOf("!") !== -1)
+            parentTransaction = null;
+          const onlyIfCompatible = mode.indexOf("?") !== -1;
+          mode = mode.replace("!", "").replace("?", "");
+          let idbMode, storeNames;
+          try {
+            storeNames = tables.map((table) => {
+              var storeName = table instanceof this.Table ? table.name : table;
+              if (typeof storeName !== "string")
+                throw new TypeError("Invalid table argument to Dexie.transaction(). Only Table or String are allowed");
+              return storeName;
+            });
+            if (mode == "r" || mode === READONLY)
+              idbMode = READONLY;
+            else if (mode == "rw" || mode == READWRITE)
+              idbMode = READWRITE;
+            else
+              throw new exceptions.InvalidArgument("Invalid transaction mode: " + mode);
+            if (parentTransaction) {
+              if (parentTransaction.mode === READONLY && idbMode === READWRITE) {
+                if (onlyIfCompatible) {
+                  parentTransaction = null;
+                } else
+                  throw new exceptions.SubTransaction("Cannot enter a sub-transaction with READWRITE mode when parent transaction is READONLY");
+              }
+              if (parentTransaction) {
+                storeNames.forEach((storeName) => {
+                  if (parentTransaction && parentTransaction.storeNames.indexOf(storeName) === -1) {
+                    if (onlyIfCompatible) {
+                      parentTransaction = null;
+                    } else
+                      throw new exceptions.SubTransaction("Table " + storeName + " not included in parent transaction.");
+                  }
+                });
+              }
+              if (onlyIfCompatible && parentTransaction && !parentTransaction.active) {
+                parentTransaction = null;
+              }
+            }
+          } catch (e) {
+            return parentTransaction ? parentTransaction._promise(null, (_3, reject) => {
+              reject(e);
+            }) : rejection(e);
+          }
+          const enterTransaction = enterTransactionScope.bind(null, this, idbMode, storeNames, parentTransaction, scopeFunc);
+          return parentTransaction ? parentTransaction._promise(idbMode, enterTransaction, "lock") : PSD.trans ? usePSD(PSD.transless, () => this._whenReady(enterTransaction)) : this._whenReady(enterTransaction);
+        }
+        table(tableName) {
+          if (!hasOwn(this._allTables, tableName)) {
+            throw new exceptions.InvalidTable(`Table ${tableName} does not exist`);
+          }
+          return this._allTables[tableName];
+        }
+      };
+      symbolObservable = typeof Symbol !== "undefined" && "observable" in Symbol ? Symbol.observable : "@@observable";
+      Observable = class {
+        constructor(subscribe) {
+          this._subscribe = subscribe;
+        }
+        subscribe(x, error, complete) {
+          return this._subscribe(!x || typeof x === "function" ? { next: x, error, complete } : x);
+        }
+        [symbolObservable]() {
+          return this;
+        }
+      };
+      try {
+        domDeps = {
+          indexedDB: _global.indexedDB || _global.mozIndexedDB || _global.webkitIndexedDB || _global.msIndexedDB,
+          IDBKeyRange: _global.IDBKeyRange || _global.webkitIDBKeyRange
+        };
+      } catch (e) {
+        domDeps = { indexedDB: null, IDBKeyRange: null };
+      }
+      Dexie = Dexie$1;
+      props(Dexie, {
+        ...fullNameExceptions,
+        delete(databaseName) {
+          const db2 = new Dexie(databaseName, { addons: [] });
+          return db2.delete();
+        },
+        exists(name) {
+          return new Dexie(name, { addons: [] }).open().then((db2) => {
+            db2.close();
+            return true;
+          }).catch("NoSuchDatabaseError", () => false);
+        },
+        getDatabaseNames(cb) {
+          try {
+            return getDatabaseNames(Dexie.dependencies).then(cb);
+          } catch (_a) {
+            return rejection(new exceptions.MissingAPI());
+          }
+        },
+        defineClass() {
+          function Class(content) {
+            extend(this, content);
+          }
+          return Class;
+        },
+        ignoreTransaction(scopeFunc) {
+          return PSD.trans ? usePSD(PSD.transless, scopeFunc) : scopeFunc();
+        },
+        vip,
+        async: function(generatorFn) {
+          return function() {
+            try {
+              var rv = awaitIterator(generatorFn.apply(this, arguments));
+              if (!rv || typeof rv.then !== "function")
+                return DexiePromise.resolve(rv);
+              return rv;
+            } catch (e) {
+              return rejection(e);
+            }
+          };
+        },
+        spawn: function(generatorFn, args, thiz) {
+          try {
+            var rv = awaitIterator(generatorFn.apply(thiz, args || []));
+            if (!rv || typeof rv.then !== "function")
+              return DexiePromise.resolve(rv);
+            return rv;
+          } catch (e) {
+            return rejection(e);
+          }
+        },
+        currentTransaction: {
+          get: () => PSD.trans || null
+        },
+        waitFor: function(promiseOrFunction, optionalTimeout) {
+          const promise = DexiePromise.resolve(typeof promiseOrFunction === "function" ? Dexie.ignoreTransaction(promiseOrFunction) : promiseOrFunction).timeout(optionalTimeout || 6e4);
+          return PSD.trans ? PSD.trans.waitFor(promise) : promise;
+        },
+        Promise: DexiePromise,
+        debug: {
+          get: () => debug,
+          set: (value) => {
+            setDebug(value, value === "dexie" ? () => true : dexieStackFrameFilter);
+          }
+        },
+        derive,
+        extend,
+        props,
+        override,
+        Events,
+        on: globalEvents,
+        liveQuery,
+        extendObservabilitySet,
+        getByKeyPath,
+        setByKeyPath,
+        delByKeyPath,
+        shallowClone,
+        deepClone,
+        getObjectDiff,
+        cmp,
+        asap: asap$1,
+        minKey,
+        addons: [],
+        connections,
+        errnames,
+        dependencies: domDeps,
+        semVer: DEXIE_VERSION,
+        version: DEXIE_VERSION.split(".").map((n) => parseInt(n)).reduce((p, c, i) => p + c / Math.pow(10, i * 2))
+      });
+      Dexie.maxKey = getMaxKey(Dexie.dependencies.IDBKeyRange);
+      if (typeof dispatchEvent !== "undefined" && typeof addEventListener !== "undefined") {
+        globalEvents(DEXIE_STORAGE_MUTATED_EVENT_NAME, (updatedParts) => {
+          if (!propagatingLocally) {
+            let event;
+            if (isIEOrEdge) {
+              event = document.createEvent("CustomEvent");
+              event.initCustomEvent(STORAGE_MUTATED_DOM_EVENT_NAME, true, true, updatedParts);
+            } else {
+              event = new CustomEvent(STORAGE_MUTATED_DOM_EVENT_NAME, {
+                detail: updatedParts
+              });
+            }
+            propagatingLocally = true;
+            dispatchEvent(event);
+            propagatingLocally = false;
+          }
+        });
+        addEventListener(STORAGE_MUTATED_DOM_EVENT_NAME, ({ detail }) => {
+          if (!propagatingLocally) {
+            propagateLocally(detail);
+          }
+        });
+      }
+      propagatingLocally = false;
+      if (typeof BroadcastChannel !== "undefined") {
+        const bc = new BroadcastChannel(STORAGE_MUTATED_DOM_EVENT_NAME);
+        globalEvents(DEXIE_STORAGE_MUTATED_EVENT_NAME, (changedParts) => {
+          if (!propagatingLocally) {
+            bc.postMessage(changedParts);
+          }
+        });
+        bc.onmessage = (ev) => {
+          if (ev.data)
+            propagateLocally(ev.data);
+        };
+      } else if (typeof self !== "undefined" && typeof navigator !== "undefined") {
+        globalEvents(DEXIE_STORAGE_MUTATED_EVENT_NAME, (changedParts) => {
+          try {
+            if (!propagatingLocally) {
+              if (typeof localStorage !== "undefined") {
+                localStorage.setItem(STORAGE_MUTATED_DOM_EVENT_NAME, JSON.stringify({
+                  trig: Math.random(),
+                  changedParts
+                }));
+              }
+              if (typeof self["clients"] === "object") {
+                [...self["clients"].matchAll({ includeUncontrolled: true })].forEach((client) => client.postMessage({
+                  type: STORAGE_MUTATED_DOM_EVENT_NAME,
+                  changedParts
+                }));
+              }
+            }
+          } catch (_a) {
+          }
+        });
+        if (typeof addEventListener !== "undefined") {
+          addEventListener("storage", (ev) => {
+            if (ev.key === STORAGE_MUTATED_DOM_EVENT_NAME) {
+              const data = JSON.parse(ev.newValue);
+              if (data)
+                propagateLocally(data.changedParts);
+            }
+          });
+        }
+        const swContainer = self.document && navigator.serviceWorker;
+        if (swContainer) {
+          swContainer.addEventListener("message", propagateMessageLocally);
+        }
+      }
+      DexiePromise.rejectionMapper = mapError;
+      setDebug(debug, dexieStackFrameFilter);
+    }
+  });
+
+  // node_modules/dexie-react-hooks/dist/dexie-react-hooks.js
+  var require_dexie_react_hooks = __commonJS({
+    "node_modules/dexie-react-hooks/dist/dexie-react-hooks.js"(exports, module) {
+      (function(global2, factory) {
+        typeof exports === "object" && typeof module !== "undefined" ? factory(exports, (init_dexie(), __toCommonJS(dexie_exports)), require_react()) : typeof define === "function" && define.amd ? define(["exports", "dexie", "react"], factory) : (global2 = typeof globalThis !== "undefined" ? globalThis : global2 || self, factory(global2.DexieReactHooks = {}, global2.Dexie, global2.React));
+      })(exports, function(exports2, dexie, React59) {
+        "use strict";
+        function _interopDefaultLegacy(e) {
+          return e && typeof e === "object" && "default" in e ? e : { "default": e };
+        }
+        var React__default = /* @__PURE__ */ _interopDefaultLegacy(React59);
+        function useObservable(observableFactory, arg2, arg3) {
+          var deps;
+          var defaultResult;
+          if (typeof observableFactory === "function") {
+            deps = arg2 || [];
+            defaultResult = arg3;
+          } else {
+            deps = [];
+            defaultResult = arg2;
+          }
+          var monitor = React__default["default"].useRef({
+            hasResult: false,
+            result: defaultResult,
+            error: null
+          });
+          var _a = React__default["default"].useReducer(function(x) {
+            return x + 1;
+          }, 0);
+          _a[0];
+          var triggerUpdate = _a[1];
+          var observable = React__default["default"].useMemo(function() {
+            var observable2 = typeof observableFactory === "function" ? observableFactory() : observableFactory;
+            if (!observable2 || typeof observable2.subscribe !== "function") {
+              if (observableFactory === observable2) {
+                throw new TypeError("Given argument to useObservable() was neither a valid observable nor a function.");
+              } else {
+                throw new TypeError("Observable factory given to useObservable() did not return a valid observable.");
+              }
+            }
+            if (!monitor.current.hasResult) {
+              if (typeof observable2.getValue === "function") {
+                monitor.current.result = observable2.getValue();
+                monitor.current.hasResult = true;
+              } else {
+                var subscription = observable2.subscribe(function(val) {
+                  monitor.current.result = val;
+                  monitor.current.hasResult = true;
+                });
+                if (typeof subscription === "function") {
+                  subscription();
+                } else {
+                  subscription.unsubscribe();
+                }
+              }
+            }
+            return observable2;
+          }, deps);
+          React__default["default"].useDebugValue(monitor.current.result);
+          React__default["default"].useEffect(function() {
+            var subscription = observable.subscribe(function(val) {
+              var current = monitor.current;
+              if (current.error !== null || current.result !== val) {
+                current.error = null;
+                current.result = val;
+                current.hasResult = true;
+                triggerUpdate();
+              }
+            }, function(err) {
+              var current = monitor.current;
+              if (current.error !== err) {
+                current.error = err;
+                triggerUpdate();
+              }
+            });
+            return typeof subscription === "function" ? subscription : subscription.unsubscribe.bind(subscription);
+          }, deps);
+          if (monitor.current.error)
+            throw monitor.current.error;
+          return monitor.current.result;
+        }
+        function useLiveQuery3(querier, deps, defaultResult) {
+          return useObservable(function() {
+            return dexie.liveQuery(querier);
+          }, deps || [], defaultResult);
+        }
+        function usePermissions(firstArg, table, obj) {
+          if (!firstArg)
+            throw new TypeError("Invalid arguments to usePermissions(): undefined or null");
+          var db2;
+          if (arguments.length >= 3) {
+            if (!("transaction" in firstArg)) {
+              throw new TypeError("Invalid arguments to usePermission(db, table, obj): 1st arg must be a Dexie instance");
+            }
+            if (typeof table !== "string")
+              throw new TypeError("Invalid arguments to usePermission(db, table, obj): 2nd arg must be string");
+            if (!obj || typeof obj !== "object")
+              throw new TypeError("Invalid arguments to usePermission(db, table, obj): 3rd arg must be an object");
+            db2 = firstArg;
+          } else {
+            if (firstArg instanceof dexie.Dexie)
+              throw new TypeError("Invalid arguments to usePermission(db, table, obj): Missing table and obj arguments.");
+            if (typeof firstArg.table === "function" && typeof firstArg.db === "object") {
+              db2 = firstArg.db;
+              obj = firstArg;
+              table = firstArg.table();
+            } else {
+              throw new TypeError("Invalid arguments to usePermissions(). Expected usePermissions(entity: DexieCloudEntity) or usePermissions(db: Dexie, table: string, obj: DexieCloudObject)");
+            }
+          }
+          if (!("cloud" in db2))
+            throw new Error("usePermissions() is only for Dexie Cloud but there's no dexie-cloud-addon active in given db.");
+          if (!("permissions" in db2["cloud"]))
+            throw new Error("usePermissions() requires a newer version of dexie-cloud-addon. Please upgrade it.");
+          return useObservable(
+            function() {
+              return db2.cloud.permissions(obj, table);
+            },
+            [obj.realmId, obj.owner, table]
+          );
+        }
+        exports2.useLiveQuery = useLiveQuery3;
+        exports2.useObservable = useObservable;
+        exports2.usePermissions = usePermissions;
+        Object.defineProperty(exports2, "__esModule", { value: true });
+      });
+    }
+  });
+
   // node_modules/react-calendar/dist/Calendar.css
   var require_ = __commonJS({
     "node_modules/react-calendar/dist/Calendar.css"(exports, module) {
@@ -59949,18 +64817,18 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       exports.otherEvents = otherEvents;
       var allEvents = [].concat(clipboardEvents, compositionEvents, keyboardEvents, focusEvents, formEvents, genericEvents, mouseEvents, pointerEvents, selectionEvents, touchEvents, uiEvents, wheelEvents, mediaEvents, imageEvents, animationEvents, transitionEvents, otherEvents);
       exports.allEvents = allEvents;
-      var makeEventProps = function makeEventProps2(props, getArgs) {
+      var makeEventProps = function makeEventProps2(props2, getArgs) {
         var eventProps = {};
         allEvents.forEach(function(eventName) {
-          if (!(eventName in props)) {
+          if (!(eventName in props2)) {
             return;
           }
           if (!getArgs) {
-            eventProps[eventName] = props[eventName];
+            eventProps[eventName] = props2[eventName];
             return;
           }
           eventProps[eventName] = function(event) {
-            return props[eventName](event, getArgs(eventName));
+            return props2[eventName](event, getArgs(eventName));
           };
         });
         return eventProps;
@@ -60169,8 +65037,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return baseIsNative(value) ? value : void 0;
       }
       function isKeyable(value) {
-        var type = typeof value;
-        return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
+        var type2 = typeof value;
+        return type2 == "string" || type2 == "number" || type2 == "symbol" || type2 == "boolean" ? value !== "__proto__" : value === null;
       }
       function isMasked(func) {
         return !!maskSrcKey && maskSrcKey in func;
@@ -60213,8 +65081,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return tag == funcTag || tag == genTag;
       }
       function isObject(value) {
-        var type = typeof value;
-        return !!value && (type == "object" || type == "function");
+        var type2 = typeof value;
+        return !!value && (type2 == "object" || type2 == "function");
       }
       module.exports = memoize;
     }
@@ -60585,9 +65453,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
           return _arrayLikeToArray(o, minLen);
       }
-      function _iterableToArray(iter) {
-        if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-          return Array.from(iter);
+      function _iterableToArray(iter2) {
+        if (typeof Symbol !== "undefined" && iter2[Symbol.iterator] != null || iter2["@@iterator"] != null)
+          return Array.from(iter2);
       }
       function _arrayWithoutHoles(arr) {
         if (Array.isArray(arr))
@@ -60995,30 +65863,30 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       exports.isCalendarType = isCalendarType;
       var isClassName = _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].arrayOf(_propTypes["default"].string)]);
       exports.isClassName = isClassName;
-      var isMinDate = function isMinDate2(props, propName, componentName) {
-        var minDate2 = props[propName];
+      var isMinDate = function isMinDate2(props2, propName, componentName) {
+        var minDate2 = props2[propName];
         if (!minDate2) {
           return null;
         }
         if (!(minDate2 instanceof Date)) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate2), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
         }
-        var maxDate = props.maxDate;
+        var maxDate = props2.maxDate;
         if (maxDate && minDate2 > maxDate) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate2), "` supplied to `").concat(componentName, "`, minDate cannot be larger than maxDate."));
         }
         return null;
       };
       exports.isMinDate = isMinDate;
-      var isMaxDate = function isMaxDate2(props, propName, componentName) {
-        var maxDate = props[propName];
+      var isMaxDate = function isMaxDate2(props2, propName, componentName) {
+        var maxDate = props2[propName];
         if (!maxDate) {
           return null;
         }
         if (!(maxDate instanceof Date)) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
         }
-        var minDate2 = props.minDate;
+        var minDate2 = props2.minDate;
         if (minDate2 && maxDate < minDate2) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, maxDate cannot be smaller than minDate."));
         }
@@ -61033,9 +65901,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       exports.isValue = isValue;
       var isViews = _propTypes["default"].arrayOf(_propTypes["default"].oneOf(allViews));
       exports.isViews = isViews;
-      var isView = function isView2(props, propName, componentName) {
-        var view = props[propName];
-        var views = props.views;
+      var isView = function isView2(props2, propName, componentName) {
+        var view = props2[propName];
+        var views = props2.views;
         var allowedViews = views || allViews;
         if (view !== void 0 && allowedViews.indexOf(view) === -1) {
           return new Error("Invalid prop `".concat(propName, "` of value `").concat(view, "` supplied to `").concat(componentName, "`, expected one of [").concat(allowedViews.map(function(a) {
@@ -61045,12 +65913,12 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return null;
       };
       exports.isView = isView;
-      isView.isRequired = function(props, propName, componentName) {
-        var view = props[propName];
+      isView.isRequired = function(props2, propName, componentName) {
+        var view = props2[propName];
         if (!view) {
           return new Error("The prop `".concat(propName, "` is marked as required in `").concat(componentName, "`, but its value is `").concat(view, "`."));
         }
-        return isView(props, propName, componentName);
+        return isView(props2, propName, componentName);
       };
       var tileGroupProps = {
         activeStartDate: _propTypes["default"].instanceOf(Date).isRequired,
@@ -61264,14 +66132,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return _extends2.apply(this, arguments);
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -61328,13 +66196,13 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return "".concat(num, "%");
       }
       function Flex(_ref) {
-        var children = _ref.children, className = _ref.className, direction = _ref.direction, count = _ref.count, offset = _ref.offset, style2 = _ref.style, wrap = _ref.wrap, otherProps = _objectWithoutProperties(_ref, _excluded32);
+        var children = _ref.children, className = _ref.className, direction = _ref.direction, count = _ref.count, offset = _ref.offset, style2 = _ref.style, wrap2 = _ref.wrap, otherProps = _objectWithoutProperties(_ref, _excluded32);
         return /* @__PURE__ */ _react["default"].createElement("div", _extends2({
           className,
           style: _objectSpread({
             display: "flex",
             flexDirection: direction,
-            flexWrap: wrap ? "wrap" : "no-wrap"
+            flexWrap: wrap2 ? "wrap" : "no-wrap"
           }, style2)
         }, otherProps), _react["default"].Children.map(children, function(child, index) {
           return /* @__PURE__ */ _react["default"].cloneElement(child, _objectSpread(_objectSpread({}, child.props), {}, {
@@ -61392,9 +66260,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
           return _arrayLikeToArray(o, minLen);
       }
-      function _iterableToArray(iter) {
-        if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-          return Array.from(iter);
+      function _iterableToArray(iter2) {
+        if (typeof Symbol !== "undefined" && iter2[Symbol.iterator] != null || iter2["@@iterator"] != null)
+          return Array.from(iter2);
       }
       function _arrayWithoutHoles(arr) {
         if (Array.isArray(arr))
@@ -61503,14 +66371,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return obj && obj.__esModule ? obj : { "default": obj };
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -61676,14 +66544,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return newObj;
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -61701,9 +66569,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
           throw new TypeError("Cannot call a class as a function");
         }
       }
-      function _defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-          var descriptor = props[i];
+      function _defineProperties(target, props2) {
+        for (var i = 0; i < props2.length; i++) {
+          var descriptor = props2[i];
           descriptor.enumerable = descriptor.enumerable || false;
           descriptor.configurable = true;
           if ("value" in descriptor)
@@ -61891,14 +66759,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return obj && obj.__esModule ? obj : { "default": obj };
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -62000,14 +66868,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return obj && obj.__esModule ? obj : { "default": obj };
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -62042,11 +66910,11 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         };
         return _extends2.apply(this, arguments);
       }
-      function Decades(props) {
-        var activeStartDate = props.activeStartDate;
+      function Decades(props2) {
+        var activeStartDate = props2.activeStartDate;
         var start = (0, _dates.getBeginOfCenturyYear)(activeStartDate);
         var end = start + 99;
-        return /* @__PURE__ */ _react["default"].createElement(_TileGroup["default"], _extends2({}, props, {
+        return /* @__PURE__ */ _react["default"].createElement(_TileGroup["default"], _extends2({}, props2, {
           className: "react-calendar__century-view__decades",
           dateTransform: _dateUtils.getDecadeStart,
           dateType: "decade",
@@ -62073,9 +66941,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { "default": obj };
       }
-      function CenturyView(props) {
+      function CenturyView(props2) {
         function renderDecades() {
-          return /* @__PURE__ */ _react["default"].createElement(_Decades["default"], props);
+          return /* @__PURE__ */ _react["default"].createElement(_Decades["default"], props2);
         }
         return /* @__PURE__ */ _react["default"].createElement("div", {
           className: "react-calendar__century-view"
@@ -62103,14 +66971,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return obj && obj.__esModule ? obj : { "default": obj };
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -62211,14 +67079,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return obj && obj.__esModule ? obj : { "default": obj };
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -62253,11 +67121,11 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         };
         return _extends2.apply(this, arguments);
       }
-      function Years(props) {
-        var activeStartDate = props.activeStartDate;
+      function Years(props2) {
+        var activeStartDate = props2.activeStartDate;
         var start = (0, _dates.getBeginOfDecadeYear)(activeStartDate);
         var end = start + 9;
-        return /* @__PURE__ */ _react["default"].createElement(_TileGroup["default"], _extends2({}, props, {
+        return /* @__PURE__ */ _react["default"].createElement(_TileGroup["default"], _extends2({}, props2, {
           className: "react-calendar__decade-view__years",
           dateTransform: function dateTransform(year) {
             var date = new Date();
@@ -62288,9 +67156,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { "default": obj };
       }
-      function DecadeView(props) {
+      function DecadeView(props2) {
         function renderYears() {
-          return /* @__PURE__ */ _react["default"].createElement(_Years["default"], props);
+          return /* @__PURE__ */ _react["default"].createElement(_Years["default"], props2);
         }
         return /* @__PURE__ */ _react["default"].createElement("div", {
           className: "react-calendar__decade-view"
@@ -62318,14 +67186,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return obj && obj.__esModule ? obj : { "default": obj };
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -62429,14 +67297,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return obj && obj.__esModule ? obj : { "default": obj };
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -62471,12 +67339,12 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         };
         return _extends2.apply(this, arguments);
       }
-      function Months(props) {
-        var activeStartDate = props.activeStartDate;
+      function Months(props2) {
+        var activeStartDate = props2.activeStartDate;
         var start = 0;
         var end = 11;
         var year = (0, _dateUtils.getYear)(activeStartDate);
-        return /* @__PURE__ */ _react["default"].createElement(_TileGroup["default"], _extends2({}, props, {
+        return /* @__PURE__ */ _react["default"].createElement(_TileGroup["default"], _extends2({}, props2, {
           className: "react-calendar__year-view__months",
           dateTransform: function dateTransform(monthIndex) {
             var date = new Date();
@@ -62509,9 +67377,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { "default": obj };
       }
-      function YearView(props) {
+      function YearView(props2) {
         function renderMonths() {
-          return /* @__PURE__ */ _react["default"].createElement(_Months["default"], props);
+          return /* @__PURE__ */ _react["default"].createElement(_Months["default"], props2);
         }
         return /* @__PURE__ */ _react["default"].createElement("div", {
           className: "react-calendar__year-view"
@@ -62540,14 +67408,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return obj && obj.__esModule ? obj : { "default": obj };
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -62654,14 +67522,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return obj && obj.__esModule ? obj : { "default": obj };
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -62728,9 +67596,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         }
         return target;
       }
-      function Days(props) {
-        var activeStartDate = props.activeStartDate, calendarType = props.calendarType;
-        var showFixedNumberOfWeeks = props.showFixedNumberOfWeeks, showNeighboringMonth = props.showNeighboringMonth, otherProps = _objectWithoutProperties(props, _excluded32);
+      function Days(props2) {
+        var activeStartDate = props2.activeStartDate, calendarType = props2.calendarType;
+        var showFixedNumberOfWeeks = props2.showFixedNumberOfWeeks, showNeighboringMonth = props2.showNeighboringMonth, otherProps = _objectWithoutProperties(props2, _excluded32);
         var year = (0, _dateUtils.getYear)(activeStartDate);
         var monthIndex = (0, _dateUtils.getMonth)(activeStartDate);
         var hasFixedNumberOfWeeks = showFixedNumberOfWeeks || showNeighboringMonth;
@@ -62797,8 +67665,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       }
       var className = "react-calendar__month-view__weekdays";
       var weekdayClassName = "".concat(className, "__weekday");
-      function Weekdays(props) {
-        var calendarType = props.calendarType, _props$formatShortWee = props.formatShortWeekday, formatShortWeekday = _props$formatShortWee === void 0 ? _dateFormatter.formatShortWeekday : _props$formatShortWee, _props$formatWeekday = props.formatWeekday, formatWeekday = _props$formatWeekday === void 0 ? _dateFormatter.formatWeekday : _props$formatWeekday, locale = props.locale, onMouseLeave = props.onMouseLeave;
+      function Weekdays(props2) {
+        var calendarType = props2.calendarType, _props$formatShortWee = props2.formatShortWeekday, formatShortWeekday = _props$formatShortWee === void 0 ? _dateFormatter.formatShortWeekday : _props$formatShortWee, _props$formatWeekday = props2.formatWeekday, formatWeekday = _props$formatWeekday === void 0 ? _dateFormatter.formatWeekday : _props$formatWeekday, locale = props2.locale, onMouseLeave = props2.onMouseLeave;
         var anyDate = new Date();
         var beginOfMonth = (0, _dateUtils.getMonthStart)(anyDate);
         var year = (0, _dateUtils.getYear)(beginOfMonth);
@@ -62861,14 +67729,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return _extends2.apply(this, arguments);
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -62924,16 +67792,16 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       var className = "react-calendar__tile";
       function WeekNumber(_ref) {
         var date = _ref.date, onClickWeekNumber = _ref.onClickWeekNumber, weekNumber = _ref.weekNumber, otherProps = _objectWithoutProperties(_ref, _excluded32);
-        var props = _objectSpread({
+        var props2 = _objectSpread({
           className
         }, otherProps);
         var children = /* @__PURE__ */ _react["default"].createElement("span", null, weekNumber);
-        return onClickWeekNumber ? /* @__PURE__ */ _react["default"].createElement("button", _extends2({}, props, {
+        return onClickWeekNumber ? /* @__PURE__ */ _react["default"].createElement("button", _extends2({}, props2, {
           onClick: function onClick(event) {
             return onClickWeekNumber(weekNumber, date, event);
           },
           type: "button"
-        }), children) : /* @__PURE__ */ _react["default"].createElement("div", props, children);
+        }), children) : /* @__PURE__ */ _react["default"].createElement("div", props2, children);
       }
       WeekNumber.propTypes = {
         date: _propTypes["default"].instanceOf(Date).isRequired,
@@ -62961,8 +67829,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { "default": obj };
       }
-      function WeekNumbers(props) {
-        var activeStartDate = props.activeStartDate, calendarType = props.calendarType, onClickWeekNumber = props.onClickWeekNumber, onMouseLeave = props.onMouseLeave, showFixedNumberOfWeeks = props.showFixedNumberOfWeeks;
+      function WeekNumbers(props2) {
+        var activeStartDate = props2.activeStartDate, calendarType = props2.calendarType, onClickWeekNumber = props2.onClickWeekNumber, onMouseLeave = props2.onMouseLeave, showFixedNumberOfWeeks = props2.showFixedNumberOfWeeks;
         var numberOfWeeks = function() {
           if (showFixedNumberOfWeeks) {
             return 6;
@@ -63085,9 +67953,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
           return _const.CALENDAR_TYPE_LOCALES[calendarType].includes(locale);
         }) || _const.CALENDAR_TYPES.ISO_8601;
       }
-      function MonthView(props) {
-        var activeStartDate = props.activeStartDate, locale = props.locale, onMouseLeave = props.onMouseLeave, showFixedNumberOfWeeks = props.showFixedNumberOfWeeks;
-        var _props$calendarType = props.calendarType, calendarType = _props$calendarType === void 0 ? getCalendarTypeFromLocale(locale) : _props$calendarType, formatShortWeekday = props.formatShortWeekday, formatWeekday = props.formatWeekday, onClickWeekNumber = props.onClickWeekNumber, showWeekNumbers = props.showWeekNumbers, childProps = _objectWithoutProperties(props, _excluded32);
+      function MonthView(props2) {
+        var activeStartDate = props2.activeStartDate, locale = props2.locale, onMouseLeave = props2.onMouseLeave, showFixedNumberOfWeeks = props2.showFixedNumberOfWeeks;
+        var _props$calendarType = props2.calendarType, calendarType = _props$calendarType === void 0 ? getCalendarTypeFromLocale(locale) : _props$calendarType, formatShortWeekday = props2.formatShortWeekday, formatWeekday = props2.formatWeekday, onClickWeekNumber = props2.onClickWeekNumber, showWeekNumbers = props2.showWeekNumbers, childProps = _objectWithoutProperties(props2, _excluded32);
         function renderWeekdays() {
           return /* @__PURE__ */ _react["default"].createElement(_Weekdays["default"], {
             calendarType,
@@ -63231,9 +68099,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
           throw new TypeError("Cannot call a class as a function");
         }
       }
-      function _defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-          var descriptor = props[i];
+      function _defineProperties(target, props2) {
+        for (var i = 0; i < props2.length; i++) {
+          var descriptor = props2[i];
           descriptor.enumerable = descriptor.enumerable || false;
           descriptor.configurable = true;
           if ("value" in descriptor)
@@ -63314,14 +68182,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return _getPrototypeOf(o);
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -63393,9 +68261,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
           return _arrayLikeToArray(o, minLen);
       }
-      function _iterableToArray(iter) {
-        if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-          return Array.from(iter);
+      function _iterableToArray(iter2) {
+        if (typeof Symbol !== "undefined" && iter2[Symbol.iterator] != null || iter2["@@iterator"] != null)
+          return Array.from(iter2);
       }
       function _arrayWithoutHoles(arr) {
         if (Array.isArray(arr))
@@ -63477,8 +68345,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
           return fn(args);
         });
       };
-      function getActiveStartDate(props) {
-        var maxDate = props.maxDate, maxDetail = props.maxDetail, minDate2 = props.minDate, minDetail = props.minDetail, value = props.value, view = props.view;
+      function getActiveStartDate(props2) {
+        var maxDate = props2.maxDate, maxDetail = props2.maxDetail, minDate2 = props2.minDate, minDetail = props2.minDetail, value = props2.value, view = props2.view;
         var rangeType = getView(view, minDetail, maxDetail);
         var valueFrom = getDetailValueFrom({
           value,
@@ -63488,8 +68356,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         }) || new Date();
         return (0, _dates.getBegin)(rangeType, valueFrom);
       }
-      function getInitialActiveStartDate(props) {
-        var activeStartDate = props.activeStartDate, defaultActiveStartDate = props.defaultActiveStartDate, defaultValue = props.defaultValue, defaultView = props.defaultView, maxDetail = props.maxDetail, minDetail = props.minDetail, value = props.value, view = props.view, otherProps = _objectWithoutProperties(props, _excluded32);
+      function getInitialActiveStartDate(props2) {
+        var activeStartDate = props2.activeStartDate, defaultActiveStartDate = props2.defaultActiveStartDate, defaultValue = props2.defaultValue, defaultView = props2.defaultView, maxDetail = props2.maxDetail, minDetail = props2.minDetail, value = props2.value, view = props2.view, otherProps = _objectWithoutProperties(props2, _excluded32);
         var rangeType = getView(view, minDetail, maxDetail);
         var valueFrom = activeStartDate || defaultActiveStartDate;
         if (valueFrom) {
@@ -64110,9 +68978,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
           throw new TypeError("Cannot call a class as a function");
         }
       }
-      function _defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-          var descriptor = props[i];
+      function _defineProperties(target, props2) {
+        for (var i = 0; i < props2.length; i++) {
+          var descriptor = props2[i];
           descriptor.enumerable = descriptor.enumerable || false;
           descriptor.configurable = true;
           if ("value" in descriptor)
@@ -64223,7 +69091,7 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return target;
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           if (enumerableOnly) {
@@ -64231,9 +69099,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
               return Object.getOwnPropertyDescriptor(object, sym).enumerable;
             });
           }
-          keys.push.apply(keys, symbols);
+          keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -64536,8 +69404,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         }, _typeof(obj);
       }
       var isNumberBetween = function isNumberBetween2(min, max) {
-        return function(props, propName, componentName) {
-          var value = props[propName];
+        return function(props2, propName, componentName) {
+          var value = props2[propName];
           if ((0, _utils.isDefined)(value)) {
             if (typeof value !== "number") {
               return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(value), "` supplied to `").concat(componentName, "`, expected `number`."));
@@ -64553,8 +69421,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       exports.isHandLength = isHandLength;
       var isOppositeHandLength = isNumberBetween(-100, 100);
       exports.isOppositeHandLength = isOppositeHandLength;
-      var isHandWidth = function isHandWidth2(props, propName, componentName) {
-        var width = props[propName];
+      var isHandWidth = function isHandWidth2(props2, propName, componentName) {
+        var width = props2[propName];
         if ((0, _utils.isDefined)(width)) {
           if (typeof width !== "number") {
             return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(width), "` supplied to `").concat(componentName, "`, expected `number`."));
@@ -64672,8 +69540,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       function _interopRequireDefault(obj) {
         return obj && obj.__esModule ? obj : { "default": obj };
       }
-      function MinuteMark(props) {
-        return /* @__PURE__ */ _react["default"].createElement(_Mark["default"], props);
+      function MinuteMark(props2) {
+        return /* @__PURE__ */ _react["default"].createElement(_Mark["default"], props2);
       }
     }
   });
@@ -65021,9 +69889,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
           return _arrayLikeToArray(o, minLen);
       }
-      function _iterableToArray(iter) {
-        if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-          return Array.from(iter);
+      function _iterableToArray(iter2) {
+        if (typeof Symbol !== "undefined" && iter2[Symbol.iterator] != null || iter2["@@iterator"] != null)
+          return Array.from(iter2);
       }
       function _arrayWithoutHoles(arr) {
         if (Array.isArray(arr))
@@ -65041,30 +69909,30 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       var allValueTypes = [].concat(_toConsumableArray(allViews.slice(1)), ["day"]);
       var isValueType = _propTypes["default"].oneOf(allValueTypes);
       exports.isValueType = isValueType;
-      var isMinDate = function isMinDate2(props, propName, componentName) {
-        var minDate2 = props[propName];
+      var isMinDate = function isMinDate2(props2, propName, componentName) {
+        var minDate2 = props2[propName];
         if (!minDate2) {
           return null;
         }
         if (!(minDate2 instanceof Date)) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate2), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
         }
-        var maxDate = props.maxDate;
+        var maxDate = props2.maxDate;
         if (maxDate && minDate2 > maxDate) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate2), "` supplied to `").concat(componentName, "`, minDate cannot be larger than maxDate."));
         }
         return null;
       };
       exports.isMinDate = isMinDate;
-      var isMaxDate = function isMaxDate2(props, propName, componentName) {
-        var maxDate = props[propName];
+      var isMaxDate = function isMaxDate2(props2, propName, componentName) {
+        var maxDate = props2[propName];
         if (!maxDate) {
           return null;
         }
         if (!(maxDate instanceof Date)) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
         }
-        var minDate2 = props.minDate;
+        var minDate2 = props2.minDate;
         if (minDate2 && maxDate < minDate2) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, maxDate cannot be smaller than minDate."));
         }
@@ -65297,9 +70165,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
           return _arrayLikeToArray(o, minLen);
       }
-      function _iterableToArray(iter) {
-        if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-          return Array.from(iter);
+      function _iterableToArray(iter2) {
+        if (typeof Symbol !== "undefined" && iter2[Symbol.iterator] != null || iter2["@@iterator"] != null)
+          return Array.from(iter2);
       }
       function _arrayWithoutHoles(arr) {
         if (Array.isArray(arr))
@@ -65640,9 +70508,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
           return _arrayLikeToArray(o, minLen);
       }
-      function _iterableToArray(iter) {
-        if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-          return Array.from(iter);
+      function _iterableToArray(iter2) {
+        if (typeof Symbol !== "undefined" && iter2[Symbol.iterator] != null || iter2["@@iterator"] != null)
+          return Array.from(iter2);
       }
       function _arrayWithoutHoles(arr) {
         if (Array.isArray(arr))
@@ -65863,8 +70731,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       var allViews = ["hour", "minute", "second"];
       var allValueTypes = [].concat(allViews);
       var hourOptionalSecondsRegExp = /^(([0-1])?[0-9]|2[0-3]):[0-5][0-9](:([0-5][0-9]))?$/;
-      var isTime = function isTime2(props, propName, componentName) {
-        var time = props[propName];
+      var isTime = function isTime2(props2, propName, componentName) {
+        var time = props2[propName];
         if (time) {
           if (!hourOptionalSecondsRegExp.test(time)) {
             return new Error("Invalid prop `".concat(propName, "` of type `").concat(typeof minDate === "undefined" ? "undefined" : _typeof(minDate), "` supplied to `").concat(componentName, "`, expected time in HH:mm(:ss) format."));
@@ -66158,9 +71026,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       function _nonIterableSpread() {
         throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
       }
-      function _iterableToArray(iter) {
-        if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-          return Array.from(iter);
+      function _iterableToArray(iter2) {
+        if (typeof Symbol !== "undefined" && iter2[Symbol.iterator] != null || iter2["@@iterator"] != null)
+          return Array.from(iter2);
       }
       function _arrayWithoutHoles(arr) {
         if (Array.isArray(arr))
@@ -66893,30 +71761,30 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       }
       var allViews = ["hour", "minute", "second"];
       var allValueTypes = [].concat(allViews);
-      var isMinDate = function isMinDate2(props, propName, componentName) {
-        var minDate2 = props[propName];
+      var isMinDate = function isMinDate2(props2, propName, componentName) {
+        var minDate2 = props2[propName];
         if (!minDate2) {
           return null;
         }
         if (!(minDate2 instanceof Date)) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate2), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
         }
-        var maxDate = props.maxDate;
+        var maxDate = props2.maxDate;
         if (maxDate && minDate2 > maxDate) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate2), "` supplied to `").concat(componentName, "`, minDate cannot be larger than maxDate."));
         }
         return null;
       };
       exports.isMinDate = isMinDate;
-      var isMaxDate = function isMaxDate2(props, propName, componentName) {
-        var maxDate = props[propName];
+      var isMaxDate = function isMaxDate2(props2, propName, componentName) {
+        var maxDate = props2[propName];
         if (!maxDate) {
           return null;
         }
         if (!(maxDate instanceof Date)) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
         }
-        var minDate2 = props.minDate;
+        var minDate2 = props2.minDate;
         if (minDate2 && maxDate < minDate2) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, maxDate cannot be smaller than minDate."));
         }
@@ -67323,9 +72191,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
           throw new TypeError("Cannot call a class as a function");
         }
       }
-      function _defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-          var descriptor = props[i];
+      function _defineProperties(target, props2) {
+        for (var i = 0; i < props2.length; i++) {
+          var descriptor = props2[i];
           descriptor.enumerable = descriptor.enumerable || false;
           descriptor.configurable = true;
           if ("value" in descriptor)
@@ -67432,9 +72300,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
           return _arrayLikeToArray(o, minLen);
       }
-      function _iterableToArray(iter) {
-        if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-          return Array.from(iter);
+      function _iterableToArray(iter2) {
+        if (typeof Symbol !== "undefined" && iter2[Symbol.iterator] != null || iter2["@@iterator"] != null)
+          return Array.from(iter2);
       }
       function _arrayWithoutHoles(arr) {
         if (Array.isArray(arr))
@@ -68146,30 +73014,30 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
           return obj2 && "function" == typeof Symbol && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
         }, _typeof(obj);
       }
-      var isMinDate = function isMinDate2(props, propName, componentName) {
-        var minDate2 = props[propName];
+      var isMinDate = function isMinDate2(props2, propName, componentName) {
+        var minDate2 = props2[propName];
         if (!minDate2) {
           return null;
         }
         if (!(minDate2 instanceof Date)) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate2), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
         }
-        var maxDate = props.maxDate;
+        var maxDate = props2.maxDate;
         if (maxDate && minDate2 > maxDate) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(minDate2), "` supplied to `").concat(componentName, "`, minDate cannot be larger than maxDate."));
         }
         return null;
       };
       exports.isMinDate = isMinDate;
-      var isMaxDate = function isMaxDate2(props, propName, componentName) {
-        var maxDate = props[propName];
+      var isMaxDate = function isMaxDate2(props2, propName, componentName) {
+        var maxDate = props2[propName];
         if (!maxDate) {
           return null;
         }
         if (!(maxDate instanceof Date)) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, expected instance of `Date`."));
         }
-        var minDate2 = props.minDate;
+        var minDate2 = props2.minDate;
         if (minDate2 && maxDate < minDate2) {
           return new Error("Invalid prop `".concat(propName, "` of type `").concat(_typeof(maxDate), "` supplied to `").concat(componentName, "`, maxDate cannot be smaller than minDate."));
         }
@@ -68296,14 +73164,14 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
         return _extends2.apply(this, arguments);
       }
       function ownKeys(object, enumerableOnly) {
-        var keys = Object.keys(object);
+        var keys2 = Object.keys(object);
         if (Object.getOwnPropertySymbols) {
           var symbols = Object.getOwnPropertySymbols(object);
           enumerableOnly && (symbols = symbols.filter(function(sym) {
             return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-          })), keys.push.apply(keys, symbols);
+          })), keys2.push.apply(keys2, symbols);
         }
-        return keys;
+        return keys2;
       }
       function _objectSpread(target) {
         for (var i = 1; i < arguments.length; i++) {
@@ -68380,9 +73248,9 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
           throw new TypeError("Cannot call a class as a function");
         }
       }
-      function _defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-          var descriptor = props[i];
+      function _defineProperties(target, props2) {
+        for (var i = 0; i < props2.length; i++) {
+          var descriptor = props2[i];
           descriptor.enumerable = descriptor.enumerable || false;
           descriptor.configurable = true;
           if ("value" in descriptor)
@@ -68947,6 +73815,68 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
       }
       var _default = _DateTimeRangePicker["default"];
       exports["default"] = _default;
+    }
+  });
+
+  // node_modules/delay/index.js
+  var require_delay = __commonJS({
+    "node_modules/delay/index.js"(exports, module) {
+      "use strict";
+      var randomInteger = (minimum, maximum) => Math.floor(Math.random() * (maximum - minimum + 1) + minimum);
+      var createAbortError = () => {
+        const error = new Error("Delay aborted");
+        error.name = "AbortError";
+        return error;
+      };
+      var createDelay = ({ clearTimeout: defaultClear, setTimeout: set, willResolve }) => (ms, { value, signal } = {}) => {
+        if (signal && signal.aborted) {
+          return Promise.reject(createAbortError());
+        }
+        let timeoutId;
+        let settle;
+        let rejectFn;
+        const clear = defaultClear || clearTimeout;
+        const signalListener = () => {
+          clear(timeoutId);
+          rejectFn(createAbortError());
+        };
+        const cleanup = () => {
+          if (signal) {
+            signal.removeEventListener("abort", signalListener);
+          }
+        };
+        const delayPromise = new Promise((resolve, reject) => {
+          settle = () => {
+            cleanup();
+            if (willResolve) {
+              resolve(value);
+            } else {
+              reject(value);
+            }
+          };
+          rejectFn = reject;
+          timeoutId = (set || setTimeout)(settle, ms);
+        });
+        if (signal) {
+          signal.addEventListener("abort", signalListener, { once: true });
+        }
+        delayPromise.clear = () => {
+          clear(timeoutId);
+          timeoutId = null;
+          settle();
+        };
+        return delayPromise;
+      };
+      var createWithTimers = (clearAndSet) => {
+        const delay3 = createDelay({ ...clearAndSet, willResolve: true });
+        delay3.reject = createDelay({ ...clearAndSet, willResolve: false });
+        delay3.range = (minimum, maximum, options) => delay3(randomInteger(minimum, maximum), options);
+        return delay3;
+      };
+      var delay2 = createWithTimers();
+      delay2.createWithTimers = createWithTimers;
+      module.exports = delay2;
+      module.exports.default = delay2;
     }
   });
 
@@ -69519,16 +74449,16 @@ const theme2 = createTheme({ palette: {
   function createTransitions(inputTransitions) {
     const mergedEasing = _extends({}, easing, inputTransitions.easing);
     const mergedDuration = _extends({}, duration, inputTransitions.duration);
-    const create = (props = ["all"], options = {}) => {
+    const create = (props2 = ["all"], options = {}) => {
       const {
         duration: durationOption = mergedDuration.standard,
         easing: easingOption = mergedEasing.easeInOut,
-        delay = 0
+        delay: delay2 = 0
       } = options, other = _objectWithoutPropertiesLoose(options, _excluded3);
       if (true) {
         const isString = (value) => typeof value === "string";
         const isNumber = (value) => !isNaN(parseFloat(value));
-        if (!isString(props) && !Array.isArray(props)) {
+        if (!isString(props2) && !Array.isArray(props2)) {
           console.error('MUI: Argument "props" must be a string or Array.');
         }
         if (!isNumber(durationOption) && !isString(durationOption)) {
@@ -69537,14 +74467,14 @@ const theme2 = createTheme({ palette: {
         if (!isString(easingOption)) {
           console.error('MUI: Argument "easing" must be a string.');
         }
-        if (!isNumber(delay) && !isString(delay)) {
+        if (!isNumber(delay2) && !isString(delay2)) {
           console.error('MUI: Argument "delay" must be a number or a string.');
         }
         if (Object.keys(other).length !== 0) {
           console.error(`MUI: Unrecognized argument(s) [${Object.keys(other).join(",")}].`);
         }
       }
-      return (Array.isArray(props) ? props : [props]).map((animatedProp) => `${animatedProp} ${typeof durationOption === "string" ? durationOption : formatMs(durationOption)} ${easingOption} ${typeof delay === "string" ? delay : formatMs(delay)}`).join(",");
+      return (Array.isArray(props2) ? props2 : [props2]).map((animatedProp) => `${animatedProp} ${typeof durationOption === "string" ? durationOption : formatMs(durationOption)} ${easingOption} ${typeof delay2 === "string" ? delay2 : formatMs(delay2)}`).join(",");
     };
     return _extends({
       getAutoHeightDuration,
@@ -69643,11 +74573,11 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   // node_modules/@mui/material/esm/styles/useThemeProps.js
   var import_system4 = __toESM(require_system());
   function useThemeProps({
-    props,
+    props: props2,
     name
   }) {
     return (0, import_system4.useThemeProps)({
-      props,
+      props: props2,
       name,
       defaultTheme: defaultTheme_default
     });
@@ -69708,10 +74638,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var PaperRoot = styled_default("div", {
     name: "MuiPaper",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, styles3[ownerState.variant], !ownerState.square && styles3.rounded, ownerState.variant === "elevation" && styles3[`elevation${ownerState.elevation}`]];
     }
   })(({
@@ -69736,7 +74666,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }));
   });
   var Paper = /* @__PURE__ */ React2.forwardRef(function Paper2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiPaper"
     });
@@ -69746,8 +74676,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       elevation = 1,
       square = false,
       variant = "elevation"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded5);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded5);
+    const ownerState = _extends({}, props2, {
       component,
       elevation,
       square,
@@ -69772,11 +74702,11 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     classes: import_prop_types.default.object,
     className: import_prop_types.default.string,
     component: import_prop_types.default.elementType,
-    elevation: (0, import_utils4.chainPropTypes)(import_utils4.integerPropType, (props) => {
+    elevation: (0, import_utils4.chainPropTypes)(import_utils4.integerPropType, (props2) => {
       const {
         elevation,
         variant
-      } = props;
+      } = props2;
       if (elevation > 0 && variant === "outlined") {
         return new Error(`MUI: Combining \`elevation={${elevation}}\` with \`variant="${variant}"\` has no effect. Either use \`elevation={0}\` or use a different \`variant\`.`);
       }
@@ -69797,8 +74727,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var import_prop_types2 = __toESM(require_prop_types());
   var import_system8 = __toESM(require_system());
   var import_jsx_runtime2 = __toESM(require_jsx_runtime());
-  function GlobalStyles(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_system8.GlobalStyles, _extends({}, props, {
+  function GlobalStyles(props2) {
+    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(import_system8.GlobalStyles, _extends({}, props2, {
       defaultTheme: defaultTheme_default
     }));
   }
@@ -69862,14 +74792,14 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     return defaultStyles;
   };
   function CssBaseline(inProps) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiCssBaseline"
     });
     const {
       children,
       enableColorScheme = false
-    } = props;
+    } = props2;
     return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(React4.Fragment, {
       children: [/* @__PURE__ */ (0, import_jsx_runtime3.jsx)(GlobalStyles_default, {
         styles: (theme2) => styles(theme2, enableColorScheme)
@@ -69936,10 +74866,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ToolbarRoot = styled_default("div", {
     name: "MuiToolbar",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, !ownerState.disableGutters && styles3.gutters, styles3[ownerState.variant]];
     }
   })(({
@@ -69963,7 +74893,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     ownerState
   }) => ownerState.variant === "regular" && theme2.mixins.toolbar);
   var Toolbar = /* @__PURE__ */ React5.forwardRef(function Toolbar2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiToolbar"
     });
@@ -69972,8 +74902,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       component = "div",
       disableGutters = false,
       variant = "regular"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded6);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded6);
+    const ownerState = _extends({}, props2, {
       component,
       disableGutters,
       variant
@@ -70010,10 +74940,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     createStyledComponent: styled_default("div", {
       name: "MuiContainer",
       slot: "Root",
-      overridesResolver: (props, styles3) => {
+      overridesResolver: (props2, styles3) => {
         const {
           ownerState
-        } = props;
+        } = props2;
         return [styles3.root, styles3[`maxWidth${capitalize_default(String(ownerState.maxWidth))}`], ownerState.fixed && styles3.fixed, ownerState.disableGutters && styles3.disableGutters];
       }
     }),
@@ -70067,10 +74997,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var AppBarRoot = styled_default(Paper_default, {
     name: "MuiAppBar",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, styles3[`position${capitalize_default(ownerState.position)}`], styles3[`color${capitalize_default(ownerState.color)}`]];
     }
   })(({
@@ -70141,7 +75071,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }));
   });
   var AppBar = /* @__PURE__ */ React6.forwardRef(function AppBar2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiAppBar"
     });
@@ -70150,8 +75080,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       color = "primary",
       enableColorOnDark = false,
       position = "fixed"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded7);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded7);
+    const ownerState = _extends({}, props2, {
       color,
       position,
       enableColorOnDark
@@ -70211,10 +75141,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var TypographyRoot = styled_default("span", {
     name: "MuiTypography",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, ownerState.variant && styles3[ownerState.variant], ownerState.align !== "inherit" && styles3[`align${capitalize_default(ownerState.align)}`], ownerState.noWrap && styles3.noWrap, ownerState.gutterBottom && styles3.gutterBottom, ownerState.paragraph && styles3.paragraph];
     }
   })(({
@@ -70262,7 +75192,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       name: "MuiTypography"
     });
     const color = transformDeprecatedColors(themeProps.color);
-    const props = (0, import_system11.unstable_extendSxProp)(_extends({}, themeProps, {
+    const props2 = (0, import_system11.unstable_extendSxProp)(_extends({}, themeProps, {
       color
     }));
     const {
@@ -70274,8 +75204,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       paragraph = false,
       variant = "body1",
       variantMapping = defaultVariantMapping
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded8);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded8);
+    const ownerState = _extends({}, props2, {
       align,
       color,
       className,
@@ -70404,14 +75334,14 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var EXITING = "exiting";
   var Transition = /* @__PURE__ */ function(_React$Component) {
     _inheritsLoose(Transition2, _React$Component);
-    function Transition2(props, context) {
+    function Transition2(props2, context) {
       var _this;
-      _this = _React$Component.call(this, props, context) || this;
+      _this = _React$Component.call(this, props2, context) || this;
       var parentGroup = context;
-      var appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear;
+      var appear = parentGroup && !parentGroup.isMounting ? props2.enter : props2.appear;
       var initialStatus;
       _this.appearStatus = null;
-      if (props.in) {
+      if (props2.in) {
         if (appear) {
           initialStatus = EXITED;
           _this.appearStatus = ENTERING;
@@ -70419,7 +75349,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
           initialStatus = ENTERED;
         }
       } else {
-        if (props.unmountOnExit || props.mountOnEnter) {
+        if (props2.unmountOnExit || props2.mountOnEnter) {
           initialStatus = UNMOUNTED;
         } else {
           initialStatus = EXITED;
@@ -70612,9 +75542,9 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   Transition.contextType = TransitionGroupContext_default;
   Transition.propTypes = true ? {
     nodeRef: import_prop_types10.default.shape({
-      current: typeof Element === "undefined" ? import_prop_types10.default.any : function(propValue, key, componentName, location, propFullName, secret) {
+      current: typeof Element === "undefined" ? import_prop_types10.default.any : function(propValue, key, componentName, location2, propFullName, secret) {
         var value = propValue[key];
-        return import_prop_types10.default.instanceOf(value && "ownerDocument" in value ? value.ownerDocument.defaultView.Element : Element)(propValue, key, componentName, location, propFullName, secret);
+        return import_prop_types10.default.instanceOf(value && "ownerDocument" in value ? value.ownerDocument.defaultView.Element : Element)(propValue, key, componentName, location2, propFullName, secret);
       }
     }),
     children: import_prop_types10.default.oneOfType([import_prop_types10.default.func.isRequired, import_prop_types10.default.element.isRequired]).isRequired,
@@ -70624,14 +75554,14 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     appear: import_prop_types10.default.bool,
     enter: import_prop_types10.default.bool,
     exit: import_prop_types10.default.bool,
-    timeout: function timeout(props) {
+    timeout: function timeout(props2) {
       var pt = timeoutsShape;
-      if (!props.addEndListener)
+      if (!props2.addEndListener)
         pt = pt.isRequired;
       for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
         args[_key - 1] = arguments[_key];
       }
-      return pt.apply(void 0, [props].concat(args));
+      return pt.apply(void 0, [props2].concat(args));
     },
     addEndListener: import_prop_types10.default.func,
     onEnter: import_prop_types10.default.func,
@@ -70725,17 +75655,17 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }
     return childMapping;
   }
-  function getProp(child, prop, props) {
-    return props[prop] != null ? props[prop] : child.props[prop];
+  function getProp(child, prop, props2) {
+    return props2[prop] != null ? props2[prop] : child.props[prop];
   }
-  function getInitialChildMapping(props, onExited) {
-    return getChildMapping(props.children, function(child) {
+  function getInitialChildMapping(props2, onExited) {
+    return getChildMapping(props2.children, function(child) {
       return (0, import_react3.cloneElement)(child, {
         onExited: onExited.bind(null, child),
         in: true,
-        appear: getProp(child, "appear", props),
-        enter: getProp(child, "enter", props),
-        exit: getProp(child, "exit", props)
+        appear: getProp(child, "appear", props2),
+        enter: getProp(child, "enter", props2),
+        exit: getProp(child, "exit", props2)
       });
     });
   }
@@ -70787,9 +75717,9 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   };
   var TransitionGroup = /* @__PURE__ */ function(_React$Component) {
     _inheritsLoose(TransitionGroup2, _React$Component);
-    function TransitionGroup2(props, context) {
+    function TransitionGroup2(props2, context) {
       var _this;
-      _this = _React$Component.call(this, props, context) || this;
+      _this = _React$Component.call(this, props2, context) || this;
       var handleExited = _this.handleExited.bind(_assertThisInitialized(_this));
       _this.state = {
         contextValue: {
@@ -70837,12 +75767,12 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       }
     };
     _proto.render = function render() {
-      var _this$props = this.props, Component = _this$props.component, childFactory2 = _this$props.childFactory, props = _objectWithoutPropertiesLoose(_this$props, ["component", "childFactory"]);
+      var _this$props = this.props, Component = _this$props.component, childFactory2 = _this$props.childFactory, props2 = _objectWithoutPropertiesLoose(_this$props, ["component", "childFactory"]);
       var contextValue = this.state.contextValue;
       var children = values(this.state.children).map(childFactory2);
-      delete props.appear;
-      delete props.enter;
-      delete props.exit;
+      delete props2.appear;
+      delete props2.enter;
+      delete props2.exit;
       if (Component === null) {
         return /* @__PURE__ */ import_react4.default.createElement(TransitionGroupContext_default.Provider, {
           value: contextValue
@@ -70850,7 +75780,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       }
       return /* @__PURE__ */ import_react4.default.createElement(TransitionGroupContext_default.Provider, {
         value: contextValue
-      }, /* @__PURE__ */ import_react4.default.createElement(Component, props, children));
+      }, /* @__PURE__ */ import_react4.default.createElement(Component, props2, children));
     };
     return TransitionGroup2;
   }(import_react4.default.Component);
@@ -70874,7 +75804,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var import_prop_types12 = __toESM(require_prop_types());
   var import_clsx5 = __toESM(require_clsx());
   var import_jsx_runtime8 = __toESM(require_jsx_runtime());
-  function Ripple(props) {
+  function Ripple(props2) {
     const {
       className,
       classes,
@@ -70885,7 +75815,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       in: inProp,
       onExited,
       timeout: timeout2
-    } = props;
+    } = props2;
     const [leaving, setLeaving] = React11.useState(false);
     const rippleClassName = (0, import_clsx5.default)(className, classes.ripple, classes.rippleVisible, pulsate && classes.ripplePulsate);
     const rippleStyles = {
@@ -71046,7 +75976,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     theme: theme2
   }) => theme2.transitions.easing.easeInOut);
   var TouchRipple = /* @__PURE__ */ React12.forwardRef(function TouchRipple2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiTouchRipple"
     });
@@ -71054,7 +75984,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       center: centerProp = false,
       classes = {},
       className
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded9);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded9);
     const [ripples, setRipples] = React12.useState([]);
     const nextKey = React12.useRef(0);
     const rippleCallback = React12.useRef(null);
@@ -71249,7 +76179,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ButtonBaseRoot = styled_default("button", {
     name: "MuiButtonBase",
     slot: "Root",
-    overridesResolver: (props, styles3) => styles3.root
+    overridesResolver: (props2, styles3) => styles3.root
   })({
     display: "inline-flex",
     alignItems: "center",
@@ -71282,7 +76212,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }
   });
   var ButtonBase = /* @__PURE__ */ React13.forwardRef(function ButtonBase2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiButtonBase"
     });
@@ -71314,8 +76244,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       tabIndex = 0,
       TouchRippleProps,
       touchRippleRef,
-      type
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded10);
+      type: type2
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded10);
     const buttonRef = React13.useRef(null);
     const rippleRef = React13.useRef(null);
     const handleRippleRef = useForkRef_default(rippleRef, touchRippleRef);
@@ -71441,7 +76371,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }
     const buttonProps = {};
     if (ComponentProp === "button") {
-      buttonProps.type = type === void 0 ? "button" : type;
+      buttonProps.type = type2 === void 0 ? "button" : type2;
       buttonProps.disabled = disabled;
     } else {
       if (!other.href && !other.to) {
@@ -71459,7 +76389,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
         }
       }, [enableTouchRipple]);
     }
-    const ownerState = _extends({}, props, {
+    const ownerState = _extends({}, props2, {
       centerRipple,
       component,
       disabled,
@@ -71489,7 +76419,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       onTouchStart: handleTouchStart,
       ref: handleRef,
       tabIndex: disabled ? -1 : tabIndex,
-      type
+      type: type2
     }, buttonProps, other, {
       children: [children, enableTouchRipple ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(TouchRipple_default, _extends({
         ref: handleRippleRef,
@@ -71566,10 +76496,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var IconButtonRoot = styled_default(ButtonBase_default, {
     name: "MuiIconButton",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, ownerState.color !== "default" && styles3[`color${capitalize_default(ownerState.color)}`], ownerState.edge && styles3[`edge${capitalize_default(ownerState.edge)}`], styles3[`size${capitalize_default(ownerState.size)}`]];
     }
   })(({
@@ -71624,7 +76554,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }
   }));
   var IconButton = /* @__PURE__ */ React14.forwardRef(function IconButton2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiIconButton"
     });
@@ -71636,8 +76566,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       disabled = false,
       disableFocusRipple = false,
       size = "medium"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded11);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded11);
+    const ownerState = _extends({}, props2, {
       edge,
       color,
       disabled,
@@ -71657,8 +76587,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }));
   });
   true ? IconButton.propTypes = {
-    children: (0, import_utils11.chainPropTypes)(import_prop_types15.default.node, (props) => {
-      const found = React14.Children.toArray(props.children).some((child) => /* @__PURE__ */ React14.isValidElement(child) && child.props.onClick);
+    children: (0, import_utils11.chainPropTypes)(import_prop_types15.default.node, (props2) => {
+      const found = React14.Children.toArray(props2.children).some((child) => /* @__PURE__ */ React14.isValidElement(child) && child.props.onClick);
       if (found) {
         return new Error(["MUI: You are providing an onClick event listener to a child of a button element.", "Prefer applying it to the IconButton directly.", "This guarantees that the whole <button> will be responsive to click events."].join("\n"));
       }
@@ -71717,13 +76647,13 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
 
   // node_modules/@mui/material/esm/transitions/utils.js
   var reflow = (node) => node.scrollTop;
-  function getTransitionProps(props, options) {
+  function getTransitionProps(props2, options) {
     var _style$transitionDura, _style$transitionTimi;
     const {
       timeout: timeout2,
       easing: easing2,
       style: style2 = {}
-    } = props;
+    } = props2;
     return {
       duration: (_style$transitionDura = style2.transitionDuration) != null ? _style$transitionDura : typeof timeout2 === "number" ? timeout2 : timeout2[options.mode] || 0,
       easing: (_style$transitionTimi = style2.transitionTimingFunction) != null ? _style$transitionTimi : typeof easing2 === "object" ? easing2[options.mode] : easing2,
@@ -71742,7 +76672,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       opacity: 1
     }
   };
-  var Fade = /* @__PURE__ */ React15.forwardRef(function Fade2(props, ref) {
+  var Fade = /* @__PURE__ */ React15.forwardRef(function Fade2(props2, ref) {
     const theme2 = useTheme();
     const defaultTimeout = {
       enter: theme2.transitions.duration.enteringScreen,
@@ -71763,7 +76693,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       style: style2,
       timeout: timeout2 = defaultTimeout,
       TransitionComponent = Transition_default
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded12);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded12);
     const enableStrictModeCompat = true;
     const nodeRef = React15.useRef(null);
     const handleRef = useForkRef_default(nodeRef, children.ref, ref);
@@ -71886,10 +76816,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var BackdropRoot = styled_default("div", {
     name: "MuiBackdrop",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, ownerState.invisible && styles3.invisible];
     }
   })(({
@@ -71910,7 +76840,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   }));
   var Backdrop = /* @__PURE__ */ React16.forwardRef(function Backdrop2(inProps, ref) {
     var _components$Root, _componentsProps$root;
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiBackdrop"
     });
@@ -71924,8 +76854,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       open,
       transitionDuration,
       TransitionComponent = Fade_default
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded13);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded13);
+    const ownerState = _extends({}, props2, {
       component,
       invisible
     });
@@ -71977,10 +76907,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ModalRoot = styled_default("div", {
     name: "MuiModal",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, !ownerState.open && ownerState.exited && styles3.hidden];
     }
   })(({
@@ -71999,7 +76929,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ModalBackdrop = styled_default(Backdrop_default, {
     name: "MuiModal",
     slot: "Backdrop",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       return styles3.backdrop;
     }
   })({
@@ -72007,7 +76937,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   });
   var Modal = /* @__PURE__ */ React17.forwardRef(function Modal2(inProps, ref) {
     var _ref, _components$Root;
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       name: "MuiModal",
       props: inProps
     });
@@ -72028,7 +76958,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       hideBackdrop = false,
       keepMounted = false,
       theme: theme2
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded14);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded14);
     const [exited, setExited] = React17.useState(true);
     const commonProps = {
       closeAfterTransition,
@@ -72041,7 +76971,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       hideBackdrop,
       keepMounted
     };
-    const ownerState = _extends({}, props, commonProps, {
+    const ownerState = _extends({}, props2, commonProps, {
       exited
     });
     const classes = extendUtilityClasses(ownerState);
@@ -72141,10 +77071,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var SvgIconRoot = styled_default("svg", {
     name: "MuiSvgIcon",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, ownerState.color !== "inherit" && styles3[`color${capitalize_default(ownerState.color)}`], styles3[`fontSize${capitalize_default(ownerState.fontSize)}`]];
     }
   })(({
@@ -72176,7 +77106,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     };
   });
   var SvgIcon = /* @__PURE__ */ React18.forwardRef(function SvgIcon2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiSvgIcon"
     });
@@ -72190,8 +77120,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       inheritViewBox = false,
       titleAccess,
       viewBox = "0 0 24 24"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded15);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded15);
+    const ownerState = _extends({}, props2, {
       color,
       component,
       fontSize,
@@ -72239,10 +77169,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   // node_modules/@mui/material/esm/utils/createSvgIcon.js
   var import_jsx_runtime18 = __toESM(require_jsx_runtime());
   function createSvgIcon(path, displayName) {
-    const Component = (props, ref) => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SvgIcon_default, _extends({
+    const Component = (props2, ref) => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SvgIcon_default, _extends({
       "data-testid": `${displayName}Icon`,
       ref
-    }, props, {
+    }, props2, {
       children: path
     }));
     if (true) {
@@ -72319,7 +77249,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       node.style.transform = transform;
     }
   }
-  var Slide = /* @__PURE__ */ React20.forwardRef(function Slide2(props, ref) {
+  var Slide = /* @__PURE__ */ React20.forwardRef(function Slide2(props2, ref) {
     const theme2 = useTheme();
     const defaultEasing = {
       enter: theme2.transitions.easing.easeOut,
@@ -72346,7 +77276,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       style: style2,
       timeout: timeout2 = defaultTimeout,
       TransitionComponent = Transition_default
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded16);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded16);
     const childrenRef = React20.useRef(null);
     const handleRef = useForkRef_default(children.ref, childrenRef, ref);
     const normalizedTransitionCallback = (callback) => (isAppearing) => {
@@ -72463,9 +77393,9 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     addEndListener: import_prop_types20.default.func,
     appear: import_prop_types20.default.bool,
     children: import_utils20.elementAcceptingRef.isRequired,
-    container: (0, import_utils20.chainPropTypes)(import_prop_types20.default.oneOfType([import_utils20.HTMLElementType, import_prop_types20.default.func]), (props) => {
-      if (props.open) {
-        const resolvedContainer = resolveContainer(props.container);
+    container: (0, import_utils20.chainPropTypes)(import_prop_types20.default.oneOfType([import_utils20.HTMLElementType, import_prop_types20.default.func]), (props2) => {
+      if (props2.open) {
+        const resolvedContainer = resolveContainer(props2.container);
         if (resolvedContainer && resolvedContainer.nodeType === 1) {
           const box = resolvedContainer.getBoundingClientRect();
           if (box.top === 0 && box.left === 0 && box.right === 0 && box.bottom === 0) {
@@ -72509,10 +77439,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var import_jsx_runtime20 = __toESM(require_jsx_runtime());
   var _excluded17 = ["BackdropProps"];
   var _excluded22 = ["anchor", "BackdropProps", "children", "className", "elevation", "hideBackdrop", "ModalProps", "onClose", "open", "PaperProps", "SlideProps", "TransitionComponent", "transitionDuration", "variant"];
-  var overridesResolver = (props, styles3) => {
+  var overridesResolver = (props2, styles3) => {
     const {
       ownerState
-    } = props;
+    } = props2;
     return [styles3.root, (ownerState.variant === "permanent" || ownerState.variant === "persistent") && styles3.docked, styles3.modal];
   };
   var useUtilityClasses9 = (ownerState) => {
@@ -72550,10 +77480,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var DrawerPaper = styled_default(Paper_default, {
     name: "MuiDrawer",
     slot: "Paper",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.paper, styles3[`paperAnchor${capitalize_default(ownerState.anchor)}`], ownerState.variant !== "temporary" && styles3[`paperAnchorDocked${capitalize_default(ownerState.anchor)}`]];
     }
   })(({
@@ -72609,7 +77539,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     return theme2.direction === "rtl" && isHorizontal(anchor) ? oppositeDirection[anchor] : anchor;
   }
   var Drawer = /* @__PURE__ */ React21.forwardRef(function Drawer2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiDrawer"
     });
@@ -72635,14 +77565,14 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       TransitionComponent = Slide_default,
       transitionDuration = defaultTransitionDuration,
       variant = "temporary"
-    } = props, ModalProps = _objectWithoutPropertiesLoose(props.ModalProps, _excluded17), other = _objectWithoutPropertiesLoose(props, _excluded22);
+    } = props2, ModalProps = _objectWithoutPropertiesLoose(props2.ModalProps, _excluded17), other = _objectWithoutPropertiesLoose(props2, _excluded22);
     const mounted = React21.useRef(false);
     React21.useEffect(() => {
       mounted.current = true;
     }, []);
     const anchorInvariant = getAnchor(theme2, anchorProp);
     const anchor = anchorProp;
-    const ownerState = _extends({}, props, {
+    const ownerState = _extends({}, props2, {
       anchor,
       elevation,
       open,
@@ -72760,10 +77690,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ListRoot = styled_default("ul", {
     name: "MuiList",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, !ownerState.disablePadding && styles3.padding, ownerState.dense && styles3.dense, ownerState.subheader && styles3.subheader];
     }
   })(({
@@ -72780,7 +77710,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     paddingTop: 0
   }));
   var List = /* @__PURE__ */ React23.forwardRef(function List2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiList"
     });
@@ -72791,11 +77721,11 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       dense = false,
       disablePadding = false,
       subheader
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded18);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded18);
     const context = React23.useMemo(() => ({
       dense
     }), [dense]);
-    const ownerState = _extends({}, props, {
+    const ownerState = _extends({}, props2, {
       component,
       dense,
       disablePadding
@@ -72862,10 +77792,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var DividerRoot = styled_default("div", {
     name: "MuiDivider",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, ownerState.absolute && styles3.absolute, styles3[ownerState.variant], ownerState.light && styles3.light, ownerState.orientation === "vertical" && styles3.vertical, ownerState.flexItem && styles3.flexItem, ownerState.children && styles3.withChildren, ownerState.children && ownerState.orientation === "vertical" && styles3.withChildrenVertical, ownerState.textAlign === "right" && ownerState.orientation !== "vertical" && styles3.textAlignRight, ownerState.textAlign === "left" && ownerState.orientation !== "vertical" && styles3.textAlignLeft];
     }
   })(({
@@ -72949,10 +77879,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var DividerWrapper = styled_default("span", {
     name: "MuiDivider",
     slot: "Wrapper",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.wrapper, ownerState.orientation === "vertical" && styles3.wrapperVertical];
     }
   })(({
@@ -72967,7 +77897,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     paddingBottom: `calc(${theme2.spacing(1)} * 1.2)`
   }));
   var Divider = /* @__PURE__ */ React24.forwardRef(function Divider2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiDivider"
     });
@@ -72982,8 +77912,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       role = component !== "hr" ? "separator" : void 0,
       textAlign = "center",
       variant = "fullWidth"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded19);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded19);
+    const ownerState = _extends({}, props2, {
       absolute,
       component,
       flexItem,
@@ -73052,10 +77982,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   // node_modules/@mui/material/esm/ListItemButton/ListItemButton.js
   var import_jsx_runtime24 = __toESM(require_jsx_runtime());
   var _excluded20 = ["alignItems", "autoFocus", "component", "children", "dense", "disableGutters", "divider", "focusVisibleClassName", "selected", "className"];
-  var overridesResolver2 = (props, styles3) => {
+  var overridesResolver2 = (props2, styles3) => {
     const {
       ownerState
-    } = props;
+    } = props2;
     return [styles3.root, ownerState.dense && styles3.dense, ownerState.alignItems === "flex-start" && styles3.alignItemsFlexStart, ownerState.divider && styles3.divider, !ownerState.disableGutters && styles3.gutters];
   };
   var useUtilityClasses12 = (ownerState) => {
@@ -73135,7 +78065,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     paddingBottom: 4
   }));
   var ListItemButton = /* @__PURE__ */ React25.forwardRef(function ListItemButton2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiListItemButton"
     });
@@ -73150,7 +78080,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       focusVisibleClassName,
       selected = false,
       className
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded20);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded20);
     const context = React25.useContext(ListContext_default);
     const childContext = {
       dense: dense || context.dense || false,
@@ -73167,7 +78097,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
         }
       }
     }, [autoFocus]);
-    const ownerState = _extends({}, props, {
+    const ownerState = _extends({}, props2, {
       alignItems,
       dense: childContext.dense,
       disableGutters,
@@ -73238,10 +78168,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ListItemIconRoot = styled_default("div", {
     name: "MuiListItemIcon",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, ownerState.alignItems === "flex-start" && styles3.alignItemsFlexStart];
     }
   })(({
@@ -73256,15 +78186,15 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     marginTop: 8
   }));
   var ListItemIcon = /* @__PURE__ */ React26.forwardRef(function ListItemIcon2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiListItemIcon"
     });
     const {
       className
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded21);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded21);
     const context = React26.useContext(ListContext_default);
-    const ownerState = _extends({}, props, {
+    const ownerState = _extends({}, props2, {
       alignItems: context.alignItems
     });
     const classes = useUtilityClasses13(ownerState);
@@ -73318,10 +78248,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ListItemTextRoot = styled_default("div", {
     name: "MuiListItemText",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [{
         [`& .${listItemTextClasses_default.primary}`]: styles3.primary
       }, {
@@ -73342,7 +78272,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     paddingLeft: 56
   }));
   var ListItemText = /* @__PURE__ */ React27.forwardRef(function ListItemText2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiListItemText"
     });
@@ -73355,13 +78285,13 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       primaryTypographyProps,
       secondary: secondaryProp,
       secondaryTypographyProps
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded23);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded23);
     const {
       dense
     } = React27.useContext(ListContext_default);
     let primary = primaryProp != null ? primaryProp : children;
     let secondary = secondaryProp;
-    const ownerState = _extends({}, props, {
+    const ownerState = _extends({}, props2, {
       disableTypography,
       inset,
       primary: !!primary,
@@ -73412,8 +78342,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ListItemText_default = ListItemText;
 
   // src/website/drawerItem.tsx
-  function DrawerItem(props) {
-    const { activeView, view, title, onChangeView, icon } = props;
+  function DrawerItem(props2) {
+    const { activeView, view, title, onChangeView, icon } = props2;
     return /* @__PURE__ */ React28.createElement(ListItemButton_default, {
       onClick: () => onChangeView(view),
       selected: view === activeView
@@ -73448,8 +78378,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       })
     })
   );
-  function Drawer3(props) {
-    const { open, toggleDrawer, onChangeView, view } = props;
+  function Drawer3(props2) {
+    const { open, toggleDrawer, onChangeView, view } = props2;
     return /* @__PURE__ */ React29.createElement(DrawerElem, {
       variant: "permanent",
       open
@@ -73510,8 +78440,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       duration: theme2.transitions.duration.enteringScreen
     })
   }));
-  function AppBar3(props) {
-    const { open, toggleDrawer } = props;
+  function AppBar3(props2) {
+    const { open, toggleDrawer } = props2;
     return /* @__PURE__ */ React30.createElement(AppBarElem, {
       position: "absolute",
       open
@@ -73573,7 +78503,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     "zeroMinWidth",
     ...SPACINGS.map((spacing) => `spacing-xs-${spacing}`),
     ...DIRECTIONS.map((direction) => `direction-xs-${direction}`),
-    ...WRAPS.map((wrap) => `wrap-xs-${wrap}`),
+    ...WRAPS.map((wrap2) => `wrap-xs-${wrap2}`),
     ...GRID_SIZES.map((size) => `grid-xs-${size}`),
     ...GRID_SIZES.map((size) => `grid-sm-${size}`),
     ...GRID_SIZES.map((size) => `grid-md-${size}`),
@@ -73806,16 +78736,16 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var GridRoot = styled_default("div", {
     name: "MuiGrid",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       const {
         container: container2,
         direction,
         item,
         spacing,
-        wrap,
+        wrap: wrap2,
         zeroMinWidth,
         breakpoints
       } = ownerState;
@@ -73830,7 +78760,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
           breakpointsStyles.push(styles3[`grid-${breakpoint}-${String(value)}`]);
         }
       });
-      return [styles3.root, container2 && styles3.container, item && styles3.item, zeroMinWidth && styles3.zeroMinWidth, ...spacingStyles, direction !== "row" && styles3[`direction-xs-${String(direction)}`], wrap !== "wrap" && styles3[`wrap-xs-${String(wrap)}`], ...breakpointsStyles];
+      return [styles3.root, container2 && styles3.container, item && styles3.item, zeroMinWidth && styles3.zeroMinWidth, ...spacingStyles, direction !== "row" && styles3[`direction-xs-${String(direction)}`], wrap2 !== "wrap" && styles3[`wrap-xs-${String(wrap2)}`], ...breakpointsStyles];
     }
   })(({
     ownerState
@@ -73871,7 +78801,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       direction,
       item,
       spacing,
-      wrap,
+      wrap: wrap2,
       zeroMinWidth,
       breakpoints
     } = ownerState;
@@ -73887,7 +78817,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       }
     });
     const slots = {
-      root: ["root", container2 && "container", item && "item", zeroMinWidth && "zeroMinWidth", ...spacingClasses, direction !== "row" && `direction-xs-${String(direction)}`, wrap !== "wrap" && `wrap-xs-${String(wrap)}`, ...breakpointsClasses]
+      root: ["root", container2 && "container", item && "item", zeroMinWidth && "zeroMinWidth", ...spacingClasses, direction !== "row" && `direction-xs-${String(direction)}`, wrap2 !== "wrap" && `wrap-xs-${String(wrap2)}`, ...breakpointsClasses]
     };
     return (0, import_base31.unstable_composeClasses)(slots, getGridUtilityClass, classes);
   };
@@ -73899,7 +78829,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     const {
       breakpoints
     } = useTheme();
-    const props = (0, import_system16.unstable_extendSxProp)(themeProps);
+    const props2 = (0, import_system16.unstable_extendSxProp)(themeProps);
     const {
       className,
       columns: columnsProp,
@@ -73910,9 +78840,9 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       item = false,
       rowSpacing: rowSpacingProp,
       spacing = 0,
-      wrap = "wrap",
+      wrap: wrap2 = "wrap",
       zeroMinWidth = false
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded24);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded24);
     const rowSpacing = rowSpacingProp || spacing;
     const columnSpacing = columnSpacingProp || spacing;
     const columnsContext = React32.useContext(GridContext_default);
@@ -73925,14 +78855,14 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
         delete otherFiltered[breakpoint];
       }
     });
-    const ownerState = _extends({}, props, {
+    const ownerState = _extends({}, props2, {
       columns,
       container: container2,
       direction,
       item,
       rowSpacing,
       columnSpacing,
-      wrap,
+      wrap: wrap2,
       zeroMinWidth,
       spacing
     }, breakpointsValues, {
@@ -74051,10 +78981,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var CircularProgressRoot = styled_default("span", {
     name: "MuiCircularProgress",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, styles3[ownerState.variant], styles3[`color${capitalize_default(ownerState.color)}`]];
     }
   })(({
@@ -74074,17 +79004,17 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var CircularProgressSVG = styled_default("svg", {
     name: "MuiCircularProgress",
     slot: "Svg",
-    overridesResolver: (props, styles3) => styles3.svg
+    overridesResolver: (props2, styles3) => styles3.svg
   })({
     display: "block"
   });
   var CircularProgressCircle = styled_default("circle", {
     name: "MuiCircularProgress",
     slot: "Circle",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.circle, styles3[`circle${capitalize_default(ownerState.variant)}`], ownerState.disableShrink && styles3.circleDisableShrink];
     }
   })(({
@@ -74103,7 +79033,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       animation: ${0} 1.4s ease-in-out infinite;
     `), circularDashKeyframe));
   var CircularProgress = /* @__PURE__ */ React33.forwardRef(function CircularProgress2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiCircularProgress"
     });
@@ -74116,8 +79046,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       thickness = 3.6,
       value = 0,
       variant = "indeterminate"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded25);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded25);
+    const ownerState = _extends({}, props2, {
       color,
       disableShrink,
       size,
@@ -74167,8 +79097,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     classes: import_prop_types28.default.object,
     className: import_prop_types28.default.string,
     color: import_prop_types28.default.oneOfType([import_prop_types28.default.oneOf(["inherit", "primary", "secondary", "error", "info", "success", "warning"]), import_prop_types28.default.string]),
-    disableShrink: (0, import_utils24.chainPropTypes)(import_prop_types28.default.bool, (props) => {
-      if (props.disableShrink && props.variant && props.variant !== "indeterminate") {
+    disableShrink: (0, import_utils24.chainPropTypes)(import_prop_types28.default.bool, (props2) => {
+      if (props2.disableShrink && props2.variant && props2.variant !== "indeterminate") {
         return new Error("MUI: You have provided the `disableShrink` prop with a variant other than `indeterminate`. This will have no effect.");
       }
       return null;
@@ -74190,14 +79120,14 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
 
   // node_modules/@mui/material/esm/FormControl/formControlState.js
   function formControlState({
-    props,
+    props: props2,
     states,
     muiFormControl
   }) {
     return states.reduce((acc, state) => {
-      acc[state] = props[state];
+      acc[state] = props2[state];
       if (muiFormControl) {
-        if (typeof props[state] === "undefined") {
+        if (typeof props2[state] === "undefined") {
           acc[state] = muiFormControl[state];
         }
       }
@@ -74278,7 +79208,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var AsteriskComponent = styled_default("span", {
     name: "MuiFormLabel",
     slot: "Asterisk",
-    overridesResolver: (props, styles3) => styles3.asterisk
+    overridesResolver: (props2, styles3) => styles3.asterisk
   })(({
     theme: theme2
   }) => ({
@@ -74287,7 +79217,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }
   }));
   var FormLabel = /* @__PURE__ */ React36.forwardRef(function FormLabel2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiFormLabel"
     });
@@ -74295,14 +79225,14 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       children,
       className,
       component = "label"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded26);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded26);
     const muiFormControl = useFormControl();
     const fcs = formControlState({
-      props,
+      props: props2,
       muiFormControl,
       states: ["color", "required", "focused", "disabled", "error", "filled"]
     });
-    const ownerState = _extends({}, props, {
+    const ownerState = _extends({}, props2, {
       color: fcs.color || "primary",
       component,
       disabled: fcs.disabled,
@@ -74364,10 +79294,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var SliderRoot = styled_default("span", {
     name: "MuiSlider",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, styles3[`color${capitalize_default(ownerState.color)}`], ownerState.size !== "medium" && styles3[`size${capitalize_default(ownerState.size)}`], ownerState.marked && styles3.marked, ownerState.orientation === "vertical" && styles3.vertical, ownerState.track === "inverted" && styles3.trackInverted, ownerState.track === false && styles3.trackFalse];
     }
   })(({
@@ -74425,7 +79355,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var SliderRail = styled_default("span", {
     name: "MuiSlider",
     slot: "Rail",
-    overridesResolver: (props, styles3) => styles3.rail
+    overridesResolver: (props2, styles3) => styles3.rail
   })(({
     ownerState
   }) => _extends({
@@ -74453,7 +79383,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var SliderTrack = styled_default("span", {
     name: "MuiSlider",
     slot: "Track",
-    overridesResolver: (props, styles3) => styles3.track
+    overridesResolver: (props2, styles3) => styles3.track
   })(({
     theme: theme2,
     ownerState
@@ -74491,10 +79421,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var SliderThumb = styled_default("span", {
     name: "MuiSlider",
     slot: "Thumb",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.thumb, styles3[`thumbColor${capitalize_default(ownerState.color)}`], ownerState.size !== "medium" && styles3[`thumbSize${capitalize_default(ownerState.size)}`]];
     }
   })(({
@@ -74565,7 +79495,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var SliderValueLabel = styled_default(import_SliderUnstyled.SliderValueLabelUnstyled, {
     name: "MuiSlider",
     slot: "ValueLabel",
-    overridesResolver: (props, styles3) => styles3.valueLabel
+    overridesResolver: (props2, styles3) => styles3.valueLabel
   })(({
     theme: theme2,
     ownerState
@@ -74627,7 +79557,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     name: "MuiSlider",
     slot: "Mark",
     shouldForwardProp: (prop) => slotShouldForwardProp(prop) && prop !== "markActive",
-    overridesResolver: (props, styles3) => styles3.mark
+    overridesResolver: (props2, styles3) => styles3.mark
   })(({
     theme: theme2,
     ownerState,
@@ -74655,7 +79585,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     name: "MuiSlider",
     slot: "MarkLabel",
     shouldForwardProp: (prop) => slotShouldForwardProp(prop) && prop !== "markLabelActive",
-    overridesResolver: (props, styles3) => styles3.markLabel
+    overridesResolver: (props2, styles3) => styles3.markLabel
   })(({
     theme: theme2,
     ownerState,
@@ -74695,7 +79625,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   };
   var Slider = /* @__PURE__ */ React37.forwardRef(function Slider2(inputProps, ref) {
     var _componentsProps$root, _componentsProps$thum, _componentsProps$trac, _componentsProps$valu;
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inputProps,
       name: "MuiSlider"
     });
@@ -74707,8 +79637,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       componentsProps = {},
       color = "primary",
       size = "medium"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded27);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded27);
+    const ownerState = _extends({}, props2, {
       color,
       size
     });
@@ -74756,17 +79686,17 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }));
   });
   true ? Slider.propTypes = {
-    "aria-label": (0, import_utils25.chainPropTypes)(import_prop_types30.default.string, (props) => {
-      const range = Array.isArray(props.value || props.defaultValue);
-      if (range && props["aria-label"] != null) {
+    "aria-label": (0, import_utils25.chainPropTypes)(import_prop_types30.default.string, (props2) => {
+      const range = Array.isArray(props2.value || props2.defaultValue);
+      if (range && props2["aria-label"] != null) {
         return new Error("MUI: You need to use the `getAriaLabel` prop instead of `aria-label` when using a range slider.");
       }
       return null;
     }),
     "aria-labelledby": import_prop_types30.default.string,
-    "aria-valuetext": (0, import_utils25.chainPropTypes)(import_prop_types30.default.string, (props) => {
-      const range = Array.isArray(props.value || props.defaultValue);
-      if (range && props["aria-valuetext"] != null) {
+    "aria-valuetext": (0, import_utils25.chainPropTypes)(import_prop_types30.default.string, (props2) => {
+      const range = Array.isArray(props2.value || props2.defaultValue);
+      if (range && props2["aria-valuetext"] != null) {
         return new Error("MUI: You need to use the `getAriaValueText` prop instead of `aria-valuetext` when using a range slider.");
       }
       return null;
@@ -74836,50 +79766,9 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var import_PauseCircle = __toESM(require_PauseCircle());
   var import_PlayCircle = __toESM(require_PlayCircle());
 
-  // src/website/getData.ts
-  function getCachedDataSeries(from, samples = 200) {
-    return __async(this, null, function* () {
-      const params = new URLSearchParams();
-      if (from !== void 0) {
-        params.append("from", String(from));
-      }
-      if (samples !== void 0) {
-        params.append("samples", String(samples));
-      }
-      return (yield fetch("/getDataCacheSeries?" + params.toString())).json();
-    });
-  }
-  function getDataSeries(from, to, samples = 200) {
-    return __async(this, null, function* () {
-      const searchParams = new URLSearchParams();
-      if (from !== void 0) {
-        searchParams.append("from", String(from));
-      }
-      if (to !== void 0) {
-        searchParams.append("t", String(to));
-      }
-      if (samples !== void 0) {
-        searchParams.append("samples", String(samples));
-      }
-      const url = "/getDataSeries?" + searchParams.toString();
-      return (yield fetch(url)).json();
-    });
-  }
-  function getMinDate() {
-    return __async(this, null, function* () {
-      return parseInt(yield (yield fetch("/getMinDate")).text());
-    });
-  }
-  function getSystem() {
-    return __async(this, null, function* () {
-      return (yield fetch("/system")).json();
-    });
-  }
-
   // src/website/lineGraph.tsx
   var React38 = __toESM(require_react());
   var import_react_apexcharts = __toESM(require_react_apexcharts_min());
-  var inputNames = ["Speicher unten", "Dach", "Speicher oben", "Speicher mitte"];
   var inputOptions = {
     chart: {
       id: "input",
@@ -74949,36 +79838,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       offsetX: -5
     }
   };
-  function LineGraph(props) {
-    const { data } = props;
-    const inputSeries = [
-      {
-        name: inputNames[0],
-        data: data.input0
-      },
-      {
-        name: inputNames[1],
-        data: data.input1
-      },
-      {
-        name: inputNames[2],
-        data: data.input2
-      },
-      {
-        name: inputNames[3],
-        data: data.input3
-      }
-    ];
-    const outputSeries = [
-      {
-        name: "Pumpe 1",
-        data: data.out0
-      },
-      {
-        name: "Pumpe 2",
-        data: data.out1
-      }
-    ];
+  function LineGraph(props2) {
+    const { data } = props2;
+    const { inputSeries, outputSeries } = React38.useMemo(() => getSeriesData(data), [data]);
+    console.log("Graph showing data", { data, inputSeries, outputSeries });
     return /* @__PURE__ */ React38.createElement(React38.Fragment, null, /* @__PURE__ */ React38.createElement(import_react_apexcharts.default, {
       options: inputOptions,
       series: inputSeries,
@@ -74993,6 +79856,152 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       height: 300
     }));
   }
+  function getSeriesData(data) {
+    const inputSeries = [
+      {
+        name: "Speicher unten",
+        data: []
+      },
+      {
+        name: "Dach",
+        data: []
+      },
+      {
+        name: "Speicher oben",
+        data: []
+      },
+      {
+        name: "Speicher mitte",
+        data: []
+      }
+    ];
+    const outputSeries = [
+      {
+        name: "Pumpe 1",
+        data: []
+      },
+      {
+        name: "Pumpe 2",
+        data: []
+      }
+    ];
+    for (const row of data) {
+      inputSeries[0].data.push({ x: row.timestamp, y: row.input[0].val });
+      inputSeries[1].data.push({ x: row.timestamp, y: row.input[1].val });
+      inputSeries[2].data.push({ x: row.timestamp, y: row.input[2].val });
+      inputSeries[3].data.push({ x: row.timestamp, y: row.input[3].val });
+      outputSeries[0].data.push({ x: row.timestamp, y: row.output[0].val });
+      outputSeries[1].data.push({ x: row.timestamp, y: row.output[1].val });
+    }
+    for (let i = 0; i < 4; i++) {
+      inputSeries[i].data = downsample(inputSeries[i].data, 500);
+    }
+    outputSeries[0].data = downsample(outputSeries[0].data, 500);
+    outputSeries[1].data = downsample(outputSeries[1].data, 500);
+    return { inputSeries, outputSeries };
+  }
+  function downsample(data, threshold) {
+    const data_length = data.length;
+    if (threshold >= data_length || threshold === 0) {
+      return data;
+    }
+    const sampled = [];
+    let sampled_index = 0;
+    const every = (data_length - 2) / (threshold - 2);
+    let a = 0;
+    let max_area_point = { x: 0, y: 0 }, max_area, area;
+    let next_a = 0;
+    sampled[sampled_index++] = data[a];
+    for (let i = 0; i < threshold - 2; i++) {
+      let avg_x = 0;
+      let avg_y = 0;
+      let avg_range_start = Math.floor((i + 1) * every) + 1;
+      let avg_range_end = Math.floor((i + 2) * every) + 1;
+      avg_range_end = avg_range_end < data_length ? avg_range_end : data_length;
+      const avg_range_length = avg_range_end - avg_range_start;
+      for (; avg_range_start < avg_range_end; avg_range_start++) {
+        avg_x += data[avg_range_start].x * 1;
+        avg_y += data[avg_range_start].y * 1;
+      }
+      avg_x /= avg_range_length;
+      avg_y /= avg_range_length;
+      let range_offs = Math.floor((i + 0) * every) + 1;
+      const range_to = Math.floor((i + 1) * every) + 1;
+      const point_a_x = data[a].x * 1;
+      const point_a_y = data[a].y * 1;
+      max_area = area = -1;
+      for (; range_offs < range_to; range_offs++) {
+        area = Math.abs(
+          (point_a_x - avg_x) * (data[range_offs].y - point_a_y) - (point_a_x - data[range_offs].x) * (avg_y - point_a_y)
+        ) * 0.5;
+        if (area > max_area) {
+          max_area = area;
+          max_area_point = data[range_offs];
+          next_a = range_offs;
+        }
+      }
+      sampled[sampled_index++] = max_area_point;
+      a = next_a;
+    }
+    sampled[sampled_index++] = data[data_length - 1];
+    return sampled;
+  }
+
+  // src/website/live.tsx
+  var import_dexie_react_hooks = __toESM(require_dexie_react_hooks());
+
+  // src/website/database.ts
+  init_dexie();
+  var Database = class extends Dexie$1 {
+    constructor() {
+      super("pump");
+      const stores = {
+        fileIndex: "filename, fetched",
+        data: "timestamp",
+        error: "timestamp"
+      };
+      this.version(1).stores(stores);
+    }
+    updateFileIndex(filenames) {
+      return __async(this, null, function* () {
+        yield Promise.allSettled(
+          filenames.map((filename) => this.fileIndex.add({ filename, fetched: 0 }))
+        );
+      });
+    }
+    setFileIndex(filename) {
+      return __async(this, null, function* () {
+        yield this.fileIndex.update(filename, { fetched: true });
+      });
+    }
+    getNextFilenames() {
+      return __async(this, null, function* () {
+        return (yield this.fileIndex.where("fetched").equals(0).reverse().sortBy("filename")).map((fileIndex) => fileIndex.filename);
+      });
+    }
+    addData(data) {
+      return __async(this, null, function* () {
+        yield this.data.bulkPut(data);
+      });
+    }
+    addError(error) {
+      return __async(this, null, function* () {
+        yield this.error.bulkPut(error);
+      });
+    }
+    getData(from, to) {
+      return __async(this, null, function* () {
+        return this.data.where("timestamp").between(from, to, true, true).toArray();
+      });
+    }
+    getMinDataDate() {
+      return __async(this, null, function* () {
+        var _a;
+        return (_a = yield this.data.orderBy("timestamp").first()) == null ? void 0 : _a.timestamp;
+      });
+    }
+  };
+  var db = new Database();
 
   // src/website/live.tsx
   var marks = [
@@ -75030,23 +80039,19 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }
   ];
   function Live() {
-    const [data, setData] = React39.useState(null);
     const [showTime, setShowTime] = React39.useState(60 * 60 * 1e3);
+    const [showInterval, setShowInterval] = React39.useState([Date.now() - showTime, Date.now()]);
     const [timeout2, setTimeout2] = React39.useState(10);
     const [pause, setPause] = React39.useState(false);
+    const data = (0, import_dexie_react_hooks.useLiveQuery)(() => db.getData(showInterval[0], showInterval[1]), [showInterval]);
     React39.useEffect(() => {
-      if (!pause) {
-        getCachedDataSeries(Date.now() - showTime, 200).then(setData).catch((err) => console.warn("Failed to fetch data!", { err }));
-        const interval = setInterval(() => __async(this, null, function* () {
-          setData(yield getCachedDataSeries(Date.now() - showTime, 200));
-        }), timeout2 * 1e3);
-        return () => {
-          clearInterval(interval);
-        };
-      }
-      return () => {
-      };
-    }, [showTime, pause, timeout2]);
+      setShowInterval([Date.now() - showTime, Date.now()]);
+      const updateInterval = setInterval(() => {
+        const now = Date.now();
+        setShowInterval([now - showTime, now]);
+      }, timeout2 * 1e3);
+      return () => clearInterval(updateInterval);
+    }, [showTime, timeout2]);
     return /* @__PURE__ */ React39.createElement(Grid_default, {
       container: true,
       spacing: 3
@@ -75101,27 +80106,27 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       color: "primary"
     }))))), /* @__PURE__ */ React39.createElement(Paper_default, {
       sx: { p: 2, mb: 4 }
-    }, data === null ? /* @__PURE__ */ React39.createElement(CircularProgress_default, null) : /* @__PURE__ */ React39.createElement(LineGraph, {
+    }, data === void 0 ? /* @__PURE__ */ React39.createElement(CircularProgress_default, null) : /* @__PURE__ */ React39.createElement(LineGraph, {
       data
     }))));
   }
 
   // src/website/graph.tsx
   var React40 = __toESM(require_react());
+  var import_dexie_react_hooks2 = __toESM(require_dexie_react_hooks());
   var import_react_datetimerange_picker = __toESM(require_entry());
   function Graph() {
-    var _a;
-    const [data, setData] = React40.useState(null);
     const [state, setState] = React40.useState([new Date(Date.now() - 1e3 * 3600 * 24), new Date()]);
-    const [minDate2, setMinDate] = React40.useState(new Date());
-    const startDate = state === null || state[0] === void 0 ? Date.now() - 1e3 * 3600 * 24 : state[0].getTime();
-    const endDate = state === null || state[1] === void 0 ? Date.now() : (_a = state[0]) == null ? void 0 : _a.getTime();
-    React40.useEffect(() => {
-      getDataSeries(startDate, endDate).then(setData).catch((err) => console.warn("Failed to fetch data!", { err }));
+    const minDate2 = (0, import_dexie_react_hooks2.useLiveQuery)(() => db.getMinDataDate());
+    const from = React40.useMemo(() => {
+      var _a, _b;
+      return (_b = (_a = state == null ? void 0 : state[0]) == null ? void 0 : _a.getTime()) != null ? _b : Date.now() - 1e3 * 60 * 60;
     }, [state]);
-    React40.useEffect(() => {
-      getMinDate().then((date) => setMinDate(new Date(date))).catch((err) => console.warn("Could not fetch min date", { err }));
-    });
+    const to = React40.useMemo(() => {
+      var _a, _b;
+      return (_b = (_a = state == null ? void 0 : state[1]) == null ? void 0 : _a.getTime()) != null ? _b : Date.now();
+    }, [state]);
+    const data = (0, import_dexie_react_hooks2.useLiveQuery)(() => db.getData(from, to), [from, to]);
     return /* @__PURE__ */ React40.createElement(Grid_default, {
       container: true,
       spacing: 3
@@ -75136,11 +80141,11 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       locale: "de-DE",
       onChange: (range) => setState(range),
       value: state,
-      minDate: minDate2,
+      minDate: new Date(minDate2 != null ? minDate2 : Date.now()),
       maxDate: new Date()
     })), /* @__PURE__ */ React40.createElement(Paper_default, {
       sx: { p: 2, mb: 4 }
-    }, data === null ? /* @__PURE__ */ React40.createElement(CircularProgress_default, null) : /* @__PURE__ */ React40.createElement(LineGraph, {
+    }, data === void 0 ? /* @__PURE__ */ React40.createElement(CircularProgress_default, null) : /* @__PURE__ */ React40.createElement(LineGraph, {
       data
     }))));
   }
@@ -75196,21 +80201,21 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     });
   }
   function GenIcon(data) {
-    return function(props) {
+    return function(props2) {
       return import_react6.default.createElement(IconBase, __assign({
         attr: __assign({}, data.attr)
-      }, props), Tree2Element(data.child));
+      }, props2), Tree2Element(data.child));
     };
   }
-  function IconBase(props) {
+  function IconBase(props2) {
     var elem = function(conf) {
-      var attr = props.attr, size = props.size, title = props.title, svgProps = __rest(props, ["attr", "size", "title"]);
+      var attr = props2.attr, size = props2.size, title = props2.title, svgProps = __rest(props2, ["attr", "size", "title"]);
       var computedSize = size || conf.size || "1em";
       var className;
       if (conf.className)
         className = conf.className;
-      if (props.className)
-        className = (className ? className + " " : "") + props.className;
+      if (props2.className)
+        className = (className ? className + " " : "") + props2.className;
       return import_react6.default.createElement("svg", __assign({
         stroke: "currentColor",
         fill: "currentColor",
@@ -75218,12 +80223,12 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       }, conf.attr, attr, svgProps, {
         className,
         style: __assign(__assign({
-          color: props.color || conf.color
-        }, conf.style), props.style),
+          color: props2.color || conf.color
+        }, conf.style), props2.style),
         height: computedSize,
         width: computedSize,
         xmlns: "http://www.w3.org/2000/svg"
-      }), title && import_react6.default.createElement("title", null, title), props.children);
+      }), title && import_react6.default.createElement("title", null, title), props2.children);
     };
     return IconContext !== void 0 ? import_react6.default.createElement(IconContext.Consumer, null, function(conf) {
       return elem(conf);
@@ -75231,17 +80236,17 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   }
 
   // node_modules/react-icons/fa/index.esm.js
-  function FaDatabase(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 448 512" }, "child": [{ "tag": "path", "attr": { "d": "M448 73.143v45.714C448 159.143 347.667 192 224 192S0 159.143 0 118.857V73.143C0 32.857 100.333 0 224 0s224 32.857 224 73.143zM448 176v102.857C448 319.143 347.667 352 224 352S0 319.143 0 278.857V176c48.125 33.143 136.208 48.572 224 48.572S399.874 209.143 448 176zm0 160v102.857C448 479.143 347.667 512 224 512S0 479.143 0 438.857V336c48.125 33.143 136.208 48.572 224 48.572S399.874 369.143 448 336z" } }] })(props);
+  function FaDatabase(props2) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 448 512" }, "child": [{ "tag": "path", "attr": { "d": "M448 73.143v45.714C448 159.143 347.667 192 224 192S0 159.143 0 118.857V73.143C0 32.857 100.333 0 224 0s224 32.857 224 73.143zM448 176v102.857C448 319.143 347.667 352 224 352S0 319.143 0 278.857V176c48.125 33.143 136.208 48.572 224 48.572S399.874 209.143 448 176zm0 160v102.857C448 479.143 347.667 512 224 512S0 479.143 0 438.857V336c48.125 33.143 136.208 48.572 224 48.572S399.874 369.143 448 336z" } }] })(props2);
   }
-  function FaFileCode(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 384 512" }, "child": [{ "tag": "path", "attr": { "d": "M384 121.941V128H256V0h6.059c6.365 0 12.47 2.529 16.971 7.029l97.941 97.941A24.005 24.005 0 0 1 384 121.941zM248 160c-13.2 0-24-10.8-24-24V0H24C10.745 0 0 10.745 0 24v464c0 13.255 10.745 24 24 24h336c13.255 0 24-10.745 24-24V160H248zM123.206 400.505a5.4 5.4 0 0 1-7.633.246l-64.866-60.812a5.4 5.4 0 0 1 0-7.879l64.866-60.812a5.4 5.4 0 0 1 7.633.246l19.579 20.885a5.4 5.4 0 0 1-.372 7.747L101.65 336l40.763 35.874a5.4 5.4 0 0 1 .372 7.747l-19.579 20.884zm51.295 50.479l-27.453-7.97a5.402 5.402 0 0 1-3.681-6.692l61.44-211.626a5.402 5.402 0 0 1 6.692-3.681l27.452 7.97a5.4 5.4 0 0 1 3.68 6.692l-61.44 211.626a5.397 5.397 0 0 1-6.69 3.681zm160.792-111.045l-64.866 60.812a5.4 5.4 0 0 1-7.633-.246l-19.58-20.885a5.4 5.4 0 0 1 .372-7.747L284.35 336l-40.763-35.874a5.4 5.4 0 0 1-.372-7.747l19.58-20.885a5.4 5.4 0 0 1 7.633-.246l64.866 60.812a5.4 5.4 0 0 1-.001 7.879z" } }] })(props);
+  function FaFileCode(props2) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 384 512" }, "child": [{ "tag": "path", "attr": { "d": "M384 121.941V128H256V0h6.059c6.365 0 12.47 2.529 16.971 7.029l97.941 97.941A24.005 24.005 0 0 1 384 121.941zM248 160c-13.2 0-24-10.8-24-24V0H24C10.745 0 0 10.745 0 24v464c0 13.255 10.745 24 24 24h336c13.255 0 24-10.745 24-24V160H248zM123.206 400.505a5.4 5.4 0 0 1-7.633.246l-64.866-60.812a5.4 5.4 0 0 1 0-7.879l64.866-60.812a5.4 5.4 0 0 1 7.633.246l19.579 20.885a5.4 5.4 0 0 1-.372 7.747L101.65 336l40.763 35.874a5.4 5.4 0 0 1 .372 7.747l-19.579 20.884zm51.295 50.479l-27.453-7.97a5.402 5.402 0 0 1-3.681-6.692l61.44-211.626a5.402 5.402 0 0 1 6.692-3.681l27.452 7.97a5.4 5.4 0 0 1 3.68 6.692l-61.44 211.626a5.397 5.397 0 0 1-6.69 3.681zm160.792-111.045l-64.866 60.812a5.4 5.4 0 0 1-7.633-.246l-19.58-20.885a5.4 5.4 0 0 1 .372-7.747L284.35 336l-40.763-35.874a5.4 5.4 0 0 1-.372-7.747l19.58-20.885a5.4 5.4 0 0 1 7.633-.246l64.866 60.812a5.4 5.4 0 0 1-.001 7.879z" } }] })(props2);
   }
-  function FaFileCsv(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 384 512" }, "child": [{ "tag": "path", "attr": { "d": "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm-96 144c0 4.42-3.58 8-8 8h-8c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h8c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8h-8c-26.51 0-48-21.49-48-48v-32c0-26.51 21.49-48 48-48h8c4.42 0 8 3.58 8 8v16zm44.27 104H160c-4.42 0-8-3.58-8-8v-16c0-4.42 3.58-8 8-8h12.27c5.95 0 10.41-3.5 10.41-6.62 0-1.3-.75-2.66-2.12-3.84l-21.89-18.77c-8.47-7.22-13.33-17.48-13.33-28.14 0-21.3 19.02-38.62 42.41-38.62H200c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8h-12.27c-5.95 0-10.41 3.5-10.41 6.62 0 1.3.75 2.66 2.12 3.84l21.89 18.77c8.47 7.22 13.33 17.48 13.33 28.14.01 21.29-19 38.62-42.39 38.62zM256 264v20.8c0 20.27 5.7 40.17 16 56.88 10.3-16.7 16-36.61 16-56.88V264c0-4.42 3.58-8 8-8h16c4.42 0 8 3.58 8 8v20.8c0 35.48-12.88 68.89-36.28 94.09-3.02 3.25-7.27 5.11-11.72 5.11s-8.7-1.86-11.72-5.11c-23.4-25.2-36.28-58.61-36.28-94.09V264c0-4.42 3.58-8 8-8h16c4.42 0 8 3.58 8 8zm121-159L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z" } }] })(props);
+  function FaFileCsv(props2) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 384 512" }, "child": [{ "tag": "path", "attr": { "d": "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm-96 144c0 4.42-3.58 8-8 8h-8c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h8c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8h-8c-26.51 0-48-21.49-48-48v-32c0-26.51 21.49-48 48-48h8c4.42 0 8 3.58 8 8v16zm44.27 104H160c-4.42 0-8-3.58-8-8v-16c0-4.42 3.58-8 8-8h12.27c5.95 0 10.41-3.5 10.41-6.62 0-1.3-.75-2.66-2.12-3.84l-21.89-18.77c-8.47-7.22-13.33-17.48-13.33-28.14 0-21.3 19.02-38.62 42.41-38.62H200c4.42 0 8 3.58 8 8v16c0 4.42-3.58 8-8 8h-12.27c-5.95 0-10.41 3.5-10.41 6.62 0 1.3.75 2.66 2.12 3.84l21.89 18.77c8.47 7.22 13.33 17.48 13.33 28.14.01 21.29-19 38.62-42.39 38.62zM256 264v20.8c0 20.27 5.7 40.17 16 56.88 10.3-16.7 16-36.61 16-56.88V264c0-4.42 3.58-8 8-8h16c4.42 0 8 3.58 8 8v20.8c0 35.48-12.88 68.89-36.28 94.09-3.02 3.25-7.27 5.11-11.72 5.11s-8.7-1.86-11.72-5.11c-23.4-25.2-36.28-58.61-36.28-94.09V264c0-4.42 3.58-8 8-8h16c4.42 0 8 3.58 8 8zm121-159L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z" } }] })(props2);
   }
-  function FaFileExcel(props) {
-    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 384 512" }, "child": [{ "tag": "path", "attr": { "d": "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm60.1 106.5L224 336l60.1 93.5c5.1 8-.6 18.5-10.1 18.5h-34.9c-4.4 0-8.5-2.4-10.6-6.3C208.9 405.5 192 373 192 373c-6.4 14.8-10 20-36.6 68.8-2.1 3.9-6.1 6.3-10.5 6.3H110c-9.5 0-15.2-10.5-10.1-18.5l60.3-93.5-60.3-93.5c-5.2-8 .6-18.5 10.1-18.5h34.8c4.4 0 8.5 2.4 10.6 6.3 26.1 48.8 20 33.6 36.6 68.5 0 0 6.1-11.7 36.6-68.5 2.1-3.9 6.2-6.3 10.6-6.3H274c9.5-.1 15.2 10.4 10.1 18.4zM384 121.9v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z" } }] })(props);
+  function FaFileExcel(props2) {
+    return GenIcon({ "tag": "svg", "attr": { "viewBox": "0 0 384 512" }, "child": [{ "tag": "path", "attr": { "d": "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm60.1 106.5L224 336l60.1 93.5c5.1 8-.6 18.5-10.1 18.5h-34.9c-4.4 0-8.5-2.4-10.6-6.3C208.9 405.5 192 373 192 373c-6.4 14.8-10 20-36.6 68.8-2.1 3.9-6.1 6.3-10.5 6.3H110c-9.5 0-15.2-10.5-10.1-18.5l60.3-93.5-60.3-93.5c-5.2-8 .6-18.5 10.1-18.5h34.8c4.4 0 8.5 2.4 10.6 6.3 26.1 48.8 20 33.6 36.6 68.5 0 0 6.1-11.7 36.6-68.5 2.1-3.9 6.2-6.3 10.6-6.3H274c9.5-.1 15.2 10.4 10.1 18.4zM384 121.9v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z" } }] })(props2);
   }
 
   // node_modules/@mui/material/esm/Stack/Stack.js
@@ -75329,7 +80334,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var StackRoot = styled_default("div", {
     name: "MuiStack",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       return [styles3.root];
     }
   })(style);
@@ -75338,14 +80343,14 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       props: inProps,
       name: "MuiStack"
     });
-    const props = (0, import_system19.unstable_extendSxProp)(themeProps);
+    const props2 = (0, import_system19.unstable_extendSxProp)(themeProps);
     const {
       component = "div",
       direction = "column",
       spacing = 0,
       divider,
       children
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded28);
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded28);
     const ownerState = {
       direction,
       spacing
@@ -75394,10 +80399,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   // node_modules/@mui/material/esm/ButtonGroup/ButtonGroup.js
   var import_jsx_runtime33 = __toESM(require_jsx_runtime());
   var _excluded29 = ["children", "className", "color", "component", "disabled", "disableElevation", "disableFocusRipple", "disableRipple", "fullWidth", "orientation", "size", "variant"];
-  var overridesResolver3 = (props, styles3) => {
+  var overridesResolver3 = (props2, styles3) => {
     const {
       ownerState
-    } = props;
+    } = props2;
     return [{
       [`& .${buttonGroupClasses_default.grouped}`]: styles3.grouped
     }, {
@@ -75501,7 +80506,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     })
   }));
   var ButtonGroup = /* @__PURE__ */ React45.forwardRef(function ButtonGroup2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiButtonGroup"
     });
@@ -75518,8 +80523,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       orientation = "horizontal",
       size = "medium",
       variant = "outlined"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded29);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded29);
+    const ownerState = _extends({}, props2, {
       color,
       component,
       disabled,
@@ -75629,10 +80634,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     shouldForwardProp: (prop) => rootShouldForwardProp(prop) || prop === "classes",
     name: "MuiButton",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, styles3[ownerState.variant], styles3[`${ownerState.variant}${capitalize_default(ownerState.color)}`], styles3[`size${capitalize_default(ownerState.size)}`], styles3[`${ownerState.variant}Size${capitalize_default(ownerState.size)}`], ownerState.color === "inherit" && styles3.colorInherit, ownerState.disableElevation && styles3.disableElevation, ownerState.fullWidth && styles3.fullWidth];
     }
   })(({
@@ -75755,10 +80760,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ButtonStartIcon = styled_default("span", {
     name: "MuiButton",
     slot: "StartIcon",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.startIcon, styles3[`iconSize${capitalize_default(ownerState.size)}`]];
     }
   })(({
@@ -75773,10 +80778,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var ButtonEndIcon = styled_default("span", {
     name: "MuiButton",
     slot: "EndIcon",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.endIcon, styles3[`iconSize${capitalize_default(ownerState.size)}`]];
     }
   })(({
@@ -75791,7 +80796,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var Button = /* @__PURE__ */ React46.forwardRef(function Button2(inProps, ref) {
     const contextProps = React46.useContext(ButtonGroupContext_default);
     const resolvedProps = (0, import_utils27.internal_resolveProps)(contextProps, inProps);
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: resolvedProps,
       name: "MuiButton"
     });
@@ -75808,10 +80813,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       fullWidth = false,
       size = "medium",
       startIcon: startIconProp,
-      type,
+      type: type2,
       variant = "text"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded30);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded30);
+    const ownerState = _extends({}, props2, {
       color,
       component,
       disabled,
@@ -75819,7 +80824,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       disableFocusRipple,
       fullWidth,
       size,
-      type,
+      type: type2,
       variant
     });
     const classes = useUtilityClasses19(ownerState);
@@ -75841,7 +80846,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       focusRipple: !disableFocusRipple,
       focusVisibleClassName: (0, import_clsx22.default)(classes.focusVisible, focusVisibleClassName),
       ref,
-      type
+      type: type2
     }, other, {
       classes,
       children: [startIcon, children, endIcon]
@@ -75903,9 +80908,6 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     const [minDate2, setMinDate] = React47.useState(new Date());
     const paperSx = { p: 4, px: 5, mb: 4, display: "flex", flexDirection: "column" };
     const buttonSx = { width: 150 };
-    React47.useEffect(() => {
-      getMinDate().then((date) => setMinDate(new Date(date))).catch((err) => console.warn("Could not fetch min date", { err }));
-    });
     const [from, to] = getFromTo(timeframe, timeRange);
     const baseUrl = "/download?from=" + from + "&to=" + to + "&format=";
     return /* @__PURE__ */ React47.createElement(Stack_default, null, /* @__PURE__ */ React47.createElement(Paper_default, {
@@ -76063,10 +81065,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var AlertRoot = styled_default(Paper_default, {
     name: "MuiAlert",
     slot: "Root",
-    overridesResolver: (props, styles3) => {
+    overridesResolver: (props2, styles3) => {
       const {
         ownerState
-      } = props;
+      } = props2;
       return [styles3.root, styles3[ownerState.variant], styles3[`${ownerState.variant}${capitalize_default(ownerState.color || ownerState.severity)}`]];
     }
   })(({
@@ -76109,7 +81111,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var AlertIcon = styled_default("div", {
     name: "MuiAlert",
     slot: "Icon",
-    overridesResolver: (props, styles3) => styles3.icon
+    overridesResolver: (props2, styles3) => styles3.icon
   })({
     marginRight: 12,
     padding: "7px 0",
@@ -76120,7 +81122,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var AlertMessage = styled_default("div", {
     name: "MuiAlert",
     slot: "Message",
-    overridesResolver: (props, styles3) => styles3.message
+    overridesResolver: (props2, styles3) => styles3.message
   })({
     padding: "8px 0",
     minWidth: 0,
@@ -76129,7 +81131,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var AlertAction = styled_default("div", {
     name: "MuiAlert",
     slot: "Action",
-    overridesResolver: (props, styles3) => styles3.action
+    overridesResolver: (props2, styles3) => styles3.action
   })({
     display: "flex",
     alignItems: "flex-start",
@@ -76152,7 +81154,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     })
   };
   var Alert = /* @__PURE__ */ React53.forwardRef(function Alert2(inProps, ref) {
-    const props = useThemeProps({
+    const props2 = useThemeProps({
       props: inProps,
       name: "MuiAlert"
     });
@@ -76168,8 +81170,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       role = "alert",
       severity = "success",
       variant = "standard"
-    } = props, other = _objectWithoutPropertiesLoose(props, _excluded31);
-    const ownerState = _extends({}, props, {
+    } = props2, other = _objectWithoutPropertiesLoose(props2, _excluded31);
+    const ownerState = _extends({}, props2, {
       color,
       severity,
       variant
@@ -76289,18 +81291,6 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   };
   function System() {
     const [data, setData] = React55.useState(null);
-    const fetchData = () => {
-      getSystem().then(setData).catch((err) => console.warn("Failed to fetch data", { err }));
-    };
-    React55.useEffect(() => {
-      fetchData();
-      const interval = setInterval(() => {
-        fetchData();
-      }, 6e4);
-      return () => {
-        clearInterval(interval);
-      };
-    });
     if (data === null) {
       return /* @__PURE__ */ React55.createElement(CircularProgress_default, null);
     }
@@ -76358,9 +81348,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   }
 
   // src/website/main.tsx
-  function Main(props) {
-    const { view } = props;
-    console.log(view);
+  function Main(props2) {
+    const { view } = props2;
     switch (view) {
       case "graph":
         return /* @__PURE__ */ React56.createElement(Graph, null);
@@ -76407,6 +81396,73 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
     }))));
   }
 
+  // src/website/getData.ts
+  var import_delay = __toESM(require_delay());
+  function fetchLoop() {
+    return __async(this, null, function* () {
+      while (true) {
+        yield updateFileIndex();
+        for (const filename of yield db.getNextFilenames()) {
+          console.log("Fetching data file " + filename);
+          yield storeFile(filename);
+          yield db.setFileIndex(filename);
+          console.log("... fetched");
+        }
+        console.log("Waiting for new files");
+        yield (0, import_delay.default)(1e4);
+      }
+    });
+  }
+  function updateFileIndex() {
+    return __async(this, null, function* () {
+      const url = "/data/index.txt";
+      const content = yield (yield fetch(url)).text();
+      const filenames = content.split("\n").filter((line) => line.length > 0);
+      yield db.updateFileIndex(filenames);
+    });
+  }
+  function storeFile(filename) {
+    return __async(this, null, function* () {
+      const url = "/" + filename;
+      const content = yield (yield fetch(url)).text();
+      const rows = content.split("\n").filter((line) => line.length > 0);
+      if (filename.match(/-error\.csv/)) {
+        const errors = rows.map(parseErrorLine);
+        yield db.addError(errors);
+      } else {
+        const data = rows.map(parseDataLine);
+        yield db.addData(data);
+      }
+    });
+  }
+  function parseErrorLine(line) {
+    const [timestamp, data, error, message] = line.split(";");
+    return {
+      timestamp: parseInt(timestamp),
+      data,
+      error,
+      message
+    };
+  }
+  function parseDataLine(line) {
+    const [timestamp, input0, input1, input2, input3, output0, output1, boot, state] = line.split(";");
+    return {
+      timestamp: parseInt(timestamp),
+      input: [
+        { id: 0, val: parseInt(input0) },
+        { id: 1, val: parseInt(input1) },
+        { id: 2, val: parseInt(input2) },
+        { id: 3, val: parseInt(input3) }
+      ],
+      output: [
+        { id: 0, val: parseInt(output0) },
+        { id: 1, val: parseInt(output1) }
+      ],
+      boot: boot === "1",
+      state: parseInt(state)
+    };
+  }
+
   // src/website/index.tsx
   var container = document.getElementById("reactRoot");
   if (!container) {
@@ -76422,6 +81478,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
       }
     }
   });
+  fetchLoop().catch((err) => console.error("Fetch loop crashed!", { err }));
   var root = (0, import_client.createRoot)(container);
   root.render(/* @__PURE__ */ React58.createElement(React58.StrictMode, null, /* @__PURE__ */ React58.createElement(import_system6.ThemeProvider, {
     theme

@@ -7,7 +7,6 @@ import Paper from '@mui/material/Paper';
 import FormLabel from '@mui/material/FormLabel';
 import CircularProgress from '@mui/material/CircularProgress';
 import Chart from 'react-apexcharts';
-import { getSystem } from './getData.js';
 import { VersionInfo } from './versionInfo.js';
 /** Sotrage graph options */
 const storageOptions = {
@@ -48,20 +47,20 @@ const memoryOptions = {
  */
 export function System() {
     const [data, setData] = React.useState(null);
-    const fetchData = () => {
-        getSystem()
-            .then(setData)
-            .catch((err) => console.warn('Failed to fetch data', { err }));
-    };
-    React.useEffect(() => {
-        fetchData();
-        const interval = setInterval(() => {
-            fetchData();
-        }, 60000);
-        return () => {
-            clearInterval(interval);
-        };
-    });
+    // const fetchData = () => {
+    //     getSystem()
+    //         .then(setData)
+    //         .catch((err: unknown) => console.warn('Failed to fetch data', {err}));
+    // };
+    // React.useEffect(() => {
+    //     fetchData();
+    //     const interval = setInterval(() => {
+    //         fetchData();
+    //     }, 60000);
+    //     return () => {
+    //         clearInterval(interval);
+    //     };
+    // });
     if (data === null) {
         return React.createElement(CircularProgress, null);
     }

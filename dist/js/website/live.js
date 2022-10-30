@@ -1,15 +1,6 @@
 /**
  * @file React component
  */
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -19,8 +10,9 @@ import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import { getCachedDataSeries } from './getData.js';
 import { LineGraph } from './lineGraph.js';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { db } from './database.js';
 /** Available marks on time slider */
 const marks = [
     {
@@ -62,24 +54,19 @@ const marks = [
  * @returns React component
  */
 export function Live() {
-    const [data, setData] = React.useState(null);
     const [showTime, setShowTime] = React.useState(60 * 60 * 1000);
+    const [showInterval, setShowInterval] = React.useState([Date.now() - showTime, Date.now()]);
     const [timeout, setTimeout] = React.useState(10);
     const [pause, setPause] = React.useState(false);
+    const data = useLiveQuery(() => db.getData(showInterval[0], showInterval[1]), [showInterval]);
     React.useEffect(() => {
-        if (!pause) {
-            getCachedDataSeries(Date.now() - showTime, 200)
-                .then(setData)
-                .catch((err) => console.warn('Failed to fetch data!', { err }));
-            const interval = setInterval(() => __awaiter(this, void 0, void 0, function* () {
-                setData(yield getCachedDataSeries(Date.now() - showTime, 200));
-            }), timeout * 1000);
-            return () => {
-                clearInterval(interval);
-            };
-        }
-        return () => { };
-    }, [showTime, pause, timeout]);
+        setShowInterval([Date.now() - showTime, Date.now()]);
+        const updateInterval = setInterval(() => {
+            const now = Date.now();
+            setShowInterval([now - showTime, now]);
+        }, timeout * 1000);
+        return () => clearInterval(updateInterval);
+    }, [showTime, timeout]);
     return (React.createElement(Grid, { container: true, spacing: 3 },
         React.createElement(Grid, { item: true, xs: 12, md: 8, lg: 9 },
             React.createElement(Paper, { sx: { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column' } },
@@ -97,5 +84,5 @@ export function Live() {
                             React.createElement(PlayCircleIcon, { fontSize: 'inherit', color: 'primary' }))
                         : React.createElement(IconButton, { onClick: () => setPause(true), size: 'large' },
                             React.createElement(PauseCircleIcon, { fontSize: 'inherit', color: 'primary' }))))),
-            React.createElement(Paper, { sx: { p: 2, mb: 4 } }, data === null ? React.createElement(CircularProgress, null) : React.createElement(LineGraph, { data: data })))));
+            React.createElement(Paper, { sx: { p: 2, mb: 4 } }, data === undefined ? React.createElement(CircularProgress, null) : React.createElement(LineGraph, { data: data })))));
 }

@@ -14,9 +14,10 @@ import type { Mark } from '@mui/base';
 import PauseCircleIcon from '@mui/icons-material/PauseCircle';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 
-import { getCachedDataSeries } from './getData.js';
 import { LineGraph } from './lineGraph.js';
-import type { ISeriesData } from '../interfaces/IStorage.js';
+import type { IStorageData } from '../interfaces/IData.js';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { db } from './database.js';
 
 /** Available marks on time slider */
 const marks: Mark[] = [
@@ -61,25 +62,20 @@ const marks: Mark[] = [
  * @returns React component
  */
 export function Live(): JSX.Element {
-    const [data, setData] = React.useState<ISeriesData | null>(null);
     const [showTime, setShowTime] = React.useState<number>(60 * 60 * 1000);
+    const [showInterval, setShowInterval] = React.useState<[number, number]>([Date.now() - showTime, Date.now()]);
     const [timeout, setTimeout] = React.useState<number>(10);
     const [pause, setPause] = React.useState<boolean>(false);
+    const data = useLiveQuery(() => db.getData(showInterval[0], showInterval[1]), [showInterval]);
 
     React.useEffect(() => {
-        if (! pause) {
-            getCachedDataSeries(Date.now() - showTime, 200)
-                .then(setData)
-                .catch((err) => console.warn('Failed to fetch data!', {err}));
-            const interval = setInterval(async () => {
-                setData(await getCachedDataSeries(Date.now() - showTime, 200));
-            }, timeout * 1000);
-            return () => {
-                clearInterval(interval);
-            };
-        }
-        return () => {/* NO OP */};
-    }, [showTime, pause, timeout]);
+        setShowInterval([Date.now() - showTime, Date.now()]);
+        const updateInterval = setInterval(() => {
+            const now = Date.now();
+            setShowInterval([now - showTime, now]);
+        }, timeout * 1000);
+        return () => clearInterval(updateInterval);
+    }, [showTime, timeout]);
 
     return (<Grid container spacing={3}>
         <Grid item xs={12} md={8} lg={9}>
@@ -124,7 +120,7 @@ export function Live(): JSX.Element {
                 </Grid>
             </Paper>
             <Paper sx={{ p: 2, mb: 4 }}>
-                { data === null ? <CircularProgress /> : <LineGraph data={data} /> }
+                { data === undefined ? <CircularProgress /> : <LineGraph data={data} /> }
             </Paper>
         </Grid>
     </Grid>);

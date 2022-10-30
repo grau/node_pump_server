@@ -12,7 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import delay from 'delay';
 import { SerialPort, ReadlineParser } from 'serialport';
-import { Storage } from './storage-mysql.js';
+import { Storage } from './storage-csv.js';
 /**
  * Main queue
  */
@@ -77,7 +77,7 @@ export function writeTestData() {
     return __awaiter(this, void 0, void 0, function* () {
         const storage = yield Storage.getInstance();
         console.log('Pre-push some values');
-        for (let timestamp = Date.now() - (2000 * 1800); timestamp < Date.now(); timestamp += 2000) {
+        for (let timestamp = Date.now() - (1000 * 60 * 60 * 24 * 10); timestamp < Date.now(); timestamp += 2000) {
             yield storage.storeDataLine(getTestdata(timestamp), timestamp);
         }
         console.log('Starting base system');
@@ -106,7 +106,7 @@ function getTestdata(timestamp) {
     for (let id = 0; id < 4; id++) {
         data.input.push({
             id,
-            val: Math.sin(id + timestamp / 4000),
+            val: Math.sin(id + timestamp / 4000) * 30,
         });
     }
     for (let id = 0; id < 2; id++) {

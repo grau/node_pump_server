@@ -19,8 +19,6 @@ import SvgIcon from '@mui/material/SvgIcon';
 import type { Mark } from '@mui/base';
 import type { SxProps } from '@mui/material';
 
-import { getMinDate } from './getData.js';
-
 /** All possible timeframe results */
 enum ETimeframe {
     day = 0,
@@ -72,11 +70,11 @@ export function Download(): JSX.Element {
     const paperSx: SxProps = { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column'};
     const buttonSx: SxProps = { width: 150 };
 
-    React.useEffect(() => {
-        getMinDate()
-            .then((date) => setMinDate(new Date(date)))
-            .catch((err) => console.warn('Could not fetch min date', {err}));
-    });
+    // React.useEffect(() => {
+    //     getMinDate()
+    //         .then((date) => setMinDate(new Date(date)))
+    //         .catch((err) => console.warn('Could not fetch min date', {err}));
+    // });
 
     const [from, to] = getFromTo(timeframe, timeRange);
     const baseUrl = '/download?from=' + from + '&to=' + to + '&format=';
