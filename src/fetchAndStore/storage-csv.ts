@@ -12,7 +12,15 @@ import { dataStorage } from '../config.js';
 import type { IStorageData, IStorageError } from '../interfaces/IData.js';
 
 /** Name of index file containing a list of all files */
-const indexFile = path.join(dataStorage, 'index.txt');
+const indexFile = path.join(dataStorage, 'index.csv');
+
+/** Index entry */
+export interface IIndex {
+    /** Index filename */
+    filename: string;
+    /** Index timestamp */
+    timestamp: number;
+}
 
 /**
  * Central storage class for writing/reading data
@@ -24,14 +32,17 @@ export class Storage {
     private static instance?: Storage;
 
     /** Set of all index files */
-    private indexFiles: Set<string>;
+    private indexFiles: Record<string, IIndex>;
+
+    /** Listeners to data changes */
+    private dataListeners: ((data: IStorageData) => void)[] = [];
 
     /**
      * Base constructor
      */
     private constructor() {
         fs.mkdirSync(dataStorage, { recursive: true });
-        this.indexFiles = new Set();
+        this.indexFiles = {};
     }
 
     /**
@@ -45,12 +56,36 @@ export class Storage {
             Storage.instance = storage;
             if (fs.existsSync(indexFile)) {
                 const indexFileContent = await fs.readFile(indexFile, 'utf8');
-                storage.indexFiles = new Set(indexFileContent
+                indexFileContent
                     .split('\n')
-                    .filter((content) => content.length > 0));
+                    .filter((content) => content.length > 0)
+                    .map((row) => row.split(';'))
+                    .forEach((row) => {
+                        storage.indexFiles[row[0]] = {filename: row[0], timestamp: parseInt(row[1])};
+                    });
             }
         }
         return Storage.instance;
+    }
+
+    /**
+     * Adds a listener to this storage object.
+     *
+     * @param listener Listener to add
+     * @returns The added listener
+     */
+    public addListeners(listener: (data: IStorageData) => void): (data: IStorageData) => void {
+        this.dataListeners.push(listener);
+        return listener;
+    }
+
+    /**
+     * Removes the given listener from this storage object.
+     *
+     * @param listener Listener to remove
+     */
+    public removeListeners(listener: (data: IStorageData) => void): void {
+        this.dataListeners = this.dataListeners.filter((listListener) => listListener !== listener);
     }
 
     /**
@@ -97,14 +132,17 @@ export class Storage {
     }
 
     /**
-     * Checks if the given filename is already part of index and optionally updates index
+     * Emits the given data to all listeners
      *
-     * @param filename Filename to add
+     * @param data Data to emit
      */
-    private async updateIndex(filename: string): Promise<void> {
-        if (! this.indexFiles.has(filename)) {
-            this.indexFiles.add(filename);
-            await fs.appendFile(indexFile, filename + '\n');
+    private emitDataToListeners(data: IStorageData): void {
+        for (const listener of this.dataListeners) {
+            try {
+                listener(data);
+            } catch (err) {
+                console.warn('Failed to execute listener', {err});
+            }
         }
     }
 
@@ -115,20 +153,18 @@ export class Storage {
      */
     private async writeData(data: IStorageData): Promise<void> {
         const filename = path.join(dataStorage, this.getDateFile(data.timestamp) + '.csv');
-        await Promise.all([
-            fs.appendFile(filename, [
-                data.timestamp,
-                data.input[0]?.val ?? null,
-                data.input[1]?.val ?? null,
-                data.input[2]?.val ?? null,
-                data.input[3]?.val ?? null,
-                data.output[0]?.val ?? null,
-                data.output[1]?.val ?? null,
-                data.boot ? 1 : 0,
-                data.state,
-            ].join(';') + '\n'),
-            this.updateIndex(filename),
-        ]);
+        await fs.appendFile(filename, [
+            data.timestamp,
+            data.input[0]?.val ?? null,
+            data.input[1]?.val ?? null,
+            data.input[2]?.val ?? null,
+            data.input[3]?.val ?? null,
+            data.output[0]?.val ?? null,
+            data.output[1]?.val ?? null,
+            data.boot ? 1 : 0,
+            data.state,
+        ].join(';') + '\n');
+        this.emitDataToListeners(data);
     }
 
     /**
@@ -145,7 +181,6 @@ export class Storage {
                 error.error,
                 error.message,
             ].join(';') + '\n'),
-            this.updateIndex(filename),
         ]);
     }
 

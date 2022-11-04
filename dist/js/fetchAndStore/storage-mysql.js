@@ -263,108 +263,121 @@ export class Storage {
             try {
                 const inputData = JSON.parse(inputLine);
                 inputData.timestamp = timestamp;
-                const valid = (input => { const $out = {
-                    success: true,
-                    errors: []
-                }; const $pred = TSON.validateEquals.predicate($out); ((input, path = "$input") => {
+                const valid = (input => {
+                    const $out = {
+                        success: true,
+                        errors: []
+                    };
+                    const $report = TSON.validateEquals.report($out);
                     const $join = TSON.validateEquals.join;
-                    const $vo = [
-                        (input, path, exceptionable) => [$pred("number" === typeof input.timestamp, exceptionable, () => ({
+                    ((input, path, exceptionable) => {
+                        const $vo0 = (input, path, exceptionable) => ["number" === typeof input.timestamp || $report(exceptionable, {
                                 path: path + ".timestamp",
                                 expected: "number",
                                 value: input.timestamp
-                            })), $pred(0 === input.state || 1 === input.state || 2 === input.state || 3 === input.state || 4 === input.state, exceptionable, () => ({
+                            }), 0 === input.state || 1 === input.state || 2 === input.state || 3 === input.state || 4 === input.state || $report(exceptionable, {
                                 path: path + ".state",
                                 expected: "(0 | 1 | 2 | 3 | 4)",
                                 value: input.state
-                            })), $pred("boolean" === typeof input.boot, exceptionable, () => ({
+                            }), "boolean" === typeof input.boot || $report(exceptionable, {
                                 path: path + ".boot",
                                 expected: "boolean",
                                 value: input.boot
-                            })), $pred(Array.isArray(input.input) && input.input.map((elem, index1) => $pred(null !== elem && $pred("object" === typeof elem && null !== elem && $vo[1](elem, path + ".input[" + index1 + "]", true && exceptionable), exceptionable, () => ({
-                                path: path + ".input[" + index1 + "]",
-                                expected: "Resolve<__type>",
-                                value: elem
-                            })), exceptionable, () => ({
-                                path: path + ".input[" + index1 + "]",
-                                expected: "Resolve<__type>",
-                                value: elem
-                            }))).every(flag => true === flag), exceptionable, () => ({
+                            }), (Array.isArray(input.input) || $report(exceptionable, {
                                 path: path + ".input",
                                 expected: "Array<Resolve<__type>>",
                                 value: input.input
-                            })), $pred(Array.isArray(input.output) && input.output.map((elem, index2) => $pred(null !== elem && $pred("object" === typeof elem && null !== elem && $vo[2](elem, path + ".output[" + index2 + "]", true && exceptionable), exceptionable, () => ({
-                                path: path + ".output[" + index2 + "]",
-                                expected: "Resolve<__type.o1>",
+                            })) && input.input.map((elem, index1) => ("object" === typeof elem && null !== elem || $report(exceptionable, {
+                                path: path + ".input[" + index1 + "]",
+                                expected: "Resolve<__type>",
                                 value: elem
-                            })), exceptionable, () => ({
-                                path: path + ".output[" + index2 + "]",
-                                expected: "Resolve<__type.o1>",
+                            })) && $vo1(elem, path + ".input[" + index1 + "]", true && exceptionable) || $report(exceptionable, {
+                                path: path + ".input[" + index1 + "]",
+                                expected: "Resolve<__type>",
                                 value: elem
-                            }))).every(flag => true === flag), exceptionable, () => ({
+                            })).every(flag => true === flag) || $report(exceptionable, {
+                                path: path + ".input",
+                                expected: "Array<Resolve<__type>>",
+                                value: input.input
+                            }), (Array.isArray(input.output) || $report(exceptionable, {
                                 path: path + ".output",
                                 expected: "Array<Resolve<__type.o1>>",
                                 value: input.output
-                            })), false === exceptionable || Object.entries(input).map(([key, value]) => $pred((() => {
+                            })) && input.output.map((elem, index2) => ("object" === typeof elem && null !== elem || $report(exceptionable, {
+                                path: path + ".output[" + index2 + "]",
+                                expected: "Resolve<__type.o1>",
+                                value: elem
+                            })) && $vo2(elem, path + ".output[" + index2 + "]", true && exceptionable) || $report(exceptionable, {
+                                path: path + ".output[" + index2 + "]",
+                                expected: "Resolve<__type.o1>",
+                                value: elem
+                            })).every(flag => true === flag) || $report(exceptionable, {
+                                path: path + ".output",
+                                expected: "Array<Resolve<__type.o1>>",
+                                value: input.output
+                            }), false === exceptionable || Object.entries(input).map(([key, value]) => {
                                 if (undefined === value)
                                     return true;
                                 if (["timestamp", "state", "boot", "input", "output"].some(prop => key === prop))
                                     return true;
-                                return false;
-                            })(), exceptionable, () => ({
-                                path: path + $join(key),
-                                expected: "undefined",
-                                value: value
-                            }))).every(flag => true === flag)].every(flag => true === flag),
-                        (input, path, exceptionable) => [$pred("number" === typeof input.id, exceptionable, () => ({
+                                return $report(exceptionable, {
+                                    path: path + $join(key),
+                                    expected: "undefined",
+                                    value: value
+                                });
+                            }).every(flag => true === flag)].every(flag => true === flag);
+                        const $vo1 = (input, path, exceptionable) => ["number" === typeof input.id || $report(exceptionable, {
                                 path: path + ".id",
                                 expected: "number",
                                 value: input.id
-                            })), $pred("number" === typeof input.val, exceptionable, () => ({
+                            }), "number" === typeof input.val || $report(exceptionable, {
                                 path: path + ".val",
                                 expected: "number",
                                 value: input.val
-                            })), false === exceptionable || Object.entries(input).map(([key, value]) => $pred((() => {
+                            }), false === exceptionable || Object.entries(input).map(([key, value]) => {
                                 if (undefined === value)
                                     return true;
                                 if (["id", "val"].some(prop => key === prop))
                                     return true;
-                                return false;
-                            })(), exceptionable, () => ({
-                                path: path + $join(key),
-                                expected: "undefined",
-                                value: value
-                            }))).every(flag => true === flag)].every(flag => true === flag),
-                        (input, path, exceptionable) => [$pred("number" === typeof input.id, exceptionable, () => ({
+                                return $report(exceptionable, {
+                                    path: path + $join(key),
+                                    expected: "undefined",
+                                    value: value
+                                });
+                            }).every(flag => true === flag)].every(flag => true === flag);
+                        const $vo2 = (input, path, exceptionable) => ["number" === typeof input.id || $report(exceptionable, {
                                 path: path + ".id",
                                 expected: "number",
                                 value: input.id
-                            })), $pred("number" === typeof input.val, exceptionable, () => ({
+                            }), "number" === typeof input.val || $report(exceptionable, {
                                 path: path + ".val",
                                 expected: "number",
                                 value: input.val
-                            })), false === exceptionable || Object.entries(input).map(([key, value]) => $pred((() => {
+                            }), false === exceptionable || Object.entries(input).map(([key, value]) => {
                                 if (undefined === value)
                                     return true;
                                 if (["id", "val"].some(prop => key === prop))
                                     return true;
-                                return false;
-                            })(), exceptionable, () => ({
-                                path: path + $join(key),
-                                expected: "undefined",
-                                value: value
-                            }))).every(flag => true === flag)].every(flag => true === flag)
-                    ];
-                    return $pred(null !== input && $pred("object" === typeof input && null !== input && $vo[0](input, path + "", true), true, () => ({
-                        path: path + "",
-                        expected: "Resolve<IStorageData>",
-                        value: input
-                    })), true, () => ({
-                        path: path + "",
-                        expected: "Resolve<IStorageData>",
-                        value: input
-                    }));
-                })(input); return $out; })(inputData);
+                                return $report(exceptionable, {
+                                    path: path + $join(key),
+                                    expected: "undefined",
+                                    value: value
+                                });
+                            }).every(flag => true === flag)].every(flag => true === flag);
+                        return ("object" === typeof input && null !== input || $report(true, {
+                            path: path + "",
+                            expected: "Resolve<IStorageData>",
+                            value: input
+                        })) && $vo0(input, path + "", true) || $report(true, {
+                            path: path + "",
+                            expected: "Resolve<IStorageData>",
+                            value: input
+                        });
+                    })(input, "$input", true);
+                    if (0 !== $out.errors.length)
+                        $out.success = false;
+                    return $out;
+                })(inputData);
                 if (!valid.success) {
                     yield this.storeError('validate', valid.errors
                         .map((error) => error.path + ' --> Expect: ' + error.expected + '. Got: ' + error.value)

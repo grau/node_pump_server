@@ -5,6 +5,7 @@ import Dexie from 'dexie';
 
 import type { IStorageData, IStorageError } from '../interfaces/IData';
 import type { IFileIndex } from './databaseFormat';
+import type { IIndex } from '../fetchAndStore/storage-csv';
 
 /**
  * Database interface class.
@@ -29,19 +30,30 @@ class Database extends Dexie {
             data: 'timestamp',
             error: 'timestamp',
         };
-        this.version(1).stores(stores);
+        this.version(2).stores(stores);
     }
 
     /**
      * Adds all filenames to index. Files not already in index will be set to unfetched.
      * Files in index will be silently discarded
      *
-     * @param filenames Filenames to add
+     * @param files Fils to add
      */
-    public async updateFileIndex(filenames: string[]): Promise<void> {
-        await Promise.allSettled(
-            filenames
-                .map((filename) => this.fileIndex.add({filename, fetched: 0})));
+    public async updateFileIndex(files: IIndex[]): Promise<void> {
+        const filenames = files.map((file) => file.filename);
+        const knownKeys = await this.fileIndex.where('filename').anyOf(filenames).keys() as string[];
+        for (const file of files) {
+            if (knownKeys.includes(file.filename)) {
+                this.fileIndex.update(file.filename, {timestamp: file.timestamp})
+                    .catch((err) => console.warn('Failed to update file index entry', {file, err}));
+            } else {
+                this.fileIndex.add({
+                    filename: file.filename,
+                    fetched: 0,
+                    lastChanged: file.timestamp,
+                }).catch((err) => console.warn('Failed to add file index entry', {file, err}));
+            }
+        }
     }
 
     /**
@@ -50,17 +62,16 @@ class Database extends Dexie {
      * @param filename Filename to update status for
      */
     public async setFileIndex(filename: string): Promise<void> {
-        await this.fileIndex.update(filename, {fetched: true});
+        await this.fileIndex.update(filename, {fetched: Date.now()});
     }
 
     /**
-     * Fetches the next unfechted file from file index
+     * Fetches the complete file index
      *
-     * @returns filename to already fetched
+     * @returns complete file index
      */
-    public async getNextFilenames(): Promise<string[]> {
-        return (await this.fileIndex.where('fetched').equals(0).reverse().sortBy('filename'))
-            .map((fileIndex) => fileIndex.filename);
+    public async getFileIndex(): Promise<IFileIndex[]> {
+        return this.fileIndex.reverse().sortBy('filename');
     }
 
     /**
@@ -75,7 +86,7 @@ class Database extends Dexie {
     /**
      * Puts all error events in storage
      *
-     * @param error Errors to add
+     * @param error Error to add
      */
     public async addError(error: IStorageError[]): Promise<void> {
         await this.error.bulkPut(error);

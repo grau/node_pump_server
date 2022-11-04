@@ -1,9 +1,18 @@
 /**
  * @file React component
  */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import * as React from 'react';
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
-import { FaFileExcel, FaFileCsv, FaFileCode, FaDatabase } from 'react-icons/fa';
+import { FaFileExcel, FaFileCsv, FaFileCode } from 'react-icons/fa';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import FormLabel from '@mui/material/FormLabel';
@@ -12,6 +21,9 @@ import Slider from '@mui/material/Slider';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon';
+import { db } from './database';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { download, getCsv, getExcel, getJSON } from './fileProvider';
 /** All possible timeframe results */
 var ETimeframe;
 (function (ETimeframe) {
@@ -49,6 +61,8 @@ const timeMarks = [
         label: 'Zeitrahmen',
     },
 ];
+const paperSx = { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column' };
+const buttonSx = { width: 150 };
 /**
  * Download dialog
  *
@@ -57,34 +71,24 @@ const timeMarks = [
 export function Download() {
     const [timeframe, setTimeframe] = React.useState(ETimeframe.month);
     const [timeRange, setTimeRange] = React.useState([new Date(Date.now() - 1000 * 3600 * 24), new Date]);
-    const [minDate, setMinDate] = React.useState(new Date());
-    const paperSx = { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column' };
-    const buttonSx = { width: 150 };
-    // React.useEffect(() => {
-    //     getMinDate()
-    //         .then((date) => setMinDate(new Date(date)))
-    //         .catch((err) => console.warn('Could not fetch min date', {err}));
-    // });
-    const [from, to] = getFromTo(timeframe, timeRange);
-    const baseUrl = '/download?from=' + from + '&to=' + to + '&format=';
+    const minDate = useLiveQuery(() => db.getMinDataDate());
+    const [from, to] = React.useMemo(() => getFromTo(timeframe, timeRange), [timeframe, timeRange]);
     return React.createElement(Stack, null,
         React.createElement(Paper, { sx: paperSx },
             React.createElement(FormLabel, null, "Speicherdauer"),
             React.createElement(Box, { sx: { mb: 4 } },
                 React.createElement(Slider, { value: timeframe, onChange: (_, newVal) => setTimeframe(newVal), step: null, marks: timeMarks, min: timeMarks[0].value, max: timeMarks[timeMarks.length - 1].value })),
             React.createElement(FormLabel, null, "Zeitrahmen"),
-            React.createElement(DateTimeRangePicker, { locale: 'de-DE', onChange: (range) => setTimeRange(range), value: timeRange, minDate: minDate, maxDate: new Date(), disabled: timeframe !== ETimeframe.range })),
+            React.createElement(DateTimeRangePicker, { locale: 'de-DE', onChange: (range) => setTimeRange(range), value: timeRange, minDate: new Date(minDate !== null && minDate !== void 0 ? minDate : Date.now()), maxDate: new Date(), disabled: timeframe !== ETimeframe.range })),
         React.createElement(Paper, { sx: paperSx },
             React.createElement(FormLabel, null, "Download"),
             React.createElement(ButtonGroup, null,
                 React.createElement(Button, { variant: 'contained', startIcon: React.createElement(SvgIcon, null,
-                        React.createElement(FaFileCsv, null)), sx: buttonSx, size: "large", href: baseUrl + 'csv', download: 'Heizung.csv' }, "CSV"),
+                        React.createElement(FaFileCsv, null)), sx: buttonSx, size: "large", onClick: () => __awaiter(this, void 0, void 0, function* () { return download(yield getCsv(from, to), 'pumpData.csv'); }) }, "CSV"),
                 React.createElement(Button, { variant: 'contained', startIcon: React.createElement(SvgIcon, null,
-                        React.createElement(FaFileCode, null)), sx: buttonSx, size: "large", href: baseUrl + 'json', download: 'Heizung.json' }, "JSON"),
+                        React.createElement(FaFileCode, null)), sx: buttonSx, size: "large", onClick: () => __awaiter(this, void 0, void 0, function* () { return download(yield getJSON(from, to), 'pumpData.json'); }) }, "JSON"),
                 React.createElement(Button, { variant: 'contained', startIcon: React.createElement(SvgIcon, null,
-                        React.createElement(FaFileExcel, null)), sx: buttonSx, size: "large", href: baseUrl + 'xlsx', download: 'Heizung.xlsx' }, "Excel"),
-                React.createElement(Button, { variant: 'contained', startIcon: React.createElement(SvgIcon, null,
-                        React.createElement(FaDatabase, null)), sx: buttonSx, size: "large", href: '/backup', download: 'Heizung.db' }, "Backup"))));
+                        React.createElement(FaFileExcel, null)), sx: buttonSx, size: "large", onClick: () => __awaiter(this, void 0, void 0, function* () { return download(yield getExcel(from, to), 'pumpData.xlsx'); }) }, "Excel"))));
 }
 /**
  * Returns start and end timestamp for the given input

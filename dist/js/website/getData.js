@@ -1,5 +1,6 @@
 /**
  * @file Api connector to get data
+ * @todo Move this code to a service worker
  */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -10,24 +11,60 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import delay from 'delay';
 import { db } from './database.js';
+import delay from 'delay';
 /**
  * Update loop fetching new data from server - for all infinity.
  */
 export function fetchLoop() {
     return __awaiter(this, void 0, void 0, function* () {
-        // eslint-disable-next-line no-constant-condition
-        while (true) {
-            yield updateFileIndex();
-            for (const filename of yield db.getNextFilenames()) {
-                console.log('Fetching data file ' + filename);
+        connectWebsocket()
+            .catch((err) => {
+            console.warn('Update loop crashed', { err });
+            // eslint-disable-next-line no-alert
+            alert('Update loop ist abgestürtzt! Bitte die Seite neu laden!');
+        });
+        console.time('Fetch all data');
+        yield updateFileIndex();
+        for (const fileIndex of yield db.getFileIndex()) {
+            if (fileIndex.fetched < fileIndex.lastChanged) {
+                const { filename } = fileIndex;
+                console.time('Fetch file' + filename);
                 yield storeFile(filename);
                 yield db.setFileIndex(filename);
-                console.log('... fetched');
+                console.timeEnd('Fetch file' + filename);
             }
-            console.log('Waiting for new files');
-            yield delay(10000);
+            else {
+                console.log('File already in storage. Skipping', { fileIndex });
+            }
+        }
+        console.timeEnd('Fetch all data');
+    });
+}
+/**
+ * Websocket client connection
+ */
+function connectWebsocket() {
+    return __awaiter(this, void 0, void 0, function* () {
+        for (;;) {
+            console.log('Connecting websocket.');
+            const socket = new WebSocket('ws://localhost:3000');
+            socket.addEventListener(('message'), (message) => {
+                const data = JSON.parse(message.data);
+                db.addData([data])
+                    .catch((err) => console.warn('Failed to store data!', { err, data, message }));
+            });
+            yield new Promise((resolve) => {
+                socket.addEventListener('close', (event) => {
+                    console.warn('Socket closed. Retry ...', { event });
+                    resolve();
+                });
+                socket.addEventListener('error', (event) => {
+                    console.warn('Socket crashed. Retry ...', { event });
+                    resolve();
+                });
+            });
+            yield delay(2000);
         }
     });
 }
@@ -38,12 +75,15 @@ export function fetchLoop() {
  */
 function updateFileIndex() {
     return __awaiter(this, void 0, void 0, function* () {
-        const url = '/data/index.txt';
+        const url = '/index';
         const content = yield (yield fetch(url)).text();
-        const filenames = content
+        const indexFiles = content
             .split('\n')
-            .filter((line) => line.length > 0);
-        yield db.updateFileIndex(filenames);
+            .filter((line) => line.length > 0)
+            .map((line) => line.split(';'))
+            .map((line) => ({ filename: line[0], timestamp: parseInt(line[1]) }));
+        console.log('Got index', { indexFiles });
+        yield db.updateFileIndex(indexFiles);
     });
 }
 /**
@@ -53,7 +93,7 @@ function updateFileIndex() {
  */
 function storeFile(filename) {
     return __awaiter(this, void 0, void 0, function* () {
-        const url = '/' + filename;
+        const url = '/data/' + filename;
         const content = yield (yield fetch(url)).text();
         const rows = content
             .split('\n')

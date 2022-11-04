@@ -107,7 +107,6 @@ const outputOptions: ApexOptions = {
 export function LineGraph(props: IProps): JSX.Element {
     const { data } = props;
     const {inputSeries, outputSeries} = React.useMemo(() => getSeriesData(data), [data]);
-    console.log('Graph showing data', {data, inputSeries, outputSeries});
     return <>
         <Chart
             options={inputOptions}

@@ -25,18 +25,31 @@ class Database extends Dexie {
             data: 'timestamp',
             error: 'timestamp',
         };
-        this.version(1).stores(stores);
+        this.version(2).stores(stores);
     }
     /**
      * Adds all filenames to index. Files not already in index will be set to unfetched.
      * Files in index will be silently discarded
      *
-     * @param filenames Filenames to add
+     * @param files Fils to add
      */
-    updateFileIndex(filenames) {
+    updateFileIndex(files) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield Promise.allSettled(filenames
-                .map((filename) => this.fileIndex.add({ filename, fetched: 0 })));
+            const filenames = files.map((file) => file.filename);
+            const knownKeys = yield this.fileIndex.where('filename').anyOf(filenames).keys();
+            for (const file of files) {
+                if (knownKeys.includes(file.filename)) {
+                    this.fileIndex.update(file.filename, { timestamp: file.timestamp })
+                        .catch((err) => console.warn('Failed to update file index entry', { file, err }));
+                }
+                else {
+                    this.fileIndex.add({
+                        filename: file.filename,
+                        fetched: 0,
+                        lastChanged: file.timestamp,
+                    }).catch((err) => console.warn('Failed to add file index entry', { file, err }));
+                }
+            }
         });
     }
     /**
@@ -46,18 +59,17 @@ class Database extends Dexie {
      */
     setFileIndex(filename) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.fileIndex.update(filename, { fetched: true });
+            yield this.fileIndex.update(filename, { fetched: Date.now() });
         });
     }
     /**
-     * Fetches the next unfechted file from file index
+     * Fetches the complete file index
      *
-     * @returns filename to already fetched
+     * @returns complete file index
      */
-    getNextFilenames() {
+    getFileIndex() {
         return __awaiter(this, void 0, void 0, function* () {
-            return (yield this.fileIndex.where('fetched').equals(0).reverse().sortBy('filename'))
-                .map((fileIndex) => fileIndex.filename);
+            return this.fileIndex.reverse().sortBy('filename');
         });
     }
     /**
@@ -73,7 +85,7 @@ class Database extends Dexie {
     /**
      * Puts all error events in storage
      *
-     * @param error Errors to add
+     * @param error Error to add
      */
     addError(error) {
         return __awaiter(this, void 0, void 0, function* () {

@@ -6,7 +6,7 @@ import * as React from 'react';
 
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 
-import { FaFileExcel, FaFileCsv, FaFileCode, FaDatabase } from 'react-icons/fa';
+import { FaFileExcel, FaFileCsv, FaFileCode } from 'react-icons/fa';
 
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
@@ -18,6 +18,10 @@ import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon';
 import type { Mark } from '@mui/base';
 import type { SxProps } from '@mui/material';
+
+import { db } from './database';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { download, getCsv, getExcel, getJSON } from './fileProvider';
 
 /** All possible timeframe results */
 enum ETimeframe {
@@ -57,6 +61,9 @@ const timeMarks: Mark[] = [
     },
 ];
 
+const paperSx: SxProps = { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column'};
+const buttonSx: SxProps = { width: 150 };
+
 /**
  * Download dialog
  *
@@ -64,20 +71,10 @@ const timeMarks: Mark[] = [
  */
 export function Download(): JSX.Element {
     const [timeframe, setTimeframe] = React.useState<ETimeframe>(ETimeframe.month);
-    const [timeRange, setTimeRange] = React.useState<[(Date | undefined)?, (Date | undefined)?] | null>
-        ([new Date(Date.now() - 1000 * 3600 * 24), new Date]);
-    const [minDate, setMinDate] = React.useState<Date>(new Date());
-    const paperSx: SxProps = { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column'};
-    const buttonSx: SxProps = { width: 150 };
-
-    // React.useEffect(() => {
-    //     getMinDate()
-    //         .then((date) => setMinDate(new Date(date)))
-    //         .catch((err) => console.warn('Could not fetch min date', {err}));
-    // });
-
-    const [from, to] = getFromTo(timeframe, timeRange);
-    const baseUrl = '/download?from=' + from + '&to=' + to + '&format=';
+    const [timeRange, setTimeRange] = React.useState<[(Date | undefined)?, (Date | undefined)?] | null>(
+        [new Date(Date.now() - 1000 * 3600 * 24), new Date]);
+    const minDate = useLiveQuery(() => db.getMinDataDate());
+    const [from, to] = React.useMemo(() => getFromTo(timeframe, timeRange), [timeframe, timeRange]);
 
     return <Stack>
         <Paper sx={paperSx}>
@@ -102,7 +99,7 @@ export function Download(): JSX.Element {
                 locale='de-DE'
                 onChange={(range) => setTimeRange(range)}
                 value={timeRange}
-                minDate={minDate}
+                minDate={new Date(minDate ?? Date.now())}
                 maxDate={new Date()}
                 disabled={timeframe !== ETimeframe.range}
             />
@@ -113,20 +110,16 @@ export function Download(): JSX.Element {
             </FormLabel>
             <ButtonGroup>
                 <Button variant='contained' startIcon={<SvgIcon><FaFileCsv /></SvgIcon>} sx={buttonSx} size="large"
-                    href={baseUrl + 'csv'} download='Heizung.csv'>
+                    onClick={async () => download(await getCsv(from, to), 'pumpData.csv')}>
                     CSV
                 </Button>
                 <Button variant='contained' startIcon={<SvgIcon><FaFileCode /></SvgIcon>} sx={buttonSx} size="large"
-                    href={baseUrl + 'json'} download='Heizung.json'>
+                    onClick={async () => download(await getJSON(from, to), 'pumpData.json')}>
                     JSON
                 </Button>
                 <Button variant='contained' startIcon={<SvgIcon><FaFileExcel /></SvgIcon>} sx={buttonSx} size="large"
-                    href={baseUrl + 'xlsx'} download='Heizung.xlsx'>
+                    onClick={async () => download(await getExcel(from, to), 'pumpData.xlsx')}>
                     Excel
-                </Button>
-                <Button variant='contained' startIcon={<SvgIcon><FaDatabase /></SvgIcon>} sx={buttonSx} size="large"
-                    href={'/backup'} download='Heizung.db'>
-                    Backup
                 </Button>
             </ButtonGroup>
         </Paper>

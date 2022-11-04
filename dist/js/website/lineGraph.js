@@ -83,7 +83,6 @@ const outputOptions = {
 export function LineGraph(props) {
     const { data } = props;
     const { inputSeries, outputSeries } = React.useMemo(() => getSeriesData(data), [data]);
-    console.log('Graph showing data', { data, inputSeries, outputSeries });
     return React.createElement(React.Fragment, null,
         React.createElement(Chart, { options: inputOptions, series: inputSeries, type: 'line', width: "100%", height: 400 }),
         React.createElement(Chart, { options: outputOptions, series: outputSeries, type: 'area', width: "100%", height: 300 }));

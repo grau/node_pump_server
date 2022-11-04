@@ -71,10 +71,10 @@ async function listenToArduino(storage: Storage, error: () => void): Promise<voi
 export async function writeTestData(): Promise<never> {
     const storage = await Storage.getInstance();
 
-    console.log('Pre-push some values');
-    for (let timestamp = Date.now() - (1000 * 60 * 60 * 24 * 10); timestamp < Date.now(); timestamp+=2000) {
-        await storage.storeDataLine(getTestdata(timestamp), timestamp);
-    }
+    // console.log('Pre-push some values');
+    // for (let timestamp = Date.now() - (1000 * 60 * 60 * 24 * 10); timestamp < Date.now(); timestamp+=2000) {
+    //     await storage.storeDataLine(getTestdata(timestamp), timestamp);
+    // }
 
     console.log('Starting base system');
     // eslint-disable-next-line no-constant-condition

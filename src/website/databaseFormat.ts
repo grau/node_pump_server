@@ -6,6 +6,8 @@
 export interface IFileIndex {
     /** Name of file */
     filename: string;
-    /** If the file was already fetched */
-    fetched: 0 | 1;
+    /** Timestamp of this index entry */
+    lastChanged: number;
+    /** When the file was fetched. Null if not at all */
+    fetched: number;
 }

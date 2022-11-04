@@ -10,7 +10,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 // import '@fontsource/roboto/500.css';
 // import '@fontsource/roboto/700.css';
 import { Root } from './root.js';
-import { fetchLoop } from './getData.js';
+const fetchWorker = new SharedWorker('worker.js', { credentials: 'same-origin' });
+fetchWorker.addEventListener('error', (err) => console.warn('Worker failed!', { err }));
 const container = document.getElementById('reactRoot');
 if (!container) {
     throw new Error('No root container node found');
@@ -25,8 +26,6 @@ const theme = createTheme({
         },
     },
 });
-fetchLoop()
-    .catch((err) => console.error('Fetch loop crashed!', { err }));
 const root = createRoot(container);
 root.render(React.createElement(React.StrictMode, null,
     React.createElement(ThemeProvider, { theme: theme },
