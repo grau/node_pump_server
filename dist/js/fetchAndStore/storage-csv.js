@@ -129,7 +129,7 @@ export class Storage {
             const files = yield fs.readdir(dataStorage);
             for (const file of files) {
                 const fileTimestamp = parseInt(file) * timestampDivider;
-                if (!isNaN(fileTimestamp)) {
+                if (!isNaN(fileTimestamp) && file.match(/^[0-9]+\.csv$/)) {
                     const [start, end] = [fileTimestamp, fileTimestamp + timestampDivider];
                     if (end >= from && start <= to) {
                         yield this.pipeFile(file, from, to, pipe);

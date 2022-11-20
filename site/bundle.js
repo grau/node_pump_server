@@ -81995,7 +81995,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
         return Math.round(10 * timeInSeconds / timeName.div) / 10 + " " + timeName.title;
       }
     }
-    throw new Error("Uptime bigger than Number.MAX_SAFE_INTEGER!", { timeInSeconds });
+    throw new Error("Uptime bigger than Number.MAX_SAFE_INTEGER!");
   }
 
   // src/website/main.tsx
