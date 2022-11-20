@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 import { drawerWidth } from './drawer.js';
+import { DownloadProgress } from './downloadProgress.js';
 const AppBarElem = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => (Object.assign({ zIndex: theme.zIndex.drawer + 1, transition: theme.transitions.create(['width', 'margin'], {
@@ -37,5 +38,6 @@ export function AppBar(props) {
             } },
             React.createElement(IconButton, { edge: "start", color: "inherit", "aria-label": "open drawer", onClick: toggleDrawer, sx: Object.assign({ marginRight: '36px' }, (open && { display: 'none' })) },
                 React.createElement(MenuIcon, null)),
-            React.createElement(Typography, { component: "h1", variant: "h6", color: "inherit", noWrap: true, sx: { flexGrow: 1 } }, "Dashboard")));
+            React.createElement(Typography, { component: "h1", variant: "h6", color: "inherit", noWrap: true, sx: { flexGrow: 1 } }, "Dashboard"),
+            React.createElement(DownloadProgress, null)));
 }

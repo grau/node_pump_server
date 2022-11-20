@@ -1,3 +1,0 @@
-CREATE DATABASE pump;
-CREATE USER 'pump'@'localhost' IDENTIFIED BY 'pump';
-GRANT ALL PRIVILEGES ON * . * TO 'pump'@'localhost';

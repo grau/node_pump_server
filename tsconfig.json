@@ -3,11 +3,11 @@
 		"paths": {
 			"*": ["types/*"],
 		},
-		"plugins": [{
-			"transform": "typescript-json/lib/transform",
-			// "functional": true, // test function type
-			// "numeric": true, // test `isNaN()` and `isFinite()`
-		}],
+		"plugins": [
+			{
+				"transform": "typescript-json/lib/transform"
+			}
+		],
 		"strict": true,
 		"esModuleInterop": true,
 		"baseUrl": "./src",

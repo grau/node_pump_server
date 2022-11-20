@@ -31,8 +31,8 @@ export function VersionInfo(): JSX.Element {
     });
 
     return <>
-        <FormLabel>Version</FormLabel>
         <Paper sx={{ p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column'}}>
+            <FormLabel>Version</FormLabel>
             {'0.1' === remoteVersion
                 ? <Alert severity='success'>
                     Die installierte Version 0.1 ist aktuell

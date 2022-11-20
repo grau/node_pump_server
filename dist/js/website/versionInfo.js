@@ -33,11 +33,12 @@ export function VersionInfo() {
         };
     });
     return React.createElement(React.Fragment, null,
-        React.createElement(FormLabel, null, "Version"),
-        React.createElement(Paper, { sx: { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column' } }, '0.1' === remoteVersion
-            ? React.createElement(Alert, { severity: 'success' }, "Die installierte Version 0.1 ist aktuell")
-            : React.createElement(Alert, { severity: 'error' },
-                "Installiert ist Version 0.1. Version ",
-                remoteVersion,
-                " ist verf\u00FCgbar")));
+        React.createElement(Paper, { sx: { p: 4, px: 5, mb: 4, display: 'flex', flexDirection: 'column' } },
+            React.createElement(FormLabel, null, "Version"),
+            '0.1' === remoteVersion
+                ? React.createElement(Alert, { severity: 'success' }, "Die installierte Version 0.1 ist aktuell")
+                : React.createElement(Alert, { severity: 'error' },
+                    "Installiert ist Version 0.1. Version ",
+                    remoteVersion,
+                    " ist verf\u00FCgbar")));
 }

@@ -101,6 +101,7 @@ class Database extends Dexie {
      */
     getData(from, to) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('Fetching data', { from, to });
             return this.data.where('timestamp').between(from, to, true, true).toArray();
         });
     }

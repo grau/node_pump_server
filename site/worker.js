@@ -4876,6 +4876,7 @@
     }
     getData(from, to) {
       return __async(this, null, function* () {
+        console.log("Fetching data", { from, to });
         return this.data.where("timestamp").between(from, to, true, true).toArray();
       });
     }

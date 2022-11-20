@@ -4,21 +4,19 @@
 
 import path from 'path';
 import fs from 'fs-extra';
+import os from 'os';
 
+import checkDiskSpace from 'check-disk-space';
 import express from 'express';
 import { WebSocketServer } from 'ws';
+
 import type { Request, Response } from 'express';
+import type { ISystemData } from '../interfaces/ISystemData';
 
 import {Storage} from '../fetchAndStore/storage-csv.js';
-import { dataStorage } from '../config.js';
+import {dataStorage} from '../config.js';
+import {initCpuInfoUpdater, cpuTimes } from './cpuInfo.js';
 
-/** Supported download formats */
-export const downloadFormats = ['csv', 'xlsx', 'json'] as const;
-
-/**
- *
- */
-export type TDownloadFormats = typeof downloadFormats[number];
 
 /**
  * Starts http server. Servers all files
@@ -27,12 +25,13 @@ export async function startWebServer(): Promise<void> {
     const storage = await Storage.getInstance();
     const app = express();
     const port = 3000;
+    initCpuInfoUpdater();
 
     app.use('/', express.static('./site'));
     app.use('/data', express.static(dataStorage));
     app.get('/index', (_, res) => sendIndex(res));
-
     app.get('/csv', (req: Request, res: Response) => sendCsv(req, res, storage));
+    app.get('/system', (_: Request, res: Response) => sendSystemData(res, storage));
 
     const wsServer = new WebSocketServer({ noServer: true });
     wsServer.on('connection', (socket) => {
@@ -88,6 +87,32 @@ async function sendCsv(req: Request, res: Response, storage: Storage): Promise<v
         res.send('err');
         return;
     }
+    res.setHeader('content-type', 'text/csv');
     await storage.pipeDataCsv(from, to, res);
     res.end();
+}
+
+
+
+/**
+ * Gather some system data and write it to array
+ *
+ * @param res Express response
+ * @param storage Storage object
+ */
+async function sendSystemData(res: Response, storage: Storage): Promise<void> {
+    const dbSize = await storage.getDbSize();
+    const systemData: ISystemData = {
+        timestamp: Date.now(),
+        diskSpace: await checkDiskSpace('/'),
+        cpuTimes: cpuTimes,
+        dbSize,
+        mem: {
+            total: os.totalmem(),
+            free: os.freemem(),
+        },
+        uptime: os.uptime(),
+    };
+    res.setHeader('content-type', 'application/json');
+    res.send(JSON.stringify(systemData));
 }

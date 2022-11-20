@@ -12,12 +12,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import path from 'path';
 import fs from 'fs-extra';
+import os from 'os';
+import checkDiskSpace from 'check-disk-space';
 import express from 'express';
 import { WebSocketServer } from 'ws';
 import { Storage } from '../fetchAndStore/storage-csv.js';
 import { dataStorage } from '../config.js';
-/** Supported download formats */
-export const downloadFormats = ['csv', 'xlsx', 'json'];
+import { initCpuInfoUpdater, cpuTimes } from './cpuInfo.js';
 /**
  * Starts http server. Servers all files
  */
@@ -26,10 +27,12 @@ export function startWebServer() {
         const storage = yield Storage.getInstance();
         const app = express();
         const port = 3000;
+        initCpuInfoUpdater();
         app.use('/', express.static('./site'));
         app.use('/data', express.static(dataStorage));
         app.get('/index', (_, res) => sendIndex(res));
         app.get('/csv', (req, res) => sendCsv(req, res, storage));
+        app.get('/system', (_, res) => sendSystemData(res, storage));
         const wsServer = new WebSocketServer({ noServer: true });
         wsServer.on('connection', (socket) => {
             const listener = storage.addListeners((data) => socket.send(JSON.stringify(data)));
@@ -85,7 +88,32 @@ function sendCsv(req, res, storage) {
             res.send('err');
             return;
         }
+        res.setHeader('content-type', 'text/csv');
         yield storage.pipeDataCsv(from, to, res);
         res.end();
+    });
+}
+/**
+ * Gather some system data and write it to array
+ *
+ * @param res Express response
+ * @param storage Storage object
+ */
+function sendSystemData(res, storage) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const dbSize = yield storage.getDbSize();
+        const systemData = {
+            timestamp: Date.now(),
+            diskSpace: yield checkDiskSpace('/'),
+            cpuTimes: cpuTimes,
+            dbSize,
+            mem: {
+                total: os.totalmem(),
+                free: os.freemem(),
+            },
+            uptime: os.uptime(),
+        };
+        res.setHeader('content-type', 'application/json');
+        res.send(JSON.stringify(systemData));
     });
 }

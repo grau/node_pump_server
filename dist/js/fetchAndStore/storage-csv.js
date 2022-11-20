@@ -173,6 +173,22 @@ export class Storage {
         });
     }
     /**
+     * Retzurns the size of the stored data
+     *
+     * @returns Size of stored data
+     */
+    getDbSize() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let size = 0;
+            const files = yield fs.readdir(dataStorage);
+            for (const file of files) {
+                const stat = yield fs.stat(path.join(dataStorage, file));
+                size += stat.size;
+            }
+            return size;
+        });
+    }
+    /**
      * Returns a date part for a filename.
      *
      * @param timestamp Timestamp to get file name for

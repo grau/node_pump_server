@@ -1,0 +1,14 @@
+[Unit]
+ Description=Pump log daemon
+ After=multi-user.target
+ StartLimitIntervalSec=500
+ StartLimitBurst=5
+
+[Service]
+ Restart=on-failure
+ RestartSec=5s
+ Type=idle
+ ExecStart=/usr/bin/python /home/pi/sample.py
+
+[Install]
+ WantedBy=multi-user.target

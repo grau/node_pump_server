@@ -138,7 +138,7 @@ export class Storage {
         const files = await fs.readdir(dataStorage);
         for (const file of files) {
             const fileTimestamp = parseInt(file) * timestampDivider;
-            if (! isNaN(fileTimestamp)) {
+            if (! isNaN(fileTimestamp) && file.match(/^[0-9]+\.csv$/)) {
                 const [start, end] = [fileTimestamp, fileTimestamp + timestampDivider];
                 if (end >= from && start <= to) {
                     await this.pipeFile(file, from, to, pipe);
@@ -167,6 +167,21 @@ export class Storage {
                 pipe.write(line + '\n');
             }
         }
+    }
+
+    /**
+     * Retzurns the size of the stored data
+     *
+     * @returns Size of stored data
+     */
+    public async getDbSize(): Promise<number> {
+        let size = 0;
+        const files = await fs.readdir(dataStorage);
+        for (const file of files) {
+            const stat = await fs.stat(path.join(dataStorage, file));
+            size += stat.size;
+        }
+        return size;
     }
 
     /**
