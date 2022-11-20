@@ -15,6 +15,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 // import NotificationsIcon from '@mui/icons-material/Notifications';
 
 import { drawerWidth } from './drawer.js';
+import { DownloadProgress } from './downloadProgress.js';
 
 /**
  * React properties
@@ -84,11 +85,7 @@ export function AppBar(props: Props): JSX.Element {
             >
                 Dashboard
             </Typography>
-            {/* <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                    <NotificationsIcon />
-                </Badge>
-            </IconButton> */}
+            <DownloadProgress />
         </Toolbar>
     </AppBarElem>;
 }

@@ -17,21 +17,25 @@ import { db } from './database';
  *
  * @param from Start timestamp
  * @param to End timestamp
+ * @param stream Stream to write to
  */
-export function getCsv(from, to) {
+// eslint-disable-next-line no-undef
+export function sendCsv(from, to, stream) {
     return __awaiter(this, void 0, void 0, function* () {
-        const rows = yield db.getData(from, to);
-        return rows.map((row) => [
-            row.timestamp,
-            row.input[0].val,
-            row.input[1].val,
-            row.input[2].val,
-            row.input[3].val,
-            row.output[0].val,
-            row.output[1].val,
-            row.boot,
-            row.state,
-        ].join(';')).join('\n');
+        yield db.getDataIterator(from, to, (row) => {
+            stream.write([
+                row.timestamp,
+                row.input[0].val,
+                row.input[1].val,
+                row.input[2].val,
+                row.input[3].val,
+                row.output[0].val,
+                row.output[1].val,
+                row.boot,
+                row.state,
+            ].join(';') + '\n')
+                .catch((err) => console.warn('Failed to write to stream', { err }));
+        });
     });
 }
 /**
@@ -42,9 +46,7 @@ export function getCsv(from, to) {
  */
 export function getJSON(from, to) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.warn('GETTING DATA ROWS');
         const rows = yield db.getData(from, to);
-        console.warn('STRINGIFY');
         return JSON.stringify(rows, null, 2);
     });
 }

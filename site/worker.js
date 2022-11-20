@@ -4879,6 +4879,11 @@
         return this.data.where("timestamp").between(from, to, true, true).toArray();
       });
     }
+    getDataIterator(from, to, callback) {
+      return __async(this, null, function* () {
+        yield this.data.where("timestamp").between(from, to, true, true).each(callback);
+      });
+    }
     getMinDataDate() {
       return __async(this, null, function* () {
         var _a;

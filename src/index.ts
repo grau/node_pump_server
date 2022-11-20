@@ -1,7 +1,7 @@
 /**
  * @file Entry point
  */
-import { mainQueue, writeTestData } from './fetchAndStore/index.js';
+import { writeTestData } from './fetchAndStore/index.js';
 import { startWebServer } from './serve/index.js';
 
 Promise.all([

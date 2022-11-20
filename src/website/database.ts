@@ -100,7 +100,20 @@ class Database extends Dexie {
      * @returns Datapoints
      */
     public async getData(from: number, to: number): Promise<IStorageData[]> {
+        console.log('Fetching data', {from, to});
         return this.data.where('timestamp').between(from, to, true, true).toArray();
+    }
+
+    /**
+     * Iterates over each line in the storage and calls callback.
+     * Promise resolves, once all files are processed.
+     *
+     * @param from Start timestamp
+     * @param to End timestamp
+     * @param callback Callback to process rows
+     */
+    public async getDataIterator(from: number, to: number, callback: (row: IStorageData) => void): Promise<void> {
+        await this.data.where('timestamp').between(from, to, true, true).each(callback);
     }
 
     /**

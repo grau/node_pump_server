@@ -1,18 +1,9 @@
 /**
  * @file React component
  */
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import * as React from 'react';
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
-import { FaFileExcel, FaFileCsv, FaFileCode } from 'react-icons/fa';
+import { FaFileCsv } from 'react-icons/fa';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import FormLabel from '@mui/material/FormLabel';
@@ -23,7 +14,6 @@ import Button from '@mui/material/Button';
 import SvgIcon from '@mui/material/SvgIcon';
 import { db } from './database';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { download, getCsv, getExcel, getJSON } from './fileProvider';
 /** All possible timeframe results */
 var ETimeframe;
 (function (ETimeframe) {
@@ -84,11 +74,7 @@ export function Download() {
             React.createElement(FormLabel, null, "Download"),
             React.createElement(ButtonGroup, null,
                 React.createElement(Button, { variant: 'contained', startIcon: React.createElement(SvgIcon, null,
-                        React.createElement(FaFileCsv, null)), sx: buttonSx, size: "large", onClick: () => __awaiter(this, void 0, void 0, function* () { return download(yield getCsv(from, to), 'pumpData.csv'); }) }, "CSV"),
-                React.createElement(Button, { variant: 'contained', startIcon: React.createElement(SvgIcon, null,
-                        React.createElement(FaFileCode, null)), sx: buttonSx, size: "large", onClick: () => __awaiter(this, void 0, void 0, function* () { return download(yield getJSON(from, to), 'pumpData.json'); }) }, "JSON"),
-                React.createElement(Button, { variant: 'contained', startIcon: React.createElement(SvgIcon, null,
-                        React.createElement(FaFileExcel, null)), sx: buttonSx, size: "large", onClick: () => __awaiter(this, void 0, void 0, function* () { return download(yield getExcel(from, to), 'pumpData.xlsx'); }) }, "Excel"))));
+                        React.createElement(FaFileCsv, null)), sx: buttonSx, size: "large", href: '/csv?from=' + from + '&to=' + to, download: 'Heizung.csv' }, "CSV"))));
 }
 /**
  * Returns start and end timestamp for the given input

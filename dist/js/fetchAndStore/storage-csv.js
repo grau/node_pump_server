@@ -10,13 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __asyncValues = (this && this.__asyncValues) || function (o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+};
 import path from 'path';
 import fs from 'fs-extra';
 import TSON from 'typescript-json';
-import dateFormat from 'dateformat';
+import readline from 'readline';
 import { dataStorage } from '../config.js';
 /** Name of index file containing a list of all files */
 const indexFile = path.join(dataStorage, 'index.csv');
+/** Number to dividde timestamp by for storage */
+const timestampDivider = 1000 * 1000 * 100;
 /**
  * Central storage class for writing/reading data
  *
@@ -109,13 +118,69 @@ export class Storage {
         });
     }
     /**
+     * Pipes data in the given timeframe to the given pipe
+     *
+     * @param from Start timestamp
+     * @param to End timestamp
+     * @param pipe Pipe for data
+     */
+    pipeDataCsv(from, to, pipe) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const files = yield fs.readdir(dataStorage);
+            for (const file of files) {
+                const fileTimestamp = parseInt(file) * timestampDivider;
+                if (!isNaN(fileTimestamp)) {
+                    const [start, end] = [fileTimestamp, fileTimestamp + timestampDivider];
+                    if (end >= from && start <= to) {
+                        yield this.pipeFile(file, from, to, pipe);
+                    }
+                }
+            }
+        });
+    }
+    /**
+     * Pipes all entries inside the given timeframe from file to response
+     *
+     * @param filename File to read from
+     * @param from Start date to send data
+     * @param to End data to send data
+     * @param pipe Response to pipe to
+     */
+    pipeFile(filename, from, to, pipe) {
+        var e_1, _a;
+        return __awaiter(this, void 0, void 0, function* () {
+            const fileStream = fs.createReadStream(path.join(dataStorage, filename));
+            const rl = readline.createInterface({
+                input: fileStream,
+                crlfDelay: Infinity,
+            });
+            try {
+                for (var rl_1 = __asyncValues(rl), rl_1_1; rl_1_1 = yield rl_1.next(), !rl_1_1.done;) {
+                    const line = rl_1_1.value;
+                    const timestamp = parseInt(line.split(';')[0]);
+                    if (timestamp >= from && timestamp <= to) {
+                        pipe.write(line + '\n');
+                    }
+                }
+            }
+            catch (e_1_1) { e_1 = { error: e_1_1 }; }
+            finally {
+                try {
+                    if (rl_1_1 && !rl_1_1.done && (_a = rl_1.return)) yield _a.call(rl_1);
+                }
+                finally { if (e_1) throw e_1.error; }
+            }
+        });
+    }
+    /**
      * Returns a date part for a filename.
      *
      * @param timestamp Timestamp to get file name for
      * @returns Date specific file part
      */
-    getDateFile(timestamp) {
-        return dateFormat(new Date(timestamp), 'yyyy_WW');
+    getTimestampDivided(timestamp) {
+        // Leads to ~5 MB / File.
+        return Math.floor(timestamp / timestampDivider);
     }
     /**
      * Emits the given data to all listeners
@@ -140,7 +205,7 @@ export class Storage {
     writeData(data) {
         var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         return __awaiter(this, void 0, void 0, function* () {
-            const filename = path.join(dataStorage, this.getDateFile(data.timestamp) + '.csv');
+            const filename = path.join(dataStorage, this.getTimestampDivided(data.timestamp) + '.csv');
             yield fs.appendFile(filename, [
                 data.timestamp,
                 (_b = (_a = data.input[0]) === null || _a === void 0 ? void 0 : _a.val) !== null && _b !== void 0 ? _b : null,
@@ -163,7 +228,7 @@ export class Storage {
     writeError(error) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const filename = path.join(dataStorage, this.getDateFile(error.timestamp) + '-error.csv');
+            const filename = path.join(dataStorage, this.getTimestampDivided(error.timestamp) + '-error.csv');
             yield Promise.all([
                 fs.appendFile(filename, [
                     error.timestamp,

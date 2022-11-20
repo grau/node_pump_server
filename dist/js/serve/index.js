@@ -29,6 +29,7 @@ export function startWebServer() {
         app.use('/', express.static('./site'));
         app.use('/data', express.static(dataStorage));
         app.get('/index', (_, res) => sendIndex(res));
+        app.get('/csv', (req, res) => sendCsv(req, res, storage));
         const wsServer = new WebSocketServer({ noServer: true });
         wsServer.on('connection', (socket) => {
             const listener = storage.addListeners((data) => socket.send(JSON.stringify(data)));
@@ -58,6 +59,33 @@ function sendIndex(res) {
             const stat = yield fs.stat(path.join(dataStorage, file));
             res.write(file + ';' + String(stat.mtime.getTime()) + '\n');
         }
+        res.end();
+    });
+}
+/**
+ * Send a csv file
+ *
+ * @param req Express request
+ * @param res Express response
+ * @param storage Storage object
+ */
+function sendCsv(req, res, storage) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const fromString = req.query.from;
+        const toString = req.query.to;
+        if (typeof fromString !== 'string' || typeof toString !== 'string') {
+            res.status(500);
+            res.send('err');
+            return;
+        }
+        const from = parseInt(fromString);
+        const to = parseInt(toString);
+        if (isNaN(from) || isNaN(to)) {
+            res.status(500);
+            res.send('err');
+            return;
+        }
+        yield storage.pipeDataCsv(from, to, res);
         res.end();
     });
 }

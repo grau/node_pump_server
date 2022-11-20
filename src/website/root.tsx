@@ -20,6 +20,7 @@ import type { TViews } from './drawer.js';
 export function Root(): JSX.Element {
     const [open, setOpen] = React.useState(true);
     const [view, setView] = React.useState<TViews>('live');
+
     const toggleDrawer = () => {
         setOpen(!open);
     };

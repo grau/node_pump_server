@@ -10,8 +10,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 // import '@fontsource/roboto/500.css';
 // import '@fontsource/roboto/700.css';
 import { Root } from './root.js';
-const fetchWorker = new SharedWorker('worker.js', { credentials: 'same-origin' });
-fetchWorker.addEventListener('error', (err) => console.warn('Worker failed!', { err }));
 const container = document.getElementById('reactRoot');
 if (!container) {
     throw new Error('No root container node found');
@@ -19,7 +17,7 @@ if (!container) {
 const theme = createTheme({
     palette: {
         action: {
-            selectedOpacity: 0.3,
+            selectedOpacity: 0.0,
             hoverOpacity: 1,
             focus: '#ff0000',
             focusOpacity: 1,

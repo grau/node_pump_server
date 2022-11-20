@@ -5,7 +5,9 @@
 import path from 'path';
 import fs from 'fs-extra';
 import TSON from 'typescript-json';
-import dateFormat from 'dateformat';
+import readline from 'readline';
+
+import type * as stream from 'node:stream';
 
 
 import { dataStorage } from '../config.js';
@@ -21,6 +23,9 @@ export interface IIndex {
     /** Index timestamp */
     timestamp: number;
 }
+
+/** Number to dividde timestamp by for storage */
+const timestampDivider = 1000 * 1000 * 100;
 
 /**
  * Central storage class for writing/reading data
@@ -121,14 +126,58 @@ export class Storage {
         console.warn('Got an error: ' + error, {errorObject});
     }
 
+
+    /**
+     * Pipes data in the given timeframe to the given pipe
+     *
+     * @param from Start timestamp
+     * @param to End timestamp
+     * @param pipe Pipe for data
+     */
+    public async pipeDataCsv(from: number, to: number, pipe: stream.Writable): Promise<void> {
+        const files = await fs.readdir(dataStorage);
+        for (const file of files) {
+            const fileTimestamp = parseInt(file) * timestampDivider;
+            if (! isNaN(fileTimestamp)) {
+                const [start, end] = [fileTimestamp, fileTimestamp + timestampDivider];
+                if (end >= from && start <= to) {
+                    await this.pipeFile(file, from, to, pipe);
+                }
+            }
+        }
+    }
+
+    /**
+     * Pipes all entries inside the given timeframe from file to response
+     *
+     * @param filename File to read from
+     * @param from Start date to send data
+     * @param to End data to send data
+     * @param pipe Response to pipe to
+     */
+    public async pipeFile(filename: string, from: number, to: number, pipe: stream.Writable): Promise<void> {
+        const fileStream = fs.createReadStream(path.join(dataStorage, filename));
+        const rl = readline.createInterface({
+            input: fileStream,
+            crlfDelay: Infinity,
+        });
+        for await (const line of rl) {
+            const timestamp = parseInt(line.split(';')[0]);
+            if (timestamp >= from && timestamp <= to) {
+                pipe.write(line + '\n');
+            }
+        }
+    }
+
     /**
      * Returns a date part for a filename.
      *
      * @param timestamp Timestamp to get file name for
      * @returns Date specific file part
      */
-    private getDateFile(timestamp: number): string {
-        return dateFormat(new Date(timestamp), 'yyyy_WW');
+    private getTimestampDivided(timestamp: number): number {
+        // Leads to ~5 MB / File.
+        return Math.floor(timestamp / timestampDivider);
     }
 
     /**
@@ -152,7 +201,7 @@ export class Storage {
      * @param data data to store
      */
     private async writeData(data: IStorageData): Promise<void> {
-        const filename = path.join(dataStorage, this.getDateFile(data.timestamp) + '.csv');
+        const filename = path.join(dataStorage, this.getTimestampDivided(data.timestamp) + '.csv');
         await fs.appendFile(filename, [
             data.timestamp,
             data.input[0]?.val ?? null,
@@ -173,7 +222,7 @@ export class Storage {
      * @param error error to store
      */
     private async writeError(error: IStorageError): Promise<void> {
-        const filename = path.join(dataStorage, this.getDateFile(error.timestamp) + '-error.csv');
+        const filename = path.join(dataStorage, this.getTimestampDivided(error.timestamp) + '-error.csv');
         await Promise.all([
             fs.appendFile(filename, [
                 error.timestamp,

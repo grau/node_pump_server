@@ -105,6 +105,19 @@ class Database extends Dexie {
         });
     }
     /**
+     * Iterates over each line in the storage and calls callback.
+     * Promise resolves, once all files are processed.
+     *
+     * @param from Start timestamp
+     * @param to End timestamp
+     * @param callback Callback to process rows
+     */
+    getDataIterator(from, to, callback) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield this.data.where('timestamp').between(from, to, true, true).each(callback);
+        });
+    }
+    /**
      * Timestamp of first datapoint in database
      *
      * @returns timestamp or undefined if there is no data (yet)
