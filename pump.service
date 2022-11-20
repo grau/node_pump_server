@@ -8,7 +8,7 @@
  Restart=on-failure
  RestartSec=5s
  Type=idle
- ExecStart=/usr/bin/python /home/pi/sample.py
+ ExecStart=/home/pump/node_pump_server/start.sh
 
 [Install]
  WantedBy=multi-user.target
