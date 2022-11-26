@@ -16,7 +16,7 @@ import type { ISystemData } from '../interfaces/ISystemData';
 import {Storage} from '../fetchAndStore/storage-csv.js';
 import {dataStorage} from '../config.js';
 import {initCpuInfoUpdater, cpuTimes } from './cpuInfo.js';
-
+import {__dirname} from '../config.js';
 
 /**
  * Starts http server. Servers all files
@@ -24,10 +24,10 @@ import {initCpuInfoUpdater, cpuTimes } from './cpuInfo.js';
 export async function startWebServer(): Promise<void> {
     const storage = await Storage.getInstance();
     const app = express();
-    const port = 3000;
+    const port = 80;
     initCpuInfoUpdater();
 
-    app.use('/', express.static('./site'));
+    app.use('/', express.static(path.join(__dirname, '/site')));
     app.use('/data', express.static(dataStorage));
     app.get('/index', (_, res) => sendIndex(res));
     app.get('/csv', (req: Request, res: Response) => sendCsv(req, res, storage));
