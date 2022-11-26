@@ -6,6 +6,7 @@
   "author": "grau",
   "license": "MIT",
   "private": false,
+  "type": "module",
   "scripts": {
     "build": "npm run site && npm run server",
 

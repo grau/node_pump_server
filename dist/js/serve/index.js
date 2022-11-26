@@ -27,7 +27,7 @@ export function startWebServer() {
     return __awaiter(this, void 0, void 0, function* () {
         const storage = yield Storage.getInstance();
         const app = express();
-        const port = 3000;
+        const port = 80;
         const staticSiteContent = path.join(__dirname, '..', '..', '/site');
         initCpuInfoUpdater();
         console.log('Serving static content from ' + staticSiteContent);
