@@ -12,7 +12,7 @@
 		"esModuleInterop": true,
 		"baseUrl": "./src",
 		"outDir": "./dist/js",
-		"module": "ES6",
+		"module": "ESnext",
 		"target": "ES6",
 		"allowJs": false,
 		"moduleResolution": "node",
