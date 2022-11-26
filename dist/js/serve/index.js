@@ -27,9 +27,11 @@ export function startWebServer() {
     return __awaiter(this, void 0, void 0, function* () {
         const storage = yield Storage.getInstance();
         const app = express();
-        const port = 80;
+        const port = 3000;
+        const staticSiteContent = path.join(__dirname, '..', '..', '/site');
         initCpuInfoUpdater();
-        app.use('/', express.static(path.join(__dirname, '/site')));
+        console.log('Serving static content from ' + staticSiteContent);
+        app.use('/', express.static(staticSiteContent));
         app.use('/data', express.static(dataStorage));
         app.get('/index', (_, res) => sendIndex(res));
         app.get('/csv', (req, res) => sendCsv(req, res, storage));

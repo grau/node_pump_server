@@ -25,9 +25,10 @@ export async function startWebServer(): Promise<void> {
     const storage = await Storage.getInstance();
     const app = express();
     const port = 80;
+    const staticSiteContent = path.join(__dirname, '..', '..', '/site');
     initCpuInfoUpdater();
-
-    app.use('/', express.static(path.join(__dirname, '/site')));
+    console.log('Serving static content from ' + staticSiteContent);
+    app.use('/', express.static(staticSiteContent));
     app.use('/data', express.static(dataStorage));
     app.get('/index', (_, res) => sendIndex(res));
     app.get('/csv', (req: Request, res: Response) => sendCsv(req, res, storage));

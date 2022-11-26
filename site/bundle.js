@@ -74275,8 +74275,8 @@ Please use another name.` : (0, _utils.formatMuiErrorMessage)(18));
   });
 
   // src/website/index.tsx
-  var React60 = __toESM(require_react(), 1);
-  var import_client = __toESM(require_client(), 1);
+  var React60 = __toESM(require_react());
+  var import_client = __toESM(require_client());
 
   // node_modules/@babel/runtime/helpers/esm/extends.js
   function _extends() {
@@ -75209,7 +75209,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var CssBaseline_default = CssBaseline;
 
   // src/website/root.tsx
-  var React59 = __toESM(require_react(), 1);
+  var React59 = __toESM(require_react());
 
   // node_modules/@mui/material/esm/Box/Box.js
   var import_system9 = __toESM(require_system());
@@ -75360,7 +75360,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var Container_default = Container;
 
   // src/website/appBar.tsx
-  var React32 = __toESM(require_react(), 1);
+  var React32 = __toESM(require_react());
 
   // node_modules/@mui/material/esm/AppBar/AppBar.js
   var React6 = __toESM(require_react());
@@ -77009,10 +77009,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var IconButton_default = IconButton;
 
   // src/website/appBar.tsx
-  var import_Menu = __toESM(require_Menu(), 1);
+  var import_Menu = __toESM(require_Menu());
 
   // src/website/drawer.tsx
-  var React29 = __toESM(require_react(), 1);
+  var React29 = __toESM(require_react());
 
   // node_modules/@mui/material/esm/Drawer/Drawer.js
   var React21 = __toESM(require_react());
@@ -78382,14 +78382,14 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var Divider_default = Divider;
 
   // src/website/drawer.tsx
-  var import_Download = __toESM(require_Download(), 1);
-  var import_ChevronLeft = __toESM(require_ChevronLeft(), 1);
-  var import_BarChart = __toESM(require_BarChart(), 1);
-  var import_LiveTv = __toESM(require_LiveTv(), 1);
-  var import_Memory = __toESM(require_Memory(), 1);
+  var import_Download = __toESM(require_Download());
+  var import_ChevronLeft = __toESM(require_ChevronLeft());
+  var import_BarChart = __toESM(require_BarChart());
+  var import_LiveTv = __toESM(require_LiveTv());
+  var import_Memory = __toESM(require_Memory());
 
   // src/website/drawerItem.tsx
-  var React28 = __toESM(require_react(), 1);
+  var React28 = __toESM(require_react());
 
   // node_modules/@mui/material/esm/ListItemButton/ListItemButton.js
   var React25 = __toESM(require_react());
@@ -78851,8 +78851,8 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   }
 
   // src/website/downloadProgress.tsx
-  var React31 = __toESM(require_react(), 1);
-  var import_dexie_react_hooks = __toESM(require_dexie_react_hooks(), 1);
+  var React31 = __toESM(require_react());
+  var import_dexie_react_hooks = __toESM(require_dexie_react_hooks());
 
   // node_modules/@mui/material/esm/CircularProgress/CircularProgress.js
   var React30 = __toESM(require_react());
@@ -79216,10 +79216,10 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   }
 
   // src/website/main.tsx
-  var React58 = __toESM(require_react(), 1);
+  var React58 = __toESM(require_react());
 
   // src/website/live.tsx
-  var React40 = __toESM(require_react(), 1);
+  var React40 = __toESM(require_react());
 
   // node_modules/@mui/material/esm/Grid/Grid.js
   var React34 = __toESM(require_react());
@@ -80361,12 +80361,12 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var Slider_default = Slider;
 
   // src/website/live.tsx
-  var import_PauseCircle = __toESM(require_PauseCircle(), 1);
-  var import_PlayCircle = __toESM(require_PlayCircle(), 1);
+  var import_PauseCircle = __toESM(require_PauseCircle());
+  var import_PlayCircle = __toESM(require_PlayCircle());
 
   // src/website/lineGraph.tsx
-  var React39 = __toESM(require_react(), 1);
-  var import_react_apexcharts = __toESM(require_react_apexcharts_min(), 1);
+  var React39 = __toESM(require_react());
+  var import_react_apexcharts = __toESM(require_react_apexcharts_min());
   var inputOptions = {
     chart: {
       id: "input",
@@ -80545,7 +80545,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   }
 
   // src/website/live.tsx
-  var import_dexie_react_hooks2 = __toESM(require_dexie_react_hooks(), 1);
+  var import_dexie_react_hooks2 = __toESM(require_dexie_react_hooks());
   var marks = [
     {
       value: 10 * 60 * 1e3,
@@ -80654,12 +80654,12 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   }
 
   // src/website/graph.tsx
-  var React43 = __toESM(require_react(), 1);
-  var import_dexie_react_hooks4 = __toESM(require_dexie_react_hooks(), 1);
+  var React43 = __toESM(require_react());
+  var import_dexie_react_hooks4 = __toESM(require_dexie_react_hooks());
 
   // src/website/intervallSelector.tsx
-  var React42 = __toESM(require_react(), 1);
-  var import_react_datetimerange_picker = __toESM(require_entry(), 1);
+  var React42 = __toESM(require_react());
+  var import_react_datetimerange_picker = __toESM(require_entry());
 
   // node_modules/@mui/material/esm/Stack/Stack.js
   var React41 = __toESM(require_react());
@@ -80786,7 +80786,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var Stack_default = Stack;
 
   // src/website/intervallSelector.tsx
-  var import_dexie_react_hooks3 = __toESM(require_dexie_react_hooks(), 1);
+  var import_dexie_react_hooks3 = __toESM(require_dexie_react_hooks());
   var timeMarks = [
     {
       value: 0 /* day */,
@@ -80902,7 +80902,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   }
 
   // src/website/download.tsx
-  var React49 = __toESM(require_react(), 1);
+  var React49 = __toESM(require_react());
 
   // node_modules/react-icons/lib/esm/iconBase.js
   var import_react6 = __toESM(require_react());
@@ -81492,7 +81492,7 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   var Button_default = Button;
 
   // src/website/download.tsx
-  var import_SvgIcon3 = __toESM(require_SvgIcon2(), 1);
+  var import_SvgIcon3 = __toESM(require_SvgIcon2());
   var paperSx2 = { p: 4, px: 5, mb: 4, display: "flex", flexDirection: "column" };
   var buttonSx = { width: 150 };
   function Download() {
@@ -81514,11 +81514,11 @@ Please use another name.` : (0, import_utils.formatMuiErrorMessage)(18));
   }
 
   // src/website/system.tsx
-  var React57 = __toESM(require_react(), 1);
-  var import_react_apexcharts2 = __toESM(require_react_apexcharts_min(), 1);
+  var React57 = __toESM(require_react());
+  var import_react_apexcharts2 = __toESM(require_react_apexcharts_min());
 
   // src/website/versionInfo.tsx
-  var React56 = __toESM(require_react(), 1);
+  var React56 = __toESM(require_react());
 
   // node_modules/@mui/material/esm/Alert/Alert.js
   var React55 = __toESM(require_react());
