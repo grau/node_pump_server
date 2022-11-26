@@ -19,6 +19,7 @@ import { WebSocketServer } from 'ws';
 import { Storage } from '../fetchAndStore/storage-csv.js';
 import { dataStorage } from '../config.js';
 import { initCpuInfoUpdater, cpuTimes } from './cpuInfo.js';
+import { __dirname } from '../config.js';
 /**
  * Starts http server. Servers all files
  */
@@ -26,9 +27,9 @@ export function startWebServer() {
     return __awaiter(this, void 0, void 0, function* () {
         const storage = yield Storage.getInstance();
         const app = express();
-        const port = 3000;
+        const port = 80;
         initCpuInfoUpdater();
-        app.use('/', express.static('./site'));
+        app.use('/', express.static(path.join(__dirname, '/site')));
         app.use('/data', express.static(dataStorage));
         app.get('/index', (_, res) => sendIndex(res));
         app.get('/csv', (req, res) => sendCsv(req, res, storage));
